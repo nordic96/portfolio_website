@@ -20,7 +20,7 @@ export default class CardComponent extends Component {
         <div className="card">
             <Rotate top left>
                 <div>
-                    <img className="imgproj" src='assets/temppi.png'/>
+                    {/* <img className="imgproj" src='assets/temppi.png'/> */}
                     <h3>First Component</h3>                    
                     {this.props.displaytext}
                     {element}

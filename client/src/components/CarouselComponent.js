@@ -10,7 +10,6 @@ export default class CarouselComponent extends Component {
     
     render() {
         const Container = styled.div`
-        border: 1px solid red;
         margin: auto;
         position: relative;
         overflow: hidden;
@@ -24,15 +23,22 @@ export default class CarouselComponent extends Component {
         <Carousel defaultWait={2000}>
             <Slide right>
                 <div>
-                    {/* <img src='assets/temppi.png'/> */}
-                    <h1>Slide 1</h1> 
-                    <p>Slide description</p>
+                    <img className="img-proj-card" src='assets/temppi.png'/>
+                    <h2>TempPi (2018)</h2> 
+                    <div className="desc">
+                        <p>TempPi was my first self-driven IoT project after I joined the university.
+                        The name was gotten from the idea 'Temp'erature and Raspberry'Pi', as the project basically
+                        captures the room temperature using the sensor and displays in the LCD display componenet, wired with
+                        the RaspberryPi I/O board.</p>
+                        <p>TempPi was written in Python, to control most of its electronic component parts that the RaspberryPi can handle,
+                        and it gave me a hands on experience in writing in Python.</p>
+                    </div>
                 </div>
             </Slide>
             <Slide right>
                 <div>
                     {/* <img src='assets/temppi.png'/> */}
-                    <h1>Slide 2</h1>
+                    <h2>Covid-19 Classifier (2020, Group Project)</h2>
                     <p>Slide description</p>
                 </div>
             </Slide>

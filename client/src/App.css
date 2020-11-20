@@ -10,11 +10,21 @@
   pointer-events: none;
 }
 
+.link-icon {
+  height: 3vmin;
+}
+
 .intro-selfie {
   width: 20vmin;
   height: auto;
   margin: auto;
   margin-top: 28px;
+}
+
+.desc {
+  padding: 10pt;
+  text-align: left;
+  font-size: calc(10px + 1vmin);
 }
 
 .intro-desc {
@@ -48,8 +58,8 @@
   color: #61dafb;
 }
 
-.imgproj {
-  width: 40%;
+.img-proj-card {
+  width: 50%;
   height: auto;
   float: right;
 }

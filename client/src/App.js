@@ -8,12 +8,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
+        <div>
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <header className="App-header">
           <div className="intro">
             <img className="intro-selfie" src='assets/selfie_2.png' />
-            <h3>KO GI HUN</h3>
-            <h5>Software Engineer | NUS Computer Science Undergraduate</h5>
+            <h2>
+              GI HUN, KO<br/>
+              <a href="https://github.com/nordic96"><img className="link-icon" src="assets/github-logo.png"/></a>
+              <a href="https://www.linkedin.com/in/gi-hun-ko-863619184/"><img className="link-icon" src="assets/Linkedin-Icon.png"/></a>
+            </h2>
+            <h5>Software Engineer | NUS Computer Science Undergraduate</h5> 
             <div className="intro-desc">
               "I am highly interested in various tech stacks, especially in front/back end web development.
               I am currently specialising my degree in Artificial Intelligence (A.I), and I am most proficient in using Java and Python Programming Language.
@@ -23,10 +29,10 @@ class App extends Component {
           </div>
         </header>
         <div className="project-list">
-          <h2>Interesting Projects</h2>
+          <h2>&lt; Interesting Projects /&gt;</h2>
+          <CarouselComponent/>
+          <CardComponent displaytext="First Component Data"/>
         </div>
-        <CarouselComponent/>
-        <CardComponent displaytext="First Component Data"/>
       </div>
     );
   }
