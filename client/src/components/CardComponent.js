@@ -6,14 +6,10 @@ export default class CardComponent extends Component {
      * Creates a card component that will display each project
      * 
      * @param {displaytext} description of the project
-     * @param {projectimg} media for project display
-     * @param {projectname} name of the project
-     * @param {devdate} date of development
+     * @param {medialink} media for project display
+     * @param {name} name of the project
+     * @param {devyear} date of development
      */
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const element = (<div>Text from Element</div>);
         return (
