@@ -16,7 +16,7 @@ connection.once("open", () => {
     console.log('MongoDb database connection established successfully');
 });
 
-app.use("/", router);
+app.use("/api", router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

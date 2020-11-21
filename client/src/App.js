@@ -5,9 +5,6 @@ import CardComponent from './components/CardComponent';
 import CarouselComponent from './components/CarouselComponent';
 
 class App extends Component {
-  componentDidMount() {
-    const apiUrl = "https://localhost:5000/fetchProjects";
-  }
   render() {
     return (
       <div className="App">
@@ -34,7 +31,7 @@ class App extends Component {
         </header>
         <div className="project-list">
           <h2>&lt; My Projects /&gt;</h2>
-          <CarouselComponent/>
+          <CarouselComponent />
           <CardComponent displaytext="First Component Data"/>
         </div>
       </div>
