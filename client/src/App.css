@@ -58,6 +58,11 @@
   color: #61dafb;
 }
 
+.proj-card {
+  width: 84%;
+  margin: auto;
+}
+
 .img-proj-card {
   width: 50%;
   height: auto;
