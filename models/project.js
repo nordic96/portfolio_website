@@ -6,6 +6,12 @@ let project = new Schema(
         name: {
             type: String
         },
+        projecttype: {
+            type: String
+        },
+        projectlink: {
+            type: String
+        },
         devyear: {
             type: Number
         },

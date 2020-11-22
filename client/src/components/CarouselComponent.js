@@ -33,7 +33,7 @@ export default class CarouselComponent extends Component {
       this.fetchProjects();
     }
     render() {
-      const width = "100%", height = "44vh";
+      const width = "100%", height = "35vh";
       const Container = styled.div`
       margin: auto;
       position: relative;
@@ -75,10 +75,24 @@ export default class CarouselComponent extends Component {
               return(
                   <Slide right>
                       <div className="proj-card">
-                          <img className="img-proj-card" src={project.medialink}/>
-                          <h2>{project.name} ({project.devyear})</h2> 
+                          <img className="img-proj-card" src={project.medialink} alt="project"/>
+                          <h2>{project.name}</h2>
                           <div className="desc">
-                              {project.desc}
+                            <table>
+                              <tr>
+                                <td>Project Type: </td>
+                                <td>{project.projecttype}</td>
+                              </tr>
+                              <tr>
+                                <td>Dev. Year: </td>
+                                <td>{project.devyear}</td>
+                              </tr>
+                              <tr>
+                                <td>Project Link:</td>
+                                <td><a href={project.projectlink}><img className="link-icon" src="assets/github-white.png" alt="github"/></a></td>
+                              </tr>
+                            </table><br></br>
+                            {project.desc}
                           </div>
                       </div>
                   </Slide>

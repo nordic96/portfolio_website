@@ -27,6 +27,13 @@
   font-size: calc(10px + 1vmin);
 }
 
+.desc-main {
+  width: 80%;
+  margin: auto;
+  padding: 10pt;
+  font-size: calc(10px + 1vmin);
+}
+
 .intro-desc {
   width: 59%;
   margin: auto;
@@ -69,9 +76,16 @@
   float: right;
 }
 
+.img-design {
+  width: 38vh;
+}
+
+.container-design {
+  /* color: royalblue;
+  background-color: #F5CA01; */
+}
 .card {
-  padding: 10pt;
-  overflow: auto;
+  margin: auto;
 }
 
 @keyframes App-logo-spin {
