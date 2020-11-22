@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const path = require('path');
 const projects = require('./models/project');
 const router =  express.Router();
 
@@ -16,6 +16,7 @@ connection.once("open", () => {
     console.log('MongoDb database connection established successfully');
 });
 
+//Checks if production, then build react app and use build/
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
@@ -33,4 +34,9 @@ router.route("/fetchProjects").get((req, res) => {
         }
     });
 });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+});
+
 app.listen(port, () => console.log('Listening on port: ' + port));
