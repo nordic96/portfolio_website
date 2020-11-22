@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"start": "node server.js",
+		"heroku-postbuild": "cd client && yarn && yarn run build"
 		"client": "cd client && yarn start",
 		"server": "nodemon server.js",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
@@ -18,6 +19,6 @@
 	"author": "Gihun Ko",
 	"license": "MIT",
 	"engines": {
-		"node": "10.x"
+		"node": "15.2.1"
 	}
 }
