@@ -2,14 +2,15 @@
 	"name":"portfolio_website",
 	"version": "0.0.1",
 	"scripts": {
+		"start": "node server.js",
 		"client": "cd client && yarn start",
 		"server": "nodemon server.js",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "mongoose": "5.10.15"
+		"express": "^4.16.4",
+		"mongoose": "5.10.15"
 	},
 	"devDependencies": {
 		"concurrently": "^4.0.1"
