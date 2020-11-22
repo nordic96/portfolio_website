@@ -13,7 +13,7 @@ export default class CarouselComponent extends Component {
       } 
       
       fetchProjects() {
-        fetch('/fetchProjects')
+        fetch('/api/fetchProjects')
         .then(res => res.json())
         .then(
           (projects) => {

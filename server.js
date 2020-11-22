@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const path = require('path');
 const projects = require('./models/project');
 const router =  express.Router();
 
@@ -33,10 +32,6 @@ router.route("/fetchProjects").get((req, res) => {
             res.send(result);
         }
     });
-});
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/index.html'))
 });
 
 app.listen(port, () => console.log('Listening on port: ' + port));
