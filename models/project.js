@@ -12,6 +12,9 @@ let project = new Schema(
         projectlink: {
             type: String
         },
+        tags: {
+            type: [String]
+        },
         devyear: {
             type: Number
         },

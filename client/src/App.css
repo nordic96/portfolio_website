@@ -14,6 +14,10 @@
   height: 3vmin;
 }
 
+.intro {
+  width: 100%;
+}
+
 .intro-selfie {
   width: 20vmin;
   height: auto;
@@ -22,7 +26,7 @@
 }
 
 .desc {
-  padding: 10pt;
+  padding: 14pt;
   text-align: left;
   font-size: calc(10px + 1vmin);
 }
@@ -35,10 +39,36 @@
 }
 
 .intro-desc {
-  width: 59%;
-  margin: auto;
+  position: absolute;
+  width: 70%;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
   margin-bottom: 28px;
   font-size: calc(10px + 1vmin);
+}
+
+.label-primary {
+  background-color:#f16059;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.tags-container {
+  margin: auto;
+  padding: 10px;
 }
 
 .project-list {
