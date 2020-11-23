@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const projects = require('./models/project');
 const designs = require('./models/design');
 const router =  express.Router();
-
+const CONFIG = require('./config.json');
 const app = express();
 const port = process.env.PORT || 5000;
 
-var uri = "mongodb+srv://admin:nordic96@clustergh.i9pmr.mongodb.net/<dbname>?retryWrites=true&w=majority";
+var uri = `mongodb+srv://${CONFIG.dbUser}:${CONFIG.dbPw}@clustergh.i9pmr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
 mongoose.connect(uri, { useUnifiedTopology:true, useNewUrlParser: true });
 
 const connection = mongoose.connection;
