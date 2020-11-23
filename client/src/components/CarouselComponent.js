@@ -12,22 +12,22 @@ export default class CarouselComponent extends Component {
         };
       } 
       
-      fetchProjects() {
-        fetch('/api/fetchProjects')
-        .then(res => res.json())
-        .then(
-          (projects) => {
-            console.log(projects)
-            this.setState({
-              isLoaded: true,
-              projects: projects
-            });
-          },
-          (ex) => {
-            console.log('Fetch failed, ', ex);
-          }
-        )
-      }
+    fetchProjects() {
+      fetch('/api/fetchProjects')
+      .then(res => res.json())
+      .then(
+        (projects) => {
+          console.log(projects)
+          this.setState({
+            isLoaded: true,
+            projects: projects
+          });
+        },
+        (ex) => {
+          console.log('Fetch failed, ', ex);
+        }
+      )
+    }
     
     componentDidMount() {
       this.fetchProjects();

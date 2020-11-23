@@ -10,16 +10,24 @@ export default class CardComponent extends Component {
      * @param {name} name of the project
      * @param {devyear} date of development
      */
+    constructor(props) {
+        super(props);
+    }
+
     render() {
-        const element = (<div>Text from Element</div>);
         return (
         <div className="card">
             <Rotate top left>
                 <div>
-                    {/* <img className="imgproj" src='assets/temppi.png'/> */}
-                    <h3>First Component</h3>                    
-                    {this.props.displaytext}
-                    {element}
+                    <div className="desc-design">
+                        <img className="img-design" src={this.props.medialink} alt="design"/>
+                        <h3>'{this.props.name}'</h3>
+                        <h4>
+                            <span className="label label-primary">{this.props.org}</span> &nbsp;
+                            <span className="label label-primary">{this.props.year}</span>
+                        </h4>
+                        {this.props.desc}
+                    </div>
                 </div>
             </Rotate>
          </div>);

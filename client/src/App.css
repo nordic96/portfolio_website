@@ -38,6 +38,13 @@ td img {
   font-size: calc(10px + 1vmin);
 }
 
+.desc-design {
+  padding: 14pt;
+  width: 48%;
+  margin: auto;
+  font-size: calc(10px + 1vmin);
+}
+
 .desc-main {
   width: 80%;
   margin: auto;
@@ -115,7 +122,7 @@ td img {
 }
 
 .img-design {
-  width: 38vh;
+  width: 100%;
 }
 
 .container-design {

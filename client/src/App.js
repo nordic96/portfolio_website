@@ -8,6 +8,34 @@ import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        isLoaded: false,
+        designs: []
+    };
+  } 
+  fetchDesigns() {
+    fetch('/api/fetchDesigns')
+    .then(res => res.json())
+    .then(
+      (designs) => {
+        console.log(designs)
+        this.setState({
+          isLoaded: true,
+          designs: designs
+        });
+      },
+      (ex) => {
+        console.log('Fetch failed, ', ex);
+      }
+    )
+  }
+
+  componentDidMount() {
+    this.fetchDesigns();
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,17 +72,22 @@ class App extends Component {
         <div className="project-list">
           <h2>&lt; My Projects /&gt;</h2>
           <CarouselComponent />
-          <Rotate top left>
-            <div className="container-design">
-                <h2>&lt; Design Works /&gt;</h2>
-                <div className="desc-main">
-                  <p>Not only just coding, but I have background experience in designing during my Co-Curriculum-Activities. 
-                    Below works are the designs that I have worked on.</p>
-                  <img className="img-design" src="assets/sticker_lion2.png" alt="design"/>
+          <div className="container-design">
+              <h2>&lt; Design Works /&gt;</h2>
+              <div className="desc-main">
+                <p>Not only just coding, but I have background experience in designing during my Co-Curriculum-Activities. 
+                  Below works are the designs that I have worked on.</p>                
+              </div>
+              <Rotate top left>
+                <div>
+                  {this.state.designs.map((design) => {
+                    return (
+                      <CardComponent medialink={design.medialink} name={design.name} desc={design.desc} org={design.organisation} year={design.year}/>
+                    );
+                  })}
                 </div>
-            </div>
-          </Rotate>
-          <CardComponent displaytext="First Component Data"/>
+              </Rotate>
+          </div>
         </div>
         <FooterComponent />
       </div>
