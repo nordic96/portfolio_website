@@ -5,6 +5,13 @@
   font-family: itc-avant-garde-gothic-pro;
 }
 
+td {
+  vertical-align: baseline;
+}
+td img {
+  vertical-align: top;
+}
+
 .App-logo {
   height: 7vmin;
   pointer-events: none;
@@ -12,6 +19,10 @@
 
 .link-icon {
   height: 3vmin;
+}
+
+.intro {
+  width: 100%;
 }
 
 .intro-selfie {
@@ -22,8 +33,15 @@
 }
 
 .desc {
-  padding: 10pt;
+  padding: 14pt;
   text-align: left;
+  font-size: calc(10px + 1vmin);
+}
+
+.desc-design {
+  padding: 14pt;
+  width: 48%;
+  margin: auto;
   font-size: calc(10px + 1vmin);
 }
 
@@ -35,14 +53,41 @@
 }
 
 .intro-desc {
-  width: 59%;
-  margin: auto;
+  position: absolute;
+  width: 70%;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
   margin-bottom: 28px;
   font-size: calc(10px + 1vmin);
 }
 
+.label-primary {
+  background-color:#f16059;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.tags-container {
+  margin: auto;
+  padding: 10px;
+}
+
 .project-list {
   font-size: calc(10px + 2vmin);
+  padding-bottom: 5vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -77,7 +122,7 @@
 }
 
 .img-design {
-  width: 38vh;
+  width: 100%;
 }
 
 .container-design {
@@ -86,6 +131,13 @@
 }
 .card {
   margin: auto;
+}
+
+.footer {
+  background-color: #323232;
+  padding: 2vh;
+  font-size: calc(10px + 0.8vmin);
+  height: 10vh;
 }
 
 @keyframes App-logo-spin {

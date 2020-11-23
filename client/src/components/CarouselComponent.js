@@ -12,28 +12,44 @@ export default class CarouselComponent extends Component {
         };
       } 
       
-      fetchProjects() {
-        fetch('/api/fetchProjects')
-        .then(res => res.json())
-        .then(
-          (projects) => {
-            console.log(projects)
-            this.setState({
-              isLoaded: true,
-              projects: projects
-            });
-          },
-          (ex) => {
-            console.log('Fetch failed, ', ex);
-          }
-        )
-      }
+    fetchProjects() {
+      fetch('/api/fetchProjects')
+      .then(res => res.json())
+      .then(
+        (projects) => {
+          console.log(projects)
+          this.setState({
+            isLoaded: true,
+            projects: projects
+          });
+        },
+        (ex) => {
+          console.log('Fetch failed, ', ex);
+        }
+      )
+    }
     
     componentDidMount() {
       this.fetchProjects();
     }
+
+    createTags(tags) {
+      console.log(tags);
+      return (
+        <div className="tags-container">
+          {tags.map((tag) => {
+            return(
+              <span>
+                <span className="label label-primary">{tag}</span> &nbsp;
+              </span>
+            )
+          })}
+        </div>
+      );
+    }
+
     render() {
-      const width = "100%", height = "35vh";
+      const width = "100%", height = "48vh";
       const Container = styled.div`
       margin: auto;
       position: relative;
@@ -78,6 +94,7 @@ export default class CarouselComponent extends Component {
                           <img className="img-proj-card" src={project.medialink} alt="project"/>
                           <h2>{project.name}</h2>
                           <div className="desc">
+                            {this.createTags(project.tags)}
                             <table>
                               <tr>
                                 <td>Project Type: </td>

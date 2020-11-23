@@ -1,21 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let project = new Schema(
+let design = new Schema(
     {
         name: {
             type: String
         },
-        projecttype: {
+        organisation: {
             type: String
         },
-        projectlink: {
-            type: String
-        },
-        tags: {
-            type: [String]
-        },
-        devyear: {
+        year: {
             type: Number
         },
         medialink: {
@@ -25,7 +19,7 @@ let project = new Schema(
             type: String
         }
     },
-    { collection: "projects" }
+    { collection: "designs" }
 );
 
-module.exports = mongoose.model("projects", project);
+module.exports = mongoose.model("designs", design);
