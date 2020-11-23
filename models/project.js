@@ -21,6 +21,9 @@ let project = new Schema(
         medialink: {
             type: String
         },
+        videolink: {
+            type: String
+        },
         desc: {
             type: String
         }

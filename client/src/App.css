@@ -6,6 +6,7 @@
 }
 
 td {
+  text-align: left;
   vertical-align: baseline;
 }
 td img {
@@ -19,6 +20,10 @@ td img {
 
 .link-icon {
   height: 3vmin;
+}
+
+.contact-icon {
+  height: 2vmin;
 }
 
 .intro {
@@ -40,7 +45,7 @@ td img {
 
 .desc-design {
   padding: 14pt;
-  width: 48%;
+  width: 59%;
   margin: auto;
   font-size: calc(10px + 1vmin);
 }
@@ -65,6 +70,14 @@ td img {
 
 .label-primary {
   background-color:#f16059;
+}
+
+.label-designtitle {
+  background-color:green;
+}
+
+.label-year {
+  background-color:lightskyblue;
 }
 
 .label {
@@ -122,7 +135,7 @@ td img {
 }
 
 .img-design {
-  width: 100%;
+  width: 35vh;
 }
 
 .container-design {

@@ -48,6 +48,30 @@ export default class CarouselComponent extends Component {
       );
     }
 
+    createVideoLink(link) {
+      if (link) {
+        return (
+          <a href={link}><img className="link-icon" src="assets/youtube-icon.png" alt="video"/></a>
+        );
+      } else {
+        return (
+          <span></span>
+        );
+      }
+    }
+
+    createProjectLink(link) {
+      if (link) {
+        return (
+          <a href={link}><img className="link-icon" src="assets/github-white.png" alt="github"/></a>
+        );
+      } else {
+        return (
+          <span></span>
+        );
+      }
+    }
+
     render() {
       const width = "100%", height = "48vh";
       const Container = styled.div`
@@ -63,11 +87,12 @@ export default class CarouselComponent extends Component {
       height: ${height};
       `;
       const Arrow = styled.div`
-      text-shadow: 1px 1px 1px #fff;
+      text-shadow: 1px 1px 1px #d6554f;
       z-index: 100;
       line-height: ${height};
       text-align: center;
       position: absolute;
+      color: #f16059;
       top: 0;
       width: 10%;
       font-size: 3em;
@@ -106,7 +131,13 @@ export default class CarouselComponent extends Component {
                               </tr>
                               <tr>
                                 <td>Project Link:</td>
-                                <td><a href={project.projectlink}><img className="link-icon" src="assets/github-white.png" alt="github"/></a></td>
+                                <td>
+                                  {/* <a href={project.projectlink}>
+                                    <img className="link-icon" src="assets/github-white.png" alt="github"/>
+                                  </a> */}
+                                  {this.createProjectLink(project.projectlink)}
+                                  {this.createVideoLink(project.videolink)}
+                                </td>
                               </tr>
                             </table><br></br>
                             {project.desc}
