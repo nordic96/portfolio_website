@@ -10,10 +10,6 @@ export default class CardComponent extends Component {
      * @param {name} name of the project
      * @param {devyear} date of development
      */
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
         <div className="card">

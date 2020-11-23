@@ -6,10 +6,6 @@ import React, { Component } from 'react';
  * Date: 23/Nov/2020
  */
 export default class FooterComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return(
             <div className="footer">
