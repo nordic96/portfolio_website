@@ -53,10 +53,10 @@ class App extends Component {
             </h2>
             <h5>Software Engineer | NUS Computer Science Undergraduate<br/>Singapore</h5> 
             <div className="intro-desc">
-              "I am highly interested in various tech stacks, especially in front/back end web development.
-              I am currently specialising my degree in Artificial Intelligence (A.I), and I am most proficient in using Java and Python Programming Language.
-              Though I have recently begun learning JavaScript (NodeJS, ReactJS), I love coding in JS framework! 
-              In fact, this website is built in Node Express and React Framework :)"
+              "I am a Korean Computer Science student in NUS. 
+              My career goal is to become an expertise in software engineering, as well as able to work along with fantastic people to design a software that is easily interactable, with simple, but attractive design. 
+              I am currently specialising my degree in Artificial Intelligence (A.I), and I love projects that are hybrid of an AI and software engineering. 
+              I do not bound myself in A.I and I constantly learn new tech stacks, to improve myself! :)"
             </div>
             <Wave fill='#f79902'
                   paused={false}
