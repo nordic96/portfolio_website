@@ -53,20 +53,22 @@ class App extends Component {
             </h2>
             <h5>Software Engineer | NUS Computer Science Undergraduate<br/>Singapore</h5> 
             <div className="intro-desc">
-              "I am a Korean Computer Science student in NUS. 
-              My career goal is to become an expertise in software engineering, as well as able to work along with fantastic people to design a software that is easily interactable, with simple, but attractive design. 
-              I am currently specialising my degree in Artificial Intelligence (A.I), and I love projects that are hybrid of an AI and software engineering. 
-              I do not bound myself in A.I and I constantly learn new tech stacks, to improve myself! :)"
+              "I am a Korean Computer Science student at NUS. 
+              My career goal is to become an expert in software engineering, as well as able to work along with fantastic people to design a software that is easily interactable, with simple, but attractive design. 
+              I am currently specialising my degree in Artificial Intelligence (A. I), and I love projects that are hybrid of AI and software engineering. 
+              I do not bound myself in A. I and I persistently learn new tech stack to improve my skills! :)"
             </div>
-            <Wave fill='#f79902'
-                  paused={false}
-                  options={{
-                    height: 25,
-                    amplitude: 50,
-                    speed: 0.22,
-                    points: 3
-                  }}
-            />
+            <div>
+              <Wave fill='#f79902'
+                    paused={false}
+                    options={{
+                      height: 25,
+                      amplitude: 50,
+                      speed: 0.22,
+                      points: 3
+                    }}
+              />
+            </div>
           </div>
         </header>
         <div className="project-list">
@@ -78,15 +80,17 @@ class App extends Component {
                 <p>Not only just coding, but I also have background experience in visual designs using illustration tools with group members when I was a member of publicity teams in my CCA organisations.
                   Below works are some of the designs that I have worked on :)</p>                
               </div>
-              <Rotate top left>
-                <div>
-                  {this.state.designs.map((design) => {
-                    return (
-                      <CardComponent medialink={design.medialink} name={design.name} desc={design.desc} org={design.organisation} year={design.year}/>
-                    );
-                  })}
-                </div>
-              </Rotate>
+              <div>
+                <Rotate top left>
+                  <span>
+                    {this.state.designs.map((design) => {
+                      return (
+                        <CardComponent medialink={design.medialink} name={design.name} desc={design.desc} org={design.organisation} year={design.year}/>
+                      );
+                    })}
+                  </span>
+                </Rotate>
+              </div>
           </div>
         </div>
         <FooterComponent />
