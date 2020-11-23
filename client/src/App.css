@@ -5,6 +5,13 @@
   font-family: itc-avant-garde-gothic-pro;
 }
 
+td {
+  vertical-align: baseline;
+}
+td img {
+  vertical-align: top;
+}
+
 .App-logo {
   height: 7vmin;
   pointer-events: none;
@@ -73,6 +80,7 @@
 
 .project-list {
   font-size: calc(10px + 2vmin);
+  padding-bottom: 5vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -116,6 +124,13 @@
 }
 .card {
   margin: auto;
+}
+
+.footer {
+  background-color: #323232;
+  padding: 2vh;
+  font-size: calc(10px + 0.8vmin);
+  height: 10vh;
 }
 
 @keyframes App-logo-spin {

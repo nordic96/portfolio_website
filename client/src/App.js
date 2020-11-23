@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CardComponent from './components/CardComponent';
 import CarouselComponent from './components/CarouselComponent';
+import FooterComponent from './components/FooterComponent';
 import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 
@@ -55,6 +56,7 @@ class App extends Component {
           </Rotate>
           <CardComponent displaytext="First Component Data"/>
         </div>
+        <FooterComponent />
       </div>
     );
   }
