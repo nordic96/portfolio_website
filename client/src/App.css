@@ -1,8 +1,10 @@
 .App {
   text-align: center;
-  background-color: #282c34;
-  color: white;
   font-family: itc-avant-garde-gothic-pro;
+}
+
+.header-top {
+  background-color: #282c34;
 }
 
 td {
@@ -31,10 +33,10 @@ td img {
 }
 
 .intro-selfie {
-  width: 20vmin;
+  width: 15vmin;
   height: auto;
   margin: auto;
-  margin-top: 28px;
+  margin-top: 10px;
 }
 
 .desc {
@@ -54,17 +56,6 @@ td img {
   width: 80%;
   margin: auto;
   padding: 10pt;
-  font-size: calc(10px + 1vmin);
-}
-
-.intro-desc {
-  position: relative;
-  width: 70%;
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto; 
-  margin-bottom: 0;
   font-size: calc(10px + 1vmin);
 }
 
@@ -99,8 +90,10 @@ td img {
 }
 
 .project-list {
-  font-size: calc(10px + 2vmin);
-  padding-bottom: 5vh;
+  font-size: calc(10px + 1.5vmin);
+  background-color: #282c34;
+  color: white;
+  padding-bottom: 1vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -111,12 +104,41 @@ td img {
 
 .App-header {
   background-color: #f16059;
-  min-height: 20vh;
+  color: white;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1.2vmin);
+}
+
+#content {
+  width: 100%;
+  display: table;
+}
+
+#menu-list {
+  background-color: #282c34;
+  width: 15%;
+}
+
+#right {
+  width: 85%;
+  font-size: calc(10px + 1.5vmin);
+}
+
+#menu-header {
+  font-size: calc(10px + 2.5vmin);
+  color: white;
+  background-color: black;
+  background-image: url('./images/bar_2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 35pt;
+}
+
+#menu-list, #right {
+  display: table-cell;
 }
 
 .App-link {
@@ -148,9 +170,102 @@ td img {
 
 .footer {
   background-color: #323232;
+  color: white;
   padding: 2vh;
   font-size: calc(10px + 0.8vmin);
   height: 10vh;
+}
+
+.vertical-menu {
+  top: 0;
+  width: 200px;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*
+ * ID Card Section
+ * Ko Gi Hun, 28 Nov 2020 
+ */
+.id-card {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  top: 50px;
+  margin: auto;
+  background-color:#F8F8F8;
+  color: #404c55;
+  width: 25vh;
+  height: 40vh;
+  border-radius: 25px;
+  vertical-align: middle;
+}
+
+.id-content {
+  position: relative;
+  top: 1vh;
+  height: 32vh;
+}
+
+.id-content-gray {
+  top: 1vh;
+  position: relative;
+}
+
+.id-black {
+  height: 3vh;
+  background-color:#39495b;
+}
+
+.id-maroon {
+  height: 0.7vh;
+  background-color:#b75b57;
+}
+
+.id-skyblue {
+  height: 0.3vh;
+  background-color: #4c9cca;
+}
+
+.id-lanyard {
+  opacity: 0.5;
+  width: 45vh;
+  height: 45vh;
+
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  top: 50px;
+  margin: auto;
+  vertical-align: middle;
+}
+
+.intro-desc {
+  position: relative;
+  display: inline-block;
+  width: 40%;
+  left: 2.5vh; 
+  right: 0; 
+  vertical-align: middle;
+  text-align: left;
+  margin-left: auto; 
+  margin-right: auto; 
+  font-size: calc(10px + 1vmin);
 }
 
 @keyframes App-logo-spin {

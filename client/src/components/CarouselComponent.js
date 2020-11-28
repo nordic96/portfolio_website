@@ -73,7 +73,7 @@ export default class CarouselComponent extends Component {
     }
 
     render() {
-      const width = "100%", height = "48vh";
+      const width = "100%", height = "50vmin";
       const Container = styled.div`
       margin: auto;
       position: relative;
