@@ -69,7 +69,9 @@ class App extends Component {
             <div className="project-list">
               <CarouselComponent />
               <div className="container-design">
-                <h2>&lt; Design Works /&gt;</h2>
+                <div id="menu-header">
+                  <b>&lt; Design Works /&gt;</b>
+                </div>
                 <div className="desc-main">
                   <p>Not only just coding, but I also have background experience in visual designs using illustration tools with group members when I was a member of publicity teams in my CCA organisations.
                     Below works are some of the designs that I have worked on :)</p>                

@@ -134,7 +134,7 @@ td img {
   background-color: black;
   background-image: url('./images/bar_2.png');
   background-repeat: no-repeat;
-  background-size: 100% 35pt;
+  background-size: 100% auto;
 }
 
 #menu-list, #right {
@@ -206,12 +206,12 @@ td img {
   display: inline-block;
   overflow: hidden;
   position: relative;
-  top: 50px;
+  top: 20px;
   margin: auto;
   background-color:#F8F8F8;
   color: #404c55;
   width: 25vh;
-  height: 40vh;
+  height: 37vh;
   border-radius: 25px;
   vertical-align: middle;
 }
@@ -219,7 +219,8 @@ td img {
 .id-content {
   position: relative;
   top: 1vh;
-  height: 32vh;
+  height: 29vh;
+  font-size: 1.5vh;
 }
 
 .id-content-gray {
