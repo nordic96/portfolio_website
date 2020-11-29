@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slide from 'react-reveal/Slide';
 import makeCarousel from 'react-reveal/makeCarousel';
 import styled, { css } from 'styled-components';
+import { Card } from 'react-bootstrap';
 
 export default class CarouselComponent extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ export default class CarouselComponent extends Component {
     createProjectLink(link) {
       if (link) {
         return (
-          <a href={link}><img className="link-icon" src="assets/github-white.png" alt="github"/></a>
+          <a href={link}><img className="link-icon" src="assets/github-logo.png" alt="github"/></a>
         );
       } else {
         return (
@@ -116,35 +117,31 @@ export default class CarouselComponent extends Component {
           {this.state.projects.map((project) => {
               return(
                   <Slide right>
-                      <div className="proj-card">
-                          {/* <img className="img-proj-card" src={project.medialink} alt="project"/> */}
-                          <img src={project.medialink} className="img-proj-card"  alt="project"/>
-                          <h2>{project.name}</h2>
-                          <div className="desc">
-                            {this.createTags(project.tags)}
-                            <table>
-                              <tr>
-                                <td>Project Type: </td>
-                                <td>{project.projecttype}</td>
-                              </tr>
-                              <tr>
-                                <td>Dev. Year: </td>
-                                <td>{project.devyear}</td>
-                              </tr>
-                              <tr>
-                                <td>Project Link:</td>
-                                <td>
-                                  {/* <a href={project.projectlink}>
-                                    <img className="link-icon" src="assets/github-white.png" alt="github"/>
-                                  </a> */}
-                                  {this.createProjectLink(project.projectlink)}
-                                  {this.createVideoLink(project.videolink)}
-                                </td>
-                              </tr>
-                            </table><br></br>
-                            {project.desc}
-                          </div>
-                      </div>
+                    <div className="proj-card">
+                        <img src={project.medialink} className="img-proj-card"  alt="project"/>
+                        <h2><b>{project.name}</b></h2>
+                        <div className="desc">
+                          {this.createTags(project.tags)}
+                          <table>
+                            <tr>
+                              <td>Project Type: </td>
+                              <td>{project.projecttype}</td>
+                            </tr>
+                            <tr>
+                              <td>Dev. Year: </td>
+                              <td>{project.devyear}</td>
+                            </tr>
+                            <tr>
+                              <td>Project Link:</td>
+                              <td>
+                                {this.createProjectLink(project.projectlink)}
+                                {this.createVideoLink(project.videolink)}
+                              </td>
+                            </tr>
+                          </table><br></br>
+                          {project.desc}
+                        </div>
+                    </div>
                   </Slide>
               )
           })}

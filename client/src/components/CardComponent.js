@@ -12,7 +12,7 @@ export default class CardComponent extends Component {
      */
     render() {
         return (
-        <div className="card">
+        <div>
             <Rotate top left>
                 <div>
                     <div className="desc-design">
@@ -20,7 +20,6 @@ export default class CardComponent extends Component {
                         <h3>'{this.props.name}'</h3>
                         <h4>
                             <span className="label label-designtitle">{this.props.org} ({this.props.year})</span> &nbsp;
-                            {/* <span className="label label-year">{this.props.year}</span> */}
                         </h4>
                         {this.props.desc}
                     </div>
