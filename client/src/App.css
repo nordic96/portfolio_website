@@ -161,8 +161,7 @@ td img {
 }
 
 .container-design {
-  /* color: royalblue;
-  background-color: #F5CA01; */
+  overflow: auto;
 }
 .card {
   margin: auto;
@@ -174,6 +173,7 @@ td img {
   padding: 2vh;
   font-size: calc(10px + 0.8vmin);
   height: 10vh;
+  display: table;
 }
 
 .vertical-menu {

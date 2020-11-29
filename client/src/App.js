@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CardComponent from './components/CardComponent';
@@ -7,7 +7,6 @@ import FooterComponent from './components/FooterComponent';
 import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
-import { Tabs, Tab } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {

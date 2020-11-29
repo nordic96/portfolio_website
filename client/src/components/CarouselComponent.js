@@ -73,17 +73,18 @@ export default class CarouselComponent extends Component {
     }
 
     render() {
-      const width = "100%", height = "50vmin";
+      const width = "100%", height = "45vh";
       const Container = styled.div`
       margin: auto;
-      position: relative;
-      overflow: hidden;
+      
       width: ${width};
       height: ${height};
       `;
       const Children  = styled.div`
       width: ${width};
       position: relative;
+      overflow: hidden;
+      display: table;
       height: ${height};
       `;
       const Arrow = styled.div`
@@ -116,7 +117,8 @@ export default class CarouselComponent extends Component {
               return(
                   <Slide right>
                       <div className="proj-card">
-                          <img className="img-proj-card" src={project.medialink} alt="project"/>
+                          {/* <img className="img-proj-card" src={project.medialink} alt="project"/> */}
+                          <img src={project.medialink} className="img-proj-card"  alt="project"/>
                           <h2>{project.name}</h2>
                           <div className="desc">
                             {this.createTags(project.tags)}
