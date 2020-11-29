@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardColumns } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export default class ProjectCardComponent extends Component {
     constructor(props) {
@@ -9,27 +9,6 @@ export default class ProjectCardComponent extends Component {
             projects: []
         };
       } 
-      
-    fetchProjects() {
-      fetch('/api/fetchProjects')
-      .then(res => res.json())
-      .then(
-        (projects) => {
-          console.log(projects)
-          this.setState({
-            isLoaded: true,
-            projects: projects
-          });
-        },
-        (ex) => {
-          console.log('Fetch failed, ', ex);
-        }
-      )
-    }
-    
-    componentDidMount() {
-      this.fetchProjects();
-    }
 
     createTags(tags) {
       console.log(tags);
@@ -71,44 +50,36 @@ export default class ProjectCardComponent extends Component {
     }
 
     render() {
-      return (
-          <div class="project-container">
-              {this.state.projects.map((project) => {
-                  return(
-                    <div class="project-card">
-                        <Card style={{ width: '30rem' }}>
-                            <Card.Img variant="top" src={project.medialink} />
-                            <Card.Body>
-                                <Card.Title><h3><b>{project.name}</b></h3></Card.Title>
-                                <Card.Text>
-                                    <div className="desc">
-                                        {this.createTags(project.tags)}
-                                        <table>
-                                        <tr>
-                                            <td>Project Type: </td>
-                                            <td>{project.projecttype}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dev. Year: </td>
-                                            <td>{project.devyear}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Link:</td>
-                                            <td>
-                                            {this.createProjectLink(project.projectlink)}
-                                            {this.createVideoLink(project.videolink)}
-                                            </td>
-                                        </tr>
-                                        </table><br></br>
-                                        {project.desc}
-                                    </div>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                  )
-              })}
-          </div>
-      )
+        return (
+            <div class="project-card">
+                <Card>
+                    <Card.Img variant="top" src={this.props.medialink} />
+                    <Card.Body>
+                        <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
+                        <Card.Text>
+                            <div className="desc">
+                                {this.createTags(this.props.tags)}
+                                <table>
+                                <tr>
+                                    <td><b>Type:</b></td>
+                                    <td>{this.props.projecttype}</td>
+                                    <td><b>Year:</b></td>
+                                    <td>{this.props.devyear}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Link:</b></td>
+                                    <td>
+                                    {this.createProjectLink(this.props.projectlink)}
+                                    {this.createVideoLink(this.props.videolink)}
+                                    </td>
+                                </tr>
+                                </table><br></br>
+                                {this.props.desc}
+                            </div>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
+        )
     }
 }

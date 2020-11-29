@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: itc-avant-garde-gothic-pro;
+  width: 100%;
 }
 
 .header-top {
@@ -114,6 +115,7 @@ td img {
   background-color: #f16059;
   color: white;
   min-height: 15vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,12 +153,6 @@ td img {
 .proj-card {
   width: 84%;
   margin: auto;
-}
-
-.img-proj-card {
-  width: 38vh;
-  height: auto;
-  float: right;
 }
 
 .img-design {
@@ -258,8 +254,8 @@ td img {
 }
 
 .id-barcode {
-  width: 9vw;
-  height: 2.8vh;
+  width: 8rem;
+  height: 2.8rem;
 }
 
 .id-lanyard {

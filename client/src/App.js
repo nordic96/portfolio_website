@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-
 import './App.css';
-
 import CardComponent from './components/CardComponent';
-import CarouselComponent from './components/CarouselComponent';
 import ProjectCardComponent from './components/ProjectCardComponent';
 import FooterComponent from './components/FooterComponent';
 import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
+import { CardColumns, CardDeck } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
         isLoaded: false,
-        designs: []
+        designs: [],
+        projects: []
     };
   } 
+
   fetchDesigns() {
     fetch('/api/fetchDesigns')
     .then(res => res.json())
@@ -34,9 +34,27 @@ class App extends Component {
       }
     )
   }
+  
+  fetchProjects() {
+    fetch('/api/fetchProjects')
+    .then(res => res.json())
+    .then(
+      (projects) => {
+        console.log(projects)
+        this.setState({
+          isLoaded: true,
+          projects: projects
+        });
+      },
+      (ex) => {
+        console.log('Fetch failed, ', ex);
+      }
+    )
+  }
 
   componentDidMount() {
     this.fetchDesigns();
+    this.fetchProjects();
   }
 
   render() {
@@ -67,7 +85,22 @@ class App extends Component {
           </div>
           <div className="project-list">
             {/* <CarouselComponent /> */}
-            <ProjectCardComponent />
+            <CardColumns>
+              {this.state.projects.map((project) => {
+                return(
+                  <ProjectCardComponent 
+                  name={project.name} 
+                  medialink={project.medialink} 
+                  projectlink={project.projectlink}
+                  videolink={project.videolink}
+                  projecttype={project.projecttype} 
+                  tags={project.tags}
+                  devyear={project.devyear}
+                  desc={project.desc}
+                  />
+                )
+              })}
+            </CardColumns> 
           </div>
           <div className="container-design">
             <div id="menu-header">
@@ -79,13 +112,13 @@ class App extends Component {
             </div>
             <div>
               <Rotate top left>
-                <span>
+                <CardColumns>
                   {this.state.designs.map((design) => {
                     return (
                       <CardComponent medialink={design.medialink} name={design.name} desc={design.desc} org={design.organisation} year={design.year}/>
                     );
                   })}
-                </span>
+                </CardColumns>
               </Rotate>
             </div>
           </div>

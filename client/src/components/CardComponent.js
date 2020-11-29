@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Rotate from 'react-reveal/Rotate';
+import { Card } from 'react-bootstrap';
 
 export default class CardComponent extends Component {
     /**
@@ -12,19 +12,26 @@ export default class CardComponent extends Component {
      */
     render() {
         return (
-        <div>
-            <Rotate top left>
-                <div>
-                    <div className="desc-design">
-                        <img className="img-design" src={this.props.medialink} alt="design"/>
-                        <h3>'{this.props.name}'</h3>
-                        <h4>
-                            <span className="label label-designtitle">{this.props.org} ({this.props.year})</span> &nbsp;
-                        </h4>
-                        {this.props.desc}
-                    </div>
-                </div>
-            </Rotate>
-         </div>);
+            <Card style={{ width: '28rem' }}>
+                <Card.Img variant="top" src={this.props.medialink} alt="design" />
+                <Card.Body>
+                    <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
+                    <Card.Text>
+                        <div className="desc">
+                            <table>
+                                <tr>
+                                    <td><b>Organisation: </b></td>
+                                    <td>{this.props.org}</td> 
+                                </tr>
+                                <tr>
+                                    <td><b>Year: </b></td>
+                                    <td>{this.props.year}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        );
     }
 }
