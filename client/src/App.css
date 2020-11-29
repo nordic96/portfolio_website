@@ -4,7 +4,8 @@
 }
 
 .header-top {
-  background-color: #282c34;
+  height: 3vh;
+  background-color: #335d7f;
 }
 
 td {
@@ -16,12 +17,12 @@ td img {
 }
 
 .App-logo {
-  height: 7vmin;
+  height: 3.7vmin;
   pointer-events: none;
 }
 
 .link-icon {
-  height: 3vmin;
+  height: 2vh;
 }
 
 .contact-icon {
@@ -33,7 +34,7 @@ td img {
 }
 
 .intro-selfie {
-  width: 15vmin;
+  width: 12.8vmin;
   height: auto;
   margin: auto;
   margin-top: 10px;
@@ -42,12 +43,12 @@ td img {
 .desc {
   padding: 14pt;
   text-align: left;
-  font-size: calc(10px + 1vmin);
+  font-size: calc(10px + 0.7vmin);
 }
 
 .desc-design {
   padding: 14pt;
-  width: 59%;
+  width: 80%;
   margin: auto;
   font-size: calc(10px + 1vmin);
 }
@@ -74,7 +75,7 @@ td img {
 .label {
   display: inline;
   padding: .2em .6em .3em;
-  font-size: 75%;
+  font-size: 1.3vh;
   font-weight: 700;
   line-height: 1;
   color: #fff;
@@ -91,9 +92,16 @@ td img {
 
 .project-list {
   font-size: calc(10px + 1.5vmin);
-  background-color: #282c34;
-  color: white;
+  background-color: #F8F8F8;
+  color: #39495b;
   padding-bottom: 1vh;
+}
+
+.container-design, .project-list{
+  overflow: auto;
+  color: #39495b;
+  font-size: calc(10px + 1.5vmin);
+  background-color: #F8F8F8;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -123,13 +131,8 @@ td img {
   width: 15%;
 }
 
-#right {
-  width: 85%;
-  font-size: calc(10px + 1.5vmin);
-}
-
 #menu-header {
-  font-size: calc(10px + 2.5vmin);
+  font-size: calc(10px + 1.8vmin);
   color: white;
   background-color: black;
   background-image: url('./images/bar_2.png');
@@ -137,7 +140,7 @@ td img {
   background-size: 100% auto;
 }
 
-#menu-list, #right {
+#menu-list {
   display: table-cell;
 }
 
@@ -151,18 +154,16 @@ td img {
 }
 
 .img-proj-card {
-  width: 50%;
+  width: 38vh;
   height: auto;
   float: right;
 }
 
 .img-design {
-  width: 35vh;
+  height: 27vh;
+  margin: auto;
 }
 
-.container-design {
-  overflow: auto;
-}
 .card {
   margin: auto;
 }
@@ -173,6 +174,7 @@ td img {
   padding: 2vh;
   font-size: calc(10px + 0.8vmin);
   height: 10vh;
+  width: 100%;
   display: table;
 }
 
@@ -196,6 +198,18 @@ td img {
 .vertical-menu a.active {
   background-color: #4CAF50;
   color: white;
+}
+/*
+ * Project Section
+ * Ko Gi Hun, 28 Nov 2020 
+ */
+.project-container {
+  padding: 1vh;
+}
+
+ .project-card {
+  padding: 0.5vh;
+  float: left;
 }
 
 /*
@@ -241,6 +255,11 @@ td img {
 .id-skyblue {
   height: 0.3vh;
   background-color: #4c9cca;
+}
+
+.id-barcode {
+  width: 9vw;
+  height: 2.8vh;
 }
 
 .id-lanyard {
