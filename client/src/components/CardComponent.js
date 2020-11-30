@@ -12,7 +12,7 @@ export default class CardComponent extends Component {
      */
     render() {
         return (
-            <Card style={{ width: '28rem' }}>
+            <Card>
                 <Card.Img variant="top" src={'https://drive.google.com/uc?id=' + this.props.medialink} className="img-design-card" alt="design" />
                 <Card.Body>
                     <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
