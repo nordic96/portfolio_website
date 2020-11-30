@@ -6,7 +6,7 @@ import FooterComponent from './components/FooterComponent';
 import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
-import { CardColumns, CardDeck } from 'react-bootstrap';
+import { CardColumns } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 
 export default class IDCard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return(
             <div>
@@ -25,7 +21,7 @@ export default class IDCard extends Component {
                         <a href="https://github.com/nordic96"><img className="link-icon" src="assets/github-logo.png" alt="github icon"/></a>
                         &nbsp;<a href="https://www.linkedin.com/in/gi-hun-ko-863619184/"><img className="link-icon" src="assets/Linkedin-Icon.png" alt="linkedin icon"/></a>
                         &nbsp;<a href="https://www.hackerrank.com/kogihun"><img className="link-icon" src="assets/hackerrank.svg" alt="hackerrank icon"/></a>
-                        <br/><img className="id-barcode" src="assets/barcode.png" />
+                        <br/><img className="id-barcode" src="assets/barcode.png" alt="barcode" />
                         {/* <div className="id-content-gray">
                         </div> */}
                     </div>
