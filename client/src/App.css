@@ -154,9 +154,12 @@ td img {
   margin: auto;
 }
 
-.img-design {
-  height: 27vh;
-  margin: auto;
+.img-proj-card {
+  width: 30rem;
+}
+
+.img-design-card {
+  width: 30rem;
 }
 
 .card {
