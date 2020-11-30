@@ -12,14 +12,4 @@ project_router.route("/fetchProjects").get((req, res) => {
     });
 });
 
-project_router.route("/fetchDesigns").get((req, res) => {
-    designs.find({}, (err, result) => {
-        if(err) {
-            res.send(err);
-        } else {
-            res.send(result);
-        }
-    })
-})
-
 module.exports = project_router;

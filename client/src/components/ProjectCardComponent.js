@@ -53,7 +53,7 @@ export default class ProjectCardComponent extends Component {
         return (
             <div class="project-card">
                 <Card>
-                    <Card.Img variant="top" src={this.props.medialink} />
+                    <Card.Img variant="top" src={'https://drive.google.com/uc?id=' + this.props.medialink} className="img-proj-card" />
                     <Card.Body>
                         <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
                         <Card.Text>

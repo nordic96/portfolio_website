@@ -154,9 +154,9 @@ td img {
   margin: auto;
 }
 
-.img-design {
-  height: 27vh;
-  margin: auto;
+.img-proj-card, .img-design-card{
+  width: 100%;
+  object-fit: cover;
 }
 
 .card {
