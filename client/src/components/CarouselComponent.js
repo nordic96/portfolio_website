@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Slide from 'react-reveal/Slide';
 import makeCarousel from 'react-reveal/makeCarousel';
 import styled, { css } from 'styled-components';
-import { Card } from 'react-bootstrap';
 
 export default class CarouselComponent extends Component {
     constructor(props) {

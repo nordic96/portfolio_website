@@ -13,7 +13,7 @@ export default class CardComponent extends Component {
     render() {
         return (
             <Card>
-                <Card.Img variant="top" src={'https://drive.google.com/uc?id=' + this.props.medialink} className="img-design-card" alt="design" />
+                <Card.Img variant="top" src={'https://lh3.googleusercontent.com/' + this.props.medialink} className="img-design-card" alt="design" />
                 <Card.Body>
                     <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
                     <Card.Text>
