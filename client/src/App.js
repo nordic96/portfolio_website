@@ -3,7 +3,6 @@ import './App.css';
 import CardComponent from './components/CardComponent';
 import ProjectCardComponent from './components/ProjectCardComponent';
 import FooterComponent from './components/FooterComponent';
-import Rotate from 'react-reveal/Rotate';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
 import { CardColumns } from 'react-bootstrap';
@@ -111,21 +110,19 @@ class App extends Component {
                 Below works are some of the designs that I have worked on :)</p>                
             </div>
             <div>
-              <Rotate top left>
-                <CardColumns>
-                  {this.state.designs.map((design) => {
-                    return (
-                      <CardComponent 
-                      medialink={design.medialink} 
-                      name={design.name} 
-                      desc={design.desc} 
-                      org={design.organisation} 
-                      year={design.year}
-                      />
-                    );
-                  })}
-                </CardColumns>
-              </Rotate>
+              <CardColumns>
+                {this.state.designs.map((design) => {
+                  return (
+                    <CardComponent 
+                    medialink={design.medialink} 
+                    name={design.name} 
+                    desc={design.desc} 
+                    org={design.organisation} 
+                    year={design.year}
+                    />
+                  );
+                })}
+              </CardColumns>
             </div>
           </div>
         </div>
