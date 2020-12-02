@@ -13,19 +13,22 @@ export default class CardComponent extends Component {
     render() {
         return (
             <Card>
-                <Card.Img variant="top" src={'https://drive.google.com/uc?id=' + this.props.medialink} className="img-design-card" alt="design" />
+                <Card.Img variant="top" src={'https://lh3.googleusercontent.com/' + this.props.medialink} className="img-design-card" alt="design" />
                 <Card.Body>
                     <Card.Title><h3><b>{this.props.name}</b></h3></Card.Title>
                     <Card.Text>
                         <div className="desc">
                             <table>
                                 <tr>
-                                    <td><b>Organisation: </b></td>
-                                    <td>{this.props.org}</td> 
+                                    <td>
+                                        <b>Organisation: </b>
+                                        {this.props.org}
+                                        <b>Year: </b>
+                                        {this.props.year}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Year: </b></td>
-                                    <td>{this.props.year}</td>
+                                    <td>{this.props.desc}</td>
                                 </tr>
                             </table>
                         </div>
