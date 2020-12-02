@@ -115,7 +115,13 @@ class App extends Component {
                 <CardColumns>
                   {this.state.designs.map((design) => {
                     return (
-                      <CardComponent medialink={design.medialink} name={design.name} desc={design.desc} org={design.organisation} year={design.year}/>
+                      <CardComponent 
+                      medialink={design.medialink} 
+                      name={design.name} 
+                      desc={design.desc} 
+                      org={design.organisation} 
+                      year={design.year}
+                      />
                     );
                   })}
                 </CardColumns>
