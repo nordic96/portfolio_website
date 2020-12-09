@@ -23,6 +23,10 @@ export default class CardComponent extends Component {
                                     <td>
                                         <b>Organisation: </b>
                                         {this.props.org}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <b>Year: </b>
                                         {this.props.year}
                                     </td>
