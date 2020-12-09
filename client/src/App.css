@@ -87,8 +87,9 @@ td img {
 }
 
 .tags-container {
-  margin: auto;
-  padding: 10px;
+  width: 70%;
+  /* float: right; */
+  padding: 3px;
 }
 
 .project-list {

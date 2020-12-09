@@ -84,7 +84,6 @@ class App extends Component {
           </div>
           <div className="project-list">
             {/* <CarouselComponent /> */}
-            <CardColumns>
               {this.state.projects.map((project) => {
                 return(
                   <ProjectCardComponent 
@@ -99,6 +98,7 @@ class App extends Component {
                   />
                 )
               })}
+            <CardColumns>
             </CardColumns> 
           </div>
           <div className="container-design">
