@@ -1,0 +1,22 @@
+version: "3"
+services:
+  frontend:
+    container_name: portfolio_app
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: nordic96/portfolio_app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+  backend:
+    container_name: portfolio_app_server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: nordic96/portfolio_app_server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/usr/src/app
