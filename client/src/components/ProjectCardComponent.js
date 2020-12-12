@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 export default class ProjectCardComponent extends Component {
     constructor(props) {
@@ -82,7 +81,7 @@ export default class ProjectCardComponent extends Component {
                 <div className="card mb-3" >
                   <div className="row no-gutters">
                     <div className="col-md-4">
-                      <img src={'https://lh3.googleusercontent.com/' + this.props.medialink} className="card-img" alt="project-image" />
+                      <img src={'https://lh3.googleusercontent.com/' + this.props.medialink} className="card-img" alt="project" />
                     </div>
                     <div className="col-md-8">
                       <div className="card-body">
