@@ -83,34 +83,27 @@ class App extends Component {
             </div>
           </nav>
         </div>
-        <div className="container-intro">
-          <div className="intro">
-            <IDCard />
-            <div>
-              <Wave fill='#f79902'
-                    paused={false}
-                    options={{
-                      height: 25,
-                      amplitude: 50,
-                      speed: 0.22,
-                      points: 3
-                    }}
-              />
-            </div>
+        <div className="intro">
+          <IDCard />
+          <div>
+            <Wave fill='#f79902'
+                  paused={false}
+                  options={{
+                    height: 25,
+                    amplitude: 50,
+                    speed: 0.22,
+                    points: 3
+                  }}
+            />
           </div>
         </div>
         <div className="container-fluid">
-          <div className="container-intro">
-          </div>
           <div className="content">
-            {/* <div id="menu-header">
-              <b>&lt; My Projects /&gt;</b>
-            </div> */}
             <div className="item-intro">
               <h2 className="display-4"><b>Projects</b></h2>
               <p className="lead">My projects include school projects, as well as self-sourced projects, either in groups or single. Project scope varies from IoT, machine learning, to Software Engineering!</p> 
               <hr className="my-4"/>
-              <p>All of the project source files are hosted in github or displayed in youtube, and you can click the github/youtube icon to see more details about it.</p> 
+              <p>All project source files are hosted in github or displayed in youtube, and you can click the github/youtube icon to see more details about it.</p> 
             </div>
             <div className="project-list">
               {/* <CarouselComponent /> */}
@@ -128,8 +121,7 @@ class App extends Component {
                     />
                   )
                 })}
-              <CardColumns>
-              </CardColumns> 
+              <hr className="my-4"/>
             </div>
             <div className="item-intro">
               <h2 className="display-4"><b>Design Works</b></h2>
@@ -155,6 +147,7 @@ class App extends Component {
                 </CardColumns>
               </div>
             </div>
+            <hr className="my-4"/>
           </div>
         </div> 
         <FooterComponent />
