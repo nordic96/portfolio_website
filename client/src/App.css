@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  font-family: itc-avant-garde-gothic-pro;
+  /* font-family: itc-avant-garde-gothic-pro; */
+  font-family: 'Overlock', cursive;
   width: 100%;
 }
 
@@ -36,6 +37,7 @@ td img {
 }
 
 .item-intro {
+  color: #39495b;
   text-align: left;
 }
 
