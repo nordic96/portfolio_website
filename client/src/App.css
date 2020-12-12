@@ -4,9 +4,10 @@
   width: 100%;
 }
 
-.header-top {
-  height: 3vh;
-  background-color: #335d7f;
+.content {
+  padding-top: 2.5%;
+  display: inline-block;
+  width: 88%;
 }
 
 td {
@@ -30,7 +31,18 @@ td img {
   height: 2vmin;
 }
 
+.container-intro {
+  padding-top: 2%;
+}
+
+.item-intro {
+  text-align: left;
+}
+
 .intro {
+  background-color: #f16059;
+  color: white;
+  display: inline-block;
   width: 100%;
 }
 
@@ -113,8 +125,6 @@ td img {
 }
 
 .App-header {
-  background-color: #f16059;
-  color: white;
   min-height: 15vh;
   width: 100%;
   display: flex;
@@ -122,10 +132,6 @@ td img {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 1.2vmin);
-}
-
-#content {
-  width: 100%;
 }
 
 #menu-list {
@@ -254,8 +260,8 @@ td img {
 }
 
 .id-barcode {
-  width: 8rem;
-  height: 2.8rem;
+  width: 15vw;
+  height: 4vh;
 }
 
 .id-lanyard {
