@@ -6,6 +6,8 @@ import FooterComponent from './components/FooterComponent';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
 import { CardColumns } from 'react-bootstrap';
+import logo from './logo.svg';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 class App extends Component {
   constructor(props) {
@@ -99,31 +101,30 @@ class App extends Component {
         </div>
         <div className="container-fluid">
           <div className="content">
-            <div className="item-intro">
+            <div className="item-intro" id="projects-link">
               <h2 className="display-4"><b>Projects</b></h2>
               <p className="lead">My projects include school projects, as well as self-sourced projects, either in groups or single. Project scope varies from IoT, machine learning, to Software Engineering!</p> 
               <hr className="my-4"/>
               <p>All project source files are hosted in github or displayed in youtube, and you can click the github/youtube icon to see more details about it.</p> 
             </div>
             <div className="project-list">
-              {/* <CarouselComponent /> */}
-                {this.state.projects.map((project) => {
-                  return(
-                    <ProjectCardComponent 
-                    name={project.name} 
-                    medialink={project.medialink} 
-                    projectlink={project.projectlink}
-                    videolink={project.videolink}
-                    projecttype={project.projecttype} 
-                    tags={project.tags}
-                    devyear={project.devyear}
-                    desc={project.desc}
-                    />
-                  )
-                })}
+              {this.state.projects.map((project) => {
+                return(
+                  <ProjectCardComponent 
+                  name={project.name} 
+                  medialink={project.medialink} 
+                  projectlink={project.projectlink}
+                  videolink={project.videolink}
+                  projecttype={project.projecttype} 
+                  tags={project.tags}
+                  devyear={project.devyear}
+                  desc={project.desc}
+                  />
+                )
+              })}
               <hr className="my-4"/>
             </div>
-            <div className="item-intro">
+            <div className="item-intro" id="designs-link">
               <h2 className="display-4"><b>Design Works</b></h2>
               <p className="lead">Not only just coding, but I also have background experience in visual designs using illustration tools with group members when I was a member of publicity teams in my CCA organisations.
                 Below works are some of the designs that I have worked on :)</p> 
@@ -149,6 +150,33 @@ class App extends Component {
             </div>
             <hr className="my-4"/>
           </div>
+          <div className="anchor-navbar">
+            <nav class="nav flex-column nav-pills">
+              <Link
+                className="nav-link"
+                activeClass="active"
+                to="projects-link"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                Project
+              </Link>
+              <Link
+                className="nav-link"
+                activeClass="active"
+                to="designs-link"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+              >
+                Design Works
+              </Link>
+            </nav>
+            <hr className="my-4"/>
+          </div> 
         </div> 
         <FooterComponent />
       </div>
