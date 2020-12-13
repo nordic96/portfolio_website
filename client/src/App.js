@@ -6,8 +6,7 @@ import FooterComponent from './components/FooterComponent';
 import Wave from 'react-wavify';
 import IDCard from './components/IDCard';
 import { CardColumns } from 'react-bootstrap';
-import logo from './logo.svg';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { Link, animateScroll } from 'react-scroll';
 
 class App extends Component {
   constructor(props) {
@@ -62,15 +61,15 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header-top">
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">Ko Gi Hun's Portfolio Website</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand" href="/">Ko Gi Hun's Portfolio Website</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                 </li>
                 {/* <li class="nav-item">
                   <a class="nav-link" href="#">Features</a>
@@ -151,7 +150,7 @@ class App extends Component {
             <hr className="my-4"/>
           </div>
           <div className="anchor-navbar">
-            <nav class="nav flex-column nav-pills">
+            <nav className="nav flex-column nav-pills">
               <Link
                 className="nav-link"
                 activeClass="active"
