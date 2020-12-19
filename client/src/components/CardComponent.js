@@ -19,21 +19,23 @@ export default class CardComponent extends Component {
                     <Card.Text>
                         <div className="desc">
                             <table>
-                                <tr>
-                                    <td>
-                                        <b>Organisation: </b>
-                                        {this.props.org}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Year: </b>
-                                        {this.props.year}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{this.props.desc}</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Organisation: </b>
+                                            {this.props.org}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Year: </b>
+                                            {this.props.year}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{this.props.desc}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </Card.Text>
