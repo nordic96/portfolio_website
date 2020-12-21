@@ -24,8 +24,8 @@ connection.once("open", () => {
 //Adding rate-limit middleware
 var RateLimit = require('express-rate-limit');
 var limiter = new RateLimit({
-    windowMs: 1 * 60 * 1000,
-    max: 5
+    windowMs: 1 * 60 * 2000,
+    max: 10
 });
 app.use(limiter);
 
