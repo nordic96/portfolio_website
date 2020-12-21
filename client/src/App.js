@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+
+//Custom Components
+import NavBar from './components/NavBar';
+import AnchorNavBar from './components/AnchorNavBar';
 import CardComponent from './components/CardComponent';
 import ProjectCardComponent from './components/ProjectCardComponent';
 import FooterComponent from './components/FooterComponent';
-import Wave from 'react-wavify';
-import IDCard from './components/IDCard';
+import IntroductionBox from './components/IntroductionBox';
+
 import { CardColumns } from 'react-bootstrap';
-import { Link, animateScroll } from 'react-scroll';
 
 class App extends Component {
   constructor(props) {
@@ -60,44 +63,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header-top">
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="/">Ko Gi Hun's Portfolio Website</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item active">
-                  <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-                </li>
-                {/* <li class="nav-item">
-                  <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li> */}
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div className="intro">
-          <IDCard />
-          <div>
-            <Wave fill='#f79902'
-                  paused={false}
-                  options={{
-                    height: 25,
-                    amplitude: 50,
-                    speed: 0.22,
-                    points: 3
-                  }}
-            />
-          </div>
-        </div>
+        <NavBar />
+        <IntroductionBox />
         <div className="container-fluid">
           <div className="content">
             <div className="item-intro" id="projects-link">
@@ -149,33 +116,7 @@ class App extends Component {
             </div>
             <hr className="my-4"/>
           </div>
-          <div className="anchor-navbar">
-            <nav className="nav flex-column nav-pills">
-              <Link
-                className="nav-link"
-                activeClass="active"
-                to="projects-link"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                Project
-              </Link>
-              <Link
-                className="nav-link"
-                activeClass="active"
-                to="designs-link"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-              >
-                Design Works
-              </Link>
-            </nav>
-            <hr className="my-4"/>
-          </div> 
+          <AnchorNavBar />
         </div> 
         <FooterComponent />
       </div>

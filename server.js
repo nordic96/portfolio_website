@@ -21,6 +21,14 @@ connection.once("open", () => {
     console.log('MongoDb database connection established successfully');
 });
 
+//Adding rate-limit middleware
+var RateLimit = require('express-rate-limit');
+var limiter = new RateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 5
+});
+app.use(limiter);
+
 //Checks if production, then build react app and use build/
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
