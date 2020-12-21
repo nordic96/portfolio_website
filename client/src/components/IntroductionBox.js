@@ -9,7 +9,7 @@ export default function IntroductionBox(props) {
         <div className="intro">
         <IDCard />
         <div>
-          <Wave fill='#f79902'
+          <Wave fill='#FF4B3E'
                 paused={false}
                 options={{
                   height: 25,

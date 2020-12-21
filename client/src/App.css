@@ -8,14 +8,14 @@
 .content {
   padding-top: 2.5%;
   display: inline-block;
-  width: 68%;
+  width: 75%;
 }
 
 .anchor-navbar {
   padding-top: 2.5%;
   padding-left: 1%;
   display:inline-block;
-  width: 15%;
+  width: 12%;
   vertical-align: top;
   position: fixed;
 }
@@ -51,7 +51,19 @@ td img {
 }
 
 .intro {
-  background-color: #f16059;
+  /* background-color: #f16059; */
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    color-stop(0, rgb(255, 179, 15)),
+    color-stop(1, rgb(255, 91, 79))
+  );
+  background-image: -o-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
+  background-image: -moz-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
+  background-image: -webkit-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
+  background-image: -ms-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
+  background-image: linear-gradient(to right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
   color: white;
   display: inline-block;
   width: 100%;
@@ -67,7 +79,7 @@ td img {
 .desc {
   padding: 14pt;
   text-align: left;
-  font-size: calc(10px + 0.7vmin);
+  font-size: calc(10px + 0.5vmin);
 }
 
 .desc-design {
@@ -109,13 +121,12 @@ td img {
 }
 
 .tags-container {
-  width: 70%;
-  /* float: right; */
   padding: 3px;
+  font-size: calc(10px + 0.5vmin);
 }
 
 .project-list {
-  font-size: calc(10px + 1.5vmin);
+  font-size: calc(10px + 1vmin);
   background-color: #F8F8F8;
   color: #39495b;
   padding-bottom: 1vh;
@@ -124,7 +135,6 @@ td img {
 .container-design, .project-list{
   overflow: auto;
   color: #39495b;
-  font-size: calc(10px + 1.5vmin);
   background-color: #F8F8F8;
 }
 
@@ -132,6 +142,10 @@ td img {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.header-top {
+  color: white;
 }
 
 .App-header {
@@ -219,7 +233,7 @@ td img {
   padding: 1vh;
 }
 
- .project-card {
+.project-card {
   padding: 0.5vh;
   float: left;
 }
@@ -261,7 +275,19 @@ td img {
 
 .id-maroon {
   height: 0.7vh;
-  background-color:#b75b57;
+  /* background-color:#b75b57; */
+  background-image: -webkit-gradient(
+    linear,
+    right bottom,
+    right bottom,
+    color-stop(0, rgb(37, 222, 173)),
+    color-stop(1, rgb(15, 92, 79))
+  );
+  background-image: -o-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
+  background-image: -moz-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
+  background-image: -webkit-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
+  background-image: -ms-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
+  background-image: linear-gradient(to right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
 }
 
 .id-skyblue {
