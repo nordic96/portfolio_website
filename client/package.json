@@ -15,7 +15,8 @@
     "styled-components": "5.2.1",
     "web-vitals": "^0.2.4",
     "react-bootstrap": "1.4.0",
-    "react-scroll": "^1.8.1"
+    "react-scroll": "^1.8.1",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

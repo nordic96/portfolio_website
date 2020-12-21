@@ -18,12 +18,11 @@ export default class IDCard extends Component {
                         <br/>
                         <b>GI HUN KO</b><br/>
                         <b>Software Engineer, Singapore</b><br/>
-                        <a href="https://github.com/nordic96"><img className="link-icon" src="assets/github-logo.png" alt="github icon"/></a>
-                        &nbsp;<a href="https://www.linkedin.com/in/gi-hun-ko-863619184/"><img className="link-icon" src="assets/Linkedin-Icon.png" alt="linkedin icon"/></a>
-                        &nbsp;<a href="https://www.hackerrank.com/kogihun"><img className="link-icon" src="assets/hackerrank.svg" alt="hackerrank icon"/></a>
+                        <a href="https://github.com/nordic96" target="_blank" rel="noreferrer"><img className="link-icon" src="assets/github-logo.png" alt="github icon"/></a>
+                        &nbsp;<a href="https://www.linkedin.com/in/gi-hun-ko-863619184/" target="_blank" rel="noreferrer"><img className="link-icon" src="assets/Linkedin-Icon.png" alt="linkedin icon"/></a>
+                        &nbsp;<a href="https://www.hackerrank.com/kogihun" target="_blank" rel="noreferrer"><img className="link-icon" src="assets/hackerrank.svg" alt="hackerrank icon"/></a>
+                        &nbsp;<a href="https://leetcode.com/nordic59/" target="_blank" rel="noreferrer"><img className="link-icon" src="assets/leetcode_logo.png" alt="leetcode icon"/></a>
                         <br/><img className="id-barcode" src="assets/barcode.png" alt="barcode" />
-                        {/* <div className="id-content-gray">
-                        </div> */}
                     </div>
                     <div className="id-skyblue"></div>
                     <div className="id-maroon"></div>
