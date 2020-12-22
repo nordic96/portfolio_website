@@ -11,6 +11,8 @@
   width: 75%;
 }
 
+
+/* Anchor NavBar related */
 .anchor-navbar {
   padding-top: 2.5%;
   padding-left: 1%;
@@ -18,6 +20,10 @@
   width: 12%;
   vertical-align: top;
   position: fixed;
+}
+
+.nav-link:hover {
+  color:rgb(15, 92, 79);
 }
 
 td {
@@ -34,7 +40,7 @@ td img {
 }
 
 .link-icon {
-  height: 2vh;
+  height: 30px;
 }
 
 .contact-icon {
@@ -70,7 +76,7 @@ td img {
 }
 
 .intro-selfie {
-  width: 12.8vmin;
+  width: 150px;
   height: auto;
   margin: auto;
   margin-top: 10px;
@@ -194,12 +200,16 @@ td img {
   margin: auto;
 }
 
+.card-title:hover {
+  color:rgb(37, 222, 173);
+}
+
 .footer {
   background-color: #323232;
   color: white;
-  padding: 2vh;
-  font-size: calc(10px + 0.8vmin);
-  height: 10vh;
+  padding: 5vh;
+  font-size: calc(10px + 0.68vmin);
+  height: 15vh;
   width: 100%;
   display: table;
 }
@@ -250,8 +260,8 @@ td img {
   margin: auto;
   background-color:#F8F8F8;
   color: #404c55;
-  width: 25vh;
-  height: 37vh;
+  width: 280px;
+  height: 420px;
   border-radius: 25px;
   vertical-align: middle;
 }
@@ -259,22 +269,22 @@ td img {
 .id-content {
   position: relative;
   top: 1vh;
-  height: 29vh;
-  font-size: 1.5vh;
+  height: 330px;
+  font-size: 12pt;
 }
 
 .id-content-gray {
-  top: 1vh;
+  top: 10px;
   position: relative;
 }
 
 .id-black {
-  height: 3vh;
+  height: 35px;
   background-color:#39495b;
 }
 
 .id-maroon {
-  height: 0.7vh;
+  height: 10px;
   /* background-color:#b75b57; */
   background-image: -webkit-gradient(
     linear,
@@ -296,8 +306,8 @@ td img {
 }
 
 .id-barcode {
-  width: 15vw;
-  height: 4vh;
+  width: 70%;
+  height: 45px;
 }
 
 .id-lanyard {

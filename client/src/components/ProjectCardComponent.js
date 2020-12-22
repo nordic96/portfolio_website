@@ -27,7 +27,7 @@ export default class ProjectCardComponent extends Component {
     createVideoLink(link) {
       if (link) {
         return (
-          <a href={link}><img className="link-icon" src="assets/youtube-icon.png" alt="video"/></a>
+          <a href={link} target="_blank" rel="noreferrer"><img className="link-icon" src="assets/youtube-icon.png" alt="video" /></a>
         );
       } else {
         return (
@@ -39,7 +39,7 @@ export default class ProjectCardComponent extends Component {
     createProjectLink(link) {
       if (link) {
         return (
-          <a href={link}><img className="link-icon" src="assets/github-logo.png" alt="github"/></a>
+          <a href={link} target="_blank" rel="noreferrer"><img className="link-icon" src="assets/github-logo.png" alt="github" /></a>
         );
       } else {
         return (

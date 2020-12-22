@@ -11,7 +11,7 @@ export default class FooterComponent extends Component {
             <div className="footer">
                 <table>
                     <tbody>
-                        <tr>
+                        <tr style={{ textAlign: 'left'}}>
                             <th style={{width: "50%"}}>Contacts</th>
                             <th>About This Portolio Website</th>
                         </tr>
