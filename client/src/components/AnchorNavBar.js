@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 
-export default function AnchorNavBar(props) {
+function AnchorNavBar() {
     return(
         <div className="anchor-navbar">
         <nav className="nav flex-column nav-pills">
@@ -32,3 +32,4 @@ export default function AnchorNavBar(props) {
       </div> 
     );
 }
+export default React.memo(AnchorNavBar);
