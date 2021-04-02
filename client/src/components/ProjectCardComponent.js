@@ -15,25 +15,11 @@ function createTags(tags) {
   )
 }
 
-function createVideoLink(link) {
+function createLink(link, iconName) {
   if (link) {
     return (
       <a href={link} target="_blank" rel="noreferrer">
-        <img className="link-icon" src="assets/youtube-icon.png" alt="video" />
-      </a>
-    );
-  } else {
-    return (
-      <span></span>
-    );
-  }
-}
-
-function createProjectLink(link) {
-  if (link) {
-    return (
-      <a href={link} target="_blank" rel="noreferrer">
-        <img className="link-icon" src="assets/github-logo.png" alt="github" />
+        <img className="link-icon" src={"assets/" + iconName + "-logo.png"} alt={iconName} />
       </a>
     );
   } else {
@@ -65,8 +51,8 @@ function ProjectCardComponent(props) {
                       </tr>
                       <tr>
                           <td><b>Link: </b>
-                          {createProjectLink(props.projectlink)}
-                          {createVideoLink(props.videolink)}
+                          {createLink(props.projectlink, "github")}
+                          {createLink(props.videolink, "youtube")}
                           </td>
                       </tr>
                       <tr>
