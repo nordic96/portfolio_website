@@ -4,7 +4,7 @@ import Wave from 'react-wavify';
 
 import IDCard from './IDCard';
 
-export default function IntroductionBox(props) {
+function IntroductionBox() {
     return(
         <div className="intro">
         <IDCard />
@@ -22,3 +22,4 @@ export default function IntroductionBox(props) {
       </div>
     );
 }
+export default React.memo(IntroductionBox);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function NavBar(props) {
+function NavBar() {
     return(
         <div className="header-top">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,3 +25,4 @@ export default function NavBar(props) {
         </div>
     );
 }
+export default React.memo(NavBar);
