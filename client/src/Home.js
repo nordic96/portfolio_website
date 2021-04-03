@@ -14,35 +14,39 @@ import { CardColumns } from 'react-bootstrap';
 function Home() {
   const [designs, setDesigns] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
+  const [isDesignsLoaded, setIsDesignsLoaded] = useState(false);
 
   useEffect(() => {
     fetch('/api/fetchDesigns')
     .then(res => res.json())
     .then(
       (designs) => {
-        console.log(designs)
         setDesigns(designs);
-        setIsLoaded(true);
+        setIsDesignsLoaded(true);
       },
       (ex) => {
         console.log('Fetch failed, ', ex);
+        setIsDesignsLoaded(false);
       }
     )
-
+    
     fetch('/api/fetchProjects')
     .then(res => res.json())
     .then(
       (projects) => {
-        console.log(projects)
-        setIsLoaded(true);
         setProjects(projects);
+        setIsProjectsLoaded(true);
       },
       (ex) => {
         console.log('Fetch failed, ', ex);
+        setIsProjectsLoaded(false);
       }
-    )
+    );
   }, []);
+  console.log("found " + designs.length + " design items from DB..");
+  console.log("found " + projects.length + " project items from DB..");
+
   return (
     <div className="App">
       <NavBar />
@@ -56,9 +60,10 @@ function Home() {
             <p>All project source files are hosted in github or displayed in youtube, and you can click the github/youtube icon to see more details about it.</p> 
           </div>
           <div className="project-list">
-            {projects.map((project) => {
+            {isProjectsLoaded ? (projects.map((project, index) => {
               return(
                 <ProjectCardComponent 
+                key={index}
                 name={project.name} 
                 medialink={project.medialink} 
                 projectlink={project.projectlink}
@@ -69,7 +74,7 @@ function Home() {
                 desc={project.desc}
                 />
               )
-            })}
+            })) : "Project details fetch request failed :'( please refresh the page again!"}
             <hr className="my-4"/>
           </div>
           <div className="item-intro" id="designs-link">
@@ -82,9 +87,10 @@ function Home() {
           <div className="container-design">
             <div>
               <CardColumns>
-                {designs.map((design) => {
+                {isDesignsLoaded ? (designs.map((design, index) => {
                   return (
                     <CardComponent 
+                    key={index}
                     medialink={design.medialink} 
                     name={design.name} 
                     desc={design.desc} 
@@ -92,7 +98,7 @@ function Home() {
                     year={design.year}
                     />
                   );
-                })}
+                })) : "Design details fetch request failed :'( please refresh the page again!"}
               </CardColumns>
             </div>
           </div>
@@ -104,4 +110,4 @@ function Home() {
     </div>
   );
 }
-export default React.memo(Home);
+export default Home;

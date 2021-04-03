@@ -1,14 +1,14 @@
 import React from 'react';
 
 function createTags(tags) {
-  console.log(tags);
+  //console.log(tags);
   return(
     <div className="tags-container">
-      {tags.map((tag) => {
+      {tags.map((tag, index) => {
         return(
-          <span>
-            <span className="label label-primary">{tag}</span> &nbsp;
-          </span>
+          <React.Fragment>
+            <span key={index} className="label label-primary">{tag}</span> &nbsp;
+          </React.Fragment>
         )
       })}
     </div>
@@ -16,17 +16,11 @@ function createTags(tags) {
 }
 
 function createLink(link, iconName) {
-  if (link) {
-    return (
-      <a href={link} target="_blank" rel="noreferrer">
-        <img className="link-icon" src={"assets/" + iconName + "-logo.png"} alt={iconName} />
-      </a>
-    );
-  } else {
-    return (
-      <span></span>
-    );
-  }
+  return (
+    <a href={link} target="_blank" rel="noreferrer">
+      <img className="link-icon" src={"assets/" + iconName + "-logo.png"} alt={iconName} />
+    </a>
+  );
 }
 
 function ProjectCardComponent(props) {
@@ -40,9 +34,9 @@ function ProjectCardComponent(props) {
           <div className="col-md-8">
             <div className="card-body">
               <h2 className="card-title"><b>{props.name}</b></h2>
-              <p className="card-text">
                 <div className="desc">
                   <table>
+                    <tbody>
                       <tr>
                           <td><b>Type: </b>
                           {props.projecttype}
@@ -51,17 +45,17 @@ function ProjectCardComponent(props) {
                       </tr>
                       <tr>
                           <td><b>Link: </b>
-                          {createLink(props.projectlink, "github")}
-                          {createLink(props.videolink, "youtube")}
+                          {props.projectlink ? (createLink(props.projectlink, "github")) : " "}
+                          {props.videolink ? (createLink(props.videolink, "youtube")): " "}
                           </td>
                       </tr>
                       <tr>
                         <td>{createTags(props.tags)}</td>
                       </tr>
+                    </tbody>
                   </table><br></br>
-                  {props.desc}
+                  <p className="card-text">{props.desc}</p>
                 </div>
-              </p>
             </div>
           </div>
         </div>
@@ -69,4 +63,4 @@ function ProjectCardComponent(props) {
     </div>
   );
 }
-export default ProjectCardComponent;
+export default React.memo(ProjectCardComponent);
