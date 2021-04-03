@@ -16,28 +16,32 @@ export default function CardComponent(props) {
             <Card.Body>
                 <Card.Title><h3><b>{props.name}</b></h3></Card.Title>
                 <Card.Text>
-                    <div className="desc">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>Organisation: </b>
-                                        {props.org}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Year: </b>
-                                        {props.year}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{props.desc}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </Card.Text>
+                <div className="desc">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Organisation: </b>
+                                    {props.org}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Year: </b>
+                                    {props.year}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Card.Text>
+                                        {props.desc}
+                                    </Card.Text>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
             </Card.Body>
         </Card>
     );
