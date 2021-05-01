@@ -1,6 +1,7 @@
 import React from 'react';
+import { FullProjectDesc } from '../globals';
 
-function createTags(tags) {
+function createTags(tags: string[]) {
   //console.log(tags);
   return(
     <div className="tags-container">
@@ -15,7 +16,7 @@ function createTags(tags) {
   )
 }
 
-function createLink(link, iconName) {
+function createLink(link: string, iconName: string) {
   return (
     <a href={link} target="_blank" rel="noreferrer">
       <img className="link-icon" src={"assets/" + iconName + "-logo.png"} alt={iconName} />
@@ -23,7 +24,7 @@ function createLink(link, iconName) {
   );
 }
 
-function ProjectCardComponent(props) {
+function ProjectCardComponent(props: FullProjectDesc) {
   return(
     <div className="project-card">
       <div className="card mb-3" >

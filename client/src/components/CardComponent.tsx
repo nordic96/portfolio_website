@@ -1,15 +1,16 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { FullDesignDesc } from '../globals';
 
 /**
- * Creates a card component that will display each project
+ * Creates a card component that will display each Design Project
  * 
  * @param {displaytext} description of the project
  * @param {medialink} media for project display
  * @param {name} name of the project
  * @param {devyear} date of development
  */
-export default function CardComponent(props) {
+export default function CardComponent(props: FullDesignDesc) {
     return(
         <Card>
             <Card.Img variant="top" src={'https://lh3.googleusercontent.com/' + props.medialink} className="img-design-card" alt="design" />
@@ -23,7 +24,7 @@ export default function CardComponent(props) {
                             <tr>
                                 <td>
                                     <b>Organisation: </b>
-                                    {props.org}
+                                    {props.organisation}
                                 </td>
                             </tr>
                             <tr>
