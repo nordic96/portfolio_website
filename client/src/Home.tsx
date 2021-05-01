@@ -15,7 +15,7 @@ import { CardColumns } from 'react-bootstrap';
 function Home() {
   const [designs, setDesigns] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [isSortLatest, setIsSortLatest] = useState(false);
+  const [isSortLatest, setIsSortLatest] = useState(true);
   const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
   const [isDesignsLoaded, setIsDesignsLoaded] = useState(false);
 
@@ -39,7 +39,7 @@ function Home() {
     .then(res => res.json())
     .then(
       (projects) => {
-        setProjects(projects);
+        setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p1.devyear - p2.devyear));
         setIsProjectsLoaded(true);
       },
       (ex) => {
