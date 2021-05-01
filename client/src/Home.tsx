@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import AnchorNavBar from './components/AnchorNavBar';
 import CardComponent from './components/CardComponent';
 import ProjectCardComponent from './components/ProjectCardComponent';
+import { FullProjectDesc, FullDesignDesc } from './globals';
 import FooterComponent from './components/FooterComponent';
 import IntroductionBox from './components/IntroductionBox';
 
@@ -60,7 +61,7 @@ function Home() {
             <p>All project source files are hosted in github or displayed in youtube, and you can click the github/youtube icon to see more details about it.</p> 
           </div>
           <div className="project-list">
-            {isProjectsLoaded ? (projects.map((project, index) => {
+            {isProjectsLoaded ? (projects.map((project: FullProjectDesc, index) => {
               return(
                 <ProjectCardComponent 
                 key={index}
@@ -87,14 +88,14 @@ function Home() {
           <div className="container-design">
             <div>
               <CardColumns>
-                {isDesignsLoaded ? (designs.map((design, index) => {
+                {isDesignsLoaded ? (designs.map((design: FullDesignDesc, index) => {
                   return (
                     <CardComponent 
                     key={index}
                     medialink={design.medialink} 
                     name={design.name} 
                     desc={design.desc} 
-                    org={design.organisation} 
+                    organisation={design.organisation} 
                     year={design.year}
                     />
                   );
