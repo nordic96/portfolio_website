@@ -39,7 +39,11 @@ function Home() {
     .then(res => res.json())
     .then(
       (projects) => {
-        setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p1.devyear - p2.devyear));
+        if (isSortLatest) {
+          setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p2.devyear - p1.devyear)); 
+        } else {
+          setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p1.devyear - p2.devyear));
+        }
         setIsProjectsLoaded(true);
       },
       (ex) => {
@@ -47,15 +51,7 @@ function Home() {
         setIsProjectsLoaded(false);
       }
     );
-  }, []);
-
-  useEffect(() => {
-    if (isSortLatest) {
-      setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p1.devyear - p2.devyear));
-    } else {
-      setProjects(projects.sort((p1: FullProjectDesc, p2: FullProjectDesc) => p2.devyear - p1.devyear));
-    }
-  }, [isSortLatest, projects])
+  }, [isSortLatest]);
 
   console.log("found " + designs.length + " design items from DB..");
   console.log("found " + projects.length + " project items from DB..");
