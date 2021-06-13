@@ -1,5 +1,5 @@
 {
-	"name":"portfolio_website",
+	"name": "portfolio_website",
 	"version": "0.0.7",
 	"scripts": {
 		"start": "node server.js",
@@ -10,10 +10,10 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
-		"express": "^4.16.4",
-		"mongoose": "5.10.15",
 		"dotenv": "^8.2.0",
-		"express-rate-limit": "^5.2.3"
+		"express": "^4.16.4",
+		"express-rate-limit": "^5.2.3",
+		"mongoose": "5.10.15"
 	},
 	"devDependencies": {
 		"concurrently": "^4.0.1"
@@ -21,6 +21,6 @@
 	"author": "Gihun Ko",
 	"license": "MIT",
 	"engines": {
-		"node": "15.9.0"
+		"node": "16.0.0"
 	}
 }
