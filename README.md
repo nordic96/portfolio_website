@@ -1,4 +1,6 @@
 # My Portfolio Website
+![CI badge](https://github.com/nordic96/portfolio_website/actions/workflows/npm_build.yml/badge.svg)
+![Code Analysis badge](https://github.com/nordic96/portfolio_website/actions/workflows/codeql-analysis.yml/badge.svg)
 
 This project is my first web development project using ReactJS, to enhance my frontend development skills. The project is mainly based on using ReactJS with Typescript for client development, NodeJS for backend development.
 
