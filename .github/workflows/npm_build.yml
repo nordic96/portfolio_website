@@ -1,0 +1,20 @@
+name: NPM Run Install & Build
+on:
+    push:
+        branches: [ master ]
+    pull_requests:
+        branches: [ master ]
+jobs:
+    install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: PRODUCTION
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [ 14.x ]
+        steps:
+            - name: Run NPM Install
+              run: npm install
+            - name: Run NPM Build
+              run: npm run build
