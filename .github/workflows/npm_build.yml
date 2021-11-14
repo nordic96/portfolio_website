@@ -14,6 +14,16 @@ jobs:
             matrix:
                 node-version: [ 14.x ]
         steps:
+            - name: Setup Node JS
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ matrix.node-version }}
+                registry-url: 'https://registry.npmjs.org'
+            - name: Get Latest Source Code
+              uses: actions/checkout@v2
+              with:
+                submodules: recursive
+                token: ${{ secrets.GITHUB_TOKEN }}
             - name: Run NPM Install
               run: npm install
             - name: Run NPM Build
