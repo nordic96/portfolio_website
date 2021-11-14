@@ -1,0 +1,32 @@
+name: NPM Run Install & Build
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+jobs:
+    install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: PRODUCTION
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [ 14.x ]
+        steps:
+            - name: Setup Node JS
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ matrix.node-version }}
+                registry-url: 'https://registry.npmjs.org'
+            - name: Get Latest Source Code
+              uses: actions/checkout@v2
+              with:
+                submodules: recursive
+                token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Run NPM Install (Server)
+              run: npm install
+            - name: Run NPM Install (Client)
+              run: cd client && npm install
+            - name: Run NPM Build
+              run: cd client && npm run build
