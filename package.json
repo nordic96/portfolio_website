@@ -7,7 +7,7 @@
 		"client": "cd client && yarn start",
 		"server": "nodemon server.js",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-        "build": "react-scripts build"
+        "build": "cd client && react-scripts build"
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
