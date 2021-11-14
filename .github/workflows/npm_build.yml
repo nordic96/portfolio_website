@@ -2,7 +2,7 @@ name: NPM Run Install & Build
 on:
     push:
         branches: [ master ]
-    pull_requests:
+    pull_request:
         branches: [ master ]
 jobs:
     install_build:
