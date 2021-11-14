@@ -6,7 +6,7 @@
 		"heroku-postbuild": "cd client && yarn && yarn run build",
 		"client": "cd client && yarn start",
 		"server": "nodemon server.js",
-		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
         "build": "react-scripts build"
 	},
 	"dependencies": {
