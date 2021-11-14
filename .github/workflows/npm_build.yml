@@ -29,4 +29,4 @@ jobs:
             - name: Run NPM Install (Client)
               run: cd client && npm install
             - name: Run NPM Build
-              run: npm run build
+              run: cd client && npm run build
