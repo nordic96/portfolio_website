@@ -6,7 +6,7 @@ const project_router = require('./routers/project_router');
 const dotenv = require('dotenv');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 dotenv.config();
 
 var uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_SECRET}@clustergh.i9pmr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
