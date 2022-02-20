@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@types/express-rate-limit@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/express-rate-limit/-/express-rate-limit-6.0.0.tgz#11a314477895a8a888958f27650ed0d1ddad01b0"
+  integrity sha512-nZxo3nwU20EkTl/f2eGdndQkDIJYwkXIX4S3Vrp2jMdSdFJ6AWtIda8gOz0wiMuOFoeH/UUlCAiacz3x3eWNFA==
+  dependencies:
+    express-rate-limit "*"
+
 "@types/node@*", "@types/node@< 17.0.6":
   version "17.0.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.5.tgz#57ca67ec4e57ad9e4ef5a6bab48a15387a1c83e0"
@@ -219,6 +226,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+express-rate-limit@*:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.3.0.tgz#253387ce4d36c9c2cc77c7c676068deb36cc0821"
+  integrity sha512-932Io1VGKjM3ppi7xW9sb1J5nVkEJSUiOtHw2oE+JyHks1e+AXuOBSXbJKM0mcXwEnW1TibJibQ455Ow1YFjfg==
 
 express-rate-limit@^6.2.1:
   version "6.2.1"

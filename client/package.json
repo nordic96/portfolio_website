@@ -2,7 +2,7 @@
   "name": "portfolio_website",
   "version": "0.0.8",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:17000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

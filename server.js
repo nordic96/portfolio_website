@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const design_router = require('./routers/design_router');
 const project_router = require('./routers/project_router');
 const dotenv = require('dotenv');
+const rateLimiter = require('express-rate-limit');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 17000;
 dotenv.config();
 
 var uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_SECRET}@clustergh.i9pmr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
@@ -22,10 +23,9 @@ connection.once("open", () => {
 });
 
 //Adding rate-limit middleware
-var RateLimit = require('express-rate-limit');
-var limiter = new RateLimit({
-    windowMs: 1 * 60 * 2000,
-    max: 10
+var limiter = rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
 });
 app.use(limiter);
 

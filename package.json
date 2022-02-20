@@ -17,8 +17,14 @@
 		"typescript": "~4.5.5"
 	},
 	"devDependencies": {
-		"concurrently": "^7.0.0"
+		"concurrently": "^7.0.0",
+        "@types/express-rate-limit": "6.0.0"
 	},
+    "config": {
+        "mongodbMemoryServer": {
+            "version": "4.4.1"
+        }
+    },
 	"author": "Gihun Ko",
 	"license": "MIT",
 	"engines": {
