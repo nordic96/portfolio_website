@@ -1,10 +1,14 @@
 import React from 'react';
-import logo from '../logo.svg';
 
-function IDCard() {
+import logo from '../logo.svg';
+import LabelContainer from 'labelcontainer';
+import { Icons } from '../constants/profileIcons';
+import IDIcon from './IDIcon/IDIcon';
+
+const IDCard = () => {
+    const labelInstance = LabelContainer.getInstance();
     return (
         <div>
-            {/* <img className="id-lanyard" src="assets/lanyard.png" alt="lanyard"/> */}
             <div className="id-card">
                 <div className="id-black">
                     <img src={logo} className="App-logo" alt="logo" />
@@ -24,49 +28,9 @@ function IDCard() {
                     <br />
                     <b>Software Engineer, Singapore</b>
                     <br />
-                    <a
-                        href="https://github.com/nordic96"
-                        target="_blank"
-                        rel="noreferrer">
-                        <img
-                            className="link-icon"
-                            src="assets/github-logo.png"
-                            alt="github icon"
-                        />
-                    </a>
-                    &nbsp;
-                    <a
-                        href="https://www.linkedin.com/in/gi-hun-ko-863619184/"
-                        target="_blank"
-                        rel="noreferrer">
-                        <img
-                            className="link-icon"
-                            src="assets/Linkedin-Icon.png"
-                            alt="linkedin icon"
-                        />
-                    </a>
-                    &nbsp;
-                    <a
-                        href="https://www.hackerrank.com/kogihun"
-                        target="_blank"
-                        rel="noreferrer">
-                        <img
-                            className="link-icon"
-                            src="assets/hackerrank.svg"
-                            alt="hackerrank icon"
-                        />
-                    </a>
-                    &nbsp;
-                    <a
-                        href="https://leetcode.com/nordic59/"
-                        target="_blank"
-                        rel="noreferrer">
-                        <img
-                            className="link-icon"
-                            src="assets/leetcode_logo.png"
-                            alt="leetcode icon"
-                        />
-                    </a>
+                    {Icons.map((x, i) => {
+                        return <IDIcon {...x} key={i} />;
+                    })}
                     <br />
                     <img
                         className="id-barcode"
@@ -80,7 +44,7 @@ function IDCard() {
             </div>
             <div className="intro-desc">
                 <h1>
-                    <b>{"Ko Gi Hun's Portfolio Website"}</b>
+                    <b>{labelInstance.getLabel('title')}</b>
                 </h1>
                 <p>
                     {
@@ -95,5 +59,6 @@ function IDCard() {
             </div>
         </div>
     );
-}
+};
+
 export default React.memo(IDCard);
