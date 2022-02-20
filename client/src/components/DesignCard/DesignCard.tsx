@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { FullDesignDesc } from '../globals';
+import { FullDesignDesc } from '../../globals';
 
 /**
  * Creates a card component that will display each Design Project
@@ -10,19 +10,25 @@ import { FullDesignDesc } from '../globals';
  * @param {name} name of the project
  * @param {devyear} date of development
  */
-export default function CardComponent(props: FullDesignDesc) {
+interface DesignCardProps {
+    designProject: FullDesignDesc;
+}
+
+const DesignCard = (props: DesignCardProps) => {
+    const { designProject } = props;
+    const { medialink, name, organisation, year, desc } = designProject;
     return (
         <Card>
             <Card.Img
                 variant="top"
-                src={'https://lh3.googleusercontent.com/' + props.medialink}
+                src={'https://lh3.googleusercontent.com/' + medialink}
                 className="img-design-card"
                 alt="design"
             />
             <Card.Body>
                 <Card.Title>
                     <h3>
-                        <b>{props.name}</b>
+                        <b>{name}</b>
                     </h3>
                 </Card.Title>
                 <Card.Text></Card.Text>
@@ -32,18 +38,18 @@ export default function CardComponent(props: FullDesignDesc) {
                             <tr>
                                 <td>
                                     <b>Organisation: </b>
-                                    {props.organisation}
+                                    {organisation}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <b>Year: </b>
-                                    {props.year}
+                                    {year}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <Card.Text>{props.desc}</Card.Text>
+                                    <Card.Text>{desc}</Card.Text>
                                 </td>
                             </tr>
                         </tbody>
@@ -52,4 +58,6 @@ export default function CardComponent(props: FullDesignDesc) {
             </Card.Body>
         </Card>
     );
-}
+};
+
+export default DesignCard;

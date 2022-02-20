@@ -1,6 +1,6 @@
 {
 	"name": "portfolio_website",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"scripts": {
 		"start": "node --max-http-header-size=16384 server.js",
 		"heroku-postbuild": "cd client && yarn cache clean && yarn && yarn run build",

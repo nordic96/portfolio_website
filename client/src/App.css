@@ -169,15 +169,6 @@ td img {
   width: 15%;
 }
 
-#menu-header {
-  font-size: calc(10px + 1.8vmin);
-  color: white;
-  background-color: black;
-  background-image: url('./images/bar_2.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-}
-
 #menu-list {
   display: table-cell;
 }
@@ -246,24 +237,6 @@ td img {
 .project-card {
   padding: 0.5vh;
   float: left;
-}
-
-/*
- * ID Card Section
- * Ko Gi Hun, 28 Nov 2020 
- */
-.id-card {
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  top: 20px;
-  margin: auto;
-  background-color:#F8F8F8;
-  color: #404c55;
-  width: 280px;
-  height: 420px;
-  border-radius: 25px;
-  vertical-align: middle;
 }
 
 .id-content {
