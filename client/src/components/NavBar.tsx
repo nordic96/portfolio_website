@@ -5,7 +5,7 @@ function NavBar() {
         <div className="header-top">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a className="navbar-brand" href="/">
-                    Ko Gi Hun `&apios;`s Portfolio Website
+                    {"Ko Gi Hun's Portfolio Website"}
                 </a>
                 <button
                     className="navbar-toggler"

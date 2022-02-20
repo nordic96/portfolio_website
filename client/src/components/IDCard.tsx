@@ -80,21 +80,17 @@ function IDCard() {
             </div>
             <div className="intro-desc">
                 <h1>
-                    <b>Ko Gi Hun`&apios;`s Portfolio Website</b>
+                    <b>{"Ko Gi Hun's Portfolio Website"}</b>
                 </h1>
                 <p>
-                    `&quote;`I am a Korean Computer Science student at NUS. My
-                    career goal is to become an expert in software engineering,
-                    as well as able to work along with fantastic people to
-                    design a software that is easily interactable, with simple,
-                    but attractive design.
+                    {
+                        '"I am a Korean Computer Science student at NUS. My career goal is to become an expert in software engineering, as well as able to work along with fantastic people to design a software that is easily interactable, with simple, but attractive design.'
+                    }
                 </p>
                 <p>
-                    I am currently specialising my degree in Artificial
-                    Intelligence (A. I), and I love projects that are hybrid of
-                    AI and software engineering. I do not bound myself in A. I
-                    and I persistently learn new tech stack to improve my
-                    skills! :)`&quote;`
+                    {
+                        'I am currently specialising my degree in Artificial Intelligence (A. I), and I love projects that are hybrid of AI and software engineering. I do not bound myself in A. I and I persistently learn new tech stack to improve my skills! :)"'
+                    }
                 </p>
             </div>
         </div>
