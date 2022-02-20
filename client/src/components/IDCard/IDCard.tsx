@@ -11,8 +11,8 @@ const IDCard = () => {
     const classes = createStyles();
     const labelInstance = LabelContainer.getInstance();
     return (
-        <div>
-            <div className="id-card">
+        <div className={classes.container}>
+            <div className={classes.cardContainer}>
                 <div className="id-black">
                     <img src={Logo} className="App-logo" alt="logo" />
                 </div>
@@ -45,16 +45,18 @@ const IDCard = () => {
                 <div className="id-maroon"></div>
                 <div className="id-black"></div>
             </div>
-            <div className={classes.container}>
-                <Typography className={classes.introTitle}>
+            <div className={classes.descContainer}>
+                <Typography variant={'h3'} className={classes.introTitle}>
                     {labelInstance.getLabel('title')}
                 </Typography>
-                <Typography className={classes.introLabel}>
-                    {labelInstance.getLabel('card_intro_1')}
-                </Typography>
-                <Typography className={classes.introLabel}>
-                    {labelInstance.getLabel('card_intro_2')}
-                </Typography>
+                <div>
+                    <Typography className={classes.introLabel}>
+                        {labelInstance.getLabel('card_intro_1')}
+                    </Typography>
+                    <Typography className={classes.introLabel}>
+                        {labelInstance.getLabel('card_intro_2')}
+                    </Typography>
+                </div>
             </div>
         </div>
     );

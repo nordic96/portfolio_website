@@ -10,18 +10,16 @@ const IntroSection = () => {
     return (
         <div className={classes.container}>
             <IDCard />
-            <div>
-                <Wave
-                    fill="#9c28d3"
-                    paused={false}
-                    options={{
-                        height: 25,
-                        amplitude: 50,
-                        speed: 0.22,
-                        points: 3,
-                    }}
-                />
-            </div>
+            <Wave
+                fill="#9c28d3"
+                paused={false}
+                options={{
+                    height: 25,
+                    amplitude: 50,
+                    speed: 0.22,
+                    points: 3,
+                }}
+            />
         </div>
     );
 };
