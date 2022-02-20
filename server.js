@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const rateLimiter = require('express-rate-limit');
 
 const app = express();
-const port = process.env.PORT || 17000;
+const port = process.env.PORT || 4000;
 dotenv.config();
 
 var uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_SECRET}@clustergh.i9pmr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
