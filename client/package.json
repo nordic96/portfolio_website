@@ -19,7 +19,14 @@
     "react-wavify": "1.4.0",
     "styled-components": "5.2.1",
     "web-vitals": "^0.2.4",
-    "css-select": "4.2.1"
+    "css-select": "4.2.1",
+    "eslint": "8.9.0",
+    "prettier": "2.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-config-prettier": "8.4.0",
+    "eslint-config-google": "0.14.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-jsx-a11y": "6.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
