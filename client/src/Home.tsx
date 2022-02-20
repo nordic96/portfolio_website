@@ -4,20 +4,22 @@ import './App.css';
 // Custom Components
 import NavBar from './components/NavBar';
 import AnchorNavBar from './components/AnchorNavBar';
-import CardComponent from './components/CardComponent';
-import ProjectCardComponent from './components/ProjectCardComponent';
+import DesignCard from './components/DesignCard';
+import ProjectCard from './components/ProjectCard';
 import { FullProjectDesc, FullDesignDesc } from './globals';
 import FooterComponent from './components/FooterComponent';
-import IntroductionBox from './components/IntroductionBox';
+import IntroSection from './components/IntroSection/IntroSection';
 
 import { CardColumns } from 'react-bootstrap';
+import LabelContainer from 'labelcontainer';
 
-function Home() {
-    const [designs, setDesigns] = useState([]);
-    const [projects, setProjects] = useState([]);
-    const [isSortLatest, setIsSortLatest] = useState(true);
-    const [isProjectsLoaded, setIsProjectsLoaded] = useState(false);
-    const [isDesignsLoaded, setIsDesignsLoaded] = useState(false);
+const Home = () => {
+    const labelInstance = LabelContainer.getInstance();
+    const [designs, setDesigns] = useState<Array<FullDesignDesc>>([]);
+    const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
+    const [isSortLatest, setIsSortLatest] = useState<boolean>(true);
+    const [isProjectsLoaded, setIsProjectsLoaded] = useState<boolean>(false);
+    const [isDesignsLoaded, setIsDesignsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         fetch('/api/fetchDesigns')
@@ -74,7 +76,7 @@ function Home() {
     return (
         <div className="App">
             <NavBar />
-            <IntroductionBox />
+            <IntroSection />
             <div className="container-fluid">
                 <div className="content">
                     <div className="item-intro" id="projects-link">
@@ -82,17 +84,10 @@ function Home() {
                             <b>Projects</b>
                         </h2>
                         <p className="lead">
-                            My projects include school projects, as well as
-                            self-sourced projects, either in groups or single.
-                            Project scope varies from IoT, machine learning, to
-                            Software Engineering!
+                            {labelInstance.getLabel('intro_msg')}
                         </p>
                         <hr className="my-4" />
-                        <p>
-                            All project source files are hosted in github or
-                            displayed in youtube, and you can click the
-                            github/youtube icon to see more details about it.
-                        </p>
+                        <p>{labelInstance.getLabel('intro_note')}</p>
                         <div className="dropdown show">
                             <a
                                 className="btn btn-secondary dropdown-toggle"
@@ -129,16 +124,9 @@ function Home() {
                             ? projects.map(
                                   (project: FullProjectDesc, index: number) => {
                                       return (
-                                          <ProjectCardComponent
+                                          <ProjectCard
                                               key={index}
-                                              name={project.name}
-                                              medialink={project.medialink}
-                                              projectlink={project.projectlink}
-                                              videolink={project.videolink}
-                                              projecttype={project.projecttype}
-                                              tags={project.tags}
-                                              devyear={project.devyear}
-                                              desc={project.desc}
+                                              projectDesc={project}
                                           />
                                       );
                                   }
@@ -151,11 +139,7 @@ function Home() {
                             <b>Design Works</b>
                         </h2>
                         <p className="lead">
-                            Not only just coding, but I also have background
-                            experience in visual designs using illustration
-                            tools with group members when I was a member of
-                            publicity teams in my CCA organisations. Below works
-                            are some of the designs that I have worked on :)
+                            {labelInstance.getLabel('cca_msg')}
                         </p>
                         <hr className="my-4" />
                         <p></p>
@@ -170,17 +154,9 @@ function Home() {
                                               index: number
                                           ) => {
                                               return (
-                                                  <CardComponent
+                                                  <DesignCard
                                                       key={index}
-                                                      medialink={
-                                                          design.medialink
-                                                      }
-                                                      name={design.name}
-                                                      desc={design.desc}
-                                                      organisation={
-                                                          design.organisation
-                                                      }
-                                                      year={design.year}
+                                                      designProject={design}
                                                   />
                                               );
                                           }
@@ -196,5 +172,6 @@ function Home() {
             <FooterComponent />
         </div>
     );
-}
+};
+
 export default Home;

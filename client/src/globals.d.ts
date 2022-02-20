@@ -2,7 +2,6 @@ declare module '*.png';
 declare module '*.svg';
 
 export interface FullProjectDesc {
-    key: number;
     projecttype: string;
     name: string;
     devyear: number;

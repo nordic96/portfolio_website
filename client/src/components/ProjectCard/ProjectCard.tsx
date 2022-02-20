@@ -1,5 +1,5 @@
 import React from 'react';
-import { FullProjectDesc } from '../globals';
+import { ProjectCardProps } from './types';
 
 function createTags(tags: string[]) {
     //console.log(tags);
@@ -29,7 +29,18 @@ function createLink(link: string, iconName: string) {
     );
 }
 
-function ProjectCardComponent(props: FullProjectDesc) {
+const ProjectCard = (props: ProjectCardProps) => {
+    const { projectDesc } = props;
+    const {
+        medialink,
+        name,
+        projecttype,
+        devyear,
+        projectlink,
+        videolink,
+        tags,
+        desc,
+    } = projectDesc;
     return (
         <div className="project-card">
             <div className="card mb-3">
@@ -37,8 +48,7 @@ function ProjectCardComponent(props: FullProjectDesc) {
                     <div className="col-md-4">
                         <img
                             src={
-                                'https://lh3.googleusercontent.com/' +
-                                props.medialink
+                                'https://lh3.googleusercontent.com/' + medialink
                             }
                             className="card-img"
                             alt="project"
@@ -47,7 +57,7 @@ function ProjectCardComponent(props: FullProjectDesc) {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h2 className="card-title">
-                                <b>{props.name}</b>
+                                <b>{name}</b>
                             </h2>
                             <div className="desc">
                                 <table>
@@ -55,35 +65,35 @@ function ProjectCardComponent(props: FullProjectDesc) {
                                         <tr>
                                             <td>
                                                 <b>Type: </b>
-                                                {props.projecttype}
+                                                {projecttype}
                                                 <b> Year: </b>
-                                                {props.devyear}
+                                                {devyear}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <b>Link: </b>
-                                                {props.projectlink
+                                                {projectlink
                                                     ? createLink(
-                                                          props.projectlink,
+                                                          projectlink,
                                                           'github'
                                                       )
                                                     : ' '}
-                                                {props.videolink
+                                                {videolink
                                                     ? createLink(
-                                                          props.videolink,
+                                                          videolink,
                                                           'youtube'
                                                       )
                                                     : ' '}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>{createTags(props.tags)}</td>
+                                            <td>{createTags(tags)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <br></br>
-                                <p className="card-text">{props.desc}</p>
+                                <p className="card-text">{desc}</p>
                             </div>
                         </div>
                     </div>
@@ -91,5 +101,6 @@ function ProjectCardComponent(props: FullProjectDesc) {
             </div>
         </div>
     );
-}
-export default React.memo(ProjectCardComponent);
+};
+
+export default React.memo(ProjectCard);
