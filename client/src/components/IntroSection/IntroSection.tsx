@@ -1,16 +1,18 @@
 import React from 'react';
 
+import createStyles from './styles';
+
 import Wave from 'react-wavify';
+import IDCard from '../IDCard';
 
-import IDCard from './IDCard';
-
-function IntroductionBox() {
+const IntroSection = () => {
+    const classes = createStyles();
     return (
-        <div className="intro">
+        <div className={classes.container}>
             <IDCard />
             <div>
                 <Wave
-                    fill="#FF4B3E"
+                    fill="#9c28d3"
                     paused={false}
                     options={{
                         height: 25,
@@ -22,5 +24,6 @@ function IntroductionBox() {
             </div>
         </div>
     );
-}
-export default React.memo(IntroductionBox);
+};
+
+export default IntroSection;

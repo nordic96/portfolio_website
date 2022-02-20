@@ -1,17 +1,20 @@
 import React from 'react';
 
-import logo from '../logo.svg';
+import Logo from '../../assets/images/logo.svg';
+import createStyles from './styles';
 import LabelContainer from 'labelcontainer';
-import { Icons } from '../constants/profileIcons';
-import IDIcon from './IDIcon/IDIcon';
+import { Icons } from '../../constants/profileIcons';
+import IDIcon from '../IDIcon/IDIcon';
+import { Typography } from '@mui/material';
 
 const IDCard = () => {
+    const classes = createStyles();
     const labelInstance = LabelContainer.getInstance();
     return (
         <div>
             <div className="id-card">
                 <div className="id-black">
-                    <img src={logo} className="App-logo" alt="logo" />
+                    <img src={Logo} className="App-logo" alt="logo" />
                 </div>
                 <div className="id-maroon"></div>
                 <div className="id-skyblue"></div>
@@ -42,20 +45,16 @@ const IDCard = () => {
                 <div className="id-maroon"></div>
                 <div className="id-black"></div>
             </div>
-            <div className="intro-desc">
-                <h1>
-                    <b>{labelInstance.getLabel('title')}</b>
-                </h1>
-                <p>
-                    {
-                        '"I am a Korean Computer Science student at NUS. My career goal is to become an expert in software engineering, as well as able to work along with fantastic people to design a software that is easily interactable, with simple, but attractive design.'
-                    }
-                </p>
-                <p>
-                    {
-                        'I am currently specialising my degree in Artificial Intelligence (A. I), and I love projects that are hybrid of AI and software engineering. I do not bound myself in A. I and I persistently learn new tech stack to improve my skills! :)"'
-                    }
-                </p>
+            <div className={classes.container}>
+                <Typography className={classes.introTitle}>
+                    {labelInstance.getLabel('title')}
+                </Typography>
+                <Typography className={classes.introLabel}>
+                    {labelInstance.getLabel('card_intro_1')}
+                </Typography>
+                <Typography className={classes.introLabel}>
+                    {labelInstance.getLabel('card_intro_2')}
+                </Typography>
             </div>
         </div>
     );

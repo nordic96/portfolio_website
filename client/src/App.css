@@ -169,15 +169,6 @@ td img {
   width: 15%;
 }
 
-#menu-header {
-  font-size: calc(10px + 1.8vmin);
-  color: white;
-  background-color: black;
-  background-image: url('./images/bar_2.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-}
-
 #menu-list {
   display: table-cell;
 }

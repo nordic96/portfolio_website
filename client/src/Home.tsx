@@ -8,7 +8,7 @@ import DesignCard from './components/DesignCard';
 import ProjectCard from './components/ProjectCard';
 import { FullProjectDesc, FullDesignDesc } from './globals';
 import FooterComponent from './components/FooterComponent';
-import IntroductionBox from './components/IntroductionBox';
+import IntroSection from './components/IntroSection/IntroSection';
 
 import { CardColumns } from 'react-bootstrap';
 import LabelContainer from 'labelcontainer';
@@ -76,7 +76,7 @@ const Home = () => {
     return (
         <div className="App">
             <NavBar />
-            <IntroductionBox />
+            <IntroSection />
             <div className="container-fluid">
                 <div className="content">
                     <div className="item-intro" id="projects-link">

@@ -27,7 +27,11 @@
     "eslint-config-google": "0.14.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
-    "labelcontainer": "0.0.3"
+    "labelcontainer": "0.0.3",
+    "@emotion/react": "11.8.1",
+    "@emotion/styled": "11.8.1",
+    "@mui/material": "5.4.2",
+    "@mui/styles": "5.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
