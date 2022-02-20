@@ -9,10 +9,10 @@
   dependencies:
     express-rate-limit "*"
 
-"@types/node@*", "@types/node@< 17.0.6":
-  version "17.0.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.5.tgz#57ca67ec4e57ad9e4ef5a6bab48a15387a1c83e0"
-  integrity sha512-w3mrvNXLeDYV1GKTZorGJQivK6XLCoGwpnyJFbJVK/aTBQUxOCaa/GlFAAN3OTDFcb7h5tiFG+YXCO2By+riZw==
+"@types/node@*":
+  version "17.0.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.18.tgz#3b4fed5cfb58010e3a2be4b6e74615e4847f1074"
+  integrity sha512-eKj4f/BsN/qcculZiRSujogjvp5O/k4lOW5m35NopjZM/QwLOR075a8pJW5hD+Rtdm2DaCVPENS6KtSQnUD6BA==
 
 "@types/webidl-conversions@*":
   version "6.1.1"
@@ -240,10 +240,10 @@ express-rate-limit@*:
   resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.3.0.tgz#253387ce4d36c9c2cc77c7c676068deb36cc0821"
   integrity sha512-932Io1VGKjM3ppi7xW9sb1J5nVkEJSUiOtHw2oE+JyHks1e+AXuOBSXbJKM0mcXwEnW1TibJibQ455Ow1YFjfg==
 
-express-rate-limit@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.2.1.tgz#4a7619634fb24417ae723ad2ac3707b38e2e1c64"
-  integrity sha512-22ovnpEiKR5iAMXDOQ7A6aOvb078JLvoHGlyrrWBl3PeJ34coyakaviPelj4Nc8d+yDoVIWYmaUNP5aYT4ICDQ==
+express-rate-limit@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-5.5.1.tgz#110c23f6a65dfa96ab468eda95e71697bc6987a2"
+  integrity sha512-MTjE2eIbHv5DyfuFz4zLYWxpqVhEhkTiwFGuB74Q9CSou2WHO52nlE5y3Zlg6SIsiYUIPj6ifFxnkPz6O3sIUg==
 
 express@^4.16.4:
   version "4.17.3"
