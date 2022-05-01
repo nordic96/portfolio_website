@@ -12,7 +12,7 @@
 		"body-parser": "^1.18.3",
 		"dotenv": "^10.0.0",
 		"express": "^4.16.4",
-		"express-rate-limit": "^5.5.1",
+		"express-rate-limit": "^6.4.0",
 		"mongoose": "6.2.2",
 		"queue-microtask": "^1.2.3",
 		"call-bind": "1.0.2",
