@@ -28,8 +28,5 @@
         }
     },
 	"author": "Gihun Ko",
-	"license": "MIT",
-	"engines": {
-		"node": "16.17.0"
-	}
+	"license": "MIT"
 }
