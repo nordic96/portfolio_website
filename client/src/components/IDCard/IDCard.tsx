@@ -5,7 +5,6 @@ import createStyles from './styles';
 import LabelContainer from 'labelcontainer';
 import { Icons } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
-import { Typography } from '@mui/material';
 
 const IDCard = () => {
     const classes = createStyles();
@@ -31,10 +30,6 @@ const IDCard = () => {
                     <br />
                     <b>Software Engineer, Singapore</b>
                     <br />
-                    {Icons.map((x, i) => {
-                        return <IDIcon {...x} key={i} />;
-                    })}
-                    <br />
                     <img
                         className="id-barcode"
                         src="assets/barcode.png"
@@ -44,19 +39,6 @@ const IDCard = () => {
                 <div className="id-skyblue"></div>
                 <div className="id-maroon"></div>
                 <div className="id-black"></div>
-            </div>
-            <div className={classes.descContainer}>
-                <Typography variant={'h3'} className={classes.introTitle}>
-                    {labelInstance.getLabel('title')}
-                </Typography>
-                <div>
-                    <Typography className={classes.introLabel}>
-                        {labelInstance.getLabel('card_intro_1')}
-                    </Typography>
-                    <Typography className={classes.introLabel}>
-                        {labelInstance.getLabel('card_intro_2')}
-                    </Typography>
-                </div>
             </div>
         </div>
     );

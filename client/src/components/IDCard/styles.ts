@@ -14,7 +14,6 @@ export default makeStyles({
         display: 'inline-block',
         overflow: 'hidden',
         position: 'relative',
-        top: 20,
         backgroundColor: '#F8F8F8',
         color: '#404c55',
         width: 280,
@@ -23,7 +22,6 @@ export default makeStyles({
         verticalAlign: 'middle',
     },
     container: {
-        paddingTop: 16,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
