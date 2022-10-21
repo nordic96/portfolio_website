@@ -48,43 +48,46 @@ const ProjectSection = () => {
 
     return (
         <div>
-            <div className="item-intro" id="projects-link">
-                <h2 className="display-4">
-                    <b>Projects</b>
-                </h2>
-                <p className="lead">{labelInstance.getLabel('intro_msg')}</p>
+            <div id="projects-link" className={'flex flex-column flex-1'}>
+                <div className={'flex align-middle flex-1 justify-center'}>
+                    <p className={'text-2xl w-50 text-black italic'}>
+                        {`"${labelInstance.getLabel('intro_msg')}"`}
+                    </p>
+                </div>
                 <hr className="my-4" />
-                <p>{labelInstance.getLabel('intro_note')}</p>
-                <div className="dropdown show">
-                    <a
-                        className="btn btn-secondary dropdown-toggle"
-                        href="/"
-                        role="button"
-                        id="dropdownMenuLink"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        Sort Projects
-                    </a>
-                    <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuLink">
+                <div className={'flex flex-row gap-2 align-middle'}>
+                    <p>{labelInstance.getLabel('intro_note')}</p>
+                    <div className="dropdown show">
                         <a
-                            className="dropdown-item"
+                            className="btn btn-secondary dropdown-toggle"
                             href="/"
-                            onClick={(e) => handleLatestClick(e, true)}>
-                            Latest
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            Sort Projects
                         </a>
-                        <a
-                            className="dropdown-item"
-                            href="/"
-                            onClick={(e) => handleLatestClick(e, false)}>
-                            Oldest
-                        </a>
+                        <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink">
+                            <a
+                                className="dropdown-item"
+                                href="/"
+                                onClick={(e) => handleLatestClick(e, true)}>
+                                Latest
+                            </a>
+                            <a
+                                className="dropdown-item"
+                                href="/"
+                                onClick={(e) => handleLatestClick(e, false)}>
+                                Oldest
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className={'flex flex-wrap gap-8'}>
+            <div className={'flex flex-wrap gap-8 justify-center pt-4'}>
                 {isProjectsLoaded
                     ? projects.map(
                           (project: FullProjectDesc, index: number) => {

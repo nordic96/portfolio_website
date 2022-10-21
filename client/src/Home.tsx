@@ -36,7 +36,7 @@ const Home = () => {
         <div className="App">
             <NavBar />
             <IntroSection />
-            <div className={'relative flex-column px-16 -top-16'}>
+            <div className={'relative flex-column px-16 -top-4'}>
                 <ProjectSection />
                 <div className="item-intro" id="designs-link">
                     <h2 className="display-4">

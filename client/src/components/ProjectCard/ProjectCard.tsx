@@ -8,6 +8,7 @@ import {
     CardActions,
 } from '@mui/material';
 import { ProjectCardProps } from './types';
+import StringUtils from '../../utils/StringUtils';
 
 function createTags(tags: string[]) {
     //console.log(tags);
@@ -63,22 +64,26 @@ const ProjectCard = (props: ProjectCardProps) => {
                     component="img"
                     height="140"
                     image={`https://lh3.googleusercontent.com/${medialink}`}
-                    alt="green iguana"
+                    alt="project_image"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {`${name} (${devyear})`}
-                    </Typography>
+                    <div
+                        className={
+                            'flex flex-row align-middle justify-center gap-1'
+                        }>
+                        <p
+                            className={
+                                'text-xl font-bold'
+                            }>{`${name} (${devyear})`}</p>
+                        {createLink(projectlink, 'github')}
+                        {createLink(videolink, 'youtube')}
+                    </div>
                     <Typography variant="body2" color="text.secondary">
-                        {desc}
+                        {StringUtils.shortenString(desc)}
                     </Typography>
-                    {createTags(tags)}
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                {createLink(projectlink, 'github')}
-                {createLink(videolink, 'youtube')}
-            </CardActions>
+            <CardActions>{createTags(tags)}</CardActions>
         </Card>
     );
 };
