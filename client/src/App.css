@@ -75,13 +75,6 @@ td img {
   width: 100%;
 }
 
-.intro-selfie {
-  width: 150px;
-  height: auto;
-  margin: auto;
-  margin-top: 10px;
-}
-
 .desc {
   padding: 14pt;
   text-align: left;
@@ -237,63 +230,6 @@ td img {
 .project-card {
   padding: 0.5vh;
   float: left;
-}
-
-.id-content {
-  position: relative;
-  top: 1vh;
-  height: 330px;
-  font-size: 12pt;
-}
-
-.id-content-gray {
-  top: 10px;
-  position: relative;
-}
-
-.id-black {
-  height: 35px;
-  background-color:#39495b;
-}
-
-.id-maroon {
-  height: 10px;
-  /* background-color:#b75b57; */
-  background-image: -webkit-gradient(
-    linear,
-    right bottom,
-    right bottom,
-    color-stop(0, rgb(37, 222, 173)),
-    color-stop(1, rgb(15, 92, 79))
-  );
-  background-image: -o-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -moz-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -webkit-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -ms-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: linear-gradient(to right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-}
-
-.id-skyblue {
-  height: 0.3vh;
-  background-color: #4c9cca;
-}
-
-.id-barcode {
-  width: 70%;
-  height: 45px;
-}
-
-.id-lanyard {
-  opacity: 0.5;
-  width: 45vh;
-  height: 45vh;
-
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  top: 50px;
-  margin: auto;
-  vertical-align: middle;
 }
 
 .intro-desc {
