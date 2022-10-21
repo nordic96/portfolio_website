@@ -1,32 +1,47 @@
 import React from 'react';
+import {
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    Card,
+    CardActions,
+} from '@mui/material';
 import { ProjectCardProps } from './types';
+import StringUtils from '../../utils/StringUtils';
 
 function createTags(tags: string[]) {
     //console.log(tags);
     return (
-        <div className="tags-container">
+        <div className={'flex flex-wrap'}>
             {tags.map((tag, index) => {
                 return (
-                    <React.Fragment key={index}>
-                        <span className="label label-primary">{tag}</span>
-                        &nbsp;
-                    </React.Fragment>
+                    <p
+                        key={`tag-${index}`}
+                        className={
+                            'font-bold text-velvet rounded-md min-w-20 px-2 text-sm'
+                        }>
+                        {tag}
+                    </p>
                 );
             })}
         </div>
     );
 }
 
-function createLink(link: string, iconName: string) {
-    return (
-        <a href={link} target="_blank" rel="noreferrer">
-            <img
-                className="link-icon"
-                src={'assets/' + iconName + '-logo.png'}
-                alt={iconName}
-            />
-        </a>
-    );
+function createLink(link?: string, iconName?: string) {
+    if (iconName === undefined) return null;
+    if (!!link) {
+        return (
+            <a href={link} target="_blank" rel="noreferrer">
+                <img
+                    className="link-icon"
+                    src={'assets/' + iconName + '-logo.png'}
+                    alt={iconName}
+                />
+            </a>
+        );
+    }
+    return null;
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
@@ -34,7 +49,7 @@ const ProjectCard = (props: ProjectCardProps) => {
     const {
         medialink,
         name,
-        projecttype,
+        // projecttype,
         devyear,
         projectlink,
         videolink,
@@ -42,64 +57,33 @@ const ProjectCard = (props: ProjectCardProps) => {
         desc,
     } = projectDesc;
     return (
-        <div className="project-card">
-            <div className="card mb-3">
-                <div className="row no-gutters">
-                    <div className="col-md-4">
-                        <img
-                            src={
-                                'https://lh3.googleusercontent.com/' + medialink
-                            }
-                            className="card-img"
-                            alt="project"
-                        />
+        <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={`https://lh3.googleusercontent.com/${medialink}`}
+                    alt="project_image"
+                />
+                <CardContent>
+                    <div
+                        className={
+                            'flex flex-row align-middle justify-center gap-1 pb-2'
+                        }>
+                        <p
+                            className={
+                                'text-xl font-bold'
+                            }>{`${name} (${devyear})`}</p>
+                        {createLink(projectlink, 'github')}
+                        {createLink(videolink, 'youtube')}
                     </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                <b>{name}</b>
-                            </h2>
-                            <div className="desc">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Type: </b>
-                                                {projecttype}
-                                                <b> Year: </b>
-                                                {devyear}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>Link: </b>
-                                                {projectlink
-                                                    ? createLink(
-                                                          projectlink,
-                                                          'github'
-                                                      )
-                                                    : ' '}
-                                                {videolink
-                                                    ? createLink(
-                                                          videolink,
-                                                          'youtube'
-                                                      )
-                                                    : ' '}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>{createTags(tags)}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <br></br>
-                                <p className="card-text">{desc}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <p className={'text-base'}>
+                        {StringUtils.shortenString(desc)}
+                    </p>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>{createTags(tags)}</CardActions>
+        </Card>
     );
 };
 
