@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import LabelContainer from 'labelcontainer';
 import { FullProjectDesc } from '../../globals';
 import ProjectCard from '../ProjectCard';
+import { Grow } from '@mui/material';
 
 const ProjectSection = () => {
     const labelInstance = LabelContainer.getInstance();
@@ -48,13 +49,23 @@ const ProjectSection = () => {
     }, [isSortLatest]);
 
     return (
-        <div>
+        <div className={'pt-4'}>
             <div id="projects-link" className={'flex flex-column flex-1'}>
-                <div className={'flex align-middle flex-1 justify-center'}>
-                    <p className={'text-2xl w-50 text-black italic'}>
-                        {`"${labelInstance.getLabel('intro_msg')}"`}
-                    </p>
-                </div>
+                <Grow in timeout={2000}>
+                    <div
+                        className={
+                            'flex items-center flex-1 justify-center flex-column'
+                        }>
+                        <img
+                            className={'w-80'}
+                            src={'assets/sticker_lion.png'}
+                            alt={'lion'}
+                        />
+                        <p className={'text-2xl w-50 text-black italic'}>
+                            {`"${labelInstance.getLabel('intro_msg')}"`}
+                        </p>
+                    </div>
+                </Grow>
                 <hr className="my-4" />
                 <div
                     className={

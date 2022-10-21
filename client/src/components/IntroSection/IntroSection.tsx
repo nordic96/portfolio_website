@@ -10,10 +10,10 @@ import IDIcon from '../IDIcon/IDIcon';
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'block bg-white'}>
+        <div className={'block bg-white relative'}>
             <div
                 className={
-                    'flex flex-1 flex-row pt-20 justify-center items-start gap-10'
+                    'flex flex-1 flex-row pt-20 justify-center items-center gap-24'
                 }>
                 <Grow in timeout={1000}>
                     <div className={'flex flex-column items-start'}>
@@ -35,13 +35,13 @@ const IntroSection = () => {
                 </Grow>
                 <IDCard />
             </div>
-            <div className={'-top-20 flex relative'}>
+            <div className={'-top-16 flex relative'}>
                 <Wave
                     fill={'url(#gradient)'}
                     paused={false}
                     options={{
                         height: 75,
-                        amplitude: 35,
+                        amplitude: 25,
                         speed: 0.22,
                         points: 5,
                     }}>
