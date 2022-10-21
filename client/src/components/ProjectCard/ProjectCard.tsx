@@ -3,7 +3,6 @@ import {
     CardActionArea,
     CardMedia,
     CardContent,
-    Typography,
     Card,
     CardActions,
 } from '@mui/material';
@@ -13,13 +12,13 @@ import StringUtils from '../../utils/StringUtils';
 function createTags(tags: string[]) {
     //console.log(tags);
     return (
-        <div className={'flex gap-1 flex-wrap'}>
+        <div className={'flex flex-wrap'}>
             {tags.map((tag, index) => {
                 return (
                     <p
                         key={`tag-${index}`}
                         className={
-                            'text-base bg-cyan-600 text-white rounded-md min-w-20 px-2'
+                            'font-bold text-velvet rounded-md min-w-20 px-2 text-sm'
                         }>
                         {tag}
                     </p>
@@ -69,7 +68,7 @@ const ProjectCard = (props: ProjectCardProps) => {
                 <CardContent>
                     <div
                         className={
-                            'flex flex-row align-middle justify-center gap-1'
+                            'flex flex-row align-middle justify-center gap-1 pb-2'
                         }>
                         <p
                             className={
@@ -78,9 +77,9 @@ const ProjectCard = (props: ProjectCardProps) => {
                         {createLink(projectlink, 'github')}
                         {createLink(videolink, 'youtube')}
                     </div>
-                    <Typography variant="body2" color="text.secondary">
+                    <p className={'text-base'}>
                         {StringUtils.shortenString(desc)}
-                    </Typography>
+                    </p>
                 </CardContent>
             </CardActionArea>
             <CardActions>{createTags(tags)}</CardActions>

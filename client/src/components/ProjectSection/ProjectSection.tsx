@@ -1,5 +1,6 @@
-import LabelContainer from 'labelcontainer';
 import React, { useEffect, useState } from 'react';
+
+import LabelContainer from 'labelcontainer';
 import { FullProjectDesc } from '../../globals';
 import ProjectCard from '../ProjectCard';
 
@@ -55,8 +56,11 @@ const ProjectSection = () => {
                     </p>
                 </div>
                 <hr className="my-4" />
-                <div className={'flex flex-row gap-2 align-middle'}>
-                    <p>{labelInstance.getLabel('intro_note')}</p>
+                <div
+                    className={
+                        'flex flex-row gap-2 align-middle justify-center'
+                    }>
+                    {/* <p>{labelInstance.getLabel('intro_note')}</p> */}
                     <div className="dropdown show">
                         <a
                             className="btn btn-secondary dropdown-toggle"
