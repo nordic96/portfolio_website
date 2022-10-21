@@ -1,3 +1,4 @@
+import LabelContainer from 'labelcontainer';
 import React from 'react';
 
 import Wave from 'react-wavify';
@@ -6,6 +7,7 @@ import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
 
 const IntroSection = () => {
+    const lsInstance = LabelContainer.getInstance();
     return (
         <div className={'flex bg-white flex-1 row'}>
             <div
@@ -13,9 +15,14 @@ const IntroSection = () => {
                     'flex flex-1 flex-row pt-20 justify-center items-start gap-10'
                 }>
                 <div className={'flex flex-column items-start'}>
-                    <p className={'text-4xl font-bold'}>Hi, I am Gi Hun</p>
+                    <p className={'text-4xl font-bold'}>
+                        {lsInstance.getLabel('title')}
+                    </p>
                     <p className={'text-2xl'}>
-                        Frontend Software Engineer based in Singapore
+                        {lsInstance.getLabel('title_desc')}
+                    </p>
+                    <p className={'text-base'}>
+                        {lsInstance.getLabel('intro_desc')}
                     </p>
                     <div className={'flex flex-row gap-2 pt-2'}>
                         {Icons.map((x, i) => {
