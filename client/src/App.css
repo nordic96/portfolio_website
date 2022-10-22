@@ -40,90 +40,11 @@ td img {
 }
 
 .link-icon {
-  height: 30px;
+  height: 22.5px;
 }
 
 .contact-icon {
   height: 2vmin;
-}
-
-.container-intro {
-  padding-top: 2%;
-}
-
-.item-intro {
-  color: #39495b;
-  text-align: left;
-}
-
-.intro {
-  /* background-color: #f16059; */
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right bottom,
-    color-stop(0, rgb(255, 179, 15)),
-    color-stop(1, rgb(255, 91, 79))
-  );
-  background-image: -o-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
-  background-image: -moz-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
-  background-image: -webkit-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
-  background-image: -ms-linear-gradient(right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
-  background-image: linear-gradient(to right bottom, rgb(255, 179, 15) 0%, rgb(255, 91, 79) 100%);
-  color: white;
-  display: inline-block;
-  width: 100%;
-}
-
-.intro-selfie {
-  width: 150px;
-  height: auto;
-  margin: auto;
-  margin-top: 10px;
-}
-
-.desc {
-  padding: 14pt;
-  text-align: left;
-  font-size: calc(10px + 0.5vmin);
-}
-
-.desc-design {
-  padding: 14pt;
-  width: 80%;
-  margin: auto;
-  font-size: calc(10px + 1vmin);
-}
-
-.desc-main {
-  width: 80%;
-  margin: auto;
-  padding: 10pt;
-  font-size: calc(10px + 1vmin);
-}
-
-.label-primary {
-  background-color:#f16059;
-}
-
-.label-designtitle {
-  background-color:green;
-}
-
-.label-year {
-  background-color:lightskyblue;
-}
-
-.label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: .25em;
 }
 
 .tags-container {
@@ -177,32 +98,12 @@ td img {
   color: #61dafb;
 }
 
-.proj-card {
-  width: 84%;
-  margin: auto;
-}
-
-.img-proj-card, .img-design-card{
-  width: 100%;
-  object-fit: cover;
-}
-
 .card {
   margin: auto;
 }
 
 .card-title:hover {
   color:rgb(37, 222, 173);
-}
-
-.footer {
-  background-color: #323232;
-  color: white;
-  padding: 5vh;
-  font-size: calc(10px + 0.68vmin);
-  height: 15vh;
-  width: 100%;
-  display: table;
 }
 
 .vertical-menu {
@@ -225,88 +126,6 @@ td img {
 .vertical-menu a.active {
   background-color: #4CAF50;
   color: white;
-}
-/*
- * Project Section
- * Ko Gi Hun, 28 Nov 2020 
- */
-.project-container {
-  padding: 1vh;
-}
-
-.project-card {
-  padding: 0.5vh;
-  float: left;
-}
-
-.id-content {
-  position: relative;
-  top: 1vh;
-  height: 330px;
-  font-size: 12pt;
-}
-
-.id-content-gray {
-  top: 10px;
-  position: relative;
-}
-
-.id-black {
-  height: 35px;
-  background-color:#39495b;
-}
-
-.id-maroon {
-  height: 10px;
-  /* background-color:#b75b57; */
-  background-image: -webkit-gradient(
-    linear,
-    right bottom,
-    right bottom,
-    color-stop(0, rgb(37, 222, 173)),
-    color-stop(1, rgb(15, 92, 79))
-  );
-  background-image: -o-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -moz-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -webkit-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: -ms-linear-gradient(right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-  background-image: linear-gradient(to right bottom, rgb(37, 222, 173) 0%, rgb(15, 92, 79) 100%);
-}
-
-.id-skyblue {
-  height: 0.3vh;
-  background-color: #4c9cca;
-}
-
-.id-barcode {
-  width: 70%;
-  height: 45px;
-}
-
-.id-lanyard {
-  opacity: 0.5;
-  width: 45vh;
-  height: 45vh;
-
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  top: 50px;
-  margin: auto;
-  vertical-align: middle;
-}
-
-.intro-desc {
-  position: relative;
-  display: inline-block;
-  width: 40%;
-  left: 2.5vh; 
-  right: 0; 
-  vertical-align: middle;
-  text-align: left;
-  margin-left: auto; 
-  margin-right: auto; 
-  font-size: calc(10px + 1vmin);
 }
 
 @keyframes App-logo-spin {
