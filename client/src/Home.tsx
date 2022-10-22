@@ -3,7 +3,7 @@ import './App.css';
 
 // Custom Components
 import NavBar from './components/NavBar';
-import FooterComponent from './components/FooterComponent';
+import FooterComponent from './components/FooterComp';
 import IntroSection from './components/IntroSection/IntroSection';
 
 import ProjectSection from './components/ProjectSection';
