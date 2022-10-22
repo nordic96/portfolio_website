@@ -30,7 +30,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10"
+    "eslint-plugin-react": "^7.31.10",
+    "@typescript-eslint/eslint-plugin": "5.12.0",
+    "@typescript-eslint/parser": "5.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -62,8 +64,6 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-scroll": "^1.8.2",
-    "@typescript-eslint/eslint-plugin": "5.12.0",
-    "@typescript-eslint/parser": "5.12.0",
     "typescript": "4.5.5"
   }
 }
