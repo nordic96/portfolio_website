@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { FullDesignDesc } from '../../globals';
 
 /**
@@ -16,47 +15,17 @@ interface DesignCardProps {
 
 const DesignCard = (props: DesignCardProps) => {
     const { designProject } = props;
-    const { medialink, name, organisation, year, desc } = designProject;
+    const { medialink, name, organisation, year } = designProject;
     return (
-        <Card>
-            <Card.Img
-                variant="top"
+        <div className={'flex flex-column'}>
+            <img
                 src={'https://lh3.googleusercontent.com/' + medialink}
-                className="img-design-card"
-                alt="design"
+                className={'w-80'}
+                alt="design_img"
             />
-            <Card.Body>
-                <Card.Title>
-                    <h3>
-                        <b>{name}</b>
-                    </h3>
-                </Card.Title>
-                <Card.Text></Card.Text>
-                <div className="desc">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <b>Organisation: </b>
-                                    {organisation}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Year: </b>
-                                    {year}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Card.Text>{desc}</Card.Text>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </Card.Body>
-        </Card>
+            <p className={'font-bold text-lg'}>{`${name}`}</p>
+            <p className={'italic'}>{`${organisation}, ${year}`}</p>
+        </div>
     );
 };
 

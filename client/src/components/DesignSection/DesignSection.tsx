@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import LabelContainer from 'labelcontainer';
 import DesignCard from '../DesignCard';
-import { CardColumns } from 'react-bootstrap';
 import { FullDesignDesc } from '../../globals';
 
 const DesignSection = () => {
@@ -34,23 +33,17 @@ const DesignSection = () => {
                     {`"${labelInstance.getLabel('cca_msg')}"`}
                 </p>
             </div>
-            <div className="container-design">
-                <div>
-                    <CardColumns>
-                        {isDesignsLoaded
-                            ? designs.map(
-                                  (design: FullDesignDesc, index: number) => {
-                                      return (
-                                          <DesignCard
-                                              key={index}
-                                              designProject={design}
-                                          />
-                                      );
-                                  }
-                              )
-                            : "Design details fetch request failed :'( please refresh the page again!"}
-                    </CardColumns>
-                </div>
+            <div
+                className={
+                    'flex flex-wrap justify-center pt-16 px-4 pb-16 gap-8'
+                }>
+                {isDesignsLoaded
+                    ? designs.map((design: FullDesignDesc, index: number) => {
+                          return (
+                              <DesignCard key={index} designProject={design} />
+                          );
+                      })
+                    : "Design details fetch request failed :'( please refresh the page again!"}
             </div>
         </div>
     );
