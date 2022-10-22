@@ -32,6 +32,7 @@ const DesignSection = () => {
                 <p className={'text-2xl w-50 text-black italic'}>
                     {`"${labelInstance.getLabel('cca_msg')}"`}
                 </p>
+                <p className={'text-4xl'}>&#128518;</p>
             </div>
             <div
                 className={

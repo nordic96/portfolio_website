@@ -61,8 +61,9 @@ const ProjectSection = () => {
                             src={'assets/sticker_lion.png'}
                             alt={'lion'}
                         />
-                        <p className={'text-2xl w-50 text-black italic'}>
-                            {`"${labelInstance.getLabel('intro_msg')}"`}
+                        <p className={'text-2xl w-50 text-black'}>
+                            <i>{`"${labelInstance.getLabel('intro_msg')}"`}</i>
+                            &nbsp; &#128522;
                         </p>
                     </div>
                 </Grow>
