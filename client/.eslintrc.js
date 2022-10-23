@@ -11,6 +11,7 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:jsx-a11y/recommended',
     ],
+    ignorePatterns: ['**/*.js'],
     parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
