@@ -31,9 +31,7 @@ function NavBar() {
                         </li>
                     </ul>
                 </div>
-                <div id="nav-version-right">
-                    v{process.env.REACT_APP_VERSION}
-                </div>
+                <div id="nav-version-right">v{process.env.VERSION}</div>
             </nav>
         </div>
     );

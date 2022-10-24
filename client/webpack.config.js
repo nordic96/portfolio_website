@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { DefinePlugin } = require('webpack');
+const PACKAGE = require('./package.json');
 
 module.exports = {
     entry: './src/index.js',
@@ -11,6 +13,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+        new DefinePlugin({
+            'process.env.VERSION': JSON.stringify(PACKAGE.version),
+        }),
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
