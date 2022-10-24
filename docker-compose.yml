@@ -1,0 +1,15 @@
+version: '3'
+services:
+  portfolio-server:
+    build: ./
+    container_name: portfolio-server
+    ports:
+      - 4000:4000
+  
+  portfolio-ui:
+    build: ./client
+    container_name: portfolio-ui
+    ports:
+      - 80:80
+    links:
+      - portfolio-server
