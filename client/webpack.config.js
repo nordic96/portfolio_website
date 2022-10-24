@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -11,9 +12,10 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'public', 'index.html'),
+            template: 'index.html',
         }),
         new Dotenv(),
+        new CopyWebpackPlugin({ patterns: [{ from: 'public' }] }),
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -50,8 +52,8 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
-                test: /\.(png|jp(e*)g|svg|gif)$/,
-                use: ['file-loader'],
+                test: /\.(png|jp(e*)g|svg|gif|ico)$/,
+                use: ['file-loader?name=[name].[ext]'],
             },
         ],
     },

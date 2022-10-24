@@ -70,6 +70,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "dotenv-webpack": "^8.0.1",
     "file-loader": "^6.2.0",
