@@ -1,5 +1,5 @@
 import React from 'react';
-
+import EmailIcon from '../assets/images/email-icon.png';
 /**
  * Footer Component for Main Page (contains footer information)
  */
@@ -12,7 +12,7 @@ function FooterComp() {
                     <div className={'flex flex-row gap-2'}>
                         <img
                             className="contact-icon"
-                            src="assets/email-icon.png"
+                            src={EmailIcon}
                             alt="email"
                         />
                         <p className={'text-base'}>
