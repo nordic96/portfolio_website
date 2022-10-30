@@ -25,8 +25,8 @@ jobs:
                 submodules: recursive
                 token: ${{ secrets.GITHUB_TOKEN }}
             - name: Run NPM Install (Server)
-              run: npm install
+              run: yarn
             - name: Run NPM Install (Client)
-              run: cd client && npm install
+              run: cd client && yarn
             - name: Run NPM Build
-              run: cd client && npm run build
+              run: cd client && yarn build
