@@ -7,7 +7,7 @@ function FooterComp() {
     return (
         <div
             className={
-                'text-white px-24 py-4 bg-slate-800 absolute bottom-0 w-full h-32'
+                'text-white px-24 py-4 bg-coolblack absolute bottom-0 w-full h-32'
             }>
             <div className={'flex flex-row justify-between gap-4'}>
                 <div className={'flex-1 text-left'}>
