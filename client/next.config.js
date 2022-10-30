@@ -7,5 +7,10 @@ module.exports = () => {
             },
         ];
     };
-    return { rewrites };
+    return {
+        rewrites,
+        env: {
+            VERSION: process.env.REACT_APP_VERSION,
+        },
+    };
 };
