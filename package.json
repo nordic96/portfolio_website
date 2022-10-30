@@ -11,7 +11,7 @@
 		"dev": "concurrently --kill-others-on-fail \"yarn server-dev\" \"yarn client-dev\""
 	},
 	"dependencies": {
-		"body-parser": "^1.18.3",
+		"body-parser": "^1.20.1",
 		"call-bind": "1.0.2",
 		"dotenv": "^16.0.2",
 		"express": "^4.18.1",
