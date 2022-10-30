@@ -26,7 +26,5 @@ jobs:
                 token: ${{ secrets.GITHUB_TOKEN }}
             - name: Run NPM Install (Server)
               run: yarn
-            - name: Run NPM Install (Client)
-              run: cd client && yarn
-            - name: Run NPM Build
-              run: cd client && yarn build
+            - name: Yarn & Build (Client)
+              run: cd client && yarn && yarn build
