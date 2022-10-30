@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import LabelContainer from 'labelcontainer';
 import { FullProjectDesc } from '../../globals';
 import ProjectCard from '../ProjectCard';
-import Lion from '../../assets/images/sticker_lion.png';
 import { Grow } from '@mui/material';
 
 const ProjectSection = () => {
@@ -57,7 +56,11 @@ const ProjectSection = () => {
                         className={
                             'flex items-center flex-1 justify-center flex-column'
                         }>
-                        <img className={'w-80'} src={Lion} alt={'lion'} />
+                        <img
+                            className={'w-80'}
+                            src={'assets/images/sticker_lion.png'}
+                            alt={'lion'}
+                        />
                         <p className={'text-2xl w-50 text-black'}>
                             <i>{`"${labelInstance.getLabel('intro_msg')}"`}</i>
                             &nbsp; &#128522;

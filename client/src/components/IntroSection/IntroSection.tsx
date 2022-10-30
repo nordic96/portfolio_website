@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grow } from '@mui/material';
+import { Grow } from '@mui/material';
 import LabelContainer from 'labelcontainer';
 
 import Wave from 'react-wavify';
@@ -21,7 +21,7 @@ const IntroSection = () => {
         <div className={'block bg-white relative'}>
             <div
                 className={
-                    'flex flex-1 flex-row pt-20 justify-center items-center gap-24'
+                    'flex flex-1 flex-wrap pt-20 justify-center items-center gap-24'
                 }>
                 <Grow in timeout={1000}>
                     <div
@@ -45,16 +45,16 @@ const IntroSection = () => {
                             </div>
                         </div>
                         <div>
-                            <Button
-                                sx={{
-                                    background:
-                                        'linear-gradient(to right, #4f46e5, #0891b2)',
-                                }}
-                                onClick={onClick}
-                                variant={'contained'}
-                                endIcon={<Download />}>
-                                View Resume
-                            </Button>
+                            <button
+                                className={
+                                    'flex flex-row rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
+                                }
+                                onClick={onClick}>
+                                <p className={'text-white uppercase font-bold'}>
+                                    View Resume
+                                    <Download />
+                                </p>
+                            </button>
                         </div>
                     </div>
                 </Grow>
