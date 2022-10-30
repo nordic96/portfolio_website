@@ -5,19 +5,19 @@ import LabelContainer from 'labelcontainer';
 import { LABELS } from '../constants/constants';
 
 import '../styles/globals.css';
-import Head from 'next/Head';
+import Head from 'next/head';
 import NavBar from '../components/NavBar';
 import FooterComp from '../components/FooterComp';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import reportWebVitals from '../reportWebVitals';
+import { AppProps } from 'next/dist/shared/lib/router/router';
 
 /** Setting Constant Labels */
 const labelnstance = LabelContainer.getInstance();
 labelnstance.setLabels(LABELS);
 
-// eslint-disable-next-line react/prop-types
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
     return (
         <div className={'App'}>
             <Head>
