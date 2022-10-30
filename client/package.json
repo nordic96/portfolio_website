@@ -39,11 +39,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "start": "next start",
-    "build": "next build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "next start -p $PORT",
+    "build": "next build"
   },
+  "cacheDirectories": [".next/cache"],
   "eslintConfig": {
     "extends": [
       "react-app",
