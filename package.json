@@ -2,11 +2,13 @@
 	"name": "portfolio_website",
 	"version": "0.0.9",
 	"scripts": {
-		"start": "node --max-http-header-size=16384 server.js",
+		"start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
 		"heroku-postbuild": "cd client && yarn cache clean && yarn && yarn run build",
-		"client": "cd client && yarn dev",
-		"server": "nodemon server.js",
-		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+		"client": "cd client && yarn start",
+		"client-dev": "cd client && yarn dev",
+		"server": "nodemon --max-http-header-size=16384 server.js",
+		"server-dev": "nodemon server.js",
+		"dev": "concurrently --kill-others-on-fail \"yarn server-dev\" \"yarn client-dev\""
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
