@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { ProjectCardProps } from './types';
 import StringUtils from '../../utils/StringUtils';
+import { LogoUrlMap } from './constants';
 
 function createTags(tags: string[]) {
     //console.log(tags);
@@ -35,7 +36,7 @@ function createLink(link?: string, iconName?: string) {
             <a href={link} target="_blank" rel="noreferrer">
                 <img
                     className="link-icon"
-                    src={'assets/' + iconName + '-logo.png'}
+                    src={LogoUrlMap[iconName]}
                     alt={iconName}
                 />
             </a>

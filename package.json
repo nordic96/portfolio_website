@@ -4,29 +4,28 @@
 	"scripts": {
 		"start": "node --max-http-header-size=16384 server.js",
 		"heroku-postbuild": "cd client && yarn cache clean && yarn && yarn run build",
-		"client": "cd client && yarn start",
+		"client": "cd client && yarn dev",
 		"server": "nodemon server.js",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
+		"call-bind": "1.0.2",
 		"dotenv": "^16.0.2",
 		"express": "^4.18.1",
 		"express-rate-limit": "^6.6.0",
 		"mongoose": "6.6.1",
-		"queue-microtask": "^1.2.3",
-		"call-bind": "1.0.2",
-		"typescript": "~4.8.3"
+		"queue-microtask": "^1.2.3"
 	},
 	"devDependencies": {
-		"concurrently": "^7.4.0",
-        "@types/express-rate-limit": "6.0.0"
+		"@types/express-rate-limit": "6.0.0",
+		"concurrently": "^7.4.0"
 	},
-    "config": {
-        "mongodbMemoryServer": {
-            "version": "4.4.1"
-        }
-    },
+	"config": {
+		"mongodbMemoryServer": {
+			"version": "4.4.1"
+		}
+	},
 	"author": "Gihun Ko",
 	"license": "MIT"
 }

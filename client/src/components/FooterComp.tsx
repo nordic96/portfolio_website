@@ -5,14 +5,17 @@ import React from 'react';
  */
 function FooterComp() {
     return (
-        <div className={'text-white px-24 py-8 bg-slate-800'}>
+        <div
+            className={
+                'text-white px-24 py-4 bg-coolblack absolute bottom-0 w-full h-32'
+            }>
             <div className={'flex flex-row justify-between gap-4'}>
                 <div className={'flex-1 text-left'}>
                     <p className={'font-bold text-lg'}>Contacts</p>
                     <div className={'flex flex-row gap-2'}>
                         <img
                             className="contact-icon"
-                            src="assets/email-icon.png"
+                            src={'assets/images/email-icon.png'}
                             alt="email"
                         />
                         <p className={'text-base'}>

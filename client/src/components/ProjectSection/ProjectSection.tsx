@@ -58,7 +58,7 @@ const ProjectSection = () => {
                         }>
                         <img
                             className={'w-80'}
-                            src={'assets/sticker_lion.png'}
+                            src={'assets/images/sticker_lion.png'}
                             alt={'lion'}
                         />
                         <p className={'text-2xl w-50 text-black'}>
