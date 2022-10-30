@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"@types/express-rate-limit": "6.0.0",
-		"concurrently": "^7.4.0"
+		"concurrently": "^7.5.0"
 	},
 	"config": {
 		"mongodbMemoryServer": {
