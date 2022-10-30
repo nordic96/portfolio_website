@@ -5,8 +5,9 @@ import LabelContainer from 'labelcontainer';
 import { LABELS } from '../constants/constants';
 
 import '../styles/globals.css';
-import 'tailwindcss/tailwind.css';
 import Head from 'next/Head';
+import NavBar from '../components/NavBar';
+import FooterComp from '../components/FooterComp';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import reportWebVitals from '../reportWebVitals';
@@ -18,7 +19,7 @@ labelnstance.setLabels(LABELS);
 // eslint-disable-next-line react/prop-types
 export default function MyApp({ Component, pageProps }) {
     return (
-        <div>
+        <div className={'App'}>
             <Head>
                 <title>Gi Hun&apos;s Portfolio</title>
                 <meta charSet="utf-8" />
@@ -61,7 +62,9 @@ export default function MyApp({ Component, pageProps }) {
                 />
             </Head>
             <CssBaseline />
+            <NavBar />
             <Component {...pageProps} />
+            <FooterComp />
         </div>
     );
 }
