@@ -20,20 +20,20 @@ const ProjectSection = () => {
     }
 
     useEffect(() => {
-        fetch('/api/fetchProjects')
+        fetch('/api/projects')
             .then((res) => res.json())
             .then(
-                (projects) => {
+                (json) => {
                     if (isSortLatest) {
                         setProjects(
-                            projects.sort(
+                            json.projects.sort(
                                 (p1: FullProjectDesc, p2: FullProjectDesc) =>
                                     p2.devyear - p1.devyear
                             )
                         );
                     } else {
                         setProjects(
-                            projects.sort(
+                            json.projects.sort(
                                 (p1: FullProjectDesc, p2: FullProjectDesc) =>
                                     p1.devyear - p2.devyear
                             )

@@ -10,11 +10,11 @@ const DesignSection = () => {
     const [isDesignsLoaded, setIsDesignsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
-        fetch('/api/fetchDesigns')
+        fetch('/api/designs')
             .then((res) => res.json())
             .then(
-                (designs) => {
-                    setDesigns(designs);
+                (json) => {
+                    setDesigns(json.designs);
                     setIsDesignsLoaded(true);
                 },
                 (ex) => {
