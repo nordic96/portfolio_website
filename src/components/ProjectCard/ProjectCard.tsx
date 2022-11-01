@@ -52,7 +52,10 @@ const ProjectCard = (props: ProjectCardProps) => {
         desc,
     } = projectDesc;
     return (
-        <div className={'w-1/4'}>
+        <div
+            className={
+                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md'
+            }>
             <CardActionArea>
                 <img
                     src={`https://lh3.googleusercontent.com/${medialink}`}

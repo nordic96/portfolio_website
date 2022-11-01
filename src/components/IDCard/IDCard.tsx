@@ -4,7 +4,7 @@ const IDCard = () => {
     return (
         <div
             className={
-                'lg:w-80 lg:h-80 md:h-64 md:w-64 bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-full relative overflow-hidden drop-shadow-2xl'
+                'lg:w-80 lg:h-80 md:h-64 md:w-64 max-sm:w-32 max-sm:h-32 bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-full relative overflow-hidden drop-shadow-2xl'
             }>
             <div
                 className={
