@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    CardActionArea,
-    CardMedia,
-    CardContent,
-    Card,
-    CardActions,
-} from '@mui/material';
+import { CardActionArea, CardContent, CardActions } from '@mui/material';
 import { ProjectCardProps } from './types';
 import StringUtils from '../../utils/StringUtils';
 import { LogoUrlMap } from './constants';
@@ -19,7 +13,7 @@ function createTags(tags: string[]) {
                     <p
                         key={`tag-${index}`}
                         className={
-                            'font-bold text-velvet rounded-md min-w-20 px-2 text-sm'
+                            'font-bold text-velvet rounded-md min-w-20 px-2 lg:text-sm md:text-xs'
                         }>
                         {tag}
                     </p>
@@ -58,13 +52,15 @@ const ProjectCard = (props: ProjectCardProps) => {
         desc,
     } = projectDesc;
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <div
+            className={
+                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md'
+            }>
             <CardActionArea>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image={`https://lh3.googleusercontent.com/${medialink}`}
-                    alt="project_image"
+                <img
+                    src={`https://lh3.googleusercontent.com/${medialink}`}
+                    alt={'project_img'}
+                    className={'w-full'}
                 />
                 <CardContent>
                     <div
@@ -73,18 +69,18 @@ const ProjectCard = (props: ProjectCardProps) => {
                         }>
                         <p
                             className={
-                                'text-xl font-bold'
+                                'lg:text-xl md:text-lg font-bold'
                             }>{`${name} (${devyear})`}</p>
                         {createLink(projectlink, 'github')}
                         {createLink(videolink, 'youtube')}
                     </div>
-                    <p className={'text-base'}>
+                    <p className={'lg:text-base md:text-sm'}>
                         {StringUtils.shortenString(desc)}
                     </p>
                 </CardContent>
             </CardActionArea>
             <CardActions>{createTags(tags)}</CardActions>
-        </Card>
+        </div>
     );
 };
 

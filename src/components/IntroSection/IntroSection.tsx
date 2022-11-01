@@ -21,21 +21,30 @@ const IntroSection = () => {
         <div className={'block bg-white relative'}>
             <div
                 className={
-                    'flex flex-1 flex-wrap pt-20 justify-center items-center gap-24'
+                    'flex flex-1 flex-wrap lg:pt-20 md:pt-16 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4'
                 }>
                 <Grow in timeout={1000}>
                     <div
                         className={
-                            'flex flex-column justify-between items-start h-64'
+                            'flex flex-column justify-between items-start lg:h-64 md:h-48 max-sm:w-1/2 gap-4'
                         }>
-                        <div className={'flex flex-column items-start'}>
-                            <p className={'text-4xl font-bold'}>
+                        <div
+                            className={
+                                'flex flex-column items-start text-left'
+                            }>
+                            <p
+                                className={
+                                    'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
+                                }>
                                 {lsInstance.getLabel('title')}&#9995;
                             </p>
-                            <p className={'text-2xl'}>
+                            <p
+                                className={
+                                    'lg:text-2xl md:text-xl max-sm:text-sm'
+                                }>
                                 {lsInstance.getLabel('title_desc')}
                             </p>
-                            <p className={'text-base'}>
+                            <p className={'lg:text-base max-sm:text-xs'}>
                                 {lsInstance.getLabel('intro_desc')}
                             </p>
                             <div className={'flex flex-row gap-2 pt-2'}>
@@ -47,10 +56,13 @@ const IntroSection = () => {
                         <div>
                             <button
                                 className={
-                                    'flex flex-row rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
+                                    'rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
                                 }
                                 onClick={onClick}>
-                                <p className={'text-white uppercase font-bold'}>
+                                <p
+                                    className={
+                                        'text-white uppercase font-bold max-sm:text-sm'
+                                    }>
                                     View Resume
                                     <Download />
                                 </p>
