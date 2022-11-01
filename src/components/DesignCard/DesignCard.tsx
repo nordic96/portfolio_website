@@ -17,14 +17,17 @@ const DesignCard = (props: DesignCardProps) => {
     const { designProject } = props;
     const { medialink, name, organisation, year } = designProject;
     return (
-        <div className={'flex flex-column'}>
+        <div className={'flex flex-column w-1/4'}>
             <img
                 src={'https://lh3.googleusercontent.com/' + medialink}
-                className={'w-80'}
+                className={'w-full'}
                 alt="design_img"
             />
-            <p className={'font-bold text-lg'}>{`${name}`}</p>
-            <p className={'italic'}>{`${organisation}, ${year}`}</p>
+            <p className={'font-bold lg:text-lg md:text-base'}>{`${name}`}</p>
+            <p
+                className={
+                    'italic lg:text-base md:text-sm'
+                }>{`${organisation}, ${year}`}</p>
         </div>
     );
 };

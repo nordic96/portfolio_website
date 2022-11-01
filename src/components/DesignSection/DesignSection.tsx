@@ -28,15 +28,17 @@ const DesignSection = () => {
         <div>
             <hr className="my-4" />
             <div
-                className={'flex items-center justify-center py-4 flex-column'}>
-                <p className={'text-2xl w-50 text-black italic'}>
+                className={
+                    'flex items-center justify-center lg:py-4 md:py-2 flex-column'
+                }>
+                <p className={'lg:text-2xl md:text-xl w-50 text-black italic'}>
                     {`"${labelInstance.getLabel('cca_msg')}"`}
                 </p>
-                <p className={'text-4xl'}>&#128518;</p>
+                <p className={'lg:text-4xl md:text-2xl'}>&#128518;</p>
             </div>
             <div
                 className={
-                    'flex flex-wrap justify-center pt-16 px-4 pb-16 gap-8'
+                    'flex flex-wrap justify-center lg:py-16 md:py-8 lg:gap-8 md:gap-4'
                 }>
                 {isDesignsLoaded
                     ? designs.map((design: FullDesignDesc, index: number) => {

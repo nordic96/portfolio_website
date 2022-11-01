@@ -21,18 +21,18 @@ const IntroSection = () => {
         <div className={'block bg-white relative'}>
             <div
                 className={
-                    'flex flex-1 flex-wrap pt-20 justify-center items-center gap-24'
+                    'flex flex-1 flex-wrap lg:pt-20 md:px-4 md:pt-16 justify-center items-center lg:gap-24 md:gap-4'
                 }>
                 <Grow in timeout={1000}>
                     <div
                         className={
-                            'flex flex-column justify-between items-start h-64'
+                            'flex flex-column justify-between items-start lg:h-64 md:h-48'
                         }>
                         <div className={'flex flex-column items-start'}>
-                            <p className={'text-4xl font-bold'}>
+                            <p className={'lg:text-4xl md:text-2xl font-bold'}>
                                 {lsInstance.getLabel('title')}&#9995;
                             </p>
-                            <p className={'text-2xl'}>
+                            <p className={'lg:text-2xl md:text-xl'}>
                                 {lsInstance.getLabel('title_desc')}
                             </p>
                             <p className={'text-base'}>

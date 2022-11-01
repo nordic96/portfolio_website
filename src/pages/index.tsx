@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <>
             <IntroSection />
-            <div className={'relative flex-column px-16 pb-32'}>
+            <div className={'relative flex-column lg:px-16 md:px-8 pb-32'}>
                 <ProjectSection />
                 <DesignSection />
             </div>
