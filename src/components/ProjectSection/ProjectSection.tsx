@@ -57,11 +57,14 @@ const ProjectSection = () => {
                             'flex items-center flex-1 justify-center flex-column'
                         }>
                         <img
-                            className={'w-80'}
+                            className={'lg:w-80 md:w-60 max-sm:w-48'}
                             src={'assets/images/sticker_lion.png'}
                             alt={'lion'}
                         />
-                        <p className={'text-2xl w-50 text-black'}>
+                        <p
+                            className={
+                                'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full text-black'
+                            }>
                             <i>{`"${labelInstance.getLabel('intro_msg')}"`}</i>
                             &nbsp; &#128522;
                         </p>
