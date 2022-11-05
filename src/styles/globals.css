@@ -13,6 +13,7 @@ body {
 @layer base {
     body {
         @apply dark:text-white;
+        @apply transition duration-1000;
     }
 }
   

@@ -63,11 +63,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
             </Head>
             <CssBaseline />
-            <NavBar />
             <ThemeProvider attribute={'class'}>
+                <NavBar />
                 <Component {...pageProps} />
+                <FooterComp />
             </ThemeProvider>
-            <FooterComp />
         </div>
     );
 }

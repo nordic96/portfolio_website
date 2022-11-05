@@ -36,7 +36,11 @@ const IntroSection = () => {
                                 className={
                                     'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
                                 }>
-                                {lsInstance.getLabel('title')}&#9995;
+                                {lsInstance.getLabel('title')}
+                                <span className={'dark:text-fuchsia-500'}>
+                                    Gihun, Stephen
+                                </span>
+                                &#9995;
                             </p>
                             <p
                                 className={
