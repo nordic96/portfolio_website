@@ -33,7 +33,7 @@ const DesignSection = () => {
                 }>
                 <p
                     className={
-                        'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full text-black italic'
+                        'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full italic'
                     }>
                     {`"${labelInstance.getLabel('cca_msg')}"`}
                 </p>

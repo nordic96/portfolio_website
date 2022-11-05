@@ -5,6 +5,7 @@ import LabelContainer from 'labelcontainer';
 import { LABELS } from '../constants/constants';
 
 import '../styles/globals.css';
+import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
 import NavBar from '../components/NavBar';
 import FooterComp from '../components/FooterComp';
@@ -62,9 +63,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
             </Head>
             <CssBaseline />
-            <NavBar />
-            <Component {...pageProps} />
-            <FooterComp />
+            <ThemeProvider attribute={'class'}>
+                <NavBar />
+                <Component {...pageProps} />
+                <FooterComp />
+            </ThemeProvider>
         </div>
     );
 }

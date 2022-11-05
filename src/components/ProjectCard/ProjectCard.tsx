@@ -13,7 +13,7 @@ function createTags(tags: string[]) {
                     <p
                         key={`tag-${index}`}
                         className={
-                            'font-bold text-velvet rounded-md min-w-20 px-2 lg:text-sm md:text-xs'
+                            'font-bold text-velvet dark:text-teal-500 rounded-md min-w-20 px-2 lg:text-sm md:text-xs'
                         }>
                         {tag}
                     </p>
@@ -54,13 +54,13 @@ const ProjectCard = (props: ProjectCardProps) => {
     return (
         <div
             className={
-                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md'
+                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-gray-800'
             }>
             <CardActionArea>
                 <img
                     src={`https://lh3.googleusercontent.com/${medialink}`}
                     alt={'project_img'}
-                    className={'w-full'}
+                    className={'w-full rounded-t'}
                 />
                 <CardContent>
                     <div

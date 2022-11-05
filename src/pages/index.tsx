@@ -9,7 +9,7 @@ import DesignSection from '../components/DesignSection';
 
 const Home = () => {
     return (
-        <>
+        <div className={'bg:white dark:bg-slate-800'}>
             <IntroSection />
             <div
                 className={
@@ -18,7 +18,7 @@ const Home = () => {
                 <ProjectSection />
                 <DesignSection />
             </div>
-        </>
+        </div>
     );
 };
 
