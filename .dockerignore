@@ -1,2 +1,5 @@
 node_modules/
-client/
+README.md
+docs
+.next
+.git
