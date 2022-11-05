@@ -2,7 +2,7 @@ import { Labels } from 'labelcontainer/build/types';
 export const LABELS: Labels = {
     GLOBAL: {
         en: {
-            title: 'Hi! I am Gi Hun (Stephen)',
+            title: 'Hi! I am ',
             title_desc: 'Frontend Software Engineer based in Singapore',
             intro_msg:
                 'From Software Engineering to Machine Learning and Data Analytics, below are my projects I have worked on either as a school project or as a hobby!',

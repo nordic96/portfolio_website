@@ -18,10 +18,10 @@ const IntroSection = () => {
     };
 
     return (
-        <div className={'block bg-white relative'}>
+        <div className={'block relative'}>
             <div
                 className={
-                    'flex flex-1 flex-wrap lg:pt-20 md:pt-16 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4'
+                    'flex flex-1 flex-wrap lg:pt-20 md:pt-16 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
                 }>
                 <Grow in timeout={1000}>
                     <div
@@ -36,7 +36,11 @@ const IntroSection = () => {
                                 className={
                                     'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
                                 }>
-                                {lsInstance.getLabel('title')}&#9995;
+                                {lsInstance.getLabel('title')}
+                                <span className={'dark:text-fuchsia-500'}>
+                                    Gihun, Stephen
+                                </span>
+                                &#9995;
                             </p>
                             <p
                                 className={

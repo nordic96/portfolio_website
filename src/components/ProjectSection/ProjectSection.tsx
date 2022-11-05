@@ -63,7 +63,7 @@ const ProjectSection = () => {
                         />
                         <p
                             className={
-                                'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full text-black'
+                                'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full'
                             }>
                             <i>{`"${labelInstance.getLabel('intro_msg')}"`}</i>
                             &nbsp; &#128522;
