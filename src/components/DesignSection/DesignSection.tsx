@@ -3,25 +3,33 @@ import React, { useState, useEffect } from 'react';
 import LabelContainer from 'labelcontainer';
 import DesignCard from '../DesignCard';
 import { FullDesignDesc } from '../../globals';
+import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
+import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 
 const DesignSection = () => {
     const labelInstance = LabelContainer.getInstance();
     const [designs, setDesigns] = useState<Array<FullDesignDesc>>([]);
     const [isDesignsLoaded, setIsDesignsLoaded] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        fetch('/api/designs')
-            .then((res) => res.json())
-            .then(
-                (json) => {
-                    setDesigns(json.designs);
-                    setIsDesignsLoaded(true);
-                },
-                (ex) => {
-                    console.log('Fetch failed, ', ex);
-                    setIsDesignsLoaded(false);
-                }
-            );
+        setLoading(true);
+        setTimeout(() => {
+            fetch('/api/designs')
+                .then((res) => res.json())
+                .then(
+                    (json) => {
+                        setDesigns(json.designs);
+                        setIsDesignsLoaded(true);
+                        setLoading(false);
+                    },
+                    (ex) => {
+                        console.log('Fetch failed, ', ex);
+                        setIsDesignsLoaded(false);
+                        setLoading(false);
+                    }
+                );
+        }, 1000);
     }, []);
 
     return (
@@ -43,7 +51,9 @@ const DesignSection = () => {
                 className={
                     'flex flex-wrap justify-center lg:py-16 md:py-8 lg:gap-8 md:gap-4'
                 }>
-                {isDesignsLoaded
+                {loading
+                    ? withLoadingSkeleton(LoadingSkeleton)(3)
+                    : isDesignsLoaded
                     ? designs.map((design: FullDesignDesc, index: number) => {
                           return (
                               <DesignCard key={index} designProject={design} />

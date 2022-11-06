@@ -1,9 +1,11 @@
+import LabelContainer from 'labelcontainer';
 import React from 'react';
 
 /**
  * Footer Component for Main Page (contains footer information)
  */
 function FooterComp() {
+    const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
@@ -15,30 +17,10 @@ function FooterComp() {
                         className={
                             'font-bold lg:text-lg md:text-base max-sm:text-sm'
                         }>
-                        Contacts
-                    </p>
-                    <div className={'flex flex-row gap-2'}>
-                        <img
-                            className="contact-icon"
-                            src={'assets/images/email-icon.png'}
-                            alt="email"
-                        />
-                        <p className={'lg:text-base md:text-sm max-sm:text-xs'}>
-                            rhrlgns96@gmail.com (personal)
-                        </p>
-                    </div>
-                </div>
-                <div className={'flex-1 text-left'}>
-                    <p
-                        className={
-                            'font-bold lg:text-lg md:text-base max-sm:text-sm'
-                        }>
                         About this Website
                     </p>
                     <p className={'lg:text-base md:text-sm max-sm:text-xs'}>
-                        This project was built using NodeJS, ReactJS, deployed
-                        in Heroku App Server. Project information was pulled
-                        from MongoDB Server
+                        {lsInstance.getLabel('footer_desc_1')}
                     </p>
                 </div>
             </div>
