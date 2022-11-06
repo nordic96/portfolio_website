@@ -9,8 +9,12 @@ export async function getConfigData() {
     try {
         connectMongo();
         const labels = await ConfigSchema.findOne({});
-        if (!!labels) data = JSON.parse(JSON.stringify(labels));
-        logger.info(`Config data found: ${labels}`);
+        if (!!labels) {
+            data = JSON.parse(JSON.stringify(labels));
+            logger.info(`Config data found: ${labels}`);
+        } else {
+            logger.info('Config data not found or empty');
+        }
     } catch (e) {
         logger.error(e);
     } finally {
