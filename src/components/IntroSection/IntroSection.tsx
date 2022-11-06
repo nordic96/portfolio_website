@@ -25,7 +25,7 @@ const IntroSection = () => {
                 <Grow in timeout={1000}>
                     <div
                         className={
-                            'flex flex-column justify-between items-start lg:h-64 md:h-48 max-sm:w-1/2 gap-4'
+                            'flex flex-column justify-between items-start lg:h-64 md:h-48 w-1/2 gap-4'
                         }>
                         <div
                             className={
