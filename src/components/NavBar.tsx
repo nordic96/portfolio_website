@@ -45,7 +45,12 @@ function NavBar() {
     return (
         <div className="header-top">
             <nav className="navbar navbar-expand-lg navbar-dark bg-coolblack justify-between">
-                <div className={'flex align-center'}>
+                <div className={'flex align-center items-center gap-2'}>
+                    <img
+                        className={'h-7'}
+                        src={'assets/images/heroku-logo-solid-white.svg'}
+                        alt={'heroku-logo'}
+                    />
                     <a className="navbar-brand font-bold" href="/">
                         {"Gi Hun's Portfolio"}
                     </a>

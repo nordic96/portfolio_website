@@ -7,17 +7,25 @@ import { Download } from '@mui/icons-material';
 import { Icons } from '../../constants/profileIcons';
 import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
-import { RESUME_LINK } from '../../constants/constants';
+import {
+    RESUME_LINK,
+    techstackLogoArr,
+    techStackLogoArrWhite,
+} from '../../constants/constants';
+import { useTheme } from 'next-themes';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
+    const { systemTheme } = useTheme();
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         window.open(RESUME_LINK, '_blank');
     };
 
+    let logoArr = techstackLogoArr;
+    if (systemTheme === 'dark') logoArr = techStackLogoArrWhite;
     return (
-        <div className={'block relative'}>
+        <div className={'flex relative flex-column items-center'}>
             <div
                 className={
                     'flex flex-1 flex-wrap lg:pt-20 md:pt-16 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
@@ -75,7 +83,19 @@ const IntroSection = () => {
                 </Grow>
                 <IDCard />
             </div>
-            <div className={'-top-4 flex relative'}>
+            <div
+                className={'px-8 flex relative items-center flex-column gap-2'}>
+                <p className={'text-xl font-semibold'}>
+                    -This website is powered by-
+                </p>
+                <div className={'flex items-center gap-5 overflow-x-auto h-24'}>
+                    {logoArr.map((x, i) => {
+                        const { alt, src, ...other } = x;
+                        return <img key={i} alt={alt} src={src} {...other} />;
+                    })}
+                </div>
+            </div>
+            <div className={'-top-4 flex relative w-full'}>
                 <Wave
                     fill={'url(#gradient)'}
                     paused={false}
