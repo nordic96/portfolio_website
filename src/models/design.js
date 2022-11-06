@@ -22,5 +22,5 @@ let DesignSchema = new Schema(
     { collection: 'designs' }
 );
 
-module.exports =
-    mongoose.models.designs || mongoose.model('designs', DesignSchema);
+export default mongoose.models.designs ||
+    mongoose.model('designs', DesignSchema);
