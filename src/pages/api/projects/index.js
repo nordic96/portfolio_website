@@ -1,5 +1,6 @@
 import connectMongo from '../../../utils/mongoConnect';
 import Project from '../../../models/project';
+import logger from '../../../logger/logger';
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -7,21 +8,19 @@ import Project from '../../../models/project';
  */
 export default function handler(req, res) {
     try {
-        console.info('Connecting to MongoDB..');
         connectMongo();
-        console.info('Mongo Connection Established..');
 
-        console.log('Fetching Projects document..');
+        logger.info('Fetching Projects document..');
         Project.find({}, (err, result) => {
             if (err) {
                 res.status(500).json({ msg: errMsg });
             } else {
-                console.info(`found ${result.length} projects...`);
+                logger.info(`found ${result.length} projects...`);
                 res.status(200).json({ projects: result });
             }
         });
     } catch (error) {
-        console.error(error);
+        logger.error(error);
         res.status(500).json({ error });
     }
 }
