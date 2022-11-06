@@ -8,6 +8,7 @@ const langSchema = new Schema({
     intro_note: { type: String },
     cca_msg: { type: String },
     intro_desc: { type: String },
+    footer_desc_1: { type: String },
 });
 
 const pageSchema = new Schema({
@@ -30,6 +31,7 @@ export interface Config extends Document {
             intro_note: string;
             cca_msg: string;
             intro_desc: string;
+            footer_desc_1: string;
         };
     };
 }
