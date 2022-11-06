@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import LabelContainer from 'labelcontainer';
-import { LABELS } from '../constants/constants';
-
 import '../styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
@@ -13,10 +10,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import reportWebVitals from '../reportWebVitals';
 import { AppProps } from 'next/dist/shared/lib/router/router';
-
-/** Setting Constant Labels */
-const labelnstance = LabelContainer.getInstance();
-labelnstance.setLabels(LABELS);
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (

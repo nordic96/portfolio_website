@@ -2,6 +2,21 @@ import connectMongo from '../../../utils/mongoConnect';
 import logger from '../../../logger/logger';
 import { NextApiRequest, NextApiResponse } from 'next';
 import ConfigSchema from '../../../models/configs';
+import { Labels } from 'labelcontainer/build/types';
+
+export async function getConfigData() {
+    let data: Labels = {};
+    try {
+        connectMongo();
+        const labels = await ConfigSchema.findOne({});
+        if (!!labels) data = JSON.parse(JSON.stringify(labels));
+        logger.info(`Config data found: ${labels}`);
+    } catch (e) {
+        logger.error(e);
+    } finally {
+        return data;
+    }
+}
 
 /**
  * @param {import('next').NextApiRequest} req

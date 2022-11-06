@@ -6,8 +6,27 @@ import IntroSection from '../components/IntroSection/IntroSection';
 
 import ProjectSection from '../components/ProjectSection';
 import DesignSection from '../components/DesignSection';
+import LabelContainer from 'labelcontainer';
+import { Labels } from 'labelcontainer/build/types';
+import { InferGetServerSidePropsType, NextPage } from 'next';
+import { getConfigData } from './api/configs';
 
-const Home = () => {
+interface HomeProps {
+    data: Labels;
+}
+
+export const getServerSideProps = async () => {
+    const data = await getConfigData();
+    return {
+        props: { data },
+    };
+};
+
+const Home: NextPage<HomeProps> = ({
+    data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const labelInstance = LabelContainer.getInstance();
+    labelInstance.setLabels(data as Labels);
     return (
         <div className={'bg:white dark:bg-slate-800'}>
             <IntroSection />

@@ -11,7 +11,6 @@ import { RESUME_LINK } from '../../constants/constants';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
-
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         window.open(RESUME_LINK, '_blank');
@@ -36,7 +35,7 @@ const IntroSection = () => {
                                 className={
                                     'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
                                 }>
-                                {lsInstance.getLabel('title')}
+                                {lsInstance.getLabel('title')}&nbsp;
                                 <span className={'dark:text-fuchsia-500'}>
                                     Gihun, Stephen
                                 </span>
