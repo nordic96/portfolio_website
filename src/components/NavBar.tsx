@@ -47,7 +47,7 @@ function NavBar() {
             <nav className="navbar navbar-expand-lg navbar-dark bg-coolblack justify-between">
                 <div className={'flex align-center items-center gap-2'}>
                     <img
-                        className={'h-7'}
+                        className={'h-5'}
                         src={'assets/images/heroku-logo-solid-white.svg'}
                         alt={'heroku-logo'}
                     />

@@ -28,7 +28,7 @@ const IntroSection = () => {
         <div className={'flex relative flex-column items-center'}>
             <div
                 className={
-                    'flex flex-1 flex-wrap lg:pt-20 md:pt-16 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
+                    'flex flex-1 flex-wrap lg:pt-10 md:pt-10 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
                 }>
                 <Grow in timeout={1000}>
                     <div
@@ -84,18 +84,34 @@ const IntroSection = () => {
                 <IDCard />
             </div>
             <div
-                className={'px-8 flex relative items-center flex-column gap-2'}>
-                <p className={'text-xl font-semibold'}>
-                    -This website is powered by-
+                className={
+                    'px-8 md:top-4 max-sm:top-8 flex relative items-center flex-column max-sm:gap-1'
+                }>
+                <p
+                    className={
+                        'text-lg md:text-base max-sm:text-sm font-semibold'
+                    }>
+                    -This website was built using-
                 </p>
-                <div className={'flex items-center gap-5 overflow-x-auto h-24'}>
+                <div
+                    className={
+                        'flex items-center gap-3 overflow-x-auto h-24 max-sm:h-12'
+                    }>
                     {logoArr.map((x, i) => {
                         const { alt, src, ...other } = x;
-                        return <img key={i} alt={alt} src={src} {...other} />;
+                        return (
+                            <img
+                                key={i}
+                                alt={alt}
+                                src={src}
+                                className={'lg:h-10 md:h-8 max-sm:h-6'}
+                                {...other}
+                            />
+                        );
                     })}
                 </div>
             </div>
-            <div className={'-top-4 flex relative w-full'}>
+            <div className={'-top-12 max-sm:-top-8 flex relative w-full'}>
                 <Wave
                     fill={'url(#gradient)'}
                     paused={false}

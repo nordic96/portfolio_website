@@ -28,7 +28,7 @@ const Home: NextPage<HomeProps> = ({
     const labelInstance = LabelContainer.getInstance();
     labelInstance.setLabels(data as Labels);
     return (
-        <div className={'bg:white dark:bg-slate-800'}>
+        <div className={'bg:white dark:bg-neutral-900'}>
             <IntroSection />
             <div
                 className={
