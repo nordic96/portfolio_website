@@ -4,12 +4,15 @@ import LabelContainer from 'labelcontainer';
 import { FullProjectDesc } from '../../globals';
 import ProjectCard from '../ProjectCard';
 import { Grow } from '@mui/material';
+import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
+import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
 
 const ProjectSection = () => {
     const labelInstance = LabelContainer.getInstance();
     const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
     const [isSortLatest, setIsSortLatest] = useState<boolean>(true);
     const [isProjectsLoaded, setIsProjectsLoaded] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     function handleLatestClick(
         e: React.MouseEvent<HTMLAnchorElement>,
@@ -20,32 +23,41 @@ const ProjectSection = () => {
     }
 
     useEffect(() => {
-        fetch('/api/projects')
-            .then((res) => res.json())
-            .then(
-                (json) => {
-                    if (isSortLatest) {
-                        setProjects(
-                            json.projects.sort(
-                                (p1: FullProjectDesc, p2: FullProjectDesc) =>
-                                    p2.devyear - p1.devyear
-                            )
-                        );
-                    } else {
-                        setProjects(
-                            json.projects.sort(
-                                (p1: FullProjectDesc, p2: FullProjectDesc) =>
-                                    p1.devyear - p2.devyear
-                            )
-                        );
+        setLoading(true);
+        setTimeout(() => {
+            fetch('/api/projects')
+                .then((res) => res.json())
+                .then(
+                    (json) => {
+                        if (isSortLatest) {
+                            setProjects(
+                                json.projects.sort(
+                                    (
+                                        p1: FullProjectDesc,
+                                        p2: FullProjectDesc
+                                    ) => p2.devyear - p1.devyear
+                                )
+                            );
+                        } else {
+                            setProjects(
+                                json.projects.sort(
+                                    (
+                                        p1: FullProjectDesc,
+                                        p2: FullProjectDesc
+                                    ) => p1.devyear - p2.devyear
+                                )
+                            );
+                        }
+                        setIsProjectsLoaded(true);
+                        setLoading(false);
+                    },
+                    (ex) => {
+                        console.log('Fetch failed, ', ex);
+                        setIsProjectsLoaded(false);
+                        setLoading(false);
                     }
-                    setIsProjectsLoaded(true);
-                },
-                (ex) => {
-                    console.log('Fetch failed, ', ex);
-                    setIsProjectsLoaded(false);
-                }
-            );
+                );
+        }, 1000);
     }, [isSortLatest]);
 
     return (
@@ -106,8 +118,10 @@ const ProjectSection = () => {
                     </div>
                 </div>
             </div>
-            <div className={'flex flex-wrap gap-8 justify-center pt-4'}>
-                {isProjectsLoaded
+            <div className={'flex flex-wrap gap-8 justify-center pt-4 w-full'}>
+                {loading
+                    ? withLoadingSkeleton(LoadingSkeleton)(5)
+                    : isProjectsLoaded
                     ? projects.map(
                           (project: FullProjectDesc, index: number) => {
                               return (

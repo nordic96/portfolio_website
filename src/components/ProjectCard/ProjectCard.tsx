@@ -51,12 +51,20 @@ const ProjectCard = (props: ProjectCardProps) => {
         tags,
         desc,
     } = projectDesc;
+
+    const onClickCard = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        let link = projectlink;
+        if (!link) link = videolink;
+        window.open(link, '_blank');
+    };
+
     return (
         <div
             className={
-                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-gray-800'
+                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
             }>
-            <CardActionArea>
+            <CardActionArea onClick={onClickCard}>
                 <img
                     src={`https://lh3.googleusercontent.com/${medialink}`}
                     alt={'project_img'}

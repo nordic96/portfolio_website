@@ -32,5 +32,5 @@ let ProjectSchema = new Schema(
     { collection: 'projects' }
 );
 
-module.exports =
-    mongoose.models.projects || mongoose.model('projects', ProjectSchema);
+export default mongoose.models.projects ||
+    mongoose.model('projects', ProjectSchema);

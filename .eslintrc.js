@@ -28,6 +28,8 @@ module.exports = {
     rules: {
         'require-jsdoc': 0,
         'valid-jsdoc': 0,
+        'jsx-a11y/no-static-element-interactions': 0,
+        'jsx-a11y/click-events-have-key-events': 0,
         'prettier/prettier': [
             'error',
             { endOfLine: 'auto' },
