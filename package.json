@@ -18,7 +18,7 @@
     "call-bind": "1.0.2",
     "css-select": "4.2.1",
     "dotenv": "^16.0.2",
-    "eslint": "8.9.0",
+    "eslint": "8.33.0",
     "eslint-config-google": "0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
