@@ -13,7 +13,7 @@
     "css-select": "4.2.1",
     "dotenv": "^16.0.2",
     "labelcontainer": "0.0.36",
-    "mongoose": "6.6.1",
+    "mongoose": "^6.6.1",
     "next": "^13.2.1",
     "next-themes": "^0.2.1",
     "path": "0.12.7",
@@ -67,8 +67,7 @@
     "start": "next start -p $PORT",
     "build": "next build",
     "docker:build": "docker build --no-cache --build-arg port=80 -t portfolio_web:local .",
-    "docker:run": "docker run --rm -p 80:80 portfolio_web:local",
-    "deploy": "components-v1 --aws-profile default"
+    "docker:run": "docker run --rm -p 80:80 portfolio_web:local"
   },
   "cacheDirectories": [
     ".next/cache"
