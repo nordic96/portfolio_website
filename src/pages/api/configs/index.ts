@@ -6,9 +6,12 @@ import { Labels } from 'labelcontainer/build/types';
 
 export async function getConfigData() {
     let data: Labels = {};
+    const client = await connectMongo();
     try {
-        connectMongo();
-        const labels = await ConfigSchema.findOne({});
+        const db = client.db(process.env.MONGO_DBNAME);
+        const configs = db.collection('configs');
+
+        const labels = await configs.findOne({});
         if (!!labels) {
             data = JSON.parse(JSON.stringify(labels));
             logger.info(`Config data found: ${labels}`);
@@ -18,6 +21,7 @@ export async function getConfigData() {
     } catch (e) {
         logger.error(e);
     } finally {
+        client.close();
         return data;
     }
 }
