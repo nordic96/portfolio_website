@@ -10,7 +10,7 @@
     "@mui/styles": "^5.11.11",
     "autoprefixer": "^10.4.12",
     "call-bind": "1.0.2",
-    "css-select": "4.2.1",
+    "css-select": "5.1.0",
     "dotenv": "^16.0.2",
     "labelcontainer": "0.0.36",
     "mongodb": "^5.1.0",
