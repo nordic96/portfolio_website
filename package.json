@@ -14,7 +14,7 @@
     "dotenv": "^16.0.2",
     "labelcontainer": "0.0.36",
     "mongodb": "^5.1.0",
-    "mongoose": "^6.6.1",
+    "mongoose": "^7.0.0",
     "next": "^13.2.1",
     "next-themes": "^0.2.1",
     "path": "0.12.7",
