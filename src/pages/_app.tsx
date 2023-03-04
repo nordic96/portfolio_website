@@ -24,7 +24,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="title" content="StephenKo's Portfolio" />
                 <meta
                     name="description"
-                    content="Portfolio website of my school projects, as well as self-sourced projects hosted in GitHub and visual design works."
+                    content="StephenKo's personal portfolio website to showcase software engineering & AI related projects"
                 />
                 {/** OpenGraph Meta Data */}
                 <meta property="og:title" content="StephenKo's Portfolio" />
@@ -35,7 +35,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta
                     property="og:description"
-                    content="Portfolio website of my school projects, as well as self-sourced projects hosted in GitHub and visual design works."
+                    content="StephenKo's personal portfolio website to showcase software engineering & AI related projects"
                 />
                 <meta
                     property="og:image"
@@ -50,7 +50,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta
                     property="twitter:description"
-                    content="Portfolio website of my school projects, as well as self-sourced projects hosted in GitHub and visual design works."
+                    content="StephenKo's personal portfolio website to showcase software engineering & AI related projects"
                 />
                 <meta
                     property="twitter:image"
