@@ -2,16 +2,11 @@ import React from 'react';
 import { Grow } from '@mui/material';
 import LabelContainer from 'labelcontainer';
 
-import Wave from 'react-wavify';
 import { Download } from '@mui/icons-material';
 import { Icons } from '../../constants/profileIcons';
 import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
-import {
-    RESUME_LINK,
-    techstackLogoArr,
-    techStackLogoArrWhite,
-} from '../../constants/constants';
+import { RESUME_LINK, techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
 
 const IntroSection = () => {
@@ -22,7 +17,7 @@ const IntroSection = () => {
         window.open(RESUME_LINK, '_blank');
     };
 
-    let logoArr = techstackLogoArr;
+    let logoArr = techStackLogoArrWhite;
     if (systemTheme === 'dark') logoArr = techStackLogoArrWhite;
     return (
         <div className={'flex relative flex-column items-center'}>
@@ -87,6 +82,15 @@ const IntroSection = () => {
                 className={
                     'px-8 md:top-4 max-sm:top-8 flex relative items-center flex-column max-sm:gap-1'
                 }>
+                <a href="https://aws.amazon.com/what-is-cloud-computing">
+                    <img
+                        src={`https://d0.awsstatic.com/logos/powered-by-aws${
+                            systemTheme === 'dark' ? '-white' : ''
+                        }.png`}
+                        alt="Powered by AWS Cloud Computing"
+                        className={'lg:h-14 md:h-9 max-sm:h-8'}
+                    />
+                </a>
                 <p
                     className={
                         'text-lg md:text-base max-sm:text-sm font-semibold'
@@ -95,7 +99,7 @@ const IntroSection = () => {
                 </p>
                 <div
                     className={
-                        'flex items-center gap-3 overflow-x-auto h-24 max-sm:h-12'
+                        'flex items-center gap-3 overflow-x-auto h-24 max-sm:h-12 lg:pb-4 md:pb-1'
                     }>
                     {logoArr.map((x, i) => {
                         const { alt, src, ...other } = x;
@@ -110,27 +114,6 @@ const IntroSection = () => {
                         );
                     })}
                 </div>
-            </div>
-            <div className={'-top-12 max-sm:-top-8 flex relative w-full'}>
-                <Wave
-                    fill={'url(#gradient)'}
-                    paused={false}
-                    options={{
-                        height: 75,
-                        amplitude: 25,
-                        speed: 0.22,
-                        points: 5,
-                    }}>
-                    <defs>
-                        <linearGradient
-                            id="gradient"
-                            gradientTransform="rotate(0)">
-                            <stop offset="0%" stopColor="#fa256d" />
-                            <stop offset="35%" stopColor="#79096d" />
-                            <stop offset="90%" stopColor="#0070ff" />
-                        </linearGradient>
-                    </defs>
-                </Wave>
             </div>
         </div>
     );

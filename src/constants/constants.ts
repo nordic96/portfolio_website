@@ -13,17 +13,8 @@ export const techstackLogoArr: React.DetailedHTMLProps<
         className: 'h-5 md:h-2 max-sm:h-2',
     },
     {
-        src: 'assets/images/docker.svg',
-        alt: 'docker',
-        className: 'lg:h-8 md:h-8 max-sm:h-6',
-    },
-    {
         src: 'assets/images/react.svg',
         alt: 'react',
-    },
-    {
-        src: 'assets/images/heroku-logotype-vertical-purple.svg',
-        alt: 'heroku',
     },
     {
         src: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg',
@@ -53,21 +44,13 @@ export const techStackLogoArrWhite: React.DetailedHTMLProps<
         className: 'h-5 md:h-2 max-sm:h-2',
     },
     {
-        src: 'assets/images/docker.svg',
-        alt: 'docker',
-        className: 'lg:h-8 md:h-8 max-sm:h-6',
-    },
-    {
         src: 'assets/images/react.svg',
         alt: 'react',
     },
     {
-        src: 'assets/images/heroku-logotype-vertical-white.svg',
-        alt: 'heroku',
-    },
-    {
         src: 'https://nodejs.org/static/images/logo.svg',
         alt: 'nodejs',
+        className: 'lg:h-7 md:h-5 max-sm:h-2',
     },
     {
         src: 'assets/images/next-js.svg',
