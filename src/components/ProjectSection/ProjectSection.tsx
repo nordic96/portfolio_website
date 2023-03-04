@@ -61,7 +61,7 @@ const ProjectSection = () => {
     }, [isSortLatest]);
 
     return (
-        <div className={'pt-4'}>
+        <div className={'pt-16 max-sm:pt-24'}>
             <div id="projects-link" className={'flex flex-column flex-1'}>
                 <Grow in timeout={2000}>
                     <div
@@ -118,7 +118,7 @@ const ProjectSection = () => {
                     </div>
                 </div>
             </div>
-            <div className={'flex flex-wrap gap-8 justify-center pt-4 w-full'}>
+            <div className={'flex flex-wrap gap-2 justify-center pt-4 w-full'}>
                 {loading
                     ? withLoadingSkeleton(LoadingSkeleton)(5)
                     : isProjectsLoaded

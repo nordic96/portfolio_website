@@ -7,6 +7,10 @@ module.exports = {
     ],
     theme: {
         extend: {
+            maxWidth: {
+                '1/2': '50%',
+                '3/5': '60%',
+            },
             colors: {
                 hotpink: '#fa256d',
                 velvet: '#79096d',
