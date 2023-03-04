@@ -6,6 +6,7 @@ import ProjectCard from '../ProjectCard';
 import { Grow } from '@mui/material';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
+import CertificateSection from '../CertificateSection/CertificateSection';
 
 const ProjectSection = () => {
     const labelInstance = LabelContainer.getInstance();
@@ -62,32 +63,38 @@ const ProjectSection = () => {
 
     return (
         <div className={'pt-16 max-sm:pt-24'}>
-            <div id="projects-link" className={'flex flex-column flex-1'}>
-                <Grow in timeout={2000}>
-                    <div
-                        className={
-                            'flex items-center flex-1 justify-center flex-column'
-                        }>
-                        <img
-                            className={'lg:w-80 md:w-60 max-sm:w-48'}
-                            src={'assets/images/sticker_lion.png'}
-                            alt={'lion'}
-                        />
-                        <p
+            <div
+                id="projects-link"
+                className={'flex flex-column align-middle items-center'}>
+                <div className="flex flex-row align-middle lg:px-32 md:px-32 max-sm:px-4 gap-8">
+                    <CertificateSection />
+                    <Grow in timeout={2000}>
+                        <div
                             className={
-                                'lg:text-2xl md:text-xl max-sm:text-base w-1/2 max-sm:w-full'
+                                'flex items-center justify-center flex-column w-1/2 align-middle'
                             }>
-                            <i>{`"${labelInstance.getLabel('intro_msg')}"`}</i>
-                            &nbsp; &#128522;
-                        </p>
-                    </div>
-                </Grow>
+                            <img
+                                className={'lg:w-80 md:w-60 max-sm:w-48'}
+                                src={'assets/images/sticker_lion.png'}
+                                alt={'lion'}
+                            />
+                            <p
+                                className={
+                                    'lg:text-xl md:text-md max-sm:text-base max-sm:w-full'
+                                }>
+                                <i>{`"${labelInstance.getLabel(
+                                    'intro_msg'
+                                )}"`}</i>
+                                &nbsp; &#128522;
+                            </p>
+                        </div>
+                    </Grow>
+                </div>
                 <hr className="my-4" />
                 <div
                     className={
                         'flex flex-row gap-2 align-middle justify-center'
                     }>
-                    {/* <p>{labelInstance.getLabel('intro_note')}</p> */}
                     <div className="dropdown show">
                         <a
                             className="btn btn-secondary dropdown-toggle"
