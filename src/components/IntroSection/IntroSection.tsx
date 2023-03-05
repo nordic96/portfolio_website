@@ -8,6 +8,7 @@ import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
 import { techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
+import StringUtils from '../../utils/StringUtils';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
@@ -42,13 +43,15 @@ const IntroSection = () => {
                                 <span className={'dark:text-fuchsia-500'}>
                                     Gihun, Stephen
                                 </span>
-                                &#9995;
+                                &#128075;
                             </p>
                             <p
                                 className={
-                                    'lg:text-2xl md:text-xl max-sm:text-sm'
+                                    'lg:text-3xl md:text-xl max-sm:text-sm'
                                 }>
-                                {lsInstance.getLabel('title_desc')}
+                                {lsInstance.getLabel('title_desc') +
+                                    ' ' +
+                                    StringUtils.getFlagEmoji('SG')}
                             </p>
                             <p className={'lg:text-base max-sm:text-xs'}>
                                 {lsInstance.getLabel('intro_desc')}
