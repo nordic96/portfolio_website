@@ -21,7 +21,6 @@ export async function getConfigData() {
     } catch (e) {
         logger.error(e);
     } finally {
-        client.close();
         return data;
     }
 }

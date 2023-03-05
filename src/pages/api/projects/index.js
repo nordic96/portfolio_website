@@ -22,7 +22,6 @@ export default async function handler(req, res) {
                 projects.push(doc);
             });
             res.status(200).json({ projects: projects });
-            client.close();
             resolve();
         } catch (error) {
             logger.error(error);
