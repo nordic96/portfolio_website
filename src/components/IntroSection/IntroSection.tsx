@@ -3,18 +3,19 @@ import { Grow } from '@mui/material';
 import LabelContainer from 'labelcontainer';
 
 import { Download } from '@mui/icons-material';
-import { Icons } from '../../constants/profileIcons';
+import { generateIcons } from '../../constants/profileIcons';
 import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
-import { RESUME_LINK, techStackLogoArrWhite } from '../../constants/constants';
+import { techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
+import StringUtils from '../../utils/StringUtils';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
     const { systemTheme } = useTheme();
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        window.open(RESUME_LINK, '_blank');
+        window.open(lsInstance.getLabel('url_resume'), '_blank');
     };
 
     let logoArr = techStackLogoArrWhite;
@@ -42,19 +43,21 @@ const IntroSection = () => {
                                 <span className={'dark:text-fuchsia-500'}>
                                     Gihun, Stephen
                                 </span>
-                                &#9995;
+                                &#128075;
                             </p>
                             <p
                                 className={
-                                    'lg:text-2xl md:text-xl max-sm:text-sm'
+                                    'lg:text-3xl md:text-xl max-sm:text-sm'
                                 }>
-                                {lsInstance.getLabel('title_desc')}
+                                {lsInstance.getLabel('title_desc') +
+                                    ' ' +
+                                    StringUtils.getFlagEmoji('SG')}
                             </p>
                             <p className={'lg:text-base max-sm:text-xs'}>
                                 {lsInstance.getLabel('intro_desc')}
                             </p>
                             <div className={'flex flex-row gap-2 pt-2'}>
-                                {Icons.map((x, i) => {
+                                {generateIcons().map((x, i) => {
                                     return <IDIcon {...x} key={i} />;
                                 })}
                             </div>

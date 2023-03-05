@@ -14,14 +14,13 @@ export async function getConfigData() {
         const labels = await configs.findOne({});
         if (!!labels) {
             data = JSON.parse(JSON.stringify(labels));
-            logger.info(`Config data found: ${labels}`);
+            logger.info(`Config data found: ${JSON.stringify(labels)}`);
         } else {
             logger.info('Config data not found or empty');
         }
     } catch (e) {
         logger.error(e);
     } finally {
-        client.close();
         return data;
     }
 }

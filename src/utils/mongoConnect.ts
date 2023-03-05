@@ -10,7 +10,8 @@ const connectMongo = async () => {
         return client;
     }
     logger.info('Mongo Connection Established..');
-    return new MongoClient(process.env.MONGO_URI!);
+    client = new MongoClient(process.env.MONGO_URI!);
+    return client;
 };
 
 export default connectMongo;

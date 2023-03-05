@@ -6,5 +6,13 @@ function shortenString(str: string, maxLen?: number): string {
     return `${str.substring(0, max)}...`;
 }
 
-const StringUtils = { shortenString };
+const getFlagEmoji = (countryCode: string) => {
+    const codePoints = countryCode
+        .toUpperCase()
+        .split('')
+        .map((char) => 127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
+};
+
+const StringUtils = { shortenString, getFlagEmoji };
 export default StringUtils;
