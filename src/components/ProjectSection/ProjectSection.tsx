@@ -30,25 +30,8 @@ const ProjectSection = () => {
                 .then((res) => res.json())
                 .then(
                     (json) => {
-                        if (isSortLatest) {
-                            setProjects(
-                                json.projects.sort(
-                                    (
-                                        p1: FullProjectDesc,
-                                        p2: FullProjectDesc
-                                    ) => p2.devyear - p1.devyear
-                                )
-                            );
-                        } else {
-                            setProjects(
-                                json.projects.sort(
-                                    (
-                                        p1: FullProjectDesc,
-                                        p2: FullProjectDesc
-                                    ) => p1.devyear - p2.devyear
-                                )
-                            );
-                        }
+                        const { projects } = json;
+                        setProjects(projects);
                         setIsProjectsLoaded(true);
                         setLoading(false);
                     },
@@ -58,7 +41,25 @@ const ProjectSection = () => {
                         setLoading(false);
                     }
                 );
-        }, 1000);
+        }, 500);
+    }, []);
+
+    useEffect(() => {
+        if (isSortLatest) {
+            setProjects(
+                projects.sort(
+                    (p1: FullProjectDesc, p2: FullProjectDesc) =>
+                        p1.devyear - p2.devyear
+                )
+            );
+            return;
+        }
+        setProjects(
+            projects.sort(
+                (p1: FullProjectDesc, p2: FullProjectDesc) =>
+                    p2.devyear - p1.devyear
+            )
+        );
     }, [isSortLatest]);
 
     return (
