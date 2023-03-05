@@ -3,10 +3,10 @@ import { Grow } from '@mui/material';
 import LabelContainer from 'labelcontainer';
 
 import { Download } from '@mui/icons-material';
-import { Icons } from '../../constants/profileIcons';
+import { generateIcons } from '../../constants/profileIcons';
 import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
-import { RESUME_LINK, techStackLogoArrWhite } from '../../constants/constants';
+import { techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
 
 const IntroSection = () => {
@@ -14,7 +14,7 @@ const IntroSection = () => {
     const { systemTheme } = useTheme();
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        window.open(RESUME_LINK, '_blank');
+        window.open(lsInstance.getLabel('url_resume'), '_blank');
     };
 
     let logoArr = techStackLogoArrWhite;
@@ -54,7 +54,7 @@ const IntroSection = () => {
                                 {lsInstance.getLabel('intro_desc')}
                             </p>
                             <div className={'flex flex-row gap-2 pt-2'}>
-                                {Icons.map((x, i) => {
+                                {generateIcons().map((x, i) => {
                                     return <IDIcon {...x} key={i} />;
                                 })}
                             </div>
