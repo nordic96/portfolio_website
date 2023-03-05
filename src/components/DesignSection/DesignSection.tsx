@@ -29,7 +29,7 @@ const DesignSection = () => {
                         setLoading(false);
                     }
                 );
-        }, 1000);
+        }, 500);
     }, []);
 
     return (

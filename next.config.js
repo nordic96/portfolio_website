@@ -1,6 +1,6 @@
 module.exports = () => {
     return {
-        reactStrictMode: true,
+        reactStrictMode: false,
         swcMinify: true,
         env: {
             VERSION: process.env.REACT_APP_VERSION,

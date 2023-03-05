@@ -28,6 +28,7 @@ const Home: NextPage<HomeProps> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const labelInstance = LabelContainer.getInstance();
     labelInstance.setLabels(data as Labels);
+
     return (
         <div
             className={
