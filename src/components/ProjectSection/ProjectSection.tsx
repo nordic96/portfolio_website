@@ -25,23 +25,21 @@ const ProjectSection = () => {
 
     useEffect(() => {
         setLoading(true);
-        setTimeout(() => {
-            fetch('/api/projects')
-                .then((res) => res.json())
-                .then(
-                    (json) => {
-                        const { projects } = json;
-                        setProjects(projects);
-                        setIsProjectsLoaded(true);
-                        setLoading(false);
-                    },
-                    (ex) => {
-                        console.log('Fetch failed, ', ex);
-                        setIsProjectsLoaded(false);
-                        setLoading(false);
-                    }
-                );
-        }, 500);
+        fetch('/api/projects')
+            .then((res) => res.json())
+            .then(
+                (json) => {
+                    const { projects } = json;
+                    setProjects(projects);
+                    setIsProjectsLoaded(true);
+                    setLoading(false);
+                },
+                (ex) => {
+                    console.log('Fetch failed, ', ex);
+                    setIsProjectsLoaded(false);
+                    setLoading(false);
+                }
+            );
     }, []);
 
     useEffect(() => {
@@ -67,7 +65,7 @@ const ProjectSection = () => {
             <div
                 id="projects-link"
                 className={'flex flex-column align-middle items-center'}>
-                <div className="flex flex-row align-middle lg:px-32 md:px-32 max-sm:px-4 gap-8">
+                <div className="flex flex-row align-middle lg:px-32 md:px-32 max-sm:px-4 gap-2">
                     <CertificateSection />
                     <Grow in timeout={2000}>
                         <div
@@ -91,7 +89,6 @@ const ProjectSection = () => {
                         </div>
                     </Grow>
                 </div>
-                <hr className="my-4" />
                 <div
                     className={
                         'flex flex-row gap-2 align-middle justify-center'
@@ -126,6 +123,7 @@ const ProjectSection = () => {
                     </div>
                 </div>
             </div>
+            <hr className="my-4" />
             <div className={'flex flex-wrap gap-2 justify-center pt-4 w-full'}>
                 {loading
                     ? withLoadingSkeleton(LoadingSkeleton)(5)

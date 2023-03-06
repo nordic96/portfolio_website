@@ -52,7 +52,7 @@ function NavBar() {
                         alt={'heroku-logo'}
                     /> */}
                     <a className="navbar-brand font-bold" href="/">
-                        {"Gi Hun's Portfolio"}
+                        {"StephenK's Portfolio"}
                     </a>
                     {renderThemeSwticher()}
                 </div>

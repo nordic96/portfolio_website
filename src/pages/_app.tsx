@@ -39,7 +39,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta
                     property="og:image"
-                    content="https://master.dmw61j7mp1m3g.amplifyapp.com/assets/thumbnail.png"
+                    content="https://www.stephenkportfolio.com/assets/thumbnail.png"
                 />
                 {/* Twitter Meta Data */}
                 <meta property="twitter:card" content="summary_large_image" />

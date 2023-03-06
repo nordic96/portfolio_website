@@ -14,22 +14,20 @@ const DesignSection = () => {
 
     useEffect(() => {
         setLoading(true);
-        setTimeout(() => {
-            fetch('/api/designs')
-                .then((res) => res.json())
-                .then(
-                    (json) => {
-                        setDesigns(json.designs);
-                        setIsDesignsLoaded(true);
-                        setLoading(false);
-                    },
-                    (ex) => {
-                        console.log('Fetch failed, ', ex);
-                        setIsDesignsLoaded(false);
-                        setLoading(false);
-                    }
-                );
-        }, 500);
+        fetch('/api/designs')
+            .then((res) => res.json())
+            .then(
+                (json) => {
+                    setDesigns(json.designs);
+                    setIsDesignsLoaded(true);
+                    setLoading(false);
+                },
+                (ex) => {
+                    console.log('Fetch failed, ', ex);
+                    setIsDesignsLoaded(false);
+                    setLoading(false);
+                }
+            );
     }, []);
 
     return (

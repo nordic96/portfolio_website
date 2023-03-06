@@ -30,13 +30,10 @@ const Home: NextPage<HomeProps> = ({
     labelInstance.setLabels(data as Labels);
 
     return (
-        <div
-            className={
-                'bg:white dark:bg-neutral-900 flex justify-center relative'
-            }>
+        <div className={'bg:white dark:bg-black flex justify-center relative'}>
             <div
                 className={
-                    'absolute w-full h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
+                    'absolute w-1/2 h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
                 }>
                 <ColourWave />
             </div>
