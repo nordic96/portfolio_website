@@ -8,7 +8,6 @@ import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
 import { techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
-import StringUtils from '../../utils/StringUtils';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
