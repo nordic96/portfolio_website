@@ -8,7 +8,6 @@ import IDCard from '../IDCard';
 import IDIcon from '../IDIcon/IDIcon';
 import { techStackLogoArrWhite } from '../../constants/constants';
 import { useTheme } from 'next-themes';
-import StringUtils from '../../utils/StringUtils';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
@@ -49,9 +48,13 @@ const IntroSection = () => {
                                 className={
                                     'lg:text-3xl md:text-xl max-sm:text-sm'
                                 }>
-                                {lsInstance.getLabel('title_desc') +
-                                    ' ' +
-                                    StringUtils.getFlagEmoji('SG')}
+                                {lsInstance.getLabel('title_desc')}
+                            </p>
+                            <p
+                                className={
+                                    'bg-yellow-400 lg:text-2xl md:text-lg max-sm:text-sm'
+                                }>
+                                {lsInstance.getLabel('title_desc2')}
                             </p>
                             <p className={'lg:text-base max-sm:text-xs'}>
                                 {lsInstance.getLabel('intro_desc')}
