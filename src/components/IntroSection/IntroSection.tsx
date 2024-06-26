@@ -55,7 +55,7 @@ const IntroSection = () => {
                                     'bg-yellow-400 lg:text-2xl md:text-lg max-sm:text-sm'
                                 }>
                                 {lsInstance.getLabel('title_desc2')}
-                            </p>                            
+                            </p>
                             <p className={'lg:text-base max-sm:text-xs'}>
                                 {lsInstance.getLabel('intro_desc')}
                             </p>
