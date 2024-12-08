@@ -1,6 +1,6 @@
 {
   "name": "portfolio_website",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -13,8 +13,8 @@
     "dotenv": "^16.0.2",
     "labelcontainer": "0.0.36",
     "mongodb": "^5.1.0",
-    "mongoose": "^6.6.1",
-    "next": "^13.2.1",
+    "mongoose": "^8.8.4",
+    "next": "^15.0.4",
     "next-themes": "^0.2.1",
     "path": "0.12.7",
     "postcss": "^8.4.16",
