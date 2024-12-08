@@ -5,7 +5,7 @@ import ConfigSchema from '../../../models/configs';
 import { Labels } from 'labelcontainer/build/types';
 
 export async function getConfigData() {
-    let data: Labels = {};
+    let data: Labels = { en: {} };
     const client = await connectMongo();
     try {
         const db = client.db(process.env.MONGO_DBNAME);
@@ -16,7 +16,7 @@ export async function getConfigData() {
             data = JSON.parse(JSON.stringify(labels));
             logger.info(`Config data found: ${JSON.stringify(labels)}`);
         } else {
-            logger.info('Config data not found or empty');
+            throw new Error('Config data not found or empty');
         }
     } catch (e) {
         logger.error(e);

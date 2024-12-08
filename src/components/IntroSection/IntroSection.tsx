@@ -22,11 +22,14 @@ const IntroSection = () => {
     return (
         <div className={'flex relative flex-column items-center'}>
             <div
+                id="intro-section-container"
                 className={
-                    'flex flex-1 flex-wrap lg:pt-10 md:pt-10 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
+                    'flex flex-1 flex-column flex-wrap lg:pt-10 md:pt-10 max-sm:pt-8 md:px-4 justify-between items-center lg:gap-24 md:gap-4 '
                 }>
+                <IDCard />
                 <Grow in timeout={1000}>
                     <div
+                        id="intro-desc-container"
                         className={
                             'flex flex-column justify-between items-start lg:h-64 md:h-48 w-1/2 gap-4'
                         }>
@@ -82,7 +85,6 @@ const IntroSection = () => {
                         </div>
                     </div>
                 </Grow>
-                <IDCard />
             </div>
             <div
                 className={

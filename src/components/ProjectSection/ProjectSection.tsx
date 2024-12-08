@@ -25,23 +25,23 @@ const ProjectSection = () => {
 
     useEffect(() => {
         setLoading(true);
-        setTimeout(() => {
-            fetch('/api/projects')
-                .then((res) => res.json())
-                .then(
-                    (json) => {
-                        const { projects } = json;
+        fetch('/api/projects')
+            .then((res) => res.json())
+            .then(
+                (json) => {
+                    const { projects } = json;
+                    if (projects) {
                         setProjects(projects);
-                        setIsProjectsLoaded(true);
-                        setLoading(false);
-                    },
-                    (ex) => {
-                        console.log('Fetch failed, ', ex);
-                        setIsProjectsLoaded(false);
-                        setLoading(false);
                     }
-                );
-        }, 500);
+                    setIsProjectsLoaded(true);
+                    setLoading(false);
+                },
+                (ex) => {
+                    console.log('Fetch failed, ', ex);
+                    setIsProjectsLoaded(false);
+                    setLoading(false);
+                }
+            );
     }, []);
 
     useEffect(() => {
