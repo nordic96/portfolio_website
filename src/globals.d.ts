@@ -1,6 +1,9 @@
 declare module '*.png';
 declare module '*.svg';
 
+export type ProjectApiResponse = Array<FullProjectDesc>;
+export type DesignApiResponse = Array<FullDesignDesc>;
+
 export interface FullProjectDesc {
     projecttype: string;
     name: string;

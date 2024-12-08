@@ -1,39 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import LabelContainer from 'labelcontainer';
 import DesignCard from '../DesignCard';
 import { FullDesignDesc } from '../../globals';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
+import { useAtom } from 'jotai';
+import {
+    asyncWriteDesignAtom,
+    readOnlyDesignAtomn,
+    readOnlyIsDesignLoadingAtom,
+} from '../../atoms/designAtom';
 
 const DesignSection = () => {
     const labelInstance = LabelContainer.getInstance();
-    const [designs, setDesigns] = useState<Array<FullDesignDesc>>([]);
-    const [isDesignsLoaded, setIsDesignsLoaded] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading] = useAtom(readOnlyIsDesignLoadingAtom);
+    const [, fetchDesigns] = useAtom(asyncWriteDesignAtom);
+    const [designs] = useAtom(readOnlyDesignAtomn);
 
     useEffect(() => {
-        setLoading(true);
-        fetch('/api/designs')
-            .then((res) => res.json())
-            .then(
-                (json) => {
-                    const { designs } = json;
-                    if (designs) {
-                        setDesigns(designs);
-                        setIsDesignsLoaded(true);
-                    } else {
-                        setIsDesignsLoaded(false);
-                    }
-                },
-                (ex) => {
-                    console.error('Fetch failed, ', ex);
-                    setIsDesignsLoaded(false);
-                }
-            )
-            .finally(() => {
-                setLoading(false);
-            });
+        fetchDesigns();
     }, []);
 
     return (
@@ -57,7 +43,7 @@ const DesignSection = () => {
                 }>
                 {loading
                     ? withLoadingSkeleton(LoadingSkeleton)(3)
-                    : isDesignsLoaded
+                    : designs
                     ? designs.map((design: FullDesignDesc, index: number) => {
                           return (
                               <DesignCard key={index} designProject={design} />

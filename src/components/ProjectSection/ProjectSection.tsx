@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import LabelContainer from 'labelcontainer';
-import { FullProjectDesc } from '../../globals';
+import { FullProjectDesc, ProjectApiResponse } from '../../globals';
 import ProjectCard from '../ProjectCard';
 import { Grow } from '@mui/material';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
@@ -10,7 +10,7 @@ import CertificateSection from '../CertificateSection/CertificateSection';
 
 const ProjectSection = () => {
     const labelInstance = LabelContainer.getInstance();
-    const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
+    const [projects, setProjects] = useState<ProjectApiResponse>([]);
     const [isSortLatest, setIsSortLatest] = useState<boolean>(true);
     const [isProjectsLoaded, setIsProjectsLoaded] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
