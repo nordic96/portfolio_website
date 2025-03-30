@@ -10,7 +10,6 @@ import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
 import { InferGetServerSidePropsType, NextPage } from 'next';
 import { getConfigData } from './api/configs';
-import ColourWave from '../components/ColourWave/ColourWave';
 
 interface HomeProps {
     data: Labels;
@@ -38,7 +37,6 @@ const Home: NextPage<HomeProps> = ({
                 className={
                     'absolute w-full h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
                 }>
-                <ColourWave />
             </div>
             <div className={'max-w-7xl flex justify-center flex-col'}>
                 <IntroSection />
