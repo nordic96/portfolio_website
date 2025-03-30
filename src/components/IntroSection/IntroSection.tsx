@@ -11,14 +11,14 @@ import IDIcon from '../IDIcon/IDIcon';
 
 const IntroSection = () => {
     return (
-        <div className={'flex relative flex-column items-start max-w-md'}>
+        <div className={'flex relative flex-column items-start max-w-xl'}>
             <IDCard />
             <div
                 className={
                     'flex flex-column justify-between items-start gap-4'
                 }>
                 <div className={'flex flex-column items-start text-left gap-2'}>
-                    <p className={'text-5xl font-bold'}>
+                    <p className={'text-4xl font-bold'}>
                         {'GIHUN KO \n STEPHEN'}
                     </p>
                     <div
@@ -29,7 +29,7 @@ const IntroSection = () => {
                             return <IDIcon {...x} key={i} />;
                         })}
                     </div>
-                    <p className={'text-4xl font-bold'}>
+                    <p className={'text-3xl font-bold'}>
                         {'SOFTWARE ENGINEER BASED IN SINGAPORE'}
                     </p>
                 </div>
