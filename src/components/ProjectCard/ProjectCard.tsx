@@ -2,55 +2,12 @@ import React from 'react';
 import { CardActionArea, CardContent, CardActions } from '@mui/material';
 import { ProjectCardProps } from './types';
 import StringUtils from '../../utils/StringUtils';
-import { LogoUrlMap } from './constants';
-
-function createTags(tags: string[]) {
-    //console.log(tags);
-    return (
-        <div className={'flex flex-wrap'}>
-            {tags.map((tag, index) => {
-                return (
-                    <p
-                        key={`tag-${index}`}
-                        className={
-                            'font-bold text-velvet dark:text-teal-500 rounded-md min-w-20 px-2 lg:text-sm md:text-xs'
-                        }>
-                        {tag}
-                    </p>
-                );
-            })}
-        </div>
-    );
-}
-
-function createLink(link?: string, iconName?: string) {
-    if (iconName === undefined) return null;
-    if (!!link) {
-        return (
-            <a href={link} target="_blank" rel="noreferrer">
-                <img
-                    className="link-icon"
-                    src={LogoUrlMap[iconName]}
-                    alt={iconName}
-                />
-            </a>
-        );
-    }
-    return null;
-}
+import { createLink, createTags } from './utils';
 
 const ProjectCard = (props: ProjectCardProps) => {
     const { projectDesc } = props;
-    const {
-        medialink,
-        name,
-        // projecttype,
-        devyear,
-        projectlink,
-        videolink,
-        tags,
-        desc,
-    } = projectDesc;
+    const { medialink, name, devyear, projectlink, videolink, tags, desc } =
+        projectDesc;
 
     const onClickCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -62,7 +19,7 @@ const ProjectCard = (props: ProjectCardProps) => {
     return (
         <div
             className={
-                'w-1/4 max-sm:w-full rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
+                'max-w-xl rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
             }>
             <CardActionArea onClick={onClickCard}>
                 <img
@@ -77,17 +34,19 @@ const ProjectCard = (props: ProjectCardProps) => {
                         }>
                         <p
                             className={
-                                'lg:text-xl md:text-lg font-bold'
+                                'lg:text-2xl md:text-xl font-bold'
                             }>{`${name} (${devyear})`}</p>
                         {createLink(projectlink, 'github')}
                         {createLink(videolink, 'youtube')}
                     </div>
+                    <div className={'flex flex-row gap-2'}>
+                        {createTags(tags)}
+                    </div>
                     <p className={'lg:text-base md:text-sm'}>
-                        {StringUtils.shortenString(desc)}
+                        {desc}
                     </p>
                 </CardContent>
             </CardActionArea>
-            <CardActions>{createTags(tags)}</CardActions>
         </div>
     );
 };
