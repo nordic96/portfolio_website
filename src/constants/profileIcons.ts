@@ -34,6 +34,6 @@ export const generateCertificateIcons = (): IDIconProps[] => {
             className: 'cert-icon',
             src: 'https://images.credly.com/size/340x340/images/1e6611ca-8afe-4ecc-ad4d-305fba52ee7e/1_LFCS-600x600.png',
             href: 'https://www.credly.com/badges/4176e5cc-c892-4af0-b4da-59c056bb5aa6',
-        }
+        },
     ];
 };

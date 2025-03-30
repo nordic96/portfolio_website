@@ -36,8 +36,7 @@ const Home: NextPage<HomeProps> = ({
             <div
                 className={
                     'absolute w-full h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
-                }>
-            </div>
+                }></div>
             <div className={'max-w-7xl flex justify-center flex-col'}>
                 <IntroSection />
                 <div className={'flex-column md:px-8 max-sm:px-8 pb-32'}>

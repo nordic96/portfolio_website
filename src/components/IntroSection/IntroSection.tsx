@@ -3,7 +3,6 @@ import React from 'react';
 import IDCard from '../IDCard';
 import ResumeButton from '../ResumeButton';
 
-import LabelContainer from 'labelcontainer';
 import {
     generateCertificateIcons,
     generateIcons,
@@ -11,8 +10,6 @@ import {
 import IDIcon from '../IDIcon/IDIcon';
 
 const IntroSection = () => {
-    const lsInstance = LabelContainer.getInstance();
-
     return (
         <div className={'flex relative flex-column items-start max-w-md'}>
             <IDCard />

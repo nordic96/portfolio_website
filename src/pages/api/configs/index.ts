@@ -11,7 +11,7 @@ export async function getConfigData(): Promise<Labels> {
         const configs = db.collection('configs');
 
         const cursor = configs.find();
-        let labels = await cursor.toArray();
+        const labels = await cursor.toArray();
         logger.info(labels);
         if (!!labels) {
             data = JSON.parse(JSON.stringify(labels[0]));
