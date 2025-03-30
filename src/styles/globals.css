@@ -87,6 +87,10 @@ code {
     background-color: #F8F8F8;
 }
 
+.skeleton-container {
+    min-width: 36rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
