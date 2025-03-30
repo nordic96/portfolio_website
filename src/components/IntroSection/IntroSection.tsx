@@ -1,55 +1,52 @@
 import React from 'react';
 
 import IDCard from '../IDCard';
-import { Grow } from '@mui/material';
 import ResumeButton from '../ResumeButton';
 
 import LabelContainer from 'labelcontainer';
+import {
+    generateCertificateIcons,
+    generateIcons,
+} from '../../constants/profileIcons';
+import IDIcon from '../IDIcon/IDIcon';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
 
     return (
-        <div className={'flex relative flex-column items-center'}>
+        <div className={'flex relative flex-column items-start max-w-md'}>
+            <IDCard />
             <div
                 className={
-                    'flex flex-1 flex-wrap lg:pt-10 md:pt-10 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
+                    'flex flex-column justify-between items-start gap-4'
                 }>
-                <Grow in timeout={1000}>
+                <div className={'flex flex-column items-start text-left gap-2'}>
+                    <p className={'text-5xl font-bold'}>
+                        {'GIHUN KO \n STEPHEN'}
+                    </p>
                     <div
                         className={
-                            'flex flex-column justify-between items-start lg:h-64 md:h-48 w-1/2 gap-4'
+                            'flex flex-row gap-2 pt-2 border-t-4 border-black w-100'
                         }>
-                        <div
-                            className={
-                                'flex flex-column items-start text-left'
-                            }>
-                            <p
-                                className={
-                                    'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
-                                }>
-                                {lsInstance.getLabel('title')}
-                            </p>
-                            <p
-                                className={
-                                    'lg:text-3xl md:text-xl max-sm:text-sm'
-                                }>
-                                {lsInstance.getLabel('title_desc')}
-                            </p>
-                            <p
-                                className={
-                                    'bg-yellow-400 lg:text-2xl md:text-lg max-sm:text-sm'
-                                }>
-                                {lsInstance.getLabel('title_desc2')}
-                            </p>
-                            <p className={'lg:text-base max-sm:text-xs'}>
-                                {lsInstance.getLabel('intro_desc')}
-                            </p>
-                        </div>
-                        <ResumeButton />
+                        {generateIcons().map((x, i) => {
+                            return <IDIcon {...x} key={i} />;
+                        })}
                     </div>
-                </Grow>
-                <IDCard />
+                    <p className={'text-4xl font-bold'}>
+                        {'SOFTWARE ENGINEER BASED IN SINGAPORE'}
+                    </p>
+                </div>
+                <div className="flex flex-row gap-2">
+                    {generateCertificateIcons().map((x, i) => {
+                        return <IDIcon {...x} key={i} />;
+                    })}
+                </div>
+                <p className={'text-2xl font-bold text-left'}>
+                    {
+                        'Curious Learner since 2018, Mastering my profession in Front-end & DevOps'
+                    }
+                </p>
+                <ResumeButton />
             </div>
         </div>
     );
