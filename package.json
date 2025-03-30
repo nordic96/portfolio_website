@@ -2,6 +2,9 @@
   "name": "portfolio_website",
   "version": "0.1.6",
   "private": true,
+  "engines" : { 
+    "node" : ">=16.0.0 <=20.18.1"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
