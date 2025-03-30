@@ -26,7 +26,7 @@ code {
 .App {
     text-align: center;
     font-family: itc-avant-garde-gothic-pro;
-    font-family: 'Overlock', cursive;
+    font-family: 'Noto Sans Display', cursive;
     width: 100%;
     height: 100%;
     position: relative;
@@ -59,7 +59,10 @@ code {
 }
 
 .link-icon {
-    height: 22.5px;
+    height: 27px;
+}
+.cert-icon {
+    height: 100px;
 }
 
 .contact-icon {
