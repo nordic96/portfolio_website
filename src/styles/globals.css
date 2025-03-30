@@ -59,7 +59,10 @@ code {
 }
 
 .link-icon {
-    height: 22.5px;
+    height: 27px;
+}
+.cert-icon {
+    height: 100px;
 }
 
 .contact-icon {
