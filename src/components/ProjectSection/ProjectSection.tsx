@@ -6,7 +6,6 @@ import ProjectCard from '../ProjectCard';
 import { Grow } from '@mui/material';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
-import CertificateSection from '../CertificateSection/CertificateSection';
 
 const ProjectSection = () => {
     const labelInstance = LabelContainer.getInstance();
@@ -68,7 +67,6 @@ const ProjectSection = () => {
                 id="projects-link"
                 className={'flex flex-column align-middle items-center'}>
                 <div className="flex flex-row align-middle lg:px-32 md:px-32 max-sm:px-4 gap-8">
-                    <CertificateSection />
                     <Grow in timeout={2000}>
                         <div
                             className={
