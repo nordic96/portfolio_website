@@ -5,7 +5,6 @@ import React from 'react';
 import IntroSection from '../components/IntroSection/IntroSection';
 
 import ProjectSection from '../components/ProjectSection';
-import DesignSection from '../components/DesignSection';
 import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
 import { InferGetServerSidePropsType, NextPage } from 'next';
@@ -31,18 +30,11 @@ const Home: NextPage<HomeProps> = ({
     return (
         <div
             className={
-                'bg:white dark:bg-neutral-900 flex justify-center relative'
+                'bg:white dark:bg-neutral-900 px-16 py-8 flex justify-center relative'
             }>
-            <div
-                className={
-                    'absolute w-full h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
-                }></div>
-            <div className={'max-w-7xl flex justify-center flex-col'}>
+            <div className={'max-w-6xl flex justify-center flex-row gap-4'}>
                 <IntroSection />
-                <div className={'flex-column md:px-8 max-sm:px-8 pb-32'}>
-                    <ProjectSection />
-                    <DesignSection />
-                </div>
+                <ProjectSection />
             </div>
         </div>
     );
