@@ -1,17 +1,21 @@
 import React from 'react';
-import { LogoUrlMap } from './constants';
+import { LogoUrlMap, TAG_COLOURS } from './constants';
+
+function utilGetRandomColor() {
+    const n = TAG_COLOURS.length;
+    const randomIndex = Math.floor(Math.random() * n);
+    return TAG_COLOURS[randomIndex];
+}
 
 function createTags(tags: string[]) {
-    //console.log(tags);
     return (
-        <div className={'flex flex-wrap'}>
+        <div className={'flex flex-wrap gap-1'}>
             {tags.map((tag, index) => {
+                let className = utilGetRandomColor();
                 return (
                     <p
                         key={`tag-${index}`}
-                        className={
-                            'font-bold text-velvet dark:text-teal-500 rounded-md min-w-20 px-2 text-md'
-                        }>
+                        className={className}>
                         {tag}
                     </p>
                 );

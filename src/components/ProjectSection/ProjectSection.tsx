@@ -32,7 +32,7 @@ const ProjectSection = () => {
     }, []);
 
     return (
-        <div className={'flex flex-column gap-4 justify-center max-w-xl'}>
+        <div className={'flex flex-column gap-5 justify-center max-w-xl'}>
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)
                 : isProjectsLoaded

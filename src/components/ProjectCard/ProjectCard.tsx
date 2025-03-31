@@ -1,7 +1,6 @@
 import React from 'react';
-import { CardActionArea, CardContent, CardActions } from '@mui/material';
+import { CardActionArea, CardContent } from '@mui/material';
 import { ProjectCardProps } from './types';
-import StringUtils from '../../utils/StringUtils';
 import { createLink, createTags } from './utils';
 
 const ProjectCard = (props: ProjectCardProps) => {
@@ -42,7 +41,7 @@ const ProjectCard = (props: ProjectCardProps) => {
                     <div className={'flex flex-row gap-2'}>
                         {createTags(tags)}
                     </div>
-                    <p className={'lg:text-base md:text-sm'}>
+                    <p className={'lg:text-lg md:text-base py-2 text-left'}>
                         {desc}
                     </p>
                 </CardContent>
