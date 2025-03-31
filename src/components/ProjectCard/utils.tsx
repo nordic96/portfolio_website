@@ -11,7 +11,7 @@ function createTags(tags: string[]) {
     return (
         <div className={'flex flex-wrap gap-1'}>
             {tags.map((tag, index) => {
-                let className = utilGetRandomColor();
+                const className = utilGetRandomColor();
                 return (
                     <p key={`tag-${index}`} className={className}>
                         {tag}
