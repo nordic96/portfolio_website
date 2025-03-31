@@ -13,9 +13,7 @@ function createTags(tags: string[]) {
             {tags.map((tag, index) => {
                 let className = utilGetRandomColor();
                 return (
-                    <p
-                        key={`tag-${index}`}
-                        className={className}>
+                    <p key={`tag-${index}`} className={className}>
                         {tag}
                     </p>
                 );
