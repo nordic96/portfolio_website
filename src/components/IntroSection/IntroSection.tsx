@@ -11,7 +11,7 @@ import IDIcon from '../IDIcon/IDIcon';
 
 const IntroSection = () => {
     return (
-        <div className={'flex relative flex-column items-start max-w-xl'}>
+        <div className={'flex flex-column items-start max-w-xl sticky top-[20px] h-fit'}>
             <IDCard />
             <div
                 className={
@@ -19,7 +19,7 @@ const IntroSection = () => {
                 }>
                 <div className={'flex flex-column items-start text-left gap-2'}>
                     <p className={'text-4xl font-bold'}>
-                        {'GIHUN KO \n STEPHEN'}
+                        {'GIHUN KO STEPHEN'}
                     </p>
                     <div
                         className={
