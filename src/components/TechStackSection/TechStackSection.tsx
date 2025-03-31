@@ -12,7 +12,14 @@ const TechStackSection = () => {
                     'flex flex-wrap gap-3 max-w-3xl items-center justify-center'
                 }>
                 {techstackLogoArr.map((props, key) => {
-                    return <img key={key} {...props} className={'h-[40px]'} />;
+                    return (
+                        <img
+                            key={key}
+                            {...props}
+                            className={'h-[40px]'}
+                            alt={`logos-${key}`}
+                        />
+                    );
                 })}
             </div>
             <a href="https://aws.amazon.com/what-is-cloud-computing">
