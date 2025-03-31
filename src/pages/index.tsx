@@ -1,10 +1,11 @@
 import React from 'react';
-// import './App.css';
 
 // Custom Components
 import IntroSection from '../components/IntroSection/IntroSection';
-
+import HistorySection from '../components/HistorySection';
+import TechStackSection from '../components/TechStackSection';
 import ProjectSection from '../components/ProjectSection';
+
 import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
 import { InferGetServerSidePropsType, NextPage } from 'next';
@@ -30,12 +31,16 @@ const Home: NextPage<HomeProps> = ({
     return (
         <div
             className={
-                'bg:white dark:bg-neutral-900 px-16 py-8 flex justify-center relative'
+                'bg:white dark:bg-neutral-900 px-16 py-8 flex justify-center relative flex-column items-center'
             }>
-            <div className={'max-w-6xl flex justify-center flex-row gap-4'}>
+            <div className={'flex justify-center flex-row gap-4'}>
                 <IntroSection />
                 <ProjectSection />
             </div>
+            <hr className="my-4 w-[72rem]" />
+            <HistorySection />
+            <hr className="my-4 w-[72rem]" />
+            <TechStackSection />
         </div>
     );
 };

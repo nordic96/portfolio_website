@@ -44,6 +44,11 @@ const IntroSection = () => {
                         'Curious Learner since 2018, Mastering my profession in Front-end & DevOps'
                     }
                 </p>
+                <p className={'text-xl text-left font-italic'}>
+                    {
+                        '"Hey there! nice to meet ya :) I am currently showcasing my projects that I have accomplished at University and during my free itme over this website,"'
+                    }
+                </p>
                 <ResumeButton />
             </div>
         </div>
