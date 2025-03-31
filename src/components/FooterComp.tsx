@@ -9,9 +9,9 @@ function FooterComp() {
     return (
         <div
             className={
-                'text-white px-24 max-sm:px-4 py-4 max-sm:py-2 bg-coolblack absolute bottom-0 w-full h-32'
+                'relative text-white py-4 bg-coolblack bottom-0 w-full h-32 flex justify-center'
             }>
-            <div className={'flex flex-row justify-between gap-4'}>
+            <div className={'flex flex-row justify-between gap-4 w-[72rem]'}>
                 <div className={'flex-1 text-left'}>
                     <p
                         className={

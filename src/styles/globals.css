@@ -8,7 +8,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    zoom: 0.8;
+    zoom: 0.7;
 }
 
 @layer base {
@@ -85,6 +85,10 @@ code {
     overflow: auto;
     color: #39495b;
     background-color: #F8F8F8;
+}
+
+.skeleton-container {
+    min-width: 36rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
