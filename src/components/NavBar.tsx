@@ -43,21 +43,16 @@ function NavBar() {
     };
 
     return (
-        <div className="header-top">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-coolblack justify-between">
-                <div className={'flex align-center items-center gap-2'}>
-                    {/* <img
-                        className={'h-5'}
-                        src={'assets/images/heroku-logo-solid-white.svg'}
-                        alt={'heroku-logo'}
-                    /> */}
-                    <a className="navbar-brand font-bold" href="/">
-                        {"Gi Hun's Portfolio"}
+        <div className="header-top bg-coolblack py-3 flex justify-center align-center items-center">
+            <div className="flex w-[72rem] justify-between">
+                <div className={'flex gap-2'}>
+                    <a className="text-2xl font-bold" href="/">
+                        {"STEPHEN KO'S PORTFOLIO"}
                     </a>
                     {renderThemeSwticher()}
                 </div>
                 <p>v{process.env.VERSION}</p>
-            </nav>
+            </div>
         </div>
     );
 }
