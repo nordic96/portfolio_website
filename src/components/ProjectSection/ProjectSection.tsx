@@ -45,7 +45,6 @@ const ProjectSection = () => {
                       return <ProjectCard key={index} projectDesc={project} />;
                   })
                 : "Project details fetch request failed :'( please refresh the page again!"}
-            <hr className="my-4" />
         </div>
     );
 };
