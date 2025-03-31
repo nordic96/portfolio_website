@@ -33,6 +33,11 @@ const ProjectSection = () => {
 
     return (
         <div className={'flex flex-column gap-5 justify-center max-w-xl'}>
+            <div>
+                <p className="text-2xl text-left font-bold">
+                    {'MY RECENT PROJECTS'}
+                </p>
+            </div>
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)
                 : isProjectsLoaded
