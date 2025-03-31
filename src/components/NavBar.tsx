@@ -47,7 +47,12 @@ function NavBar() {
             <div className="flex w-[72rem] justify-between">
                 <div className={'flex gap-2'}>
                     <a className="text-2xl font-bold" href="/">
-                        {"STEPHEN KO'S PORTFOLIO"}
+                        <span
+                            className={
+                                'text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-600'
+                            }>
+                            {"STEPHEN KO'S PORTFOLIO"}
+                        </span>
                     </a>
                     {renderThemeSwticher()}
                 </div>

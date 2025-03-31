@@ -20,8 +20,15 @@ const IntroSection = () => {
                 className={
                     'flex flex-column justify-between items-start gap-4'
                 }>
-                <div className={'flex flex-column items-start text-left gap-2'}>
-                    <p className={'text-4xl font-bold'}>{'GIHUN KO STEPHEN'}</p>
+                <div className={'flex flex-column items-start text-left gap-2 py-4'}>
+                    <p className={'text-5xl font-bold drop-shadow-md'}>
+                        <span
+                            className={
+                                'text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-600'
+                            }>
+                            {'GIHUN KO STEPHEN'}
+                        </span>
+                    </p>
                     <div
                         className={
                             'flex flex-row gap-2 pt-2 border-t-4 border-black w-100'
