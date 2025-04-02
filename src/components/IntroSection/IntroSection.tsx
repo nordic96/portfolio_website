@@ -8,6 +8,7 @@ import {
     generateIcons,
 } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
+import CertBadge from '../CertBadge';
 
 const IntroSection = () => {
     return (
@@ -41,9 +42,9 @@ const IntroSection = () => {
                         {'SOFTWARE ENGINEER BASED IN SINGAPORE'}
                     </p>
                 </div>
-                <div className="flex flex-row gap-2 hover:animate-bounce h-auto">
+                <div className="flex flex-row gap-2 h-auto">
                     {generateCertificateIcons().map((x, i) => {
-                        return <IDIcon {...x} key={i} />;
+                        return <CertBadge {...x} key={i} />;
                     })}
                 </div>
                 <p className={'text-2xl font-bold text-left'}>
