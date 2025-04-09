@@ -25,7 +25,7 @@ const IntroSection = () => {
                     <p className={'text-5xl font-bold drop-shadow-md'}>
                         <span
                             className={
-                                'text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-600'
+                                'text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-violet-600'
                             }>
                             {'GIHUN KO STEPHEN'}
                         </span>

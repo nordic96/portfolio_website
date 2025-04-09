@@ -49,9 +49,7 @@ function NavBar() {
                     <div className={'flex gap-2'}>
                         <a className="text-2xl font-bold" href="/">
                             <span
-                                className={
-                                    'text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-600'
-                                }>
+                                className={'text-white'}>
                                 {"STEPHEN KO'S PORTFOLIO"}
                             </span>
                         </a>
