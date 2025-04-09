@@ -1,11 +1,10 @@
 import React from 'react';
+import HeaderLabel from '../HeaderLabel';
 
 const HistorySection = () => {
     return (
-        <div className={'flex flex-column gap-2'}>
-            <p className={'text-2xl font-bold'}>
-                {'ON CONSTANT DEVELOPMENT SINCE 2021'}
-            </p>
+        <div className={'flex flex-column gap-2 items-center'}>
+            <HeaderLabel>{'ON CONSTANT DEVELOPMENT SINCE 2021'}</HeaderLabel>
             <p className="text-xl">
                 {
                     'It first started as my stand-out purpose while I was a graduate student, deseparately looking for job'
