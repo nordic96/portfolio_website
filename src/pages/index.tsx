@@ -35,7 +35,9 @@ const Home: NextPage<HomeProps> = ({
             }>
             <div className={'flex justify-center flex-row gap-4'}>
                 <IntroSection />
-                <ProjectSection />
+                <div>
+                    <ProjectSection />
+                </div>
             </div>
             <hr className="my-4 w-[72rem]" />
             <HistorySection />
