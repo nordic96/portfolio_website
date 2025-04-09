@@ -3,13 +3,13 @@ import { techstackLogoArr } from '../../constants/constants';
 
 const TechStackSection = () => {
     return (
-        <div className={'flex flex-column gap-5 items-center'}>
+        <div className={'flex flex-column gap-5 items-center overflow-x-hidden relative py-4'}>
             <p className={'text-2xl font-bold'}>
                 {'THIS WEBSITE WAS BUILT USING'}
             </p>
             <div
                 className={
-                    'flex flex-wrap gap-3 max-w-3xl items-center justify-center'
+                    'flex animate-marquee whitespace-nowrap gap-8 w-2xl items-center justify-center'
                 }>
                 {techstackLogoArr.map((props, key) => {
                     return (
@@ -22,12 +22,6 @@ const TechStackSection = () => {
                     );
                 })}
             </div>
-            <a href="https://aws.amazon.com/what-is-cloud-computing">
-                <img
-                    src="https://d0.awsstatic.com/logos/powered-by-aws.png"
-                    alt="Powered by AWS Cloud Computing"
-                />
-            </a>
         </div>
     );
 };
