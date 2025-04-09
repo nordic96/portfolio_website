@@ -13,7 +13,7 @@ const CertBadge = (props: CertBadgeProps) => {
     return (
         <div className={'flex flex-column radius-1 items-center gap-1 px-1 w-32'}>
             <p className={'flex rounded-full bg-sky-900 px-2 text-white'}>{desc}</p>
-            <a href={href}>
+            <a href={href} target={'_blank'}>
                 <span className={spanClassName}>
                     <img className={'w-32 hover:motion-safe:animate-bounce'} src={src} />
                 </span>
