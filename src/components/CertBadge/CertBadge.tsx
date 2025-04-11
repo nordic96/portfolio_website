@@ -15,7 +15,7 @@ const CertBadge = (props: CertBadgeProps) => {
             <p className={'flex rounded-full bg-sky-900 px-2 text-white'}>
                 {desc}
             </p>
-            <a href={href} target={'_blank'}>
+            <a href={href} target={'_blank'} rel="noreferrer">
                 <span className={spanClassName}>
                     <img
                         className={'w-32 hover:motion-safe:animate-bounce'}
