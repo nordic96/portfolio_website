@@ -4,7 +4,6 @@ import LabelContainer from 'labelcontainer';
 
 function NavBar() {
     const { systemTheme, theme } = useTheme();
-    const lsInstance = LabelContainer.getInstance();
     const [mounted, setMounted] = useState<boolean>(false);
 
     useEffect(() => {

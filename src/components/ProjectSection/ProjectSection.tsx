@@ -37,7 +37,9 @@ const ProjectSection = () => {
     return (
         <div className={'flex flex-column gap-5 justify-center max-w-xl'}>
             <div>
-                <HeaderLabel>{lsInstance.getLabel('heading_project')}</HeaderLabel>
+                <HeaderLabel>
+                    {lsInstance.getLabel('heading_project')}
+                </HeaderLabel>
             </div>
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)

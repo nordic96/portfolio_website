@@ -53,7 +53,9 @@ const IntroSection = () => {
                     })}
                 </div>
                 <hr className="my-4 w-[32rem]" />
-                <HeaderLabel>{lsInstance.getLabel('heading_achievements')}</HeaderLabel>
+                <HeaderLabel>
+                    {lsInstance.getLabel('heading_achievements')}
+                </HeaderLabel>
                 <div className="flex flex-row gap-2 h-auto">
                     {generateCertificateIcons().map((x, i) => {
                         return <CertBadge {...x} key={i} />;

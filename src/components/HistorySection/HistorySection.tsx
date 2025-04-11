@@ -7,7 +7,9 @@ const HistorySection = () => {
     return (
         <div className={'flex flex-column gap-4 items-center'}>
             <HeaderLabel>{lsInstance.getLabel('heading_history')}</HeaderLabel>
-            <p className="text-xl text-gray-500 max-w-5xl">{lsInstance.getLabel('history_desc')}</p>
+            <p className="text-xl text-gray-500 max-w-5xl">
+                {lsInstance.getLabel('history_desc')}
+            </p>
             <div>
                 <img
                     className={'max-w-[72rem]'}
