@@ -18,6 +18,7 @@ const CertBadge = (props: CertBadgeProps) => {
             <a href={href} target={'_blank'} rel="noreferrer">
                 <span className={spanClassName}>
                     <img
+                        alt={'cert-badge'}
                         className={'w-32 hover:motion-safe:animate-bounce'}
                         src={src}
                     />
