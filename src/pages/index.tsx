@@ -5,6 +5,7 @@ import IntroSection from '../components/IntroSection/IntroSection';
 import HistorySection from '../components/HistorySection';
 import TechStackSection from '../components/TechStackSection';
 import ProjectSection from '../components/ProjectSection';
+import SkillsContainer from '../components/SkillsContainer';
 
 import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
@@ -35,7 +36,8 @@ const Home: NextPage<HomeProps> = ({
             }>
             <div className={'flex justify-center flex-row gap-4'}>
                 <IntroSection />
-                <div>
+                <div className={'flex flex-column gap-4'}>
+                    <SkillsContainer />
                     <ProjectSection />
                 </div>
             </div>
