@@ -31,6 +31,11 @@ const SKILLSECTIONS: SkillSectionProps[] = [
             },
             {
                 className: 'animate-floating h-12',
+                src: 'https://nodejs.org/static/logos/jsIconGreen.svg',
+                alt: 'nodejslogo',
+            },
+            {
+                className: 'animate-floating h-12',
                 src: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
                 alt: 'reactlogo',
             },
