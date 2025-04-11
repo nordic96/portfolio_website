@@ -66,17 +66,17 @@ const SKILLSECTIONS: SkillSectionProps[] = [
             },
             {
                 className: 'animate-floating h-12',
-                src: 'assets/images/aws_lambda.svg',
+                src: 'assets/images/logos/aws_lambda.svg',
                 alt: 'awslambdalogo',
             },
             {
                 className: 'animate-floating h-12',
-                src: 'assets/images/aws_codebuild.svg',
+                src: 'assets/images/logos/aws_codebuild.svg',
                 alt: 'codebuildlogo',
             },
             {
                 className: 'animate-floating h-12',
-                src: 'assets/images/docker-mark-blue.svg',
+                src: 'assets/images/logos/docker-mark-blue.svg',
                 alt: 'dockerlogo',
             },
         ],
