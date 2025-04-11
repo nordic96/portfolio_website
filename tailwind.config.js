@@ -27,6 +27,7 @@ module.exports = {
                 '3/5': '60%',
             },
             colors: {
+                siablue: '#00266b',
                 hotpink: '#fa256d',
                 velvet: '#79096d',
                 coolred: '#4f46e5',

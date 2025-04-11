@@ -11,6 +11,7 @@ import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
 import { InferGetServerSidePropsType, NextPage } from 'next';
 import { getConfigData } from './api/configs';
+import Banner from '../components/Banner';
 
 interface HomeProps {
     data: Labels;
@@ -32,9 +33,10 @@ const Home: NextPage<HomeProps> = ({
     return (
         <div
             className={
-                'bg:white dark:bg-neutral-900 px-16 py-8 flex justify-center relative flex-column items-center'
+                'bg:white dark:bg-neutral-900 px-16 py-4 flex justify-center relative flex-column items-center'
             }>
-            <div className={'flex justify-center flex-row gap-4'}>
+            <Banner />
+            <div className={'flex justify-center flex-row gap-4 mt-8'}>
                 <IntroSection />
                 <div className={'flex flex-column gap-4'}>
                     <SkillsContainer />
