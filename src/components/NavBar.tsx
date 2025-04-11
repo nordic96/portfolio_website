@@ -48,8 +48,7 @@ function NavBar() {
                 <div className="flex w-[72rem] justify-between">
                     <div className={'flex gap-2'}>
                         <a className="text-2xl font-bold" href="/">
-                            <span
-                                className={'text-white'}>
+                            <span className={'text-white'}>
                                 {"STEPHEN KO'S PORTFOLIO"}
                             </span>
                         </a>
@@ -58,7 +57,11 @@ function NavBar() {
                     <p>v{process.env.VERSION}</p>
                 </div>
             </div>
-            <img src={'assets/images/mbs_background.PNG'} alt={'background'} className={'w-full h-[60px] object-cover'} />
+            <img
+                src={'assets/images/mbs_background.PNG'}
+                alt={'background'}
+                className={'w-full h-[60px] object-cover'}
+            />
         </div>
     );
 }

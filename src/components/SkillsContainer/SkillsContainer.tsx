@@ -15,7 +15,7 @@ const SkillSection = (props: SkillSectionProps) => {
             <HeaderLabel>{sectionTitle}</HeaderLabel>
             <div className={'flex flexwrap gap-2 align-center items-center'}>
                 {logos.map((logo, key) => {
-                    return <img key={key} {...logo} />;
+                    return <img key={key} alt={logo.alt} {...logo} />;
                 })}
             </div>
         </div>

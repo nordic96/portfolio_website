@@ -4,7 +4,10 @@ import HeaderLabel from '../HeaderLabel';
 
 const TechStackSection = () => {
     return (
-        <div className={'flex flex-column gap-5 items-center overflow-x-hidden relative py-4'}>
+        <div
+            className={
+                'flex flex-column gap-5 items-center overflow-x-hidden relative py-4'
+            }>
             <HeaderLabel>{'THIS WEBSITE WAS BUILT USING'}</HeaderLabel>
             <div
                 className={

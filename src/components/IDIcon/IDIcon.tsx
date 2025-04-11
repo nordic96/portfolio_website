@@ -11,7 +11,13 @@ const IDIcon = (props: IDIconProps) => {
     return (
         <span className={spanClassName}>
             <a href={href} target="_blank" rel="noreferrer">
-                <img className={'h-8 transition-all duration-200 ease-in-out hover:scale-150'} src={src} alt={src} />
+                <img
+                    className={
+                        'h-8 transition-all duration-200 ease-in-out hover:scale-150'
+                    }
+                    src={src}
+                    alt={src}
+                />
             </a>
         </span>
     );

@@ -40,10 +40,10 @@ const ProjectSection = () => {
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)
                 : isProjectsLoaded
-                    ? projects.map((project: FullProjectDesc, index: number) => {
-                        return <ProjectCard key={index} projectDesc={project} />;
-                    })
-                    : "Project details fetch request failed :'( please refresh the page again!"}
+                ? projects.map((project: FullProjectDesc, index: number) => {
+                      return <ProjectCard key={index} projectDesc={project} />;
+                  })
+                : "Project details fetch request failed :'( please refresh the page again!"}
         </div>
     );
 };
