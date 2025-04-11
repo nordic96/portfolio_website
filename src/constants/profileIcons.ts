@@ -10,12 +10,8 @@ export const generateIcons = (): IDIconProps[] => {
             href: lsInstance.getLabel('url_github'),
         },
         {
-            src: 'https://upload.wikimedia.org/wikipedia/commons/8/80/LinkedIn_Logo_2013.svg',
+            src: 'assets/images/logos/linkedin_logo.png',
             href: lsInstance.getLabel('url_linkedin'),
-        },
-        {
-            src: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg',
-            href: lsInstance.getLabel('url_npm'),
         },
         {
             src: 'https://leetcode.com/_next/static/images/logo-ff2b712834cf26bf50a5de58ee27bcef.png',
