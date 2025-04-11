@@ -4,6 +4,7 @@ import { FullProjectDesc } from '../../globals';
 import ProjectCard from '../ProjectCard';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
+import HeaderLabel from '../HeaderLabel/HeaderLabel';
 
 const ProjectSection = () => {
     const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
@@ -34,9 +35,7 @@ const ProjectSection = () => {
     return (
         <div className={'flex flex-column gap-5 justify-center max-w-xl'}>
             <div>
-                <p className="text-2xl text-left font-bold">
-                    {'MY RECENT PROJECTS'}
-                </p>
+                <HeaderLabel>{'My Recent Projects'}</HeaderLabel>
             </div>
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)

@@ -18,7 +18,7 @@ const ProjectCard = (props: ProjectCardProps) => {
     return (
         <div
             className={
-                'max-w-xl rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
+                'max-w-lg rounded lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
             }>
             <CardActionArea onClick={onClickCard}>
                 <img

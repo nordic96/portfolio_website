@@ -16,7 +16,10 @@ const ResumeButton = () => {
                 'rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
             }
             onClick={onClick}>
-            <p className={'text-white uppercase font-bold max-sm:text-sm'}>
+            <p
+                className={
+                    'text-white uppercase font-semibold text-lg max-sm:text-sm'
+                }>
                 View Resume
                 <Download />
             </p>

@@ -43,16 +43,25 @@ function NavBar() {
     };
 
     return (
-        <div className="header-top bg-coolblack py-3 flex justify-center align-center items-center">
-            <div className="flex w-[72rem] justify-between">
-                <div className={'flex gap-2'}>
-                    <a className="text-2xl font-bold" href="/">
-                        {"STEPHEN KO'S PORTFOLIO"}
-                    </a>
-                    {renderThemeSwticher()}
+        <div className={'flex flex-column'}>
+            <div className="bg-coolblack text-white py-3 flex justify-center align-center items-center">
+                <div className="flex w-[72rem] justify-between">
+                    <div className={'flex gap-2'}>
+                        <a className="text-2xl font-bold" href="/">
+                            <span className={'text-white'}>
+                                {"STEPHEN KO'S PORTFOLIO"}
+                            </span>
+                        </a>
+                        {renderThemeSwticher()}
+                    </div>
+                    <p>v{process.env.VERSION}</p>
                 </div>
-                <p>v{process.env.VERSION}</p>
             </div>
+            <img
+                src={'assets/images/mbs_background.PNG'}
+                alt={'background'}
+                className={'w-full h-[60px] object-cover'}
+            />
         </div>
     );
 }

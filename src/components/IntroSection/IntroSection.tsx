@@ -8,6 +8,8 @@ import {
     generateIcons,
 } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
+import CertBadge from '../CertBadge';
+import HeaderLabel from '../HeaderLabel';
 
 const IntroSection = () => {
     return (
@@ -20,24 +22,21 @@ const IntroSection = () => {
                 className={
                     'flex flex-column justify-between items-start gap-4'
                 }>
-                <div className={'flex flex-column items-start text-left gap-2'}>
-                    <p className={'text-4xl font-bold'}>{'GIHUN KO STEPHEN'}</p>
-                    <div
-                        className={
-                            'flex flex-row gap-2 pt-2 border-t-4 border-black w-100'
-                        }>
-                        {generateIcons().map((x, i) => {
-                            return <IDIcon {...x} key={i} />;
-                        })}
-                    </div>
+                <div
+                    className={
+                        'flex flex-column items-start text-left gap-2 py-4'
+                    }>
+                    <p className={'text-5xl font-bold drop-shadow-md'}>
+                        <span
+                            className={
+                                'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
+                            }>
+                            {'GIHUN KO STEPHEN'}
+                        </span>
+                    </p>
                     <p className={'text-3xl font-bold'}>
                         {'SOFTWARE ENGINEER BASED IN SINGAPORE'}
                     </p>
-                </div>
-                <div className="flex flex-row gap-2">
-                    {generateCertificateIcons().map((x, i) => {
-                        return <IDIcon {...x} key={i} />;
-                    })}
                 </div>
                 <p className={'text-2xl font-bold text-left'}>
                     {
@@ -49,7 +48,19 @@ const IntroSection = () => {
                         '"Hey there! nice to meet ya :) I am currently showcasing my projects that I have accomplished at University and during my free itme over this website,"'
                     }
                 </p>
-                <ResumeButton />
+                <div className={'flex flex-row gap-2 pt-2 w-100 items-center'}>
+                    <ResumeButton />
+                    {generateIcons().map((x, i) => {
+                        return <IDIcon {...x} key={i} />;
+                    })}
+                </div>
+                <hr className="my-4 w-[32rem]" />
+                <HeaderLabel>{'My Achievements'}</HeaderLabel>
+                <div className="flex flex-row gap-2 h-auto">
+                    {generateCertificateIcons().map((x, i) => {
+                        return <CertBadge {...x} key={i} />;
+                    })}
+                </div>
             </div>
         </div>
     );
