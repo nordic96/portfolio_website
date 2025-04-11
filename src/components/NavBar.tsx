@@ -44,7 +44,7 @@ function NavBar() {
 
     return (
         <div className={'flex flex-column'}>
-            <div className="header-top bg-coolblack py-3 flex justify-center align-center items-center">
+            <div className="bg-coolblack text-white py-3 flex justify-center align-center items-center">
                 <div className="flex w-[72rem] justify-between">
                     <div className={'flex gap-2'}>
                         <a className="text-2xl font-bold" href="/">
