@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import LabelContainer from 'labelcontainer';
 
 function NavBar() {
     const { systemTheme, theme } = useTheme();
