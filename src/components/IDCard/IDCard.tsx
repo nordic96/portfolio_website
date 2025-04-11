@@ -20,4 +20,4 @@ const IDCard = () => {
     );
 };
 
-export default React.memo(IDCard);
+export default IDCard;

@@ -10,8 +10,10 @@ import {
 import IDIcon from '../IDIcon/IDIcon';
 import CertBadge from '../CertBadge';
 import HeaderLabel from '../HeaderLabel';
+import LabelContainer from 'labelcontainer';
 
 const IntroSection = () => {
+    const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
@@ -31,22 +33,18 @@ const IntroSection = () => {
                             className={
                                 'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
                             }>
-                            {'GIHUN KO STEPHEN'}
+                            {lsInstance.getLabel('title')}
                         </span>
                     </p>
-                    <p className={'text-3xl font-bold'}>
-                        {'SOFTWARE ENGINEER BASED IN SINGAPORE'}
+                    <p className={'text-3xl font-bold uppercase'}>
+                        {lsInstance.getLabel('title_desc')}
                     </p>
                 </div>
                 <p className={'text-2xl font-bold text-left'}>
-                    {
-                        'Curious Learner since 2018, Mastering my profession in Front-end & DevOps'
-                    }
+                    {lsInstance.getLabel('intro_msg')}
                 </p>
                 <p className={'text-xl text-left font-italic'}>
-                    {
-                        '"Hey there! nice to meet ya :) I am currently showcasing my projects that I have accomplished at University and during my free itme over this website,"'
-                    }
+                    {lsInstance.getLabel('intro_msg2')}
                 </p>
                 <div className={'flex flex-row gap-2 pt-2 w-100 items-center'}>
                     <ResumeButton />
@@ -55,7 +53,9 @@ const IntroSection = () => {
                     })}
                 </div>
                 <hr className="my-4 w-[32rem]" />
-                <HeaderLabel>{'My Achievements'}</HeaderLabel>
+                <HeaderLabel>
+                    {lsInstance.getLabel('heading_achievements')}
+                </HeaderLabel>
                 <div className="flex flex-row gap-2 h-auto">
                     {generateCertificateIcons().map((x, i) => {
                         return <CertBadge {...x} key={i} />;

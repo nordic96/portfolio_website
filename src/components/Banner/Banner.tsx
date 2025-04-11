@@ -1,6 +1,8 @@
 import React from 'react';
+import LabelContainer from 'labelcontainer';
 
 const Banner = () => {
+    const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
@@ -16,9 +18,7 @@ const Banner = () => {
                 alt={'info_icon'}
                 className={'h-6'}
             />
-            {
-                'Currently under National Service until 1st September, 2025. Will be back in a moment!!'
-            }
+            {lsInstance.getLabel('banner_msg')}
         </div>
     );
 };

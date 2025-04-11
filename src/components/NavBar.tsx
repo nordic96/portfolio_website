@@ -49,7 +49,7 @@ function NavBar() {
                     <div className={'flex gap-2'}>
                         <a className="text-2xl font-bold" href="/">
                             <span className={'text-white'}>
-                                {"STEPHEN KO'S PORTFOLIO"}
+                                {"STEPHEN KO's PORTFOLIO"}
                             </span>
                         </a>
                         {renderThemeSwticher()}
@@ -65,4 +65,4 @@ function NavBar() {
         </div>
     );
 }
-export default React.memo(NavBar);
+export default NavBar;

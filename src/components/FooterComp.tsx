@@ -27,4 +27,4 @@ function FooterComp() {
         </div>
     );
 }
-export default React.memo(FooterComp);
+export default FooterComp;
