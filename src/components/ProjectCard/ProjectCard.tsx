@@ -50,4 +50,4 @@ const ProjectCard = (props: ProjectCardProps) => {
     );
 };
 
-export default React.memo(ProjectCard);
+export default ProjectCard;

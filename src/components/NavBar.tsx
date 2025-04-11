@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
+import LabelContainer from 'labelcontainer';
 
 function NavBar() {
     const { systemTheme, theme } = useTheme();
+    const lsInstance = LabelContainer.getInstance();
     const [mounted, setMounted] = useState<boolean>(false);
 
     useEffect(() => {
@@ -49,7 +51,7 @@ function NavBar() {
                     <div className={'flex gap-2'}>
                         <a className="text-2xl font-bold" href="/">
                             <span className={'text-white'}>
-                                {"STEPHEN KO'S PORTFOLIO"}
+                                {"STEPHEN KO's PORTFOLIO"}
                             </span>
                         </a>
                         {renderThemeSwticher()}
@@ -65,4 +67,4 @@ function NavBar() {
         </div>
     );
 }
-export default React.memo(NavBar);
+export default NavBar;

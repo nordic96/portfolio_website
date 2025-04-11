@@ -1,15 +1,13 @@
 import React from 'react';
 import HeaderLabel from '../HeaderLabel';
+import LabelContainer from 'labelcontainer';
 
 const HistorySection = () => {
+    const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'flex flex-column gap-2 items-center'}>
-            <HeaderLabel>{'ON CONSTANT DEVELOPMENT SINCE 2021'}</HeaderLabel>
-            <p className="text-xl">
-                {
-                    'It first started as my stand-out purpose while I was a graduate student, deseparately looking for job'
-                }
-            </p>
+        <div className={'flex flex-column gap-4 items-center'}>
+            <HeaderLabel>{lsInstance.getLabel('heading_history')}</HeaderLabel>
+            <p className="text-xl text-gray-500 max-w-5xl">{lsInstance.getLabel('history_desc')}</p>
             <div>
                 <img
                     className={'max-w-[72rem]'}
@@ -21,4 +19,4 @@ const HistorySection = () => {
     );
 };
 
-export default React.memo(HistorySection);
+export default HistorySection;

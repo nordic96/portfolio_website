@@ -5,11 +5,13 @@ import ProjectCard from '../ProjectCard';
 import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
 import HeaderLabel from '../HeaderLabel/HeaderLabel';
+import LabelContainer from 'labelcontainer';
 
 const ProjectSection = () => {
     const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
     const [isProjectsLoaded, setIsProjectsLoaded] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const lsInstance = LabelContainer.getInstance();
 
     useEffect(() => {
         setLoading(true);
@@ -35,7 +37,7 @@ const ProjectSection = () => {
     return (
         <div className={'flex flex-column gap-5 justify-center max-w-xl'}>
             <div>
-                <HeaderLabel>{'My Recent Projects'}</HeaderLabel>
+                <HeaderLabel>{lsInstance.getLabel('heading_project')}</HeaderLabel>
             </div>
             {loading
                 ? withLoadingSkeleton(LoadingSkeleton)(5)

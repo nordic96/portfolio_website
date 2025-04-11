@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderLabel from '../HeaderLabel';
 import { ImgProps } from '../../types';
-import { SKILLSECTIONS } from './constants';
+import { generateSkillSections } from './constants';
 
 export interface SkillSectionProps {
     sectionTitle: string;
@@ -25,11 +25,11 @@ const SkillSection = (props: SkillSectionProps) => {
 const SkillsContainer = () => {
     return (
         <div className={'flex flex-column gap-4 items-end'}>
-            {SKILLSECTIONS.map((props, key) => {
+            {generateSkillSections().map((props, key) => {
                 return <SkillSection {...props} key={key} />;
             })}
         </div>
     );
 };
 
-export default React.memo(SkillsContainer);
+export default SkillsContainer;
