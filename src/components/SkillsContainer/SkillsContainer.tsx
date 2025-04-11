@@ -11,7 +11,7 @@ export interface SkillSectionProps {
 const SkillSection = (props: SkillSectionProps) => {
     const { sectionTitle, logos } = props;
     return (
-        <div>
+        <div className={'flex gap-4 flex-column'}>
             <HeaderLabel>{sectionTitle}</HeaderLabel>
             <div className={'flex flexwrap gap-2 align-center items-center justify-end'}>
                 {logos.map((logo, key) => {
