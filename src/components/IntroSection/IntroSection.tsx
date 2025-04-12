@@ -18,7 +18,7 @@ const IntroSection = () => {
     return (
         <div
             className={
-                'flex flex-column lg:items-start max-w-xl lg:sticky h-fit'
+                'flex flex-column lg:items-start max-w-xl lg:sticky lg:top-[20px] h-fit'
             }>
             <div
                 className={
