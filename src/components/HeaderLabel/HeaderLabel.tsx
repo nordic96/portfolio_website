@@ -6,7 +6,7 @@ interface HeaderLabelProps {
 
 const HeaderLabel = (props: PropsWithChildren<HeaderLabelProps>) => {
     return (
-        <p className="text-2xl text-left font-bold uppercase">
+        <p className="lg:text-2xl max-sm:text-xl text-left font-bold uppercase">
             {props.children}
         </p>
     );

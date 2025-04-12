@@ -18,7 +18,7 @@ const ResumeButton = () => {
             onClick={onClick}>
             <p
                 className={
-                    'text-white uppercase font-semibold text-xl max-sm:text-sm'
+                    'text-white uppercase font-semibold text-xl max-sm:text-base'
                 }>
                 {lsInstance.getLabel('btn_resume')}
                 <Download />

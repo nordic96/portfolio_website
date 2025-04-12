@@ -37,9 +37,12 @@ const ProjectSection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-5 justify-center max-w-xl items-end'
+                'flex flex-column gap-5 justify-center max-w-xl lg:items-end max-sm:items-center'
             }>
-            <div>
+            <div
+                className={
+                    'flex lg:text-end max-sm:w-full max-sm:items-start lg:items-center'
+                }>
                 <HeaderLabel>
                     {lsInstance.getLabel('heading_project')}
                 </HeaderLabel>

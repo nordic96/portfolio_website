@@ -8,14 +8,14 @@ const TechStackSection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-5 items-center overflow-x-hidden relative py-4'
+                'flex flex-column gap-5 lg:items-center max-sm:text-start overflow-x-hidden relative py-4'
             }>
             <HeaderLabel>
                 {lsInstance.getLabel('heading_techstack')}
             </HeaderLabel>
             <div
                 className={
-                    'flex animate-marquee whitespace-nowrap gap-8 w-2xl items-center justify-center'
+                    'flex animate-marquee whitespace-nowrap gap-8 lg:w-2xl max-sm:w-full items-center justify-center'
                 }>
                 {techstackLogoArr.map((props, key) => {
                     return (
