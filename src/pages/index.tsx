@@ -1,16 +1,18 @@
 import React from 'react';
-// import './App.css';
 
 // Custom Components
 import IntroSection from '../components/IntroSection/IntroSection';
-
+import HistorySection from '../components/HistorySection';
+import TechStackSection from '../components/TechStackSection';
 import ProjectSection from '../components/ProjectSection';
-import DesignSection from '../components/DesignSection';
+import SkillsContainer from '../components/SkillsContainer';
+
 import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
 import { InferGetServerSidePropsType, NextPage } from 'next';
 import { getConfigData } from './api/configs';
-import ColourWave from '../components/ColourWave/ColourWave';
+import Banner from '../components/Banner';
+import Divider from '../components/Divider';
 
 interface HomeProps {
     data: Labels;
@@ -32,21 +34,23 @@ const Home: NextPage<HomeProps> = ({
     return (
         <div
             className={
-                'bg:white dark:bg-neutral-900 flex justify-center relative'
+                'bg:white dark:bg-neutral-900 lg:px-16 max-sm:px-4 py-4 flex justify-center relative flex-column items-center'
             }>
+            <Banner />
             <div
                 className={
-                    'absolute w-full h-56 top-80 lg:top-80 flex md:top-64 md:h-52 max-sm:top-40 max-sm:h-52'
+                    'flex justify-center lg:flex-row md:flex-row max-sm:flex-col gap-4 max-sm:w-full pt-4'
                 }>
-                <ColourWave />
-            </div>
-            <div className={'max-w-7xl flex justify-center flex-col'}>
                 <IntroSection />
-                <div className={'flex-column md:px-8 max-sm:px-8 pb-32'}>
+                <div className={'flex flex-col gap-4'}>
+                    <SkillsContainer />
                     <ProjectSection />
-                    <DesignSection />
                 </div>
             </div>
+            <Divider />
+            <HistorySection />
+            <Divider />
+            <TechStackSection />
         </div>
     );
 };

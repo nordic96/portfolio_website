@@ -1,13 +1,15 @@
 {
   "name": "portfolio_website",
-  "version": "0.1.6",
+  "version": "1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0 <=20.18.1"
+  },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.11.11",
-    "@mui/styles": "^5.11.11",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
     "autoprefixer": "^10.4.12",
     "call-bind": "1.0.2",
     "css-select": "4.2.1",
@@ -23,9 +25,7 @@
     "react-bootstrap": "1.4.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "3.1.0",
-    "react-reveal": "1.2.2",
     "react-scroll": "^1.8.1",
-    "react-wavify": "1.4.0",
     "tailwindcss": "^3.1.8",
     "web-vitals": "^0.2.4",
     "winston": "^3.8.2"

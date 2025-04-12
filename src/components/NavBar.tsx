@@ -43,22 +43,26 @@ function NavBar() {
     };
 
     return (
-        <div className="header-top">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-coolblack justify-between">
-                <div className={'flex align-center items-center gap-2'}>
-                    {/* <img
-                        className={'h-5'}
-                        src={'assets/images/heroku-logo-solid-white.svg'}
-                        alt={'heroku-logo'}
-                    /> */}
-                    <a className="navbar-brand font-bold" href="/">
-                        {"Gi Hun's Portfolio"}
-                    </a>
-                    {renderThemeSwticher()}
+        <div className={'flex flex-column'}>
+            <div className="bg-coolblack text-white py-3 max-sm:px-4 flex justify-center align-center items-center">
+                <div className="flex lg:w-[70.5rem] max-sm:w-full justify-between items-center">
+                    <div className={'flex gap-2'}>
+                        <a className="text-2xl font-bold" href="/">
+                            <span className={'text-white'}>
+                                {"STEPHEN KO's PORTFOLIO"}
+                            </span>
+                        </a>
+                        {renderThemeSwticher()}
+                    </div>
+                    <p>v{process.env.VERSION}</p>
                 </div>
-                <p>v{process.env.VERSION}</p>
-            </nav>
+            </div>
+            <img
+                src={'assets/images/mbs_background.PNG'}
+                alt={'background'}
+                className={'w-full h-[60px] object-cover'}
+            />
         </div>
     );
 }
-export default React.memo(NavBar);
+export default NavBar;

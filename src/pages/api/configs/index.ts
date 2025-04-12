@@ -1,20 +1,21 @@
-import connectMongo from '../../../utils/mongoConnect';
 import logger from '../../../logger/logger';
-import { NextApiRequest, NextApiResponse } from 'next';
-import ConfigSchema from '../../../models/configs';
+import connectMongo from '../../../utils/mongoConnect';
 import { Labels } from 'labelcontainer/build/types';
+import { MongoClient } from 'mongodb';
 
-export async function getConfigData() {
+export async function getConfigData(): Promise<Labels> {
     let data: Labels = {};
-    const client = await connectMongo();
+    const client: MongoClient = await connectMongo();
     try {
         const db = client.db(process.env.MONGO_DBNAME);
         const configs = db.collection('configs');
 
-        const labels = await configs.findOne({});
+        const cursor = configs.find();
+        const labels = await cursor.toArray();
+        logger.info(labels);
         if (!!labels) {
-            data = JSON.parse(JSON.stringify(labels));
-            logger.info(`Config data found: ${JSON.stringify(labels)}`);
+            data = JSON.parse(JSON.stringify(labels[0]));
+            logger.info(`Config data found: ${JSON.stringify(labels[0])}`);
         } else {
             logger.info('Config data not found or empty');
         }
@@ -22,28 +23,5 @@ export async function getConfigData() {
         logger.error(e);
     } finally {
         return data;
-    }
-}
-
-/**
- * @param {import('next').NextApiRequest} req
- * @param {import('next').NextApiResponse} res
- */
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-    try {
-        connectMongo();
-        const config = await ConfigSchema.findOne({});
-        if (!!config) {
-            logger.info(config);
-            res.status(200).json({ configs: config });
-        } else {
-            res.status(204).json({ msg: 'config data empty / not found' });
-        }
-    } catch (error) {
-        logger.error(error);
-        res.status(500).json({ error });
     }
 }

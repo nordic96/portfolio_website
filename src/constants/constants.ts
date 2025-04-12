@@ -29,6 +29,10 @@ export const techstackLogoArr: React.DetailedHTMLProps<
         src: 'assets/images/MongoDB_Forest-Green.svg',
         alt: 'mongodb',
     },
+    {
+        src: 'https://d0.awsstatic.com/logos/powered-by-aws.png',
+        alt: 'aws',
+    },
 ];
 
 export const techStackLogoArrWhite: React.DetailedHTMLProps<
@@ -47,7 +51,6 @@ export const techStackLogoArrWhite: React.DetailedHTMLProps<
     {
         src: 'https://nodejs.org/static/images/logo.svg',
         alt: 'nodejs',
-        className: 'lg:h-7 md:h-5 max-sm:h-2',
     },
     {
         src: 'assets/images/next-js.svg',

@@ -3,7 +3,7 @@ module.exports = () => {
         reactStrictMode: false,
         swcMinify: true,
         env: {
-            VERSION: process.env.REACT_APP_VERSION,
+            VERSION: process.env.APP_VERSION,
         },
         output: 'standalone',
     };
