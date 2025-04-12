@@ -11,7 +11,10 @@ export interface CertBadgeProps {
 const CertBadge = (props: CertBadgeProps) => {
     const { src, href, spanClassName, title, desc } = props;
     return (
-        <div className={'flex flex-column radius-1 items-center gap-1 w-32'}>
+        <div
+            className={
+                'flex flex-column radius-1 items-center gap-1 w-32 max-sm:w-24'
+            }>
             <p className={'flex rounded-full bg-sky-900 px-2 text-white'}>
                 {desc}
             </p>
@@ -19,7 +22,7 @@ const CertBadge = (props: CertBadgeProps) => {
                 <span className={spanClassName}>
                     <img
                         alt={'cert-badge'}
-                        className={'w-32 hover:motion-safe:animate-bounce'}
+                        className={'w-full hover:motion-safe:animate-bounce'}
                         src={src}
                     />
                 </span>

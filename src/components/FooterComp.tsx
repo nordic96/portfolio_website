@@ -11,7 +11,10 @@ function FooterComp() {
             className={
                 'relative text-white py-4 bg-coolblack bottom-0 w-full h-32 flex justify-center'
             }>
-            <div className={'flex flex-row justify-between gap-4 w-[72rem]'}>
+            <div
+                className={
+                    'flex flex-row justify-between gap-4 lg:w-[72rem] max-sm:px-4'
+                }>
                 <div className={'flex-1 text-left'}>
                     <p
                         className={

@@ -11,48 +11,66 @@ import IDIcon from '../IDIcon/IDIcon';
 import CertBadge from '../CertBadge';
 import HeaderLabel from '../HeaderLabel';
 import LabelContainer from 'labelcontainer';
+import Divider from '../Divider';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
-                'flex flex-column items-start max-w-xl sticky top-[20px] h-fit'
+                'flex flex-column lg:items-start max-w-xl lg:sticky h-fit'
             }>
-            <IDCard />
             <div
                 className={
                     'flex flex-column justify-between items-start gap-4'
                 }>
                 <div
                     className={
-                        'flex flex-column items-start text-left gap-2 py-4'
+                        'flex flex-col max-sm:flex-row max-sm:w-full max-sm:justify-between'
                     }>
-                    <p className={'text-5xl font-bold drop-shadow-md'}>
-                        <span
+                    <IDCard />
+                    <div
+                        className={
+                            'flex flex-column items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[16rem]'
+                        }>
+                        <p
                             className={
-                                'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
+                                'lg:text-5xl max-sm:text-4xl font-bold drop-shadow-md'
                             }>
-                            {lsInstance.getLabel('title')}
-                        </span>
-                    </p>
-                    <p className={'text-3xl font-bold uppercase'}>
-                        {lsInstance.getLabel('title_desc')}
-                    </p>
+                            <span
+                                className={
+                                    'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
+                                }>
+                                {lsInstance.getLabel('title')}
+                            </span>
+                        </p>
+                        <p className={'text-3xl font-bold uppercase'}>
+                            {lsInstance.getLabel('title_desc')}
+                        </p>
+                    </div>
                 </div>
-                <p className={'text-2xl font-bold text-left'}>
+                <p
+                    className={
+                        'text-2xl max-sm:text-xl font-bold lg:text-left max-sm:text-right'
+                    }>
                     {lsInstance.getLabel('intro_msg')}
                 </p>
-                <p className={'text-xl text-left font-italic'}>
+                <p
+                    className={
+                        'text-xl max-sm:text-base lg:text-left max-sm:text-right font-italic'
+                    }>
                     {lsInstance.getLabel('intro_msg2')}
                 </p>
-                <div className={'flex flex-row gap-2 pt-2 w-100 items-center'}>
+                <div
+                    className={
+                        'flex flex-row gap-2 pt-2 w-100 items-center max-sm:justify-end'
+                    }>
                     <ResumeButton />
                     {generateIcons().map((x, i) => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
-                <hr className="my-4 w-[32rem]" />
+                <Divider className={'my-4 lg:w-[36rem] max-sm:w-full'} />
                 <HeaderLabel>
                     {lsInstance.getLabel('heading_achievements')}
                 </HeaderLabel>
