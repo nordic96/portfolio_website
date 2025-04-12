@@ -6,7 +6,10 @@ frontend:
         - npm install
     build:
       commands:
-        - env | grep -e MONGO_ >> .env.production
+        - echo "injecting environment var MONGO_DBNAME..."
+        - echo "MONGO_DBNAME=$MONGO_DBNAME" >> .env.production
+        - echo "injecting env var MONGO_URI..."
+        - echo "MONGO_URI=$MONGO_URI" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
