@@ -13,7 +13,7 @@ function FooterComp() {
             }>
             <div
                 className={
-                    'flex flex-row justify-between gap-4 lg:w-[72rem] max-sm:px-4'
+                    'flex flex-row justify-between gap-4 lg:w-[70.5rem] max-sm:px-4'
                 }>
                 <div className={'flex-1 text-left'}>
                     <p

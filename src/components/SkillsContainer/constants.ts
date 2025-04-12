@@ -17,6 +17,11 @@ const generateSkillSections = (): SkillSectionProps[] => {
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png',
                     alt: 'jslogo',
                 },
+                {
+                    className: 'animate-floating h-20',
+                    src: 'assets/images/logos/java_logo.svg',
+                    alt: 'javalogo',
+                },
             ],
         },
         {
