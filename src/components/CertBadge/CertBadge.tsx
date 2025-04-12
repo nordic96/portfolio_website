@@ -22,7 +22,7 @@ const CertBadge = (props: CertBadgeProps) => {
                 <span className={spanClassName}>
                     <img
                         alt={'cert-badge'}
-                        className={'w-full hover:motion-safe:animate-bounce'}
+                        className={'w-full motion-safe:hover:animate-bounce'}
                         src={src}
                     />
                 </span>
