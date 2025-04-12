@@ -14,10 +14,14 @@ export default function Document() {
                     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
                     crossOrigin="anonymous"
                 />
-
-                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Overlock&display=swap"
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
                     rel="stylesheet"
                 />
                 <script

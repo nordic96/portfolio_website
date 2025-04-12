@@ -29,17 +29,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 {/** OpenGraph Meta Data */}
                 <meta property="og:title" content="StephenKo's Portfolio" />
                 <meta property="og:type" content="website" />
-                <meta
-                    property="og:url"
-                    content="https://www.stephenkportfolio.com/"
-                />
+                <meta property="og:url" content="https://www.stephenghk.com/" />
                 <meta
                     property="og:description"
                     content="StephenKo's personal portfolio website to showcase software engineering & AI related projects"
                 />
                 <meta
                     property="og:image"
-                    content="https://master.dmw61j7mp1m3g.amplifyapp.com/assets/thumbnail.png"
+                    content="https://stephenghk.com/assets/thumbnail.png"
                 />
                 {/* Twitter Meta Data */}
                 <meta property="twitter:card" content="summary_large_image" />
@@ -54,7 +51,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta
                     property="twitter:image"
-                    content="https://master.dmw61j7mp1m3g.amplifyapp.com/assets/thumbnail.png"
+                    content="https://stephenghk.com/assets/thumbnail.png"
                 />
             </Head>
             <CssBaseline />

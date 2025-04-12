@@ -1,15 +1,15 @@
 {
   "name": "portfolio_website",
-  "version": "0.1.6",
+  "version": "1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0 <=20.18.1"
+  },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "autoprefixer": "^10.4.12",
     "call-bind": "1.0.2",
-    "css-select": "4.2.1",
     "dotenv": "^16.0.2",
     "labelcontainer": "0.0.36",
     "mongodb": "^5.1.0",
@@ -19,11 +19,9 @@
     "path": "0.12.7",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
-    "react-bootstrap": "1.4.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "3.1.0",
     "react-scroll": "^1.8.1",
-    "react-wavify": "^1.11.0",
     "tailwindcss": "^3.1.8",
     "web-vitals": "^0.2.4",
     "winston": "^3.8.2"
@@ -37,8 +35,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/node": "^18.11.4",
-    "@types/react-router-dom": "^5.1.7",
-    "@types/react-scroll": "^1.8.2",
     "@typescript-eslint/eslint-plugin": "5.12.0",
     "@typescript-eslint/parser": "5.12.0",
     "babel-loader": "^8.2.5",

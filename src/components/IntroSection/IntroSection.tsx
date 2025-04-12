@@ -1,123 +1,82 @@
 import React from 'react';
-import { Grow } from '@mui/material';
-import LabelContainer from 'labelcontainer';
 
-import { Download } from '@mui/icons-material';
-import { generateIcons } from '../../constants/profileIcons';
 import IDCard from '../IDCard';
+import ResumeButton from '../ResumeButton';
+
+import {
+    generateCertificateIcons,
+    generateIcons,
+} from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
-import { techStackLogoArrWhite } from '../../constants/constants';
-import { useTheme } from 'next-themes';
+import CertBadge from '../CertBadge';
+import HeaderLabel from '../HeaderLabel';
+import LabelContainer from 'labelcontainer';
+import Divider from '../Divider';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
-    const { systemTheme } = useTheme();
-    const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        window.open(lsInstance.getLabel('url_resume'), '_blank');
-    };
-
-    let logoArr = techStackLogoArrWhite;
-    if (systemTheme === 'dark') logoArr = techStackLogoArrWhite;
     return (
-        <div className={'flex relative flex-column items-center'}>
+        <div
+            className={
+                'flex flex-column lg:items-start max-w-xl lg:sticky lg:top-[20px] h-fit'
+            }>
             <div
                 className={
-                    'flex flex-1 flex-wrap lg:pt-10 md:pt-10 max-sm:pt-8 md:px-4 justify-center items-center lg:gap-24 md:gap-4 '
+                    'flex flex-column justify-between items-start gap-4'
                 }>
-                <Grow in timeout={1000}>
+                <div
+                    className={
+                        'flex flex-col max-sm:flex-row max-sm:w-full max-sm:justify-between'
+                    }>
+                    <IDCard />
                     <div
                         className={
-                            'flex flex-column justify-between items-start lg:h-64 md:h-48 w-1/2 gap-4'
+                            'flex flex-column items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[16rem]'
                         }>
-                        <div
+                        <p
                             className={
-                                'flex flex-column items-start text-left'
+                                'lg:text-5xl max-sm:text-4xl font-bold drop-shadow-md'
                             }>
-                            <p
+                            <span
                                 className={
-                                    'lg:text-4xl md:text-2xl max-sm:text-base font-bold'
+                                    'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
                                 }>
-                                {lsInstance.getLabel('title')}&nbsp;
-                                <span className={'dark:text-fuchsia-500'}>
-                                    Gihun, Stephen
-                                </span>
-                                &#128075;
-                            </p>
-                            <p
-                                className={
-                                    'lg:text-3xl md:text-xl max-sm:text-sm'
-                                }>
-                                {lsInstance.getLabel('title_desc')}
-                            </p>
-                            <p
-                                className={
-                                    'bg-yellow-400 lg:text-2xl md:text-lg max-sm:text-sm'
-                                }>
-                                {lsInstance.getLabel('title_desc2')}
-                            </p>
-                            <p className={'lg:text-base max-sm:text-xs'}>
-                                {lsInstance.getLabel('intro_desc')}
-                            </p>
-                            <div className={'flex flex-row gap-2 pt-2'}>
-                                {generateIcons().map((x, i) => {
-                                    return <IDIcon {...x} key={i} />;
-                                })}
-                            </div>
-                        </div>
-                        <div>
-                            <button
-                                className={
-                                    'rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
-                                }
-                                onClick={onClick}>
-                                <p
-                                    className={
-                                        'text-white uppercase font-bold max-sm:text-sm'
-                                    }>
-                                    View Resume
-                                    <Download />
-                                </p>
-                            </button>
-                        </div>
+                                {lsInstance.getLabel('title')}
+                            </span>
+                        </p>
+                        <p className={'text-3xl font-bold uppercase'}>
+                            {lsInstance.getLabel('title_desc')}
+                        </p>
                     </div>
-                </Grow>
-                <IDCard />
-            </div>
-            <div
-                className={
-                    'px-8 md:top-4 max-sm:top-8 flex relative items-center flex-column max-sm:gap-1'
-                }>
-                <a href="https://aws.amazon.com/what-is-cloud-computing">
-                    <img
-                        src={`https://d0.awsstatic.com/logos/powered-by-aws${
-                            systemTheme === 'dark' ? '-white' : ''
-                        }.png`}
-                        alt="Powered by AWS Cloud Computing"
-                        className={'lg:h-14 md:h-9 max-sm:h-8'}
-                    />
-                </a>
+                </div>
                 <p
                     className={
-                        'text-lg md:text-base max-sm:text-sm font-semibold'
+                        'text-2xl max-sm:text-xl font-bold lg:text-left max-sm:text-right'
                     }>
-                    -This website was built using-
+                    {lsInstance.getLabel('intro_msg')}
+                </p>
+                <p
+                    className={
+                        'text-xl max-sm:text-base lg:text-left max-sm:text-right font-italic'
+                    }>
+                    {lsInstance.getLabel('intro_msg2')}
                 </p>
                 <div
                     className={
-                        'flex items-center gap-3 overflow-x-auto h-24 max-sm:h-12 lg:pb-4 md:pb-1'
+                        'flex flex-row gap-2 pt-2 w-100 items-center max-sm:justify-end'
                     }>
-                    {logoArr.map((x, i) => {
-                        const { alt, src, ...other } = x;
-                        return (
-                            <img
-                                key={i}
-                                alt={alt}
-                                src={src}
-                                className={'lg:h-10 md:h-8 max-sm:h-6'}
-                                {...other}
-                            />
-                        );
+                    <ResumeButton />
+                    {generateIcons().map((x, i) => {
+                        return <IDIcon {...x} key={i} />;
+                    })}
+                </div>
+                <Divider className={'my-4 lg:w-[36rem] max-sm:w-full'} />
+                <HeaderLabel>
+                    {lsInstance.getLabel('heading_achievements')}
+                </HeaderLabel>
+                <div className="flex flex-row gap-2 h-auto">
+                    {generateCertificateIcons().map((x, i) => {
+                        return <CertBadge {...x} key={i} />;
                     })}
                 </div>
             </div>
