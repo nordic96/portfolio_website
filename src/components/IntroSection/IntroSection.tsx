@@ -39,7 +39,7 @@ const IntroSection = () => {
                             }>
                             <span
                                 className={
-                                    'text-transparent bg-clip-text bg-gradient-to-r from-siablue to-cyan-600'
+                                    'text-transparent bg-clip-text bg-linear-to-r from-siablue to-cyan-600'
                                 }>
                                 {lsInstance.getLabel('title')}
                             </span>
