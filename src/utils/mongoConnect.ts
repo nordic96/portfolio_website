@@ -5,12 +5,12 @@ import logger from '../logger/logger';
 let client: MongoClient;
 
 const connectMongo = async () => {
-    logger.info('Connecting to MongoDB..');
+    logger.info('[mongoConnect] Connecting to MongoDB..');
     if (client) {
         return client;
     }
     client = new MongoClient(process.env.MONGO_URI!);
-    logger.info('Mongo Connection Established..');
+    logger.info(`[${process.env.MONGO_DBNAME}] Mongo Connection Established..`);
     return client;
 };
 

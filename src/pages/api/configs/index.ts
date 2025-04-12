@@ -6,6 +6,7 @@ import { MongoClient } from 'mongodb';
 export async function getConfigData(): Promise<Labels> {
     let data: Labels = {};
     const client: MongoClient = await connectMongo();
+    logger.info(`[configData] fetching configs...`);
     try {
         const db = client.db(process.env.MONGO_DBNAME);
         const configs = db.collection('configs');
