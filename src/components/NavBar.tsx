@@ -47,7 +47,9 @@ function NavBar() {
             <div className="bg-coolblack text-white py-3 max-sm:px-4 flex justify-center align-center items-center">
                 <div className="flex lg:w-[70.5rem] max-sm:w-full justify-between items-center">
                     <div className={'flex gap-2'}>
-                        <a className="text-2xl font-bold" href="/">
+                        <a
+                            className="text-2xl max-sm:text-lg font-bold"
+                            href="/">
                             <span className={'text-white'}>
                                 {"STEPHEN KO's PORTFOLIO"}
                             </span>

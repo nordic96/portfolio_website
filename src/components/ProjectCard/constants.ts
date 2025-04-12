@@ -4,8 +4,8 @@ export const LogoUrlMap: Record<string, string> = {
 };
 
 export const TAG_COLOURS = [
-    'bg-siablue text-md text-white rounded-md min-w-20 px-2',
-    'bg-[#7a2f7a] text-md text-white rounded-md min-w-20 px-2',
-    'bg-[#c54573] text-md text-white rounded-md min-w-20 px-2',
-    'bg-[#f57661] text-md text-white rounded-md min-w-20 px-2',
+    'bg-siablue text-md max-sm:text-sm text-white rounded-md min-w-20 px-2',
+    'bg-[#7a2f7a] text-md max-sm:text-sm text-white rounded-md min-w-20 px-2',
+    'bg-[#c54573] text-md max-sm:text-sm text-white rounded-md min-w-20 px-2',
+    'bg-[#f57661] text-md max-sm:text-sm text-white rounded-md min-w-20 px-2',
 ];

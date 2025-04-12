@@ -6,7 +6,7 @@ const Banner = () => {
     return (
         <div
             className={
-                'items-center relative gap-2 rounded-md flex lg:min-w-[70.5rem] max-sm:w-full py-2 px-2 justify-start bg-siablue text-white text-lg max-sm:text-base text-start'
+                'items-center relative gap-2 rounded-md flex lg:min-w-[70.5rem] max-sm:w-full py-2 px-2 justify-start bg-siablue text-white text-lg max-sm:text-sm text-start'
             }>
             <img
                 className={
