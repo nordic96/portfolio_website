@@ -11,13 +11,14 @@ import IDIcon from '../IDIcon/IDIcon';
 import CertBadge from '../CertBadge';
 import HeaderLabel from '../HeaderLabel';
 import LabelContainer from 'labelcontainer';
+import Divider from '../Divider';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
-                'flex flex-column lg:items-start max-w-xl lg:sticky top-[20px] h-fit'
+                'flex flex-column lg:items-start max-w-xl lg:sticky h-fit'
             }>
             <div
                 className={
@@ -25,7 +26,7 @@ const IntroSection = () => {
                 }>
                 <div
                     className={
-                        'flex mt-4 flex-col max-sm:flex-row max-sm:w-full max-sm:justify-between'
+                        'flex flex-col max-sm:flex-row max-sm:w-full max-sm:justify-between'
                     }>
                     <IDCard />
                     <div
@@ -69,7 +70,7 @@ const IntroSection = () => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
-                <hr className="my-4 w-[32rem]" />
+                <Divider className={'my-4 lg:w-[36rem] max-sm:w-full'} />
                 <HeaderLabel>
                     {lsInstance.getLabel('heading_achievements')}
                 </HeaderLabel>
