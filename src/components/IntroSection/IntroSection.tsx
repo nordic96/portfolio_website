@@ -31,7 +31,7 @@ const IntroSection = () => {
                     <IDCard />
                     <div
                         className={
-                            'flex flex-column items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[16rem]'
+                            'flex flex-column items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[12.5rem] max-sm:justify-between'
                         }>
                         <p
                             className={
@@ -44,20 +44,23 @@ const IntroSection = () => {
                                 {lsInstance.getLabel('title')}
                             </span>
                         </p>
-                        <p className={'text-3xl font-bold uppercase'}>
+                        <p
+                            className={
+                                'text-3xl max-sm:text-2xl font-bold uppercase'
+                            }>
                             {lsInstance.getLabel('title_desc')}
                         </p>
                     </div>
                 </div>
                 <p
                     className={
-                        'text-2xl max-sm:text-xl font-bold lg:text-left max-sm:text-right'
+                        'text-2xl max-sm:text-lg font-bold lg:text-left max-sm:text-right'
                     }>
                     {lsInstance.getLabel('intro_msg')}
                 </p>
                 <p
                     className={
-                        'text-xl max-sm:text-base lg:text-left max-sm:text-right font-italic'
+                        'text-xl max-sm:text-sm lg:text-left max-sm:text-right font-italic'
                     }>
                     {lsInstance.getLabel('intro_msg2')}
                 </p>

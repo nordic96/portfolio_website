@@ -41,7 +41,10 @@ const ProjectCard = (props: ProjectCardProps) => {
                     <div className={'flex flex-row gap-2'}>
                         {createTags(tags)}
                     </div>
-                    <p className={'lg:text-lg md:text-base py-2 text-left'}>
+                    <p
+                        className={
+                            'lg:text-lg md:text-base max-sm:text-sm py-2 text-left'
+                        }>
                         {desc}
                     </p>
                 </CardContent>

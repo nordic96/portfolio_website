@@ -13,7 +13,7 @@ const CertBadge = (props: CertBadgeProps) => {
     return (
         <div
             className={
-                'flex flex-column radius-1 items-center gap-1 w-32 max-sm:w-24'
+                'flex flex-column radius-1 items-center gap-1 w-32 max-sm:w-20'
             }>
             <p className={'flex rounded-full bg-sky-900 px-2 text-white'}>
                 {desc}
@@ -26,7 +26,10 @@ const CertBadge = (props: CertBadgeProps) => {
                         src={src}
                     />
                 </span>
-                <p className={'text-sky-900 font-semibold text-base'}>
+                <p
+                    className={
+                        'text-sky-900 font-semibold text-base max-sm:text-sm'
+                    }>
                     {title}
                 </p>
             </a>
