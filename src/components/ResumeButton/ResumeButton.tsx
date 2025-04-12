@@ -13,7 +13,7 @@ const ResumeButton = () => {
     return (
         <button
             className={
-                'rounded px-4 py-2 bg-gradient-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
+                'rounded-sm px-4 py-2 bg-linear-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
             }
             onClick={onClick}>
             <p
