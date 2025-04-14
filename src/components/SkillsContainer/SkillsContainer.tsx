@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderLabel from '../HeaderLabel';
 import { ImgProps } from '../../types';
 import { generateSkillSections } from './constants';
+import { useTheme } from 'next-themes';
 
 export interface SkillSectionProps {
     sectionTitle: string;
@@ -26,12 +27,15 @@ const SkillSection = (props: SkillSectionProps) => {
 };
 
 const SkillsContainer = () => {
+    const { systemTheme, theme } = useTheme();
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    const isDark = currentTheme === 'dark';
     return (
         <div
             className={
                 'flex flex-column gap-4 lg:items-end max-sm:items-start'
             }>
-            {generateSkillSections().map((props, key) => {
+            {generateSkillSections(isDark).map((props, key) => {
                 return <SkillSection {...props} key={key} />;
             })}
         </div>

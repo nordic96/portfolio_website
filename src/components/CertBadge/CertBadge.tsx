@@ -28,7 +28,7 @@ const CertBadge = (props: CertBadgeProps) => {
                 </span>
                 <p
                     className={
-                        'text-sky-900 font-semibold text-base max-sm:text-sm'
+                        'text-sky-900 dark:text-white font-semibold text-base max-sm:text-sm'
                     }>
                     {title}
                 </p>
