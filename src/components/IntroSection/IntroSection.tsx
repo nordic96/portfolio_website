@@ -12,8 +12,13 @@ import CertBadge from '../CertBadge';
 import HeaderLabel from '../HeaderLabel';
 import LabelContainer from 'labelcontainer';
 import Divider from '../Divider';
+import { useTheme } from 'next-themes';
 
 const IntroSection = () => {
+    const { systemTheme, theme } = useTheme();
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    const isDark = currentTheme === 'dark';
+
     const lsInstance = LabelContainer.getInstance();
     return (
         <div
@@ -39,7 +44,7 @@ const IntroSection = () => {
                             }>
                             <span
                                 className={
-                                    'text-transparent bg-clip-text bg-linear-to-r from-siablue to-cyan-600'
+                                    'text-transparent bg-clip-text bg-linear-to-r from-siablue to-cyan-600 dark:from-indigo-600'
                                 }>
                                 {lsInstance.getLabel('title')}
                             </span>
@@ -69,7 +74,7 @@ const IntroSection = () => {
                         'flex flex-row gap-2 pt-2 w-100 items-center max-sm:justify-end'
                     }>
                     <ResumeButton />
-                    {generateIcons().map((x, i) => {
+                    {generateIcons(isDark).map((x, i) => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
