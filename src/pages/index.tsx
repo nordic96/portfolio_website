@@ -34,7 +34,7 @@ const Home: NextPage<HomeProps> = ({
     return (
         <div
             className={
-                'bg:white dark:bg-neutral-900 lg:px-16 max-sm:px-4 py-4 flex justify-center relative flex-column items-center'
+                'bg:white dark:bg-neutral-900 dark:text-white lg:px-16 max-sm:px-4 py-4 flex justify-center relative flex-column items-center'
             }>
             <Banner />
             <div
@@ -44,6 +44,7 @@ const Home: NextPage<HomeProps> = ({
                 <IntroSection />
                 <div className={'flex flex-col gap-4'}>
                     <SkillsContainer />
+                    <Divider className={'my-4 lg:w-[30.5rem] max-sm:w-full'} />
                     <ProjectSection />
                 </div>
             </div>

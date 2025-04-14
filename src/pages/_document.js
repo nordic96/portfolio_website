@@ -8,6 +8,10 @@ export default function Document() {
                 <link rel="apple-touch-icon" href="logo192.png" />
                 <link rel="manifest" href="manifest.json" />
                 <link rel="icon" href="favicon.ico" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=0.85"
+                />
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"

@@ -1,24 +1,24 @@
 import LabelContainer from 'labelcontainer';
 import { SkillSectionProps } from './SkillsContainer';
 
-const generateSkillSections = (): SkillSectionProps[] => {
+const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
     const lsInstance = LabelContainer.getInstance();
     return [
         {
             sectionTitle: lsInstance.getLabel('section_title_lang'),
             logos: [
                 {
-                    className: 'animate-floating h-10 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Typescript.svg/1280px-Typescript.svg.png',
                     alt: 'tslogo',
                 },
                 {
-                    className: 'animate-floating h-10 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png',
                     alt: 'jslogo',
                 },
                 {
-                    className: 'animate-floating h-20 max-sm:h-12',
+                    className: 'animate-floating h-20 max-sm:h-14',
                     src: 'assets/images/logos/java_logo.svg',
                     alt: 'javalogo',
                 },
@@ -33,22 +33,22 @@ const generateSkillSections = (): SkillSectionProps[] => {
                     alt: 'nextjslogo',
                 },
                 {
-                    className: 'animate-floating h-12 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Spring_Boot.svg/512px-Spring_Boot.svg.png',
                     alt: 'springbootlogo',
                 },
                 {
-                    className: 'animate-floating h-12 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://nodejs.org/static/logos/jsIconGreen.svg',
                     alt: 'nodejslogo',
                 },
                 {
-                    className: 'animate-floating h-12 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
                     alt: 'reactlogo',
                 },
                 {
-                    className: 'animate-floating h-12 max-sm:h-8',
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/512px-Sass_Logo_Color.svg.png',
                     alt: 'sasslogo',
                 },
@@ -78,6 +78,13 @@ const generateSkillSections = (): SkillSectionProps[] => {
                     alt: 'bitbucketlogo',
                 },
                 {
+                    className: 'animate-floating h-14 max-sm:h-10',
+                    src: isDark
+                        ? 'assets/images/logos/logo-light_Jira_logo_inverse_RGB.svg'
+                        : 'assets/images/logos/logo-light_Jira_logo_brand_RGB.svg',
+                    alt: 'jiralogo',
+                },
+                {
                     className: 'animate-floating h-12 max-sm:h-10',
                     src: 'assets/images/logos/aws_lambda.svg',
                     alt: 'awslambdalogo',
@@ -98,8 +105,10 @@ const generateSkillSections = (): SkillSectionProps[] => {
             sectionTitle: lsInstance.getLabel('section_title_monitor'),
             logos: [
                 {
-                    className: 'animate-floating h-16 max-sm:h-12',
-                    src: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Splunk-Logo.jpg',
+                    className: 'animate-floating h-14 max-sm:h-10',
+                    src: isDark
+                        ? 'assets/images/logos/logo-splunk-acc-rgb-w.png'
+                        : 'assets/images/logos/logo-splunk-acc-rgb-k.png',
                     alt: 'splunklogo',
                 },
             ],
