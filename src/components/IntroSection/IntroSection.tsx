@@ -3,16 +3,11 @@ import React from 'react';
 import IDCard from '../IDCard';
 import ResumeButton from '../ResumeButton';
 
-import {
-    generateCertificateIcons,
-    generateIcons,
-} from '../../constants/profileIcons';
+import { generateIcons } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
-import CertBadge from '../CertBadge';
-import HeaderLabel from '../HeaderLabel';
 import LabelContainer from 'labelcontainer';
-import Divider from '../Divider';
 import { useTheme } from 'next-themes';
+import CertificateSection from '../CertificateSection';
 
 const IntroSection = () => {
     const { systemTheme, theme } = useTheme();
@@ -65,7 +60,7 @@ const IntroSection = () => {
                 </p>
                 <p
                     className={
-                        'text-xl max-sm:text-sm lg:text-left max-sm:text-right font-italic'
+                        'text-xl max-sm:text-sm lg:text-left max-sm:text-right font-italic lg:w-[30.2rem]'
                     }>
                     {lsInstance.getLabel('intro_msg2')}
                 </p>
@@ -78,15 +73,7 @@ const IntroSection = () => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
-                <Divider className={'my-4 lg:w-[36rem] max-sm:w-full'} />
-                <HeaderLabel>
-                    {lsInstance.getLabel('heading_achievements')}
-                </HeaderLabel>
-                <div className="flex flex-row gap-2 h-auto">
-                    {generateCertificateIcons().map((x, i) => {
-                        return <CertBadge {...x} key={i} />;
-                    })}
-                </div>
+                <CertificateSection />
             </div>
         </div>
     );
