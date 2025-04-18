@@ -65,7 +65,7 @@ const SkillsContainer = () => {
             </div>
             <div
                 className={
-                    'flex flex-column lg:items-end max-sm:items-start items-start text-start gap-4'
+                    'flex flex-column lg:items-end max-sm:items-start items-start text-start gap-4 lg:pb-8 max-sm:pb-4'
                 }>
                 {generateSkillSections(isDark).map((props, key) => {
                     return <SkillSection {...props} key={key} />;

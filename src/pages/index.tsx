@@ -44,7 +44,6 @@ const Home: NextPage<HomeProps> = ({
                 <IntroSection />
                 <div className={'flex flex-col gap-4'}>
                     <SkillsContainer />
-                    <Divider className={'my-4 lg:w-[30.5rem] max-sm:w-full'} />
                     <ProjectSection />
                 </div>
             </div>
