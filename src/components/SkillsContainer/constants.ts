@@ -129,6 +129,11 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                 },
                 {
                     className: 'animate-floating h-12 max-sm:h-10',
+                    src: 'assets/images/logos/storybook_logo.svg',
+                    alt: 'storybook',
+                },
+                {
+                    className: 'animate-floating h-12 max-sm:h-11',
                     src: 'assets/images/logos/webpack_logo.svg',
                     alt: 'webpacklogo',
                 },
@@ -141,6 +146,11 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                     className: 'animate-floating h-10 max-sm:h-10',
                     src: 'assets/images/logos/eslint-logo.svg',
                     alt: 'eslintlogo',
+                },
+                {
+                    className: 'animate-floating h-12 max-sm:h-10',
+                    src: 'assets/images/logos/vimlogo.svg',
+                    alt: 'vim',
                 },
             ],
         },
