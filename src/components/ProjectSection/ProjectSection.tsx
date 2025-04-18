@@ -6,6 +6,9 @@ import LoadingSkeleton from '../ProjectCard/LoadingSkeleton';
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
 import HeaderLabel from '../HeaderLabel/HeaderLabel';
 import LabelContainer from 'labelcontainer';
+import IconComp from '../common/IcomComp';
+import Divider from '@mui/material/Divider';
+import Description from '../common/Description';
 
 const ProjectSection = () => {
     const [projects, setProjects] = useState<Array<FullProjectDesc>>([]);
@@ -37,23 +40,37 @@ const ProjectSection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-5 justify-center max-w-xl lg:items-end max-sm:items-center'
+                'flex flex-column gap-5 justify-center max-w-xl lg:items-end'
             }>
-            <div
-                className={
-                    'flex lg:text-end max-sm:w-full max-sm:items-start lg:items-center'
-                }>
+            <div className={'flex flex-column text-start w-full max-w-[32rem]'}>
                 <HeaderLabel>
+                    <IconComp icon={'Description'} />
                     {lsInstance.getLabel('heading_project')}
                 </HeaderLabel>
+                <Description>
+                    {lsInstance.getLabel('project_desc_label')}
+                </Description>
+                <Divider className={'my-4 lg:w-[32rem] max-sm:w-full'} />
             </div>
-            {loading
-                ? withLoadingSkeleton(LoadingSkeleton)(5)
-                : isProjectsLoaded
-                ? projects.map((project: FullProjectDesc, index: number) => {
-                      return <ProjectCard key={index} projectDesc={project} />;
-                  })
-                : "Project details fetch request failed :'( please refresh the page again!"}
+            <div
+                className={
+                    'flex flex-column gap-5 justify-center lg:w-[32rem]'
+                }>
+                {loading
+                    ? withLoadingSkeleton(LoadingSkeleton)(5)
+                    : isProjectsLoaded
+                    ? projects.map(
+                          (project: FullProjectDesc, index: number) => {
+                              return (
+                                  <ProjectCard
+                                      key={index}
+                                      projectDesc={project}
+                                  />
+                              );
+                          }
+                      )
+                    : "Project details fetch request failed :'( please refresh the page again!"}
+            </div>
         </div>
     );
 };
