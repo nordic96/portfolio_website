@@ -1,11 +1,20 @@
-import LabelContainer from 'labelcontainer';
 import { SkillSectionProps } from './SkillsContainer';
+import { SkillCategory } from './types';
+
+import * as MUIcon from '@mui/icons-material';
+
+const SkillCatIconMap: Record<SkillCategory, keyof typeof MUIcon> = {
+    language: 'Code',
+    appframework: 'Settings',
+    devtools: 'Build',
+    cicd: 'AllInclusive',
+    cssframework: 'Palette',
+};
 
 const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
-    const lsInstance = LabelContainer.getInstance();
     return [
         {
-            sectionTitle: lsInstance.getLabel('section_title_lang'),
+            category: 'language',
             logos: [
                 {
                     className: 'animate-floating h-12 max-sm:h-10',
@@ -25,7 +34,7 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
             ],
         },
         {
-            sectionTitle: lsInstance.getLabel('section_title_framework'),
+            category: 'appframework',
             logos: [
                 {
                     className: 'animate-floating h-7 max-sm:h-5',
@@ -48,6 +57,16 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                     alt: 'reactlogo',
                 },
                 {
+                    className: 'animate-floating h-14 max-sm:h-10',
+                    src: 'https://cdn.candycode.com/jotai/jotai-mascot.png',
+                    alt: 'jotailogo',
+                },
+            ],
+        },
+        {
+            category: 'cssframework',
+            logos: [
+                {
                     className: 'animate-floating h-12 max-sm:h-10',
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/512px-Sass_Logo_Color.svg.png',
                     alt: 'sasslogo',
@@ -57,16 +76,16 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2094px-Tailwind_CSS_Logo.svg.png',
                     alt: 'tailwindlogo',
                 },
-                {
-                    className: 'animate-floating h-14 max-sm:h-10',
-                    src: 'https://cdn.candycode.com/jotai/jotai-mascot.png',
-                    alt: 'jotailogo',
-                },
             ],
         },
         {
-            sectionTitle: lsInstance.getLabel('section_title_cicd'),
+            category: 'cicd',
             logos: [
+                {
+                    className: 'animate-floating h-10 max-sm:h-9',
+                    src: 'assets/images/logos/aws_logo.svg',
+                    alt: 'awslogo',
+                },
                 {
                     className: 'animate-floating h-16 max-sm:h-12',
                     src: 'https://mirror.twds.com.tw/jenkins/art/jenkins-logo/256x256/logo.png',
@@ -78,7 +97,12 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                     alt: 'bitbucketlogo',
                 },
                 {
-                    className: 'animate-floating h-14 max-sm:h-10',
+                    className: 'animate-floating h-12 max-sm:h-10',
+                    src: 'assets/images/logos/docker-mark-blue.svg',
+                    alt: 'dockerlogo',
+                },
+                {
+                    className: 'animate-floating h-12 max-sm:h-10',
                     src: isDark
                         ? 'assets/images/logos/logo-light_Jira_logo_inverse_RGB.svg'
                         : 'assets/images/logos/logo-light_Jira_logo_brand_RGB.svg',
@@ -86,26 +110,6 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                 },
                 {
                     className: 'animate-floating h-12 max-sm:h-10',
-                    src: 'assets/images/logos/aws_lambda.svg',
-                    alt: 'awslambdalogo',
-                },
-                {
-                    className: 'animate-floating h-12 max-sm:h-10',
-                    src: 'assets/images/logos/aws_codebuild.svg',
-                    alt: 'codebuildlogo',
-                },
-                {
-                    className: 'animate-floating h-12 max-sm:h-10',
-                    src: 'assets/images/logos/docker-mark-blue.svg',
-                    alt: 'dockerlogo',
-                },
-            ],
-        },
-        {
-            sectionTitle: lsInstance.getLabel('section_title_monitor'),
-            logos: [
-                {
-                    className: 'animate-floating h-14 max-sm:h-10',
                     src: isDark
                         ? 'assets/images/logos/logo-splunk-acc-rgb-w.png'
                         : 'assets/images/logos/logo-splunk-acc-rgb-k.png',
@@ -113,7 +117,34 @@ const generateSkillSections = (isDark?: boolean): SkillSectionProps[] => {
                 },
             ],
         },
+        {
+            category: 'devtools',
+            logos: [
+                {
+                    className: 'animate-floating h-12 max-sm:h-10',
+                    src: isDark
+                        ? 'assets/images/logos/Cypress_Logomark_White-Color.svg'
+                        : 'assets/images/logos/Cypress_Logomark_Dark-Color.svg',
+                    alt: 'cypress',
+                },
+                {
+                    className: 'animate-floating h-12 max-sm:h-10',
+                    src: 'assets/images/logos/webpack_logo.svg',
+                    alt: 'webpacklogo',
+                },
+                {
+                    className: 'animate-floating h-12 max-sm:h-10',
+                    src: 'assets/images/logos/jest_logo.svg',
+                    alt: 'jestlogo',
+                },
+                {
+                    className: 'animate-floating h-10 max-sm:h-10',
+                    src: 'assets/images/logos/eslint-logo.svg',
+                    alt: 'eslintlogo',
+                },
+            ],
+        },
     ];
 };
 
-export { generateSkillSections };
+export { generateSkillSections, SkillCatIconMap };
