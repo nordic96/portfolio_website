@@ -54,7 +54,7 @@ const ProjectSection = () => {
             </div>
             <div
                 className={
-                    'flex flex-column gap-5 justify-center max-w-xl lg:items-end max-sm:items-center'
+                    'flex flex-column gap-5 justify-center lg:w-[32rem]'
                 }>
                 {loading
                     ? withLoadingSkeleton(LoadingSkeleton)(5)
