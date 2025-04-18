@@ -40,12 +40,9 @@ const ProjectSection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-5 justify-center max-w-xl lg:items-end max-sm:items-center'
+                'flex flex-column gap-5 justify-center max-w-xl lg:items-end'
             }>
-            <div
-                className={
-                    'flex flex-column text-start w-full justify-start max-w-[32rem]'
-                }>
+            <div className={'flex flex-column text-start w-full max-w-[32rem]'}>
                 <HeaderLabel>
                     <IconComp icon={'Description'} />
                     {lsInstance.getLabel('heading_project')}
@@ -55,13 +52,25 @@ const ProjectSection = () => {
                 </Description>
                 <Divider className={'my-4 lg:w-[32rem] max-sm:w-full'} />
             </div>
-            {loading
-                ? withLoadingSkeleton(LoadingSkeleton)(5)
-                : isProjectsLoaded
-                ? projects.map((project: FullProjectDesc, index: number) => {
-                      return <ProjectCard key={index} projectDesc={project} />;
-                  })
-                : "Project details fetch request failed :'( please refresh the page again!"}
+            <div
+                className={
+                    'flex flex-column gap-5 justify-center max-w-xl lg:items-end max-sm:items-center'
+                }>
+                {loading
+                    ? withLoadingSkeleton(LoadingSkeleton)(5)
+                    : isProjectsLoaded
+                    ? projects.map(
+                          (project: FullProjectDesc, index: number) => {
+                              return (
+                                  <ProjectCard
+                                      key={index}
+                                      projectDesc={project}
+                                  />
+                              );
+                          }
+                      )
+                    : "Project details fetch request failed :'( please refresh the page again!"}
+            </div>
         </div>
     );
 };
