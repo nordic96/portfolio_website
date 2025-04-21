@@ -1,0 +1,32 @@
+name: NPM Run Install & Build (UAT)
+on:
+    push:
+        branches: [ develop ]
+    pull_request:
+        branches: [ develop ]
+jobs:
+    install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: PRODUCTION
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [ 20.18 ]
+        steps:
+            - name: Setup Node JS
+              uses: actions/setup-node@v3.5.0
+              with:
+                node-version: ${{ matrix.node-version }}
+                registry-url: 'https://registry.npmjs.org'
+            - name: Get Latest Source Code
+              uses: actions/checkout@v3.0.2
+              with:
+                submodules: recursive
+                token: ${{ secrets.GITHUB_TOKEN }}
+            - name: NPM & Build
+              run: npm i && npm run build
+            - name: Deploy to AWS Amplify
+              run: |
+                URL="${{ secrets.AMPLIFY_WEBHOOK_UAT }}"
+                curl -X POST -d {} "$URL" -H "Content-Type: application/json"

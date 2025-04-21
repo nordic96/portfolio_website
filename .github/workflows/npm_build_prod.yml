@@ -1,9 +1,9 @@
-name: NPM Run Install & Build
+name: NPM Run Install & Build (PROD)
 on:
     push:
         branches: [ master ]
     pull_request:
-        branches: [ master, develop, developv2 ]
+        branches: [ master ]
 jobs:
     install_build:
         env:
@@ -26,3 +26,7 @@ jobs:
                 token: ${{ secrets.GITHUB_TOKEN }}
             - name: NPM & Build
               run: npm i && npm run build
+            - name: Deploy to AWS Amplify
+              run: |
+                URL="${{ secrets.AWS_WEBHOOK_PROD }}"
+                curl -X POST -d {} "$URL" -H "Content-Type: application/json"
