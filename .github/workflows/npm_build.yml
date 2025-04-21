@@ -1,9 +1,9 @@
-name: NPM Run Install & Build (UAT)
+name: NPM Run Install & Build
 on:
     push:
-        branches: [ develop ]
+        branches: [ master, develop ]
     pull_request:
-        branches: [ develop ]
+        branches: [ master, develop ]
 jobs:
     install_build:
         env:
@@ -26,7 +26,3 @@ jobs:
                 token: ${{ secrets.GITHUB_TOKEN }}
             - name: NPM & Build
               run: npm i && npm run build
-            - name: Deploy to AWS Amplify
-              run: |
-                URL="${{ secrets.AMPLIFY_WEBHOOK_UAT }}"
-                curl -X POST -d {} "$URL" -H "Content-Type: application/json"
