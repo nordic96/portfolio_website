@@ -1,7 +1,5 @@
-name: NPM Run Install & Build
+name: NPM Run Install & Build (Preflight Check)
 on:
-    push:
-        branches: [ master, develop ]
     pull_request:
         branches: [ master, develop ]
 jobs:
