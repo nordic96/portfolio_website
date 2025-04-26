@@ -3,10 +3,10 @@ on:
     push:
         branches: [ master ]
 jobs:
-    env:
-        CI: true
-        REACT_APP_MODE: PRODUCTION
     install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: PRODUCTION
         runs-on: ubuntu-latest
         strategy:
             matrix:
