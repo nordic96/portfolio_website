@@ -1,12 +1,15 @@
-name: Deploy to AWS Amplify (PROD)
+name: Deployment AWS Amplify (PROD)
+concurrency:
+    group: prod
+    cancel-in-progress: true
 on:
     push:
         branches: [ master ]
 jobs:
-    env:
-        CI: true
-        REACT_APP_MODE: PRODUCTION
     install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: PRODUCTION
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -25,8 +28,10 @@ jobs:
             - name: NPM & Build
               run: npm i && npm run build
     deployment:
+        runs-on: ubuntu-latest
+        environment: prod
         steps:
-            - name: Deploy to AWS Amplify
+            - name: Deploy to AWS Amplify (PROD)
               run: |
                 URL="${{ secrets.AWS_WEBHOOK_PROD }}"
                 curl -X POST -d {} "$URL" -H "Content-Type: application/json"
