@@ -1,4 +1,7 @@
-name: Deploy to AWS Amplify (UAT)
+name: Deployment AWS Amplify (UAT)
+concurrency:
+    group: uat
+    cancel-in-progress: true
 on:
     push:
         branches: [ develop ]
@@ -26,8 +29,9 @@ jobs:
               run: npm i && npm run build
     deployment:
         runs-on: ubuntu-latest
+        environment: uat
         steps:
-            - name: Deploy to AWS Amplify
+            - name: Deploy to AWS Amplify (UAT)
               run: |
                 URL="${{ secrets.AMPLIFY_WEBHOOK_UAT }}"
                 curl -X POST -d {} "$URL" -H "Content-Type: application/json"
