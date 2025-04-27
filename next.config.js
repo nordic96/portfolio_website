@@ -1,10 +1,12 @@
 module.exports = () => {
     return {
         reactStrictMode: false,
-        swcMinify: true,
         env: {
             VERSION: process.env.APP_VERSION,
         },
         output: 'standalone',
+        experimental: {
+            optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+        },
     };
 };

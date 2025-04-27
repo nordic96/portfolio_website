@@ -3,7 +3,7 @@ import connectMongo from '../../../utils/mongoConnect';
 import { Labels } from 'labelcontainer/build/types';
 import { MongoClient } from 'mongodb';
 
-export async function getConfigData(): Promise<Labels> {
+export async function GET(): Promise<Labels> {
     let data: Labels = {};
     const client: MongoClient = await connectMongo();
     logger.info(`[configData] fetching configs...`);
