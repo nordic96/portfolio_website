@@ -12,7 +12,7 @@ const CertificateSection = () => {
     return (
         <div
             className={
-                'flex flex-column py-4 max-sm:py-2 w-[30.2rem] max-sm:w-full text-start'
+                'flex flex-col py-4 max-sm:py-2 w-[30.2rem] max-sm:w-full text-start'
             }>
             <HeaderLabel>
                 <EmojiEventsIcon />

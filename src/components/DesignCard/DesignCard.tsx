@@ -17,7 +17,7 @@ const DesignCard = (props: DesignCardProps) => {
     const { designProject } = props;
     const { medialink, name, organisation, year } = designProject;
     return (
-        <div className={'flex flex-column w-1/4 max-sm:w-1/2'}>
+        <div className={'flex flex-col w-1/4 max-sm:w-1/2'}>
             <img
                 src={'https://lh3.googleusercontent.com/' + medialink}
                 className={'w-full'}
