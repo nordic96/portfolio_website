@@ -14,17 +14,13 @@ import Banner from '../components/Banner';
 import Divider from '../components/common/Divider';
 
 async function fetchConfigs() {
-    const data = await getConfigData();
-    return {
-        props: { data },
-    };
+    const data = await getConfigData().then((res) => res.json());
+    const lsInstance = LabelContainer.getInstance();
+    lsInstance.setLabels(data.configs as Labels);
 }
 
 export default async function Page() {
-    const labelInstance = LabelContainer.getInstance();
-    const promise = await fetchConfigs();
-    const data = promise.props.data;
-    labelInstance.setLabels(data as Labels);
+    await fetchConfigs();
 
     return (
         <div className="App">
