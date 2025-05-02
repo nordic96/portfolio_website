@@ -19,7 +19,6 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: 'StephenKos Portfolio',
-    manifest: 'manifest.json',
     description:
         "StephenKo's personal portfolio website to showcase software engineering & AI related projects",
     icons: {
