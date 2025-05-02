@@ -1,11 +1,8 @@
 import connectMongo from '../../../utils/mongoConnect';
 import logger from '../../../logger/logger';
+import { NextResponse } from 'next/server';
 
-/**
- * @param {import('next').NextApiRequest} req
- * @param {import('next').NextApiResponse} res
- */
-export default async function GET() {
+export async function GET() {
     try {
         const client = await connectMongo();
         const db = client.db(process.env.MONGO_DBNAME);
@@ -17,9 +14,9 @@ export default async function GET() {
             `found ${await projectCollection.countDocuments()} projects...`
         );
         const projects = await cursor.toArray();
-        return projects;
+        return NextResponse.json({ projects: projects || [] });
     } catch (error) {
         logger.error(error);
-        return { error };
+        return NextResponse.error();
     }
 }
