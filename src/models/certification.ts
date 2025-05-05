@@ -16,4 +16,3 @@ export const CertificationSchema = object({
     theme_color: Joi.string().optional(),
     logo_src: Joi.string().optional(),
 });
-
