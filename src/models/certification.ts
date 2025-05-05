@@ -1,4 +1,4 @@
-import Joi, { object } from 'joi';
+import Joi from 'joi';
 
 export interface ICertificate {
     name: string;
@@ -8,7 +8,7 @@ export interface ICertificate {
     logo_src: string;
 }
 
-export const CertificationSchema = object({
+export const CertificationSchema = Joi.object({
     _id: Joi.object().allow(),
     name: Joi.string().required(),
     credentials_url: Joi.string().required(),
