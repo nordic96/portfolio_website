@@ -20,7 +20,9 @@ async function fetchConfigs() {
 }
 
 export default async function Page() {
-    await fetchConfigs();
+    if (process.env.NODE_ENV !== 'test') {
+        await fetchConfigs();
+    }
 
     return (
         <div className="App">

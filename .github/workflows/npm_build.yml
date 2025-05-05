@@ -7,6 +7,7 @@ jobs:
         env:
             CI: true
             REACT_APP_MODE: PRODUCTION
+            NODE_ENV: test
         runs-on: ubuntu-latest
         strategy:
             matrix:
