@@ -1,19 +1,19 @@
 import { atom } from 'jotai';
+import { ApiRoutes } from '../constants/routes';
 
-type LoadingKey = 'projects' | 'configs';
-
-type LoadingMap = Record<LoadingKey, boolean>;
+type LoadingMap = Record<ApiRoutes, boolean>;
 
 const loadingAtom = atom<LoadingMap>({
     projects: false,
     configs: false,
+    certifications: false,
 });
 
 const readOnlyLoadingAtom = atom((get) => get(loadingAtom));
 
 const setLoadingValAtom = atom(
     null,
-    (get, set, loadingKey: LoadingKey, val: boolean) => {
+    (get, set, loadingKey: ApiRoutes, val: boolean) => {
         const loadingMap = get(loadingAtom);
         loadingMap[loadingKey] = val;
         set(loadingAtom, loadingMap);

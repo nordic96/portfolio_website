@@ -1,6 +1,7 @@
 import { atom } from 'jotai';
 import { FullProjectDesc } from '../globals';
 import { setLoadingValAtom } from './loadingAtom';
+import { constructApiRoute } from '../constants/routes';
 
 const projectsAtom = atom<FullProjectDesc[]>([]);
 const readonlyProjectsAtom = atom<FullProjectDesc[]>((get) =>
@@ -9,7 +10,8 @@ const readonlyProjectsAtom = atom<FullProjectDesc[]>((get) =>
 
 const asyncFetchProjectsAtom = atom(null, async (get, set) => {
     set(setLoadingValAtom, 'projects', true);
-    const json = await fetch('/api/projects').then((res) => {
+    const route = constructApiRoute('projects');
+    const json = await fetch(route).then((res) => {
         return res.json();
     });
     set(setLoadingValAtom, 'projects', false);
