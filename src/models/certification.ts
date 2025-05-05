@@ -5,6 +5,7 @@ export interface ICertificate {
     credentials_url: string;
     year_obtained: string;
     theme_color: string;
+    logo_src: string;
 }
 
 export const CertificationSchema = object({
@@ -13,5 +14,6 @@ export const CertificationSchema = object({
     credentials_url: Joi.string().required(),
     year_obtained: Joi.string().required(),
     theme_color: Joi.string().optional(),
+    logo_src: Joi.string().optional(),
 });
 
