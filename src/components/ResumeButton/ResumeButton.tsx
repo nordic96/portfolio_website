@@ -4,7 +4,12 @@ import React from 'react';
 import LabelContainer from 'labelcontainer';
 import { Download } from '@mui/icons-material';
 
-const ResumeButton = () => {
+interface ResumeBtnProps {
+    label: string;
+}
+
+const ResumeButton: React.FC<ResumeBtnProps> = (props: ResumeBtnProps) => {
+    const { label } = props;
     const lsInstance = LabelContainer.getInstance();
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -21,7 +26,7 @@ const ResumeButton = () => {
                 className={
                     'text-white uppercase font-semibold text-xl max-sm:text-base'
                 }>
-                {lsInstance.getLabel('btn_resume')}
+                {label}
                 <Download />
             </label>
         </button>

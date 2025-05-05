@@ -2,11 +2,10 @@ import React from 'react';
 import HeaderLabel from '../HeaderLabel';
 import { ImgProps } from '../../types';
 import { generateSkillSections, SkillCatIconMap } from './constants';
-import { useTheme } from 'next-themes';
 import { SkillCategory } from './types';
 import IconComp from '../common/IcomComp';
 import LabelContainer from 'labelcontainer';
-import { Divider } from '@mui/material';
+import Divider from '../common/Divider';
 import Description from '../common/Description';
 
 export interface SkillSectionProps {
@@ -18,7 +17,7 @@ const SkillSection = (props: SkillSectionProps) => {
     const { logos, category } = props;
     const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'flex gap-4 flex-column items-end max-sm:items-start'}>
+        <div className={'flex gap-4 flex-col items-end max-sm:items-start'}>
             <HeaderLabel>
                 <IconComp icon={SkillCatIconMap[category]} />
                 {lsInstance.getLabel(`section_title_${category}`)}
@@ -44,15 +43,13 @@ const SkillSection = (props: SkillSectionProps) => {
 };
 
 const SkillsContainer = () => {
-    const { systemTheme, theme } = useTheme();
-    const currentTheme = theme === 'system' ? systemTheme : theme;
     const lsInstance = LabelContainer.getInstance();
-    const isDark = currentTheme === 'dark';
+    const isDark = false;
     return (
-        <div className={'flex flex-column lg:items-end max-sm:items-start'}>
+        <div className={'flex flex-col lg:items-end max-sm:items-start'}>
             <div
                 className={
-                    'max-w-[32rem] flex flex-column items-start text-start'
+                    'max-w-[32rem] flex flex-col items-start text-start'
                 }>
                 <HeaderLabel>
                     <IconComp icon={'EmojiObjects'} />
@@ -65,7 +62,7 @@ const SkillsContainer = () => {
             </div>
             <div
                 className={
-                    'flex flex-column lg:items-end max-sm:items-start items-start text-start gap-4 lg:pb-8 max-sm:pb-4'
+                    'flex flex-col lg:items-end max-sm:items-start items-start text-start gap-4 lg:pb-8 max-sm:pb-4'
                 }>
                 {generateSkillSections(isDark).map((props, key) => {
                     return <SkillSection {...props} key={key} />;

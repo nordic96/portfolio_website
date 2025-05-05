@@ -6,24 +6,16 @@ import ResumeButton from '../ResumeButton';
 import { generateIcons } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
 import LabelContainer from 'labelcontainer';
-import { useTheme } from 'next-themes';
 import CertificateSection from '../CertificateSection';
 
 const IntroSection = () => {
-    const { systemTheme, theme } = useTheme();
-    const currentTheme = theme === 'system' ? systemTheme : theme;
-    const isDark = currentTheme === 'dark';
-
     const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
-                'flex flex-column lg:items-start max-w-xl lg:sticky lg:top-[20px] h-fit'
+                'flex flex-col lg:items-start max-w-xl lg:sticky lg:top-[20px] h-fit'
             }>
-            <div
-                className={
-                    'flex flex-column justify-between items-start gap-4'
-                }>
+            <div className={'flex flex-col justify-between items-start gap-4'}>
                 <div
                     className={
                         'flex flex-col max-sm:flex-row max-sm:w-full max-sm:justify-between'
@@ -31,9 +23,9 @@ const IntroSection = () => {
                     <IDCard />
                     <div
                         className={
-                            'flex flex-column items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[12.5rem] max-sm:justify-between'
+                            'flex flex-col items-start lg:text-left max-sm:text-right gap-2 lg:py-4 md:py-4 max-sm:max-w-[12.5rem] max-sm:justify-between'
                         }>
-                        <p
+                        <label
                             className={
                                 'lg:text-5xl max-sm:text-4xl font-bold drop-shadow-md'
                             }>
@@ -43,13 +35,13 @@ const IntroSection = () => {
                                 }>
                                 {lsInstance.getLabel('title')}
                             </span>
-                        </p>
-                        <p
+                        </label>
+                        <label
                             className={
                                 'text-3xl max-sm:text-2xl font-bold uppercase'
                             }>
                             {lsInstance.getLabel('title_desc')}
-                        </p>
+                        </label>
                     </div>
                 </div>
                 <p
@@ -68,8 +60,8 @@ const IntroSection = () => {
                     className={
                         'flex flex-row gap-2 pt-2 w-100 items-center max-sm:justify-end'
                     }>
-                    <ResumeButton />
-                    {generateIcons(isDark).map((x, i) => {
+                    <ResumeButton label={lsInstance.getLabel('btn_resume')} />
+                    {generateIcons(false).map((x, i) => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
