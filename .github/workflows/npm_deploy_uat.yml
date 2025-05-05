@@ -1,0 +1,39 @@
+name: Deployment AWS Amplify (UAT)
+concurrency:
+    group: uat
+    cancel-in-progress: true
+on:
+    push:
+        branches: [ develop ]
+jobs:
+    install_build:
+        env:
+            CI: true
+            REACT_APP_MODE: UAT
+            MONGO_URI: ${{ secrets.MONGO_URI }}
+            MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [ 20.18 ]
+        steps:
+            - name: Setup Node JS
+              uses: actions/setup-node@v3.5.0
+              with:
+                node-version: ${{ matrix.node-version }}
+                registry-url: 'https://registry.npmjs.org'
+            - name: Get Latest Source Code
+              uses: actions/checkout@v3.0.2
+              with:
+                submodules: recursive
+                token: ${{ secrets.GITHUB_TOKEN }}
+            - name: NPM & Build
+              run: npm i && npm run build
+    deployment:
+        runs-on: ubuntu-latest
+        environment: uat
+        steps:
+            - name: Deploy to AWS Amplify (UAT)
+              run: |
+                URL="${{ secrets.AMPLIFY_WEBHOOK_UAT }}"
+                curl -X POST -d {} "$URL" -H "Content-Type: application/json"

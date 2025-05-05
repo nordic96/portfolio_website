@@ -1,9 +1,15 @@
+'use client';
 import React from 'react';
 
 import LabelContainer from 'labelcontainer';
 import { Download } from '@mui/icons-material';
 
-const ResumeButton = () => {
+interface ResumeBtnProps {
+    label: string;
+}
+
+const ResumeButton: React.FC<ResumeBtnProps> = (props: ResumeBtnProps) => {
+    const { label } = props;
     const lsInstance = LabelContainer.getInstance();
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -16,13 +22,13 @@ const ResumeButton = () => {
                 'rounded-sm px-4 py-2 bg-linear-to-r from-coolblue to-coolred hover:to-blue-600 shadow-lg'
             }
             onClick={onClick}>
-            <p
+            <label
                 className={
                     'text-white uppercase font-semibold text-xl max-sm:text-base'
                 }>
-                {lsInstance.getLabel('btn_resume')}
+                {label}
                 <Download />
-            </p>
+            </label>
         </button>
     );
 };

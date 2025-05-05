@@ -1,3 +1,3 @@
-import ProjectSection from './ProjectSection';
+import ProjectContainer from './ProjectContainer';
 
-export default ProjectSection;
+export default ProjectContainer;

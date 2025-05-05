@@ -8,7 +8,7 @@ const TechStackSection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-5 lg:items-center max-sm:text-start overflow-x-hidden relative py-4'
+                'flex flex-col gap-5 lg:items-center max-sm:text-start overflow-x-hidden relative py-4'
             }>
             <HeaderLabel>
                 {lsInstance.getLabel('heading_techstack')}

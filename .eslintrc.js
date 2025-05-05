@@ -6,10 +6,8 @@ module.exports = {
     },
     parser: '@typescript-eslint/parser',
     extends: [
-        'plugin:@typescript-eslint/recommended',
+        'plugin:@next/next/recommended',
         'plugin:prettier/recommended',
-        'plugin:react/recommended',
-        'plugin:jsx-a11y/recommended',
     ],
     // ignorePatterns: ['**/*.js'],
     parserOptions: {
@@ -19,7 +17,6 @@ module.exports = {
             jsx: true,
         },
     },
-    plugins: ['@typescript-eslint', 'react', 'jsx-a11y'],
     settings: {
         react: {
             version: 'detect',
