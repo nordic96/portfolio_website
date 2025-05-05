@@ -5,7 +5,6 @@ import React, { Suspense, lazy } from 'react';
 export const IconRecord: Record<
     string,
     React.LazyExoticComponent<
-        // eslint-disable-next-line @typescript-eslint/ban-types
         OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
             muiName: string;
         }
