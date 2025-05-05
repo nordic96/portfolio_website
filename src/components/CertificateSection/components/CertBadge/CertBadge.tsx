@@ -7,7 +7,7 @@ const COLOR_MAP: Record<string, string> = {
     indigo: 'shadow-indigo-500/50',
     teel: 'shadow-teel-500/50',
     default: '',
-}
+};
 
 const CertBadge: React.FC<ICertificate> = (props: ICertificate) => {
     const { theme_color, name, credentials_url, year_obtained, logo_src } =
