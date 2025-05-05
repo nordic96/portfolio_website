@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
         logger.error(`[ERR RETRIEVING JSON BODY FROM NEXT RESPONSE] ${error}`);
         data = responseClone.text();
     }
-    logger.info(`[RESPONSE CODE: ${response.status} ${request.url}] ${data}`);
+    logger.info(`[RESPONSE CODE: ${response.status} ${request.url}] ${JSON.stringify(data)}`);
     return response;
 }
 
