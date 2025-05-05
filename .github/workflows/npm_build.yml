@@ -8,6 +8,8 @@ jobs:
             CI: true
             REACT_APP_MODE: PRODUCTION
             NODE_ENV: test
+            MONGO_URI: ${{ secrets.MONGO_URI }}
+            MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         runs-on: ubuntu-latest
         strategy:
             matrix:
