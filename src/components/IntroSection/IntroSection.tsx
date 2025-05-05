@@ -58,7 +58,7 @@ const IntroSection = () => {
                 </p>
                 <div
                     className={
-                        'flex flex-row gap-2 pt-2 w-100 items-center max-sm:justify-end'
+                        'flex flex-row gap-2 pt-2 w-[100%] items-center max-sm:justify-end'
                     }>
                     <ResumeButton label={lsInstance.getLabel('btn_resume')} />
                     {generateIcons(false).map((x, i) => {
