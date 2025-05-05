@@ -1,9 +1,8 @@
 import { SkillSectionProps } from './SkillsContainer';
 import { SkillCategory } from './types';
+import { IconRecord } from '../common/IcomComp/IconComp';
 
-import * as MUIcon from '@mui/icons-material';
-
-const SkillCatIconMap: Record<SkillCategory, keyof typeof MUIcon> = {
+const SkillCatIconMap: Record<SkillCategory, keyof typeof IconRecord> = {
     language: 'Code',
     appframework: 'Settings',
     devtools: 'Build',

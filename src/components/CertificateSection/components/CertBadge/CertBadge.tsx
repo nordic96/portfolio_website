@@ -13,7 +13,7 @@ const CertBadge = (props: CertBadgeProps) => {
         <a href={href} target={'_blank'} rel="noreferrer">
             <div
                 className={
-                    'flex flex-column rounded-md radius-1 shadow-md text-center dark:bg-gray-800 px-2 py-1 max-sm:px-1 items-center gap-1 w-36 max-sm:w-32 text-black dark:text-white'
+                    'flex flex-col rounded-md radius-1 shadow-md text-center dark:bg-gray-800 px-2 py-1 max-sm:px-1 items-center gap-1 w-36 max-sm:w-32 text-black dark:text-white'
                 }>
                 <p>{desc}</p>
                 <span

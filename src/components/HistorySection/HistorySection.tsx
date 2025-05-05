@@ -7,7 +7,7 @@ const HistorySection = () => {
     return (
         <div
             className={
-                'flex flex-column gap-4 lg:items-center max-sm:items-start max-sm:text-start'
+                'flex flex-col gap-4 lg:items-center max-sm:items-start max-sm:text-start'
             }>
             <HeaderLabel>{lsInstance.getLabel('heading_history')}</HeaderLabel>
             <p className="lg:text-xl max-sm:text-base font-italic text-gray-500 dark:text-[#fefefe] max-w-5xl">

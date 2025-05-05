@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { MongoClient } from 'mongodb';
 import logger from '../logger/logger';
 

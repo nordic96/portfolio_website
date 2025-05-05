@@ -1,19 +1,18 @@
+import { NextResponse } from 'next/server';
 import logger from '../../../logger/logger';
 import connectMongo from '../../../utils/mongoConnect';
 import { Labels } from 'labelcontainer/build/types';
 import { MongoClient } from 'mongodb';
 
-export async function getConfigData(): Promise<Labels> {
+export async function GET() {
     let data: Labels = {};
     const client: MongoClient = await connectMongo();
-    logger.info(`[configData] fetching configs...`);
     try {
         const db = client.db(process.env.MONGO_DBNAME);
         const configs = db.collection('configs');
 
         const cursor = configs.find();
         const labels = await cursor.toArray();
-        logger.info(labels);
         if (!!labels) {
             data = JSON.parse(JSON.stringify(labels[0]));
             logger.info(`Config data found: ${JSON.stringify(labels[0])}`);
@@ -22,7 +21,8 @@ export async function getConfigData(): Promise<Labels> {
         }
     } catch (e) {
         logger.error(e);
+        return NextResponse.error();
     } finally {
-        return data;
+        return NextResponse.json({ configs: data });
     }
 }
