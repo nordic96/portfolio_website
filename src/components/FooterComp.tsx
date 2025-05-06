@@ -26,5 +26,5 @@ const FooterComp: React.FC<{}> = () => {
             </div>
         </div>
     );
-}
+};
 export default FooterComp;
