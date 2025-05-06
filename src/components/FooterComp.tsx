@@ -1,10 +1,7 @@
-import LabelContainer from 'labelcontainer';
 import React from 'react';
+import LabelContainer from 'labelcontainer';
 
-/**
- * Footer Component for Main Page (contains footer information)
- */
-function FooterComp() {
+const FooterComp: React.FC<{}> = () => {
     const lsInstance = LabelContainer.getInstance();
     return (
         <div

@@ -5,9 +5,6 @@ import { Provider } from 'jotai';
 
 import '../styles/globals.css';
 
-import NavBar from '../components/NavBar';
-import FooterComp from '../components/FooterComp';
-
 const notoSansDisplay = Noto_Sans_Display({
     subsets: ['latin'],
 });
@@ -49,11 +46,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={notoSansDisplay.className}>
             <body>
-                <Provider>
-                    <NavBar />
-                    {children}
-                    <FooterComp />
-                </Provider>
+                <Provider>{children}</Provider>
             </body>
         </html>
     );
