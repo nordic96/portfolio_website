@@ -64,7 +64,7 @@
     "dev": "next dev --turbo",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "test": "jest --watchAll",
+    "test": "jest --coverage",
     "build": "next build",
     "docker:build": "docker build --no-cache --build-arg port=80 -t portfolio_web:local .",
     "docker:run": "docker run --rm -p 80:80 portfolio_web:local"
