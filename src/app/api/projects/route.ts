@@ -21,7 +21,7 @@ export async function GET() {
                 projects
             );
         }
-        return NextResponse.json({ data: projects || [] });
+        return NextResponse.json({ data: projects });
     } catch (error) {
         logger.error(error);
         return NextResponse.json(
