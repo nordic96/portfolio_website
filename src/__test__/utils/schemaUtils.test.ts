@@ -4,7 +4,6 @@
 import Joi from 'joi';
 import schemaUtils from '../../utils/schemaUtils';
 import { Document, ObjectId, WithId } from 'mongodb';
-import logger from '../../logger';
 
 describe('schemaUtils', () => {
     interface Test {
