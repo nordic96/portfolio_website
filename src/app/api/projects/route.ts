@@ -1,6 +1,9 @@
 import connectMongo from '../../../utils/mongoConnect';
 import logger from '../../../logger/logger';
 import { NextResponse } from 'next/server';
+import { WithId, Document } from 'mongodb';
+import schemaUtils from '../../../utils/schemaUtils';
+import { IProject, ProjectSchema } from '../../../models/projects';
 
 export async function GET() {
     try {
@@ -8,15 +11,22 @@ export async function GET() {
         const db = client.db(process.env.MONGO_DBNAME);
         const projectCollection = db.collection('projects');
 
-        logger.info('Fetching Projects document..');
-        const cursor = projectCollection.find();
-        logger.info(
-            `found ${await projectCollection.countDocuments()} projects...`
-        );
-        const projects = await cursor.toArray();
-        return NextResponse.json({ projects: projects || [] });
+        const cursor = projectCollection.find({});
+        const projectArr: WithId<Document>[] = await cursor.toArray();
+        const projects: IProject[] = [];
+        for (let doc of projectArr) {
+            schemaUtils.validateSchemaAndPush<IProject>(
+                ProjectSchema,
+                doc,
+                projects
+            );
+        }
+        return NextResponse.json({ data: projects || [] });
     } catch (error) {
         logger.error(error);
-        return NextResponse.error();
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
     }
 }
