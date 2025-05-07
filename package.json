@@ -52,6 +52,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "next-test-api-route-handler": "^4.0.16",
     "postcss-loader": "^7.0.1",
     "prettier": "^3.5.3",
     "style-loader": "^3.3.1",
@@ -64,7 +65,7 @@
     "dev": "next dev --turbo",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "test": "jest --coverage",
+    "test": "jest --coverage --runInBand",
     "build": "next build",
     "docker:build": "docker build --no-cache --build-arg port=80 -t portfolio_web:local .",
     "docker:run": "docker run --rm -p 80:80 portfolio_web:local"

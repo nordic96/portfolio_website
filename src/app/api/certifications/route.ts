@@ -6,6 +6,7 @@ import {
     ICertificate,
 } from '../../../models/certification';
 import schemaUtils from '../../../utils/schemaUtils';
+import logger from '../../../logger';
 
 export async function GET() {
     const validatedCertificates: ICertificate[] = [];
@@ -24,9 +25,12 @@ export async function GET() {
                 validatedCertificates
             );
         }
-    } catch (error) {
-        return NextResponse.error();
-    } finally {
         return NextResponse.json({ data: validatedCertificates });
+    } catch (error) {
+        logger.error(error);
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500, statusText: 'Internal Server Error' }
+        );
     }
 }
