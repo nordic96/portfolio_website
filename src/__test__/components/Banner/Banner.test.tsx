@@ -9,4 +9,9 @@ describe('Banner UI Component', () => {
         expect(LabelContainer.getInstance).toHaveBeenCalled();
         expect(screen.getByText('mock_banner_msg')).toBeInTheDocument();
     });
+
+    it('should match snapshot', () => {
+        const comp = render(<Banner />);
+        expect(comp).toMatchSnapshot();
+    });
 });

@@ -22,4 +22,17 @@ describe('CertBadge Component', () => {
         const divComponent = screen.getByTestId('badge_container');
         expect(divComponent.classList).toContain('shadow-violet-500/50');
     });
+
+    it('should match snapshot', () => {
+        const comp = render(
+            <CertBadge
+                logo_src="/test"
+                name="name_test"
+                theme_color="violet"
+                credentials_url="url_test"
+                year_obtained="test_2025"
+            />
+        );
+        expect(comp).toMatchSnapshot();
+    });
 });
