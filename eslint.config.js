@@ -54,6 +54,8 @@ module.exports = defineConfig([
             'valid-jsdoc': 0,
             'jsx-a11y/no-static-element-interactions': 0,
             'jsx-a11y/click-events-have-key-events': 0,
+            '@next/next/no-img-element': 0,
+            '@next/next/no-html-link-for-pages': 0,
 
             'prettier/prettier': [
                 'error',

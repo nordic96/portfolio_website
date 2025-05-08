@@ -1,4 +1,4 @@
-name: NPM Run Install & Build (Preflight Check)
+name: NPM Run Install, Test & Build (Preflight Check)
 on:
     pull_request:
         branches: [ master, develop ]
@@ -27,3 +27,5 @@ jobs:
                 token: ${{ secrets.GITHUB_TOKEN }}
             - name: NPM & Build
               run: npm i && npm run build
+            - name: Test
+              run: npm run test

@@ -1,5 +1,5 @@
-import { FullProjectDesc } from '../../globals';
+import { IProject } from '../../models/projects';
 
 export interface ProjectCardProps {
-    projectDesc: FullProjectDesc;
+    projectDesc: IProject;
 }
