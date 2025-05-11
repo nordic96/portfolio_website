@@ -1,3 +1,3 @@
 export * from './configs';
-export * from './design';
-export * from './project';
+export * from './projects';
+export * from './certification';

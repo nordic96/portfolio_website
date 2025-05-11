@@ -17,8 +17,12 @@ const CertBadge: React.FC<ICertificate> = (props: ICertificate) => {
     baseClass = baseClass.concat(COLOR_MAP[theme_color]);
 
     return (
-        <a href={credentials_url} target={'_blank'} rel="noreferrer">
-            <div className={baseClass}>
+        <a
+            data-testid={'credentials_url'}
+            href={credentials_url}
+            target={'_blank'}
+            rel="noreferrer">
+            <div data-testid={'badge_container'} className={baseClass}>
                 <p>{year_obtained}</p>
                 <span className={`rounded-full bg-radial backdrop-opacity-10`}>
                     <img
