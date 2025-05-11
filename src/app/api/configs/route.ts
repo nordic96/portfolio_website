@@ -13,16 +13,22 @@ export async function GET() {
 
         const cursor = configs.find();
         const labels = await cursor.toArray();
+        console.log(!!labels);
         if (!!labels) {
             data = JSON.parse(JSON.stringify(labels[0]));
             logger.info(`Config data found: ${JSON.stringify(labels[0])}`);
         } else {
             logger.info('Config data not found or empty');
+            throw new Error('empty data');
         }
+        return NextResponse.json({
+            configs: data,
+        });
     } catch (e) {
         logger.error(e);
-        return NextResponse.error();
-    } finally {
-        return NextResponse.json({ configs: data });
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500, statusText: 'Internal Server Error' }
+        );
     }
 }
