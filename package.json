@@ -16,7 +16,6 @@
     "jotai": "2.12.3",
     "labelcontainer": "0.0.36",
     "mongodb": "^5.1.0",
-    "mongoose": "^6.6.1",
     "next": "15.3.1",
     "path": "0.12.7",
     "pino": "^9.6.0",

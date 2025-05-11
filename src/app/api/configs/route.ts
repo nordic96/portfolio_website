@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import logger from '../../../logger/logger';
 import mongoUtils from '../../../utils/mongoUtils';
 import { Labels } from 'labelcontainer/build/types';
-import { MongoClient } from 'mongodb';
+import { MongoClient, WithId, Document } from 'mongodb';
+import schemaUtils from '../../../utils/schemaUtils';
+import { ConfigsSchema } from '../../../models';
 
 export async function GET() {
     let data: Labels = {};
@@ -12,13 +14,17 @@ export async function GET() {
         const configs = db.collection('configs');
 
         const cursor = configs.find();
-        const labels = await cursor.toArray();
-        console.log(!!labels);
-        if (!!labels) {
-            data = JSON.parse(JSON.stringify(labels[0]));
-            logger.info(`Config data found: ${JSON.stringify(labels[0])}`);
+        const labels: WithId<Document>[] = await cursor.toArray();
+        if (!!labels && !!labels[0]) {
+            const validConfigs: Labels[] = [];
+            schemaUtils.validateSchemaAndPush<Labels>(
+                ConfigsSchema,
+                labels[0],
+                validConfigs
+            );
+            data = JSON.parse(JSON.stringify(validConfigs[0]));
         } else {
-            logger.info('Config data not found or empty');
+            logger.warn('Config data not found or empty');
             throw new Error('empty data');
         }
         return NextResponse.json({
