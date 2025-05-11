@@ -4,10 +4,10 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import * as appHandler from '../../../../app/api/projects/route';
 import testUtils from '../../../../utils/testUtils';
-import connectMongo from '../../../../utils/mongoConnect';
+import mongoUtils from '../../../../utils/mongoUtils';
 import { IProject } from '../../../../models/projects';
 
-jest.mock('../../../../utils/mongoConnect');
+jest.mock('../../../../utils/mongoUtils');
 
 describe('/api/projects', () => {
     const { mockConnectMongo, mockCollections } =
@@ -17,7 +17,9 @@ describe('/api/projects', () => {
     });
 
     it('should return 200 for empty response', async () => {
-        (connectMongo as jest.Mock).mockImplementationOnce(mockConnectMongo);
+        (mongoUtils.connectMongo as jest.Mock).mockImplementationOnce(
+            mockConnectMongo
+        );
         (mockCollections.find().toArray as jest.Mock).mockResolvedValue([]);
         await testApiHandler({
             appHandler,
@@ -31,7 +33,9 @@ describe('/api/projects', () => {
     });
 
     it('should return 200 for valid non-empty response', async () => {
-        (connectMongo as jest.Mock).mockImplementationOnce(mockConnectMongo);
+        (mongoUtils.connectMongo as jest.Mock).mockImplementationOnce(
+            mockConnectMongo
+        );
         const mockProjects: (IProject & { _id: Object })[] = [
             {
                 _id: new Object(),
@@ -61,7 +65,7 @@ describe('/api/projects', () => {
     });
 
     it('should return 500 for invalid occasions', async () => {
-        (connectMongo as jest.Mock).mockImplementationOnce(() => {
+        (mongoUtils.connectMongo as jest.Mock).mockImplementationOnce(() => {
             throw Error('error');
         });
         await testApiHandler({

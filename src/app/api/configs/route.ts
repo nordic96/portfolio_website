@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import logger from '../../../logger/logger';
-import connectMongo from '../../../utils/mongoConnect';
+import mongoUtils from '../../../utils/mongoUtils';
 import { Labels } from 'labelcontainer/build/types';
 import { MongoClient } from 'mongodb';
 
 export async function GET() {
     let data: Labels = {};
-    const client: MongoClient = await connectMongo();
+    const client: MongoClient = await mongoUtils.connectMongo();
     try {
         const db = client.db(process.env.MONGO_DBNAME);
         const configs = db.collection('configs');

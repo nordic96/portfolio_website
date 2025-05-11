@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import connectMongo from '../../../utils/mongoConnect';
+import mongoUtils from '../../../utils/mongoUtils';
 import { Document, WithId } from 'mongodb';
 import {
     CertificationSchema,
@@ -11,7 +11,7 @@ import logger from '../../../logger';
 export async function GET() {
     const validatedCertificates: ICertificate[] = [];
     try {
-        const client = await connectMongo();
+        const client = await mongoUtils.connectMongo();
         const db = client.db(process.env.MONGO_DBNAME);
         const certsCollection = db.collection('certifications');
 

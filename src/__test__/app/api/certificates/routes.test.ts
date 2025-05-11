@@ -5,10 +5,10 @@ import { testApiHandler } from 'next-test-api-route-handler';
 import * as appHandler from '../../../../app/api/certifications/route';
 import schemaUtils from '../../../../utils/schemaUtils';
 import { Collection, Db } from 'mongodb';
-import connectMongo from '../../../../utils/mongoConnect';
+import mongoUtils from '../../../../utils/mongoUtils';
 import { ICertificate } from '../../../../models/certification';
 
-jest.mock('../../../../utils/mongoConnect');
+jest.mock('../../../../utils/mongoUtils');
 jest.mock('../../../../utils/schemaUtils');
 
 describe('/api/certificates', () => {
@@ -41,7 +41,9 @@ describe('/api/certificates', () => {
         });
     });
     it('should return 200 for valid request', async () => {
-        (connectMongo as jest.Mock).mockImplementationOnce(mockConnectMongo);
+        (mongoUtils.connectMongo as jest.Mock).mockImplementationOnce(
+            mockConnectMongo
+        );
         const mockCertificates: (ICertificate & { _id: string })[] = [
             {
                 _id: '1',
@@ -83,7 +85,7 @@ describe('/api/certificates', () => {
     });
 
     it('should return 500 for invalid error', async () => {
-        (connectMongo as jest.Mock).mockImplementationOnce(() => {
+        (mongoUtils.connectMongo as jest.Mock).mockImplementationOnce(() => {
             throw Error('error');
         });
         await testApiHandler({

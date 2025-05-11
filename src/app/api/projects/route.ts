@@ -1,4 +1,4 @@
-import connectMongo from '../../../utils/mongoConnect';
+import mongoUtils from '../../../utils/mongoUtils';
 import logger from '../../../logger/logger';
 import { NextResponse } from 'next/server';
 import { WithId, Document } from 'mongodb';
@@ -7,7 +7,7 @@ import { IProject, ProjectSchema } from '../../../models/projects';
 
 export async function GET() {
     try {
-        const client = await connectMongo();
+        const client = await mongoUtils.connectMongo();
         const db = client.db(process.env.MONGO_DBNAME);
         const projectCollection = db.collection('projects');
 
