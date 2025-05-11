@@ -10,8 +10,7 @@ const ProjectCard = (props: ProjectCardProps) => {
 
     const onClickCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        let link = projectlink;
-        if (!link) link = videolink;
+        const link = projectlink ?? videolink;
         window.open(link, '_blank');
     };
 

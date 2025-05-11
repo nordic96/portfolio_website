@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
-import connectMongo from '../../../utils/mongoConnect';
+import mongoUtils from '../../../utils/mongoUtils';
 import { Document, WithId } from 'mongodb';
 import {
     CertificationSchema,
     ICertificate,
 } from '../../../models/certification';
 import schemaUtils from '../../../utils/schemaUtils';
+import logger from '../../../logger';
 
 export async function GET() {
     const validatedCertificates: ICertificate[] = [];
     try {
-        const client = await connectMongo();
+        const client = await mongoUtils.connectMongo();
         const db = client.db(process.env.MONGO_DBNAME);
         const certsCollection = db.collection('certifications');
 
@@ -24,9 +25,12 @@ export async function GET() {
                 validatedCertificates
             );
         }
-    } catch (error) {
-        return NextResponse.error();
-    } finally {
         return NextResponse.json({ data: validatedCertificates });
+    } catch (error) {
+        logger.error(error);
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500, statusText: 'Internal Server Error' }
+        );
     }
 }
