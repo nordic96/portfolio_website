@@ -1,8 +1,8 @@
-import logger from '../../../logger';
-import Certificate, { ICertificate } from '../../../models/Certificate';
-import mongodbUtils from '../../../utils/mongodbUtils';
+import logger from '../../logger';
+import Certificate, { ICertificate } from './Certificate';
+import mongodbUtils from '../../utils/mongodbUtils';
 
-const resolvers = {
+export const resolver = {
     Query: {
         certificates: async (): Promise<ICertificate[]> => {
             try {
@@ -45,5 +45,3 @@ const resolvers = {
     },
     */
 };
-
-export default resolvers;
