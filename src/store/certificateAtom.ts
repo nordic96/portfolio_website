@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { constructApiRoute } from '../constants/routes';
 import { setLoadingValAtom } from './loadingAtom';
-import { ICertificate } from '../models/Certificate';
+import { ICertificate } from '../models/cetificate/Certificate';
 
 const CertificateAtom = atom<ICertificate[]>([]);
 const readonlyCertificateAtom = atom((get) => get(CertificateAtom));

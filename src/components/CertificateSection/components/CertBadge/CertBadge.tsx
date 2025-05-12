@@ -1,5 +1,5 @@
 import React from 'react';
-import { CertificateDTO } from '../../../../models/Certificate';
+import { CertificateDTO } from '../../../../models/cetificate/Certificate';
 
 const COLOR_MAP: Record<string, string> = {
     violet: 'shadow-violet-500/50',

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const typeDefs = gql`
+export const typeDef = gql`
     type Certificate {
         id: ID!
         name: String!
@@ -14,5 +14,3 @@ const typeDefs = gql`
         certificates: [Certificate!]!
     }
 `;
-
-export default typeDefs;
