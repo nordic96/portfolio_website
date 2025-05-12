@@ -10,7 +10,7 @@ import {
     readonlyProjectsAtom,
 } from '../../store/projectsAtom';
 import { readOnlyLoadingAtom } from '../../store/loadingAtom';
-import { IProject } from '../../models/projects';
+import { IProject } from '../../models/project/Project';
 
 const ProjectSection = () => {
     const [, fetchProjects] = useAtom(asyncFetchProjectsAtom);

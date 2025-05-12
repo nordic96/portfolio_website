@@ -1,11 +1,13 @@
+import { Mongoose } from 'mongoose';
+
 declare module '*.png';
 declare module '*.svg';
 
-export interface FullDesignDesc {
-    key: number;
-    name: string;
-    medialink: string;
-    organisation: string;
-    year: number;
-    desc: string;
+interface MongooseCache {
+    client: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+}
+
+declare global {
+    var mongoose: MongooseCache;
 }

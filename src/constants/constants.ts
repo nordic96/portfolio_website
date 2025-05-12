@@ -10,6 +10,11 @@ export const techstackLogoArr: React.DetailedHTMLProps<
         className: 'h-5 md:h-2 max-sm:h-2',
     },
     {
+        src: 'assets/images/graphql.svg',
+        alt: 'graphql',
+        className: 'h-5 md:h-2 max-sm:h-2',
+    },
+    {
         src: 'assets/images/react.svg',
         alt: 'react',
     },

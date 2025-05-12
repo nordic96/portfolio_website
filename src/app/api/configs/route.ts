@@ -4,7 +4,7 @@ import mongoUtils from '../../../utils/mongoUtils';
 import { Labels } from 'labelcontainer/build/types';
 import { MongoClient, WithId, Document } from 'mongodb';
 import schemaUtils from '../../../utils/schemaUtils';
-import { ConfigsSchema } from '../../../models';
+import { ConfigsSchema } from '../../../models/configs';
 
 export async function GET() {
     let data: Labels = {};
