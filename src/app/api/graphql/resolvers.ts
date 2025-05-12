@@ -1,13 +1,12 @@
 import logger from '../../../logger';
-import { ICertificate } from '../../../models';
-import Certificate from '../../../models/Certificate';
-import mongoUtils from '../../../utils/mongoUtils';
+import Certificate, { ICertificate } from '../../../models/Certificate';
+import mongodbUtils from '../../../utils/mongodbUtils';
 
 const resolvers = {
     Query: {
         certificates: async (): Promise<ICertificate[]> => {
             try {
-                const conn = await mongoUtils.connectMongoose(); // Ensure DB connection
+                await mongodbUtils.connectMongoose(); // Ensure DB connection
                 logger.info('Fetching certificates from MongoDB...');
                 // Using .lean() returns plain JS objects.
                 // The virtual 'id' and toJSON/toObject transforms in the schema are primarily for Mongoose documents.
