@@ -1,15 +1,10 @@
-import { ApolloServer } from '@apollo/server';
-import typeDefs from './schema';
-import resolvers from './resolvers';
-import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { NextRequest } from 'next/server';
+import handler from './handler';
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    introspection: process.env.NODE_ENV !== 'production',
-});
+export async function GET(req: NextRequest) {
+    return handler(req);
+}
 
-const handler = startServerAndCreateNextHandler<NextRequest>(server, {});
-
-export { handler as GET, handler as POST };
+export async function POST(req: NextRequest) {
+    return handler(req);
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICertificate } from '../../../../models/Certificate';
+import { CertificateDTO } from '../../../../models/Certificate';
 
 const COLOR_MAP: Record<string, string> = {
     violet: 'shadow-violet-500/50',
@@ -9,7 +9,7 @@ const COLOR_MAP: Record<string, string> = {
     default: '',
 };
 
-const CertBadge: React.FC<ICertificate> = (props: ICertificate) => {
+const CertBadge: React.FC<CertificateDTO> = (props: CertificateDTO) => {
     const { theme_color, name, credentials_url, year_obtained, logo_src } =
         props;
     let baseClass =

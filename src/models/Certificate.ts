@@ -1,12 +1,15 @@
 import mongoose, { Document, Schema, Model, Types } from 'mongoose';
 
-export interface ICertificate extends Document {
-    _id: Types.ObjectId;
+export interface CertificateDTO {
     name: string;
     credentials_url: string;
     year_obtained: string;
     theme_color: string;
     logo_src: string;
+}
+
+export interface ICertificate extends Document, CertificateDTO {
+    _id: Types.ObjectId;
 }
 
 // Mongoose Schema for Certificate
