@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import logger from './logger';
+import CorsHeaders from './constants/CorsHeaders';
 
 export async function middleware(request: NextRequest) {
     logger.info(request.url);
@@ -17,7 +18,18 @@ export async function middleware(request: NextRequest) {
             data
         )}`
     );
+    setCorsHeaders(response);
     return response;
+}
+
+function setCorsHeaders(res: NextResponse): void {
+    const baseUrl = process.env.BASE_URL || '';
+    res.headers.set(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, baseUrl);
+    res.headers.set(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, 'GET, POST');
+    res.headers.set(
+        CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS,
+        'Content-Type, Authorization'
+    );
 }
 
 export const config = {
