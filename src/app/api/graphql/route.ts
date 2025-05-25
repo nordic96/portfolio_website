@@ -1,10 +1,27 @@
-import { NextRequest } from 'next/server';
-import handler from './handler';
+import { NextRequest, NextResponse } from 'next/server';
+import handler, { applyRateLimit } from './handler';
+import logger from '../../../logger';
 
 export async function GET(req: NextRequest) {
-    return handler(req);
+    try {
+        let res = new NextResponse();
+        await applyRateLimit(req, res);
+
+        return handler(req);
+    } catch (err) {
+        logger.error('Rate Limited', err);
+        return err;
+    }
 }
 
 export async function POST(req: NextRequest) {
-    return handler(req);
+    try {
+        let res = new NextResponse();
+        await applyRateLimit(req, res);
+
+        return handler(req);
+    } catch (err) {
+        logger.error('Rate Limited', err);
+        return err;
+    }
 }
