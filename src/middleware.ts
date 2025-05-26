@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import logger from './logger';
 import CorsHeaders from './constants/CorsHeaders';
 
-const NODE_ENV = process.env.NODE_ENV;
-
 export async function middleware(request: NextRequest) {
     logger.info(request.url);
     const response = NextResponse.next();
@@ -11,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
     const origin = request.headers.get('origin');
     const baseUrl = process.env.BASE_URL || '';
-    if (NODE_ENV === 'production' && origin !== baseUrl) {
+    if (origin !== baseUrl) {
         return new NextResponse('Forbiddin origin', { status: 403 });
     }
 
