@@ -10,6 +10,7 @@ frontend:
         - echo "MONGO_DBNAME=$MONGO_DBNAME" >> .env.production
         - echo "injecting env var MONGO_URI..."
         - echo "MONGO_URI=$MONGO_URI" >> .env.production
+        - echo "BASE_URL=$BASE_URL" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
