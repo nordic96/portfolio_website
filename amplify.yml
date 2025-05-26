@@ -6,7 +6,6 @@ frontend:
         - npm install
     build:
       commands:
-        - if [ "${AWS_BRANCH}" == develop/* ]; then echo "NODE_ENV=develop" >> .env.production
         - echo "injecting environment var MONGO_DBNAME..."
         - echo "MONGO_DBNAME=$MONGO_DBNAME" >> .env.production
         - echo "injecting env var MONGO_URI..."
