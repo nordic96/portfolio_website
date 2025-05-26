@@ -21,7 +21,7 @@ const CertificateContainer = () => {
 
     return (
         <div className="flex flex-row gap-2 h-auto">
-            {(loading['certifications'] || certificates.length <= 0) &&
+            {(loading['certificates'] || certificates.length <= 0) &&
                 withLoadingSkeleton(LoadingSkeleton)(3)}
             {certificates.map((x, i) => {
                 return <CertBadge {...x} key={i} />;
