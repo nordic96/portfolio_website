@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
     const origin = request.headers.get('origin');
     const baseUrl = process.env.BASE_URL || '';
-    if (origin !== baseUrl) {
+    if (origin !== baseUrl && process.env.NODE_ENV !== 'development') {
         return new NextResponse('Forbiddin origin', { status: 403 });
     }
 
