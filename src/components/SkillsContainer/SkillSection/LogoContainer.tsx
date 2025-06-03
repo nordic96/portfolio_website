@@ -1,0 +1,62 @@
+'use client';
+
+import React, { useEffect } from 'react';
+import { useAtom } from 'jotai';
+import {
+    asyncFetchSkillsByCategory,
+    readOnlySkillsAtom,
+} from '../../../store/skillsAtom';
+import { SkillCategory } from '../types';
+import { readOnlyLoadingAtom } from '../../../store/loadingAtom';
+import Skeleton from '../../SkeletonComp';
+import withLoadingSkeleton from '../../../utils/withLoadingSkeleton';
+
+interface LogoContainerProps {
+    category: SkillCategory;
+}
+
+const LoadingSkeleton = () => {
+    return (
+        <div className={'min-w-12 max-sm:min-w-10'}>
+            <Skeleton height={12} />
+        </div>
+    );
+};
+
+const LogoContainer: React.FC<LogoContainerProps> = (
+    props: LogoContainerProps
+) => {
+    const { category } = props;
+    const [isLoading] = useAtom(readOnlyLoadingAtom);
+    const [, fetchSkill] = useAtom(asyncFetchSkillsByCategory);
+    const [skills] = useAtom(readOnlySkillsAtom);
+
+    useEffect(() => {
+        if (skills[category].length === 0) {
+            fetchSkill(category);
+        }
+    }, []);
+    console.log(skills);
+    return (
+        <div
+            className={
+                'flex flex-wrap gap-2 items-center w-full lg:justify-end'
+            }>
+            {!isLoading['skills']
+                ? skills[category].map((skill, key) => {
+                      const className = `transition-all duration-200 ease-in-out hover:scale-120 ${skill.source.className}`;
+                      return (
+                          <img
+                              key={key}
+                              alt={skill.name}
+                              src={skill.source.imgSrc}
+                              className={className}
+                          />
+                      );
+                  })
+                : withLoadingSkeleton(LoadingSkeleton)(5)}
+        </div>
+    );
+};
+
+export default LogoContainer;

@@ -1,46 +1,11 @@
 import React from 'react';
 import HeaderLabel from '../HeaderLabel';
-import { ImgProps } from '../../types';
-import { generateSkillSections, SkillCatIconMap } from './constants';
-import { SkillCategory } from './types';
+import { generateSkillSections } from './constants';
 import IconComp from '../common/IcomComp';
 import LabelContainer from 'labelcontainer';
 import Divider from '../common/Divider';
 import Description from '../common/Description';
-
-export interface SkillSectionProps {
-    category: SkillCategory;
-    logos: ImgProps[];
-}
-
-const SkillSection = (props: SkillSectionProps) => {
-    const { logos, category } = props;
-    const lsInstance = LabelContainer.getInstance();
-    return (
-        <div className={'flex gap-4 flex-col items-end max-sm:items-start'}>
-            <HeaderLabel>
-                <IconComp icon={SkillCatIconMap[category]} />
-                {lsInstance.getLabel(`section_title_${category}`)}
-            </HeaderLabel>
-            <div
-                className={
-                    'flex flex-wrap gap-2 items-center w-full lg:justify-end'
-                }>
-                {logos.map((logo, key) => {
-                    const className = `transition-all duration-200 ease-in-out hover:scale-120 ${logo.className}`;
-                    return (
-                        <img
-                            key={key}
-                            alt={logo.alt}
-                            {...logo}
-                            className={className}
-                        />
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
+import SkillSection from './SkillSection/SkillSection';
 
 const SkillsContainer = () => {
     const lsInstance = LabelContainer.getInstance();

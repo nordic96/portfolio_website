@@ -1,4 +1,4 @@
-import { SkillSectionProps } from './SkillsContainer';
+import { SkillSectionProps } from './SkillSection/SkillSection';
 import { SkillCategory } from './types';
 import { IconRecord } from '../common/IcomComp/IconComp';
 
