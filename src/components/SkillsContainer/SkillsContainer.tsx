@@ -1,15 +1,17 @@
 import React from 'react';
-import HeaderLabel from '../HeaderLabel';
-import { generateSkillSections } from './constants';
-import IconComp from '../common/IcomComp';
+
 import LabelContainer from 'labelcontainer';
+
+import HeaderLabel from '../HeaderLabel';
+import IconComp from '../common/IcomComp';
 import Divider from '../common/Divider';
 import Description from '../common/Description';
 import SkillSection from './SkillSection/SkillSection';
 
+import { SkillCategoryArr } from './types';
+
 const SkillsContainer = () => {
     const lsInstance = LabelContainer.getInstance();
-    const isDark = false;
     return (
         <div className={'flex flex-col lg:items-end max-sm:items-start'}>
             <div
@@ -29,8 +31,8 @@ const SkillsContainer = () => {
                 className={
                     'flex flex-col lg:items-end max-sm:items-start items-start text-start gap-4 lg:pb-8 max-sm:pb-4'
                 }>
-                {generateSkillSections(isDark).map((props, key) => {
-                    return <SkillSection {...props} key={key} />;
+                {SkillCategoryArr.map((category, key) => {
+                    return <SkillSection category={category} key={key} />;
                 })}
             </div>
         </div>

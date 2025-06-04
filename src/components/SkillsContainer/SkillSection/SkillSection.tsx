@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { ImgProps } from '../../../types';
 import HeaderLabel from '../../HeaderLabel';
 import IconComp from '../../common/IcomComp';
 import { SkillCatIconMap } from '../constants';
@@ -10,7 +9,6 @@ import { SkillCategory } from '../types';
 
 export interface SkillSectionProps {
     category: SkillCategory;
-    logos: ImgProps[];
 }
 
 const SkillSection = (props: SkillSectionProps) => {

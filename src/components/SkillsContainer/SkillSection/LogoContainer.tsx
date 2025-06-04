@@ -17,8 +17,11 @@ interface LogoContainerProps {
 
 const LoadingSkeleton = () => {
     return (
-        <div className={'min-w-12 max-sm:min-w-10'}>
-            <Skeleton height={12} />
+        <div
+            className={
+                'flex items-center justify-center min-w-12 max-sm:min-w-8'
+            }>
+            <Skeleton height={40} width={40} borderRadius={16} />
         </div>
     );
 };
@@ -36,7 +39,7 @@ const LogoContainer: React.FC<LogoContainerProps> = (
             fetchSkill(category);
         }
     }, []);
-    console.log(skills);
+
     return (
         <div
             className={
