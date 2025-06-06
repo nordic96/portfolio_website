@@ -106,6 +106,14 @@ code {
     position: relative;
 }
 
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
 p {
     margin-bottom: 0 !important;
 }

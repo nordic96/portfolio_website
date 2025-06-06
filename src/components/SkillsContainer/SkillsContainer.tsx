@@ -6,7 +6,7 @@ import HeaderLabel from '../HeaderLabel';
 import IconComp from '../common/IcomComp';
 import Divider from '../common/Divider';
 import Description from '../common/Description';
-import SkillSection from './SkillSection/SkillSection';
+import SkillSection from './components/SkillSection/SkillSection';
 
 import { SkillCategoryArr } from './types';
 

@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types, Model, Document } from 'mongoose';
-type Proficiency = 'beginner' | 'intermediate' | 'advanced';
+export type Proficiency = 'beginner' | 'intermediate' | 'advanced';
 
 interface Source {
     imgSrc: string;
