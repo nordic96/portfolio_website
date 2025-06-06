@@ -5,7 +5,7 @@ const LIMIT_WINDOW = 15 * 60 * 1000; //15 minutes in ms
 
 const rateLimiter = rateLimit({
     windowMs: LIMIT_WINDOW,
-    max: MAX_CALLS,
+    max: process.env.NODE_ENV === 'development' ? 100 : MAX_CALLS,
     message: 'Too many requests, please try again later',
     standardHeaders: true,
     legacyHeaders: true,
