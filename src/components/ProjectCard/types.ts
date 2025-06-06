@@ -1,4 +1,4 @@
-import { IProject } from '../../models/projects';
+import { IProject } from '../../models/project/Project';
 
 export interface ProjectCardProps {
     projectDesc: IProject;
