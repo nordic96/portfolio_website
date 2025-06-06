@@ -2,14 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import logger from './logger';
 import CorsHeaders from './constants/CorsHeaders';
 
+const ALLOWED_ORIGINS: string = process.env.BASE_URL || '';
+function isValidOrigin(origin: string): boolean {
+    if (origin === '') {
+        return false;
+    }
+    return ALLOWED_ORIGINS.includes(origin);
+}
+
 export async function middleware(request: NextRequest) {
     logger.info(request.url);
     const response = NextResponse.next();
     const responseClone = response.clone();
 
-    const origin = request.headers.get('origin');
-    const baseUrl = process.env.BASE_URL || '';
-    if (origin !== baseUrl && process.env.NODE_ENV !== 'development') {
+    const origin = request.headers.get('origin') || '';
+    if (!isValidOrigin(origin) && process.env.NODE_ENV !== 'development') {
         return new NextResponse('Forbiddin origin', { status: 403 });
     }
 
