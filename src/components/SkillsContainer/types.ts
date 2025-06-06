@@ -1,8 +1,8 @@
 export const SkillCategoryArr: string[] = [
     'language',
     'appframework',
-    'devtools',
-    'cicd',
     'cssframework',
+    'cicd',
+    'devtools',
 ] as const;
 export type SkillCategory = (typeof SkillCategoryArr)[number];

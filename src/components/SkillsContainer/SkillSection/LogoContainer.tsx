@@ -49,12 +49,14 @@ const LogoContainer: React.FC<LogoContainerProps> = (
                 ? skills[category].map((skill, key) => {
                       const className = `transition-all duration-200 ease-in-out hover:scale-120 ${skill.source.className}`;
                       return (
-                          <img
-                              key={key}
-                              alt={skill.name}
-                              src={skill.source.imgSrc}
-                              className={className}
-                          />
+                          <div className={'flex max-h-16 max-sm:max-h-12'}>
+                              <img
+                                  key={key}
+                                  alt={skill.name}
+                                  src={skill.source.imgSrc}
+                                  className={className}
+                              />
+                          </div>
                       );
                   })
                 : withLoadingSkeleton(LoadingSkeleton)(5)}
