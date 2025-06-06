@@ -5,11 +5,12 @@ import { useAtom } from 'jotai';
 import {
     asyncFetchSkillsByCategory,
     readOnlySkillsAtom,
-} from '../../../store/skillsAtom';
-import { SkillCategory } from '../types';
-import { readOnlyLoadingAtom } from '../../../store/loadingAtom';
-import Skeleton from '../../SkeletonComp';
-import withLoadingSkeleton from '../../../utils/withLoadingSkeleton';
+} from '../../../../store/skillsAtom';
+import { SkillCategory } from '../../types';
+import { readOnlyLoadingAtom } from '../../../../store/loadingAtom';
+import Skeleton from '../../../SkeletonComp';
+import withLoadingSkeleton from '../../../../utils/withLoadingSkeleton';
+import SkillLogo from './SkillLogo';
 
 interface LogoContainerProps {
     category: SkillCategory;
@@ -46,19 +47,9 @@ const LogoContainer: React.FC<LogoContainerProps> = (
                 'flex flex-wrap gap-2 items-center w-full lg:justify-end'
             }>
             {!isLoading['skills']
-                ? skills[category].map((skill, key) => {
-                      const className = `transition-all duration-200 ease-in-out hover:scale-120 ${skill.source.className}`;
-                      return (
-                          <div className={'flex max-h-16 max-sm:max-h-12'}>
-                              <img
-                                  key={key}
-                                  alt={skill.name}
-                                  src={skill.source.imgSrc}
-                                  className={className}
-                              />
-                          </div>
-                      );
-                  })
+                ? skills[category].map((skill, key) => (
+                      <SkillLogo key={key} skill={skill} />
+                  ))
                 : withLoadingSkeleton(LoadingSkeleton)(5)}
         </div>
     );

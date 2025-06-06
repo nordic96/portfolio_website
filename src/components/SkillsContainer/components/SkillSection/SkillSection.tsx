@@ -1,11 +1,11 @@
 import React from 'react';
 
-import HeaderLabel from '../../HeaderLabel';
-import IconComp from '../../common/IcomComp';
-import { SkillCatIconMap } from '../constants';
+import HeaderLabel from '../../../HeaderLabel';
+import IconComp from '../../../common/IcomComp';
+import { SkillCatIconMap } from '../../constants';
 import LabelContainer from 'labelcontainer';
-import LogoContainer from './LogoContainer';
-import { SkillCategory } from '../types';
+import LogoContainer from '../LogoContainer/LogoContainer';
+import { SkillCategory } from '../../types';
 
 export interface SkillSectionProps {
     category: SkillCategory;
