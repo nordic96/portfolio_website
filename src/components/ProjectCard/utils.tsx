@@ -9,7 +9,7 @@ function utilGetRandomColor() {
 
 function createTags(tags: string[]) {
     return (
-        <div className={'flex flex-wrap gap-1'}>
+        <div className={'flex flex-wrap gap-1 justify-center w-[100%]'}>
             {tags.map((tag, index) => {
                 const className = utilGetRandomColor();
                 return (
