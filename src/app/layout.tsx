@@ -3,7 +3,13 @@ import { Metadata, Viewport } from 'next';
 import { Noto_Sans_Display } from 'next/font/google';
 import { Provider } from 'jotai';
 
+import { GET as getConfigData } from './api/configs/route';
+
 import '../styles/globals.css';
+import NavBar from '../components/NavBar';
+import FooterComp from '../components/FooterComp';
+import LabelContainer from 'labelcontainer';
+import { Labels } from 'labelcontainer/build/types';
 
 const notoSansDisplay = Noto_Sans_Display({
     subsets: ['latin'],
@@ -38,15 +44,36 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+async function fetchConfigs() {
+    const data = await getConfigData().then((res) => res.json());
+    const lsInstance = LabelContainer.getInstance();
+    lsInstance.setLabels(data.configs as Labels);
+}
+
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    if (process.env.NODE_ENV !== 'test') {
+        await fetchConfigs();
+    }
     return (
         <html lang="en" className={notoSansDisplay.className}>
             <body>
-                <Provider>{children}</Provider>
+                <Provider>
+                    <NavBar />
+                    <div className="App">
+                        <div
+                            id="page-container"
+                            className={
+                                'bg:white dark:bg-neutral-900 dark:text-white lg:px-16 max-sm:px-4 py-4 flex justify-center relative flex-col items-center'
+                            }>
+                            {children}
+                        </div>
+                    </div>
+                    <FooterComp />
+                </Provider>
             </body>
         </html>
     );
