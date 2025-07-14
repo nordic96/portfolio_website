@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 function NavBar() {
@@ -29,7 +30,9 @@ function NavBar() {
                         </a>
                         {renderThemeSwticher()}
                     </div>
-                    <p>v{process.env.VERSION}</p>
+                    <Link href={'/changelogs'}>
+                        <p>v{process.env.VERSION}</p>
+                    </Link>
                 </div>
             </div>
             <img
