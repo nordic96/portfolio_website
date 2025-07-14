@@ -11,7 +11,7 @@ export default function Page() {
         <div className={'w-[70.5rem] max-sm:w-[100%] text-wrap'}>
             <div
                 className={
-                    'flex flex-col items-start gap-4 relative min-w-100% justify-start'
+                    'flex flex-col items-start gap-16 relative min-w-100% justify-start'
                 }>
                 <PageTitle>
                     {lsInstance.getLabel('page_title_changelogs')}

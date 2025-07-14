@@ -9,9 +9,10 @@ import { Release } from '../../models/release';
 import HeaderLabel from '../../components/HeaderLabel';
 import dateUtils from '../../utils/dateUtils';
 import { readOnlyLoadingAtom } from '../../store/loadingAtom';
-import SkeletonComp from '../../components/SkeletonComp';
+
 import withLoadingSkeleton from '../../utils/withLoadingSkeleton';
 import LoadingSkeleton from '../../components/ProjectCard/LoadingSkeleton';
+import IconComp from '../../components/common/IcomComp';
 
 interface ChangeLogProps {
     release: Release;
@@ -22,9 +23,9 @@ const ChangeLog: React.FC<ChangeLogProps> = (props: ChangeLogProps) => {
     return (
         <div
             className={
-                'w-[100%] align-start text-start px-8 py-4 bg-[#f9f9f9] shadow-md rounded-sm'
+                'w-[100%] flex align-start text-start px-8 py-4 gap-4 bg-[#f9f9f9] shadow-md rounded-sm'
             }>
-            <div className={'flex gap-2 justify-between items-center'}>
+            <div className={'flex flex-col gap-2 items-start min-w-[30%]'}>
                 <a
                     className={'flex gap-2 items-center hover:text-coolblue'}
                     href={release.html_url}
@@ -38,15 +39,21 @@ const ChangeLog: React.FC<ChangeLogProps> = (props: ChangeLogProps) => {
                         alt={'icon'}
                     />
                 </a>
-                <label>
+                <div className={'text-md align-center flex items-center'}>
+                    <div
+                        className={
+                            'px-1 gap-1 bg-siablue text-white rounded-lg'
+                        }>
+                        {release.tag_name}
+                    </div>
+                    <IconComp icon={'LocalOffer'} />
+                </div>
+                <label className={'rounded-xl text-lg bg-[#d3d3d3] px-2'}>
                     Published: {dateUtils.formatShortDate(release.published_at)}
                 </label>
             </div>
-            <div
-                className={
-                    'mt-4 flex flex-row max-sm:flex-col justify-between'
-                }>
-                <div className={'max-w-[35rem]'}>{release.body}</div>
+            <div className={'flex flex-row min-w-[70%] justify-between'}>
+                <div className={'max-w-[80%]'}>{release.body}</div>
                 <div>
                     <a href={release.author.html_url} target={'_blank'}>
                         <img
@@ -75,7 +82,7 @@ const ChangelogContent: React.FC<{}> = () => {
     return (
         <div
             className={
-                'flex flex-wrap gap-16 py-16 max-sm:py-2 max-sm:gap-8 min-h-[50rem]'
+                'flex flex-wrap gap-12 py-16 max-sm:py-2 max-sm:gap-8 min-h-[50rem]'
             }>
             {isLoading['releases'] && displayLoading(5)}
             {!isLoading['releases'] &&
