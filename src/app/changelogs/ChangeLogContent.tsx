@@ -42,12 +42,15 @@ const ChangeLog: React.FC<ChangeLogProps> = (props: ChangeLogProps) => {
                     Published: {dateUtils.formatShortDate(release.published_at)}
                 </label>
             </div>
-            <div className={'mt-4 flex flex-row justify-between'}>
+            <div
+                className={
+                    'mt-4 flex flex-row max-sm:flex-col justify-between'
+                }>
                 <div className={'max-w-[35rem]'}>{release.body}</div>
                 <div>
                     <a href={release.author.html_url} target={'_blank'}>
                         <img
-                            className={'w-15 h-15 rounded-full'}
+                            className={'w-15 max-sm:w-9 rounded-full'}
                             src={release.author.avatar_url}
                             alt={'author'}
                         />
@@ -70,7 +73,10 @@ const ChangelogContent: React.FC<{}> = () => {
     }, []);
 
     return (
-        <div className={'flex flex-wrap gap-16 py-16 min-h-[50rem]'}>
+        <div
+            className={
+                'flex flex-wrap gap-16 py-16 max-sm:py-2 max-sm:gap-8 min-h-[50rem]'
+            }>
             {isLoading['releases'] && displayLoading(5)}
             {!isLoading['releases'] &&
                 releases.map((r, id) => {

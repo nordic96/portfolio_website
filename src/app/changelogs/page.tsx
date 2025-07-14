@@ -8,7 +8,7 @@ import Divider from '../../components/common/Divider';
 export default function Page() {
     const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'max-w-[70.5rem] text-wrap'}>
+        <div className={'w-[70.5rem] max-sm:w-[100%] text-wrap'}>
             <div
                 className={
                     'flex flex-col items-start gap-4 relative min-w-100% justify-start'
