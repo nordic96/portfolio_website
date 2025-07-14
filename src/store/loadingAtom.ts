@@ -1,6 +1,11 @@
 import { atom } from 'jotai';
 
-export type LoadingState = 'projects' | 'certificates' | 'configs' | 'skills';
+export type LoadingState =
+    | 'projects'
+    | 'certificates'
+    | 'configs'
+    | 'skills'
+    | 'releases';
 type LoadingMap = Record<LoadingState, boolean>;
 
 const loadingAtom = atom<LoadingMap>({
@@ -8,6 +13,7 @@ const loadingAtom = atom<LoadingMap>({
     configs: false,
     certificates: false,
     skills: false,
+    releases: false,
 });
 
 const readOnlyLoadingAtom = atom((get) => get(loadingAtom));
