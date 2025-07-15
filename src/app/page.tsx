@@ -7,9 +7,18 @@ import TechStackSection from '../components/TechStackSection';
 import ProjectSection from '../components/ProjectSection';
 import SkillsContainer from '../components/SkillsContainer';
 
+import { GET as getConfigData } from './api/configs/route';
+import LabelContainer from 'labelcontainer';
+import { Labels } from 'labelcontainer/build/types';
+
 import Banner from '../components/Banner';
 import Divider from '../components/common/Divider';
-import { fetchConfigs } from './layout';
+
+export async function fetchConfigs() {
+    const data = await getConfigData().then((res) => res.json());
+    const lsInstance = LabelContainer.getInstance();
+    lsInstance.setLabels(data.configs as Labels);
+}
 
 export default async function Page() {
     if (process.env.NODE_ENV !== 'test') {

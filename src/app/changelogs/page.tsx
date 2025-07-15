@@ -7,8 +7,12 @@ import Divider from '../../components/common/Divider';
 import { ArrowBack } from '@mui/icons-material';
 import GradientButton from '../../components/GradientButton/GradientButton';
 import Link from 'next/link';
+import { fetchConfigs } from '../page';
 
-export default function Page() {
+export default async function Page() {
+    if (process.env.NODE_ENV !== 'test') {
+        await fetchConfigs();
+    }
     const lsInstance = LabelContainer.getInstance();
 
     return (
