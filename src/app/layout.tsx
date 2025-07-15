@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     },
 };
 
-async function fetchConfigs() {
+export async function fetchConfigs() {
     const data = await getConfigData().then((res) => res.json());
     const lsInstance = LabelContainer.getInstance();
     lsInstance.setLabels(data.configs as Labels);

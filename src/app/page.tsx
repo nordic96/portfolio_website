@@ -9,8 +9,12 @@ import SkillsContainer from '../components/SkillsContainer';
 
 import Banner from '../components/Banner';
 import Divider from '../components/common/Divider';
+import { fetchConfigs } from './layout';
 
 export default async function Page() {
+    if (process.env.NODE_ENV !== 'test') {
+        await fetchConfigs();
+    }
     return (
         <>
             <Banner />
