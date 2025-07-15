@@ -11,6 +11,8 @@ frontend:
         - echo "injecting env var MONGO_URI..."
         - echo "MONGO_URI=$MONGO_URI" >> .env.production
         - echo "BASE_URL=$BASE_URL" >> .env.production
+        - echo "GITHUB_PAT=$GITHUB_PAT" >> .env.production
+        - echo "GITHUB_API_PATH=$GITHUB_API_PATH" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
