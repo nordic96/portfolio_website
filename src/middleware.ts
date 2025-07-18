@@ -3,20 +3,25 @@ import logger from './logger';
 import CorsHeaders from './constants/CorsHeaders';
 
 const ALLOWED_ORIGINS: string = process.env.BASE_URL || '';
-function isValidOrigin(origin: string): boolean {
-    if (origin === '') {
+function isSameOrValidOrigin(headers: Headers): boolean {
+    if (headers.get('sec-fetch-site') === 'same-origin') {
+        return true;
+    }
+    const origin = headers.get('origin');
+    if (!origin || !ALLOWED_ORIGINS.includes(origin)) {
         return false;
     }
-    return ALLOWED_ORIGINS.includes(origin);
+    return true;
 }
 
+const ENV = process.env.NODE_ENV;
 export async function middleware(request: NextRequest) {
-    logger.info(request.url);
     const response = NextResponse.next();
     const responseClone = response.clone();
 
     const origin = request.headers.get('origin') || '';
-    if (!isValidOrigin(origin) && process.env.NODE_ENV !== 'development') {
+    logger.info(`[ENV:${ENV}] [MIDDLEWARE] origin:${origin} => ${request.url}`);
+    if (!isSameOrValidOrigin(request.headers)) {
         return new NextResponse('Forbiddin origin', { status: 403 });
     }
 
