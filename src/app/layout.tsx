@@ -13,7 +13,7 @@ const notoSansDisplay = Noto_Sans_Display({
 
 export const viewport: Viewport = {
     width: 'device-width',
-    initialScale: 0.85,
+    initialScale: 0.82,
 };
 
 export const metadata: Metadata = {
