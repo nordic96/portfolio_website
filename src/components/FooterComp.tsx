@@ -1,8 +1,6 @@
 import React from 'react';
-import LabelContainer from 'labelcontainer';
 
 const FooterComp: React.FC<{}> = () => {
-    const lsInstance = LabelContainer.getInstance();
     return (
         <div
             className={
@@ -20,7 +18,9 @@ const FooterComp: React.FC<{}> = () => {
                         About this Website
                     </p>
                     <p className={'lg:text-base md:text-sm max-sm:text-xs'}>
-                        {lsInstance.getLabel('footer_desc_1')}
+                        {
+                            '©2025 Stephen Ko All Rights Reserved. Website design and development adhere to accessibility guidelines.'
+                        }
                     </p>
                 </div>
             </div>
