@@ -10,7 +10,7 @@ const Banner = () => {
             }>
             <img
                 className={
-                    'absolute h-12 max-sm:h-8 -right-6 max-sm:-right-3 -top-8 max-sm:-top-6'
+                    'absolute h-12 max-sm:h-8 -right-6 max-sm:-right-4 -top-8 max-sm:-top-6'
                 }
                 src={'assets/images/sailorcap.png'}
                 alt={'sailorcap'}

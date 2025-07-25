@@ -1,42 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Banner UI Component should match snapshot 1`] = `
+exports[`Footer Component should match with snapshot 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="items-center relative gap-2 rounded-md flex lg:min-w-[70.5rem] max-sm:w-full py-2 px-2 justify-start bg-siablue text-white text-lg max-sm:text-sm text-start"
+        class="relative text-white py-4 bg-coolblack bottom-0 w-full h-32 flex justify-center"
       >
-        <img
-          alt="sailorcap"
-          class="absolute h-12 max-sm:h-8 -right-6 max-sm:-right-4 -top-8 max-sm:-top-6"
-          src="assets/images/sailorcap.png"
-        />
-        <img
-          alt="info_icon"
-          class="h-6"
-          src="assets/icons/info_icon.png"
-        />
-        mock_banner_msg
+        <div
+          class="flex flex-row justify-between gap-4 lg:w-[70.5rem] max-sm:px-4"
+        >
+          <div
+            class="flex-1 text-left"
+          >
+            <p
+              class="font-bold lg:text-lg md:text-base max-sm:text-sm"
+            >
+              About this Website
+            </p>
+            <p
+              class="lg:text-base md:text-sm max-sm:text-xs"
+            >
+              ©2025 Stephen Ko All Rights Reserved. Website design and development adhere to accessibility guidelines.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="items-center relative gap-2 rounded-md flex lg:min-w-[70.5rem] max-sm:w-full py-2 px-2 justify-start bg-siablue text-white text-lg max-sm:text-sm text-start"
+      class="relative text-white py-4 bg-coolblack bottom-0 w-full h-32 flex justify-center"
     >
-      <img
-        alt="sailorcap"
-        class="absolute h-12 max-sm:h-8 -right-6 max-sm:-right-4 -top-8 max-sm:-top-6"
-        src="assets/images/sailorcap.png"
-      />
-      <img
-        alt="info_icon"
-        class="h-6"
-        src="assets/icons/info_icon.png"
-      />
-      mock_banner_msg
+      <div
+        class="flex flex-row justify-between gap-4 lg:w-[70.5rem] max-sm:px-4"
+      >
+        <div
+          class="flex-1 text-left"
+        >
+          <p
+            class="font-bold lg:text-lg md:text-base max-sm:text-sm"
+          >
+            About this Website
+          </p>
+          <p
+            class="lg:text-base md:text-sm max-sm:text-xs"
+          >
+            ©2025 Stephen Ko All Rights Reserved. Website design and development adhere to accessibility guidelines.
+          </p>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

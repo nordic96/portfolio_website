@@ -7,15 +7,14 @@ import TechStackSection from '../components/TechStackSection';
 import ProjectSection from '../components/ProjectSection';
 import SkillsContainer from '../components/SkillsContainer';
 
+import { GET as getConfigData } from './api/configs/route';
 import LabelContainer from 'labelcontainer';
 import { Labels } from 'labelcontainer/build/types';
-import { GET as getConfigData } from './api/configs/route';
+
 import Banner from '../components/Banner';
 import Divider from '../components/common/Divider';
-import FooterComp from '../components/FooterComp';
-import NavBar from '../components/NavBar';
 
-async function fetchConfigs() {
+export async function fetchConfigs() {
     const data = await getConfigData().then((res) => res.json());
     const lsInstance = LabelContainer.getInstance();
     lsInstance.setLabels(data.configs as Labels);
@@ -25,34 +24,23 @@ export default async function Page() {
     if (process.env.NODE_ENV !== 'test') {
         await fetchConfigs();
     }
-
     return (
         <>
-            <NavBar />
-            <div className="App">
-                <div
-                    id="page-container"
-                    className={
-                        'bg:white dark:bg-neutral-900 dark:text-white lg:px-16 max-sm:px-4 py-4 flex justify-center relative flex-col items-center'
-                    }>
-                    <Banner />
-                    <div
-                        className={
-                            'flex justify-center lg:flex-row md:flex-row max-sm:flex-col gap-4 max-sm:w-full pt-4'
-                        }>
-                        <IntroSection />
-                        <div className={'flex flex-col gap-4'}>
-                            <SkillsContainer />
-                            <ProjectSection />
-                        </div>
-                    </div>
-                    <Divider />
-                    <HistorySection />
-                    <Divider />
-                    <TechStackSection />
+            <Banner />
+            <div
+                className={
+                    'flex justify-center lg:flex-row md:flex-row max-sm:flex-col gap-4 max-sm:w-full pt-4'
+                }>
+                <IntroSection />
+                <div className={'flex flex-col gap-4'}>
+                    <SkillsContainer />
+                    <ProjectSection />
                 </div>
             </div>
-            <FooterComp />
+            <Divider />
+            <HistorySection />
+            <Divider />
+            <TechStackSection />
         </>
     );
 }
