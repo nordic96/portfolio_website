@@ -1,19 +1,18 @@
 'use client';
 import React from 'react';
 
-import LabelContainer from 'labelcontainer';
 import { Download } from '@mui/icons-material';
 
 interface ResumeBtnProps {
     label: string;
+    url: string;
 }
 
 const ResumeButton: React.FC<ResumeBtnProps> = (props: ResumeBtnProps) => {
-    const { label } = props;
-    const lsInstance = LabelContainer.getInstance();
+    const { label, url } = props;
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        window.open(lsInstance.getLabel('url_resume'), '_blank');
+        window.open(url, '_blank');
     };
 
     return (
