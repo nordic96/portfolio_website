@@ -4,14 +4,29 @@ import Project, { IProject } from './Project';
 
 export const resolver = {
     Query: {
-        projects: async (): Promise<IProject[]> => {
+        projects: async (
+            _parent: any,
+            args: any,
+            _context: any
+        ): Promise<IProject[]> => {
             try {
                 await mongodbUtils.connectMongoose(); // Ensure DB connection
                 logger.info('Fetching projects from MongoDB...');
                 // Using .lean() returns plain JS objects.
                 // The virtual 'id' and toJSON/toObject transforms in the schema are primarily for Mongoose documents.
                 // When using .lean(), you often need to handle transformations explicitly if they are not simple field mappings.
-                const projectsData = await Project.find({}).lean().exec();
+                let projectsData;
+                if (args.orderBy.year === 'ASC') {
+                    projectsData = await Project.find({})
+                        .sort({ devyear: 1 })
+                        .lean()
+                        .exec();
+                } else {
+                    projectsData = await Project.find({})
+                        .sort({ devyear: -1 })
+                        .lean()
+                        .exec();
+                }
 
                 logger.info(`Found ${projectsData.length} projects.`);
 

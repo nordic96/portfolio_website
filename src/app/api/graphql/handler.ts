@@ -1,6 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { merge } from 'lodash';
 
+import { typeDef as globalType } from '../../../models/globalSchema';
 import { typeDef as projectType } from '../../../models/project/schema';
 import { typeDef as certificateType } from '../../../models/cetificate/schema';
 import { typeDef as skillType } from '../../../models/skill/schema';
@@ -13,7 +14,7 @@ import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { NextRequest, NextResponse } from 'next/server';
 import rateLimiter from '../../../utils/rateLimiter';
 
-const typeDefs = [certificateType, projectType, skillType];
+const typeDefs = [globalType, certificateType, projectType, skillType];
 const resolvers = merge(certificateResolver, projectResolver, skillResolver);
 
 const server = new ApolloServer({
