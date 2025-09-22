@@ -7,7 +7,7 @@ const projectsAtom = atom<IProject[]>([]);
 const readonlyProjectsAtom = atom<IProject[]>((get) => get(projectsAtom));
 
 const FETCH_QUERY = `{
-    projects {
+    projects(orderBy: { year: DESC }) {
         id
         name
         devyear

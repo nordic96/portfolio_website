@@ -12,7 +12,11 @@ export const typeDef = gql`
         desc: String!
     }
 
+    input ProjectOrderByInput {
+        year: SortOrder
+    }
+
     type Query {
-        projects: [Project!]!
+        projects(orderBy: ProjectOrderByInput): [Project!]!
     }
 `;
