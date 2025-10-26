@@ -15,6 +15,11 @@ export const IconRecord: Record<
             default: mod.default,
         }))
     ),
+    Workspace: lazy(() =>
+        import('@mui/icons-material/Workspaces').then((mod) => ({
+            default: mod.default,
+        }))
+    ),
     Code: lazy(() =>
         import('@mui/icons-material/Code').then((mod) => ({
             default: mod.default,
