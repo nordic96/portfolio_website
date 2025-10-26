@@ -36,7 +36,7 @@ const LogoContainer: React.FC<LogoContainerProps> = (
     const [skills] = useAtom(readOnlySkillsAtom);
 
     useEffect(() => {
-        if (skills[category].length === 0) {
+        if (skills[category] && skills[category].length === 0) {
             fetchSkill(category);
         }
     }, []);
@@ -47,7 +47,7 @@ const LogoContainer: React.FC<LogoContainerProps> = (
                 'flex flex-wrap gap-2 items-center w-full lg:justify-end'
             }>
             {!isLoading['skills']
-                ? skills[category].map((skill, key) => (
+                ? (skills[category] || []).map((skill, key) => (
                       <SkillLogo key={key} skill={skill} />
                   ))
                 : withLoadingSkeleton(LoadingSkeleton)(5)}

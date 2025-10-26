@@ -1,6 +1,7 @@
 export const SkillCategoryArr: string[] = [
     'language',
     'appframework',
+    'statemanagement',
     'cssframework',
     'cicd',
     'devtools',

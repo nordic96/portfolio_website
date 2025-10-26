@@ -7,6 +7,7 @@ import { SkillCategory } from '../components/SkillsContainer/types';
 type Skills = Record<SkillCategory, ISkill[]>;
 const skillsAtom = atom<Skills>({
     language: [],
+    statemanagement: [],
     appframework: [],
     cssframework: [],
     cicd: [],
