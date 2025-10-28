@@ -60,7 +60,10 @@ const IntroSection = () => {
                     className={
                         'flex flex-row gap-2 pt-2 w-[100%] items-center max-sm:justify-end'
                     }>
-                    <ResumeButton label={lsInstance.getLabel('btn_resume')} />
+                    <ResumeButton
+                        label={lsInstance.getLabel('btn_resume')}
+                        url={lsInstance.getLabel('url_resume')}
+                    />
                     {generateIcons(false).map((x, i) => {
                         return <IDIcon {...x} key={i} />;
                     })}

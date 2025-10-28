@@ -13,11 +13,11 @@ import { SkillCategoryArr } from './types';
 const SkillsContainer = () => {
     const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'flex flex-col lg:items-end max-sm:items-start'}>
-            <div
-                className={
-                    'max-w-[32rem] flex flex-col items-start text-start'
-                }>
+        <div
+            className={
+                'flex max-w-[32rem] flex-col lg:items-end max-sm:items-start'
+            }>
+            <div className={'flex flex-col items-start text-start'}>
                 <HeaderLabel>
                     <IconComp icon={'EmojiObjects'} />
                     {lsInstance.getLabel('heading_skills')}
