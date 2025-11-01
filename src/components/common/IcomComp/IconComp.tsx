@@ -51,6 +51,11 @@ export const IconRecord: Record<
             default: mod.default,
         }))
     ),
+    Publish: lazy(() =>
+        import('@mui/icons-material/Publish').then((mod) => ({
+            default: mod.default,
+        }))
+    ),
 };
 
 interface IconProps {

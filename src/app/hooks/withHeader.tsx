@@ -3,13 +3,17 @@ import HeaderLabel from '../../components/HeaderLabel';
 import Description from '../../components/common/Description';
 import Divider from '../../components/common/Divider';
 import LabelContainer from 'labelcontainer';
+import IconComp, {
+    IconRecord,
+} from '../../components/common/IcomComp/IconComp';
 
 type WithHeaderOptions = {
     containerClassName?: string;
     dividerClassName?: string;
+    icon?: keyof typeof IconRecord;
 };
 
-function withHeader<P extends {}>(
+function withHeader<P extends {}, U>(
     Component: ComponentType<P>,
     headerKey: string,
     options?: WithHeaderOptions
@@ -24,6 +28,7 @@ function withHeader<P extends {}>(
                         : 'flex flex-col py-4 max-sm:py-2 w-[30.2rem] max-sm:w-full text-start'
                 }>
                 <HeaderLabel>
+                    {options?.icon && <IconComp icon={options.icon} />}
                     {lsInstance.getLabel(`heading_${headerKey}`)}
                 </HeaderLabel>
                 <Description>
