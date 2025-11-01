@@ -7,6 +7,7 @@ import { generateIcons } from '../../constants/profileIcons';
 import IDIcon from '../IDIcon/IDIcon';
 import LabelContainer from 'labelcontainer';
 import CertificateSection from '../CertificateSection';
+import OpenSourceContainer from '../OpenSourceContainer';
 
 const IntroSection = () => {
     const lsInstance = LabelContainer.getInstance();
@@ -68,6 +69,7 @@ const IntroSection = () => {
                         return <IDIcon {...x} key={i} />;
                     })}
                 </div>
+                <OpenSourceContainer />
                 <CertificateSection />
             </div>
         </div>
