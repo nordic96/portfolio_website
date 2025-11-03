@@ -23,11 +23,11 @@ const SkillLogo: React.FC<SkillLogoProps> = (props) => {
     const className = `transition-all duration-200 ease-in-out hover:scale-120 ${skill.source.className}`;
     const tooltipClass = constructTooltipClass(skill.proficiency);
     return (
-        <div
-            className={
-                'has-tooltip flex flex-col gap-1 justify-center text-white'
-            }>
-            <div className={'max-h-16 max-sm:max-h-12'}>
+        <div className={'has-tooltip flex flex-col gap-1 text-white'}>
+            <div
+                className={
+                    'border-2 p-1 h-16 max-sm:h-12 w-16 max-sm:w-12 flex items-center rounded-xl justify-center shadow-md'
+                }>
                 <a href={skill.source.pageUrl} target={'_blank'}>
                     <img
                         alt={skill.name}
