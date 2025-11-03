@@ -15,7 +15,7 @@ const SkillSection = (props: SkillSectionProps) => {
     const { category } = props;
     const lsInstance = LabelContainer.getInstance();
     return (
-        <div className={'flex gap-4 flex-col items-end max-sm:items-start'}>
+        <div className={'flex gap-4 flex-col items-start'}>
             <HeaderLabel>
                 <IconComp icon={SkillCatIconMap[category]} />
                 {lsInstance.getLabel(`section_title_${category}`)}
