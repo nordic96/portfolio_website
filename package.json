@@ -1,6 +1,6 @@
 {
   "name": "portfolio_website",
-  "version": "1.0",
+  "version": "1.2.4",
   "private": true,
   "engines": {
     "node": ">=18.x <=20.x"
