@@ -44,7 +44,7 @@ const LogoContainer: React.FC<LogoContainerProps> = (
     return (
         <div
             className={
-                'flex flex-wrap gap-2 items-center w-full lg:justify-end'
+                'flex flex-wrap gap-2 items-center w-full lg:justify-start'
             }>
             {!isLoading['skills']
                 ? (skills[category] || []).map((skill, key) => (
