@@ -44,7 +44,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/graphql": "^14.2.3",
     "@types/jest": "^30.0.0",
-    "@types/lodash": "^4.17.19",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^18.11.4",
     "@types/react-dom": "^19.1.7",
     "@typescript-eslint/parser": "^8.31.1",
