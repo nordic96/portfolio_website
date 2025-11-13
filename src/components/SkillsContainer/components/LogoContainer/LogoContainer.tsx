@@ -47,12 +47,13 @@ const LogoContainer: React.FC<LogoContainerProps> = (
                 'flex flex-wrap gap-2 items-center w-full lg:justify-start'
             }>
             {!isLoading['skills']
-                ? (skills[category] || []).map((skill, key) => (
-                      <SkillLogo key={key} skill={skill} />
+                ? (skills[category] || []).map((skill, _) => (
+                      <MemoisedSkillLogo key={skill.id} skill={skill} />
                   ))
                 : withLoadingSkeleton(LoadingSkeleton)(5)}
         </div>
     );
 };
 
+const MemoisedSkillLogo = React.memo(SkillLogo);
 export default LogoContainer;
