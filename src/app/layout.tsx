@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata, Viewport } from 'next';
 import { Noto_Sans_Display } from 'next/font/google';
 import { Provider } from 'jotai';
+import { Analytics } from '@vercel/analytics/next';
 
 import '../styles/globals.css';
 import NavBar from '../components/NavBar';
@@ -61,6 +62,7 @@ export default async function RootLayout({
                     </div>
                     <FooterComp />
                 </Provider>
+                <Analytics />
             </body>
         </html>
     );
