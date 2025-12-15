@@ -61,16 +61,16 @@ const ProjectSchema: Schema<IProject> = new Schema(
             virtuals: true,
             transform(doc, ret) {
                 ret.id = ret._id;
-                delete ret._id;
-                delete ret.__v;
+                // delete ret._id;
+                // delete ret.__v;
             },
         },
         toObject: {
             virtuals: true,
             transform(doc, ret) {
                 ret.id = ret._id;
-                delete ret._id;
-                delete ret.__v;
+                // delete ret._id;
+                // delete ret.__v;
             },
         },
     }

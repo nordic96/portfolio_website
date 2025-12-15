@@ -45,8 +45,8 @@ const CertificateSchema: Schema<ICertificate> = new Schema(
             virtuals: true, // Ensure virtuals are included
             transform(doc, ret) {
                 ret.id = ret._id; // Map _id to id
-                delete ret._id; // Remove _id
-                delete ret.__v; // Remove __v
+                // delete ret._id; // Remove _id
+                // delete ret.__v; // Remove __v
             },
         },
         toObject: {
@@ -54,8 +54,8 @@ const CertificateSchema: Schema<ICertificate> = new Schema(
             virtuals: true,
             transform(doc, ret) {
                 ret.id = ret._id;
-                delete ret._id;
-                delete ret.__v;
+                // delete ret._id;
+                // delete ret.__v;
             },
         },
     }

@@ -37,7 +37,7 @@ async function connectMongo(): Promise<MongoClient> {
                 logger.warn('[mongoConnect] MongoDB connection closed');
             });
             client.on('error', (err) => {
-                logger.error('[mongoConnect] MongoDB connection error', err);
+                logger.error(`[mongoConnect] MongoDB connection error ${err}`);
             });
             return client;
         } catch (error) {
