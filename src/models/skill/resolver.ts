@@ -11,9 +11,9 @@ export const resolver = {
                 return skillsData.map((skill) => ({
                     ...skill,
                     id: skill._id.toString(),
-                })) as ISkill[];
+                })) as unknown as ISkill[];
             } catch (error) {
-                logger.error('Error fetching skills:', error);
+                logger.error(`Error fetching skills: ${error}`);
                 throw new Error('Failed to fetch skills from database.');
             }
         },
@@ -34,7 +34,7 @@ export const resolver = {
                 return skillsData.map((skill) => ({
                     ...skill,
                     id: skill._id.toString(),
-                })) as ISkill[];
+                })) as unknown as ISkill[];
             } catch (error) {
                 logger.error(
                     `Error fetching skills by category ${args.category}`

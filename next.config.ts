@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     env: {
         VERSION: process.env.APP_VERSION,
     },
+    serverExternalPackages: ['pino', 'thread-stream', 'pino-pretty'],
     output: 'standalone',
     transpilePackages: ['@mui/material', '@mui/icons-material'],
 };
