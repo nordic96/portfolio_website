@@ -22,9 +22,9 @@ export const resolver = {
                 return certificatesData.map((cert) => ({
                     ...cert,
                     id: cert._id.toString(), // Ensure 'id' is populated correctly from '_id'
-                })) as ICertificate[]; // Cast to ICertificate[] (ensure your ICertificate has 'id' as optional or string)
+                })) as unknown as ICertificate[]; // Cast to ICertificate[] (ensure your ICertificate has 'id' as optional or string)
             } catch (error) {
-                logger.error('Error fetching certificates:', error);
+                logger.error(`Error fetching certificates: ${error}`);
                 throw new Error('Failed to fetch certificates from database.');
             }
         },

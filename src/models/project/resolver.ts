@@ -35,9 +35,9 @@ export const resolver = {
                 return projectsData.map((cert) => ({
                     ...cert,
                     id: cert._id.toString(), // Ensure 'id' is populated correctly from '_id'
-                })) as IProject[]; // Cast to ICertificate[] (ensure your ICertificate has 'id' as optional or string)
+                })) as unknown as IProject[]; // Cast to ICertificate[] (ensure your ICertificate has 'id' as optional or string)
             } catch (error) {
-                logger.error('Error fetching projects:', error);
+                logger.error(`Error fetching projects: ${error}`);
                 throw new Error('Failed to fetch projects from database.');
             }
         },

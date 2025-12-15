@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
         return handler(req);
     } catch (err) {
-        logger.error('Rate Limited', err);
+        logger.error(`Rate Limited ${err}`);
     }
 }
 
@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
 
         return handler(req);
     } catch (err) {
-        logger.error('Rate Limited', err);
+        logger.error(`Rate Limited ${err}`);
     }
 }
