@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+
 import { CardActionArea, CardContent } from '@mui/material';
 import { ProjectCardProps } from './types';
 import { createLink, createTags } from './utils';
@@ -20,10 +22,12 @@ const ProjectCard = (props: ProjectCardProps) => {
                 'lg:max-w-lg max-sm:w-full rounded-sm lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
             }>
             <CardActionArea onClick={onClickCard}>
-                <img
-                    src={`https://lh3.googleusercontent.com/${medialink}`}
+                <Image
+                    src={`https://cdn.jsdelivr.net/gh/nordic96/portfolio_website/resources/${medialink}`}
                     alt={'project_img'}
                     className={'w-full rounded-t'}
+                    width={'0'}
+                    height={'0'}
                 />
                 <CardContent>
                     <div
