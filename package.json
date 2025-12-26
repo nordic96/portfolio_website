@@ -81,12 +81,6 @@
   "cacheDirectories": [
     ".next/cache"
   ],
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "config": {
     "mongodbMemoryServer": {
       "version": "4.4.1"
