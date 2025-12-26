@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     env: {
         VERSION: process.env.APP_VERSION,
     },
