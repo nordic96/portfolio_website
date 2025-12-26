@@ -22,12 +22,10 @@ const ProjectCard = (props: ProjectCardProps) => {
                 'lg:max-w-lg max-sm:w-full rounded-sm lg:shadow-lg md:shadow-md max-sm:shadow-md dark:bg-zinc-800'
             }>
             <CardActionArea onClick={onClickCard}>
-                <Image
+                <img
                     src={`https://cdn.jsdelivr.net/gh/nordic96/portfolio_website/resources/${medialink}`}
                     alt={'project_img'}
-                    className={'w-full rounded-t'}
-                    width={'0'}
-                    height={'0'}
+                    className={'w-full object-cover rounded-t'}
                 />
                 <CardContent>
                     <div
