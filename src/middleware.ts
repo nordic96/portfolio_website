@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
     const origin = request.headers.get('origin') || '';
     logger.info(`[ENV:${ENV}] [MIDDLEWARE] origin:${origin} => ${request.url}`);
     if (!isSameOrValidOrigin(request.headers)) {
-        return new NextResponse('Forbiddin origin', { status: 403 });
+        return new NextResponse('Forbidden origin', { status: 403 });
     }
 
     let data;
