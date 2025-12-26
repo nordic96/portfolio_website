@@ -39,34 +39,3 @@ export const techstackLogoArr: React.DetailedHTMLProps<
         alt: 'aws',
     },
 ];
-
-export const techStackLogoArrWhite: React.DetailedHTMLProps<
-    React.ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
->[] = [
-    {
-        src: 'assets/images/tailwindcss-logotype-white.png',
-        alt: 'tailwind',
-        className: 'h-5 md:h-2 max-sm:h-2',
-    },
-    {
-        src: 'assets/images/react.svg',
-        alt: 'react',
-    },
-    {
-        src: 'https://nodejs.org/static/images/logo.svg',
-        alt: 'nodejs',
-    },
-    {
-        src: 'assets/images/next-js.svg',
-        alt: 'nextjs',
-    },
-    {
-        src: 'assets/images/ts-logo-256.svg',
-        alt: 'typescript',
-    },
-    {
-        src: 'assets/images/MongoDB_Logo_RGB_Logo_White.svg',
-        alt: 'mongodb',
-    },
-];

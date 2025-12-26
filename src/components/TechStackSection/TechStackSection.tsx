@@ -22,7 +22,7 @@ const TechStackSection = () => {
                         <img
                             key={key}
                             {...props}
-                            className={'h-[40px]'}
+                            className={'h-[40px] w-auto object-contain'}
                             alt={`logos-${key}`}
                         />
                     );
