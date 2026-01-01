@@ -30,3 +30,13 @@ yarn-debug.log*
 yarn-error.log*
 
 .serverless*
+
+# Claude
+.claude/cache/
+.claude/mcp_logs/
+.claude/temp/
+
+# Playwright
+/playwright-report/
+/playwright/.cache/
+/test-results/
