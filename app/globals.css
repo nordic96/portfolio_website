@@ -9,9 +9,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --color-bluedianne: #1f5b5b;
-  --color-bilbao: #367012;
-  --color-copper: #b68b3b;
+  --color-ocean-teel: #6b8605;
+  --color-ocean-teel-hover: #7a9706;
+  --color-island-green: #145055;
+  --color-island-green-dark: #0a3035;
+  --color-island-sand: #c1a264;
 }
 
 @media (prefers-color-scheme: dark) {
