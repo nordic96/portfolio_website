@@ -12,6 +12,88 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 - Performance optimization
 - Visual regression testing with Playwright
 
+## Required Context Files
+
+### MUST READ Before Starting Any Task
+
+**Portfolio Analysis** (`.claude/context/portfolio-analysis.md`)
+- Design specifications and rationale
+- Implementation priorities
+- Technical constraints
+- Phased roadmap
+- Completed work
+
+**How to use**:
+1. **Always read first**: `view .claude/context/portfolio-analysis.md`
+2. **Follow design decisions**: Implement according to chosen options
+3. **Update after implementation**: Document technical decisions and completions
+4. **Flag blockers**: Update if you discover technical constraints
+
+### Document Update Rules
+
+**When to update portfolio-analysis.md**:
+- ✅ After implementing a feature/component
+- ✅ When discovering technical constraints
+- ✅ After performance optimizations
+- ✅ When making implementation decisions that affect design
+- ✅ After completing phase milestones
+- ✅ When timeline estimates change
+
+**What to update**:
+- Mark implemented items as ✅ complete
+- Document technical decisions made
+- Add discovered constraints or limitations
+- Update implementation notes
+- Flag issues that need design input
+- Record performance metrics
+
+**How to update**:
+```markdown
+## Example Update Pattern
+
+1. Read current state:
+   view .claude/context/portfolio-analysis.md
+
+2. Make your updates using str_replace:
+   str_replace for specific sections
+
+3. Announce updates:
+   "Updated portfolio-analysis.md: [summary of implementation progress]"
+```
+
+## Workflow Integration with Context
+
+### Standard Task Flow
+
+1. **Read Context** (ALWAYS FIRST)
+```
+   view .claude/context/portfolio-analysis.md
+```
+
+2. **Check Specifications**
+   - Which design option was chosen?
+   - What are the priorities?
+   - Any technical constraints noted?
+
+3. **Implement** (according to context)
+   - Follow chosen design direction
+   - Respect documented constraints
+   - Meet specified requirements
+
+4. **Update Context** (ALWAYS AFTER)
+```
+   str_replace in .claude/context/portfolio-analysis.md
+   Add implementation status and any findings
+```
+
+5. **Announce Updates**
+```
+   "I've updated portfolio-analysis.md to reflect:
+   - Hero section implemented ✅
+   - Performance: LCP 1.2s (target: <2.5s) ✅
+   - Issue found: [description] → added to backlog"
+```
+
 ## Skills to Load
 When starting work, always read these skills from `/mnt/skills/public/`:
 - **frontend-design** (`/mnt/skills/public/frontend-design/SKILL.md`) - For creating production-grade frontend interfaces with high design quality
@@ -62,8 +144,42 @@ Use for structured problem-solving:
 ## Context
 Working on a personal portfolio website. The developer has 3+ years experience with the stack but values best practices and code quality. Visual verification is important for maintaining design consistency.
 
+# Context-Aware Implementation Process
+
+### Example: Implementing Hero Section
+```markdown
+**Step 1: Read Context**
+Portfolio analysis shows:
+- Design Option A chosen (strong visual hierarchy)
+- Priority: High (Week 1, Phase 1)
+- Requirements: Mobile-first, LCP < 2.5s, WCAG AA
+- Design specs: [specific details]
+
+**Step 2: Implement**
+Building hero section with:
+- Next.js Image for optimization
+- Tailwind classes per spec
+- TypeScript strict typing
+- Responsive breakpoints as specified
+
+**Step 3: Verify**
+Playwright screenshots confirm:
+- Visual matches design ✅
+- Responsive behavior correct ✅
+- Accessibility passes ✅
+- Performance: LCP 1.2s ✅
+
+**Step 4: Update Context**
+Updated portfolio-analysis.md:
+- Hero section: ✅ Complete
+- Tech stack: Next.js Image, Tailwind v3
+- Performance: Exceeds target (1.2s vs 2.5s goal)
+- Next: Projects section (Week 1-2)
+```
+
 ## Development Server
 - Local URL: http://localhost:3000
+- Production URL (current design layout): https://stephenghk.com
 - Use this URL with Playwright for visual testing
 - Ensure server is running before Playwright operations
 
