@@ -166,6 +166,6 @@ Step 4: (if needed)
 ```
 
 ### Colour Theme & Consistency
-- OceanTeel #6b8605 [Primary]
-- IslandGreen #145055 [Secondary]
-- IslandSand #c1a264
+- BlueDianne #1f5b5b [Primary]
+- Bilbao #367012 [Secondary]
+- Copper #b68b3b
