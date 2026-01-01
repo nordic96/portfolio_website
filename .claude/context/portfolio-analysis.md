@@ -1851,3 +1851,110 @@ User preference: Clean, modern design with white background, centered text, Past
 --dark-gray: #333333;
 --text-dark: #2D2D2D;
 ```
+
+---
+
+## NEW FEATURE SPECIFICATIONS (January 1, 2026)
+
+### Feature 1: Tech Stack Logos ✅ APPROVED
+
+**Full Specification:** See `/.claude/context/tech-stack-logos-spec.md`
+
+**Summary:**
+- Floating tech stack logos on left/right sides of hero content
+- 10-12 logos total (React, Next.js, TypeScript, AWS, GitHub, etc.)
+- Subtle grayscale appearance (25% opacity) with color on hover
+- Organic scattered positioning with floating animation
+- Hidden on mobile for clean focus
+- Recommended source: Simple Icons (MIT licensed)
+
+**Priority:** Medium
+**Estimated Effort:** 2-3 days
+**Status:** Specification complete, ready for implementation
+
+---
+
+### Feature 2: Highlighter Marker Animation ✅ APPROVED
+
+**Full Specification:** See `/.claude/context/highlighter-animation-spec.md`
+
+**Summary:**
+- One-time animation highlighting "exceptional" in headline
+- Pastel Green (#77dd87) highlighter effect
+- Marker tip sweeps left-to-right (600ms)
+- 800ms delay on page load
+- Requires user-provided marker asset (SVG/PNG)
+- Respects prefers-reduced-motion
+- Simplified on mobile
+
+**Priority:** Medium
+**Estimated Effort:** 1-2 days
+**Dependencies:** User must provide marker tip image asset
+**Status:** Specification complete, awaiting user asset
+
+---
+
+### Implementation Review: v1.2 (Pastel Green Update)
+
+**Full Review:** See `/.claude/context/implementation-review-v1.2.md`
+
+**Summary:**
+- ✅ Grade: A+ (98/100)
+- ✅ Perfect execution of Pastel Green color scheme
+- ✅ Clean white background implemented flawlessly
+- ✅ Frontend dev icons add thematic relevance
+- ✅ Excellent responsive behavior across all breakpoints
+- ✅ Ready for next phase (Profile Photo, CTAs)
+
+---
+
+## Updated Implementation Roadmap
+
+### Completed ✅
+- Issue #381: Base structure
+- Issue #383: Typography hierarchy
+- Issue #384: White background with Pastel Green accents
+- Design update v1.2: Color palette migration
+
+### In Progress / Next Steps
+
+**High Priority:**
+1. **Issue #382:** Profile Photo implementation
+2. **Issue #385-387:** CTA buttons ("View My Work", "Let's Connect")
+3. **Issue #388:** Scroll indicator
+
+**Medium Priority (New Features):**
+4. **New Issue:** Tech Stack Logos implementation
+5. **New Issue:** Highlighter marker animation
+
+**Future Session:**
+6. **New Issue:** Header & Footer components (#333 background)
+
+### Priority Order Recommendation
+
+1. Profile Photo (HIGH) - Completes core hero identity
+2. CTA Buttons (HIGH) - Enables user actions
+3. Tech Stack Logos (MEDIUM) - Adds visual interest and credibility
+4. Highlighter Animation (MEDIUM) - Adds personality and memorability
+5. Scroll Indicator (LOW) - Nice-to-have enhancement
+6. Header & Footer (FUTURE) - Separate implementation session
+
+---
+
+## Questions for User (Awaiting Response)
+
+### Highlighter Animation
+1. Confirm text to highlight: "exceptional" (recommended) or alternative?
+2. Timeline for marker tip asset delivery (SVG/PNG)?
+3. Mobile behavior: simplified (recommended) or full animation?
+
+### Tech Stack Logos
+1. Confirm tech stack list (or provide custom list)?
+2. Logo source preference: Simple Icons (recommended) or custom typography badges?
+3. Implementation priority relative to other features?
+
+### General
+1. Proceed with Profile Photo next, or jump to new features?
+2. Any design preference updates based on current v1.2 implementation?
+
+**All specifications are ready for @frontend-dev implementation once user confirms preferences.**

@@ -1,7 +1,12 @@
+import TechStackLogos from './TechStackLogos';
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-white px-6 md:px-12">
       <div className="container max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12">
+        {/* Tech Stack Logos - Scattered around profile photo */}
+        <TechStackLogos />
+
         {/* Frontend Dev Icons - Decorative elements */}
         <div className="flex items-center justify-center gap-6 opacity-80">
           <svg className="w-10 h-10 md:w-12 md:h-12 text-[#77dd87]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

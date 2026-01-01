@@ -32,3 +32,30 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
+
+/* Tech Stack Logos Animations */
+.tech-logo {
+  filter: grayscale(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.25;
+}
+
+.tech-logo:hover {
+  opacity: 0.8;
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.15) !important;
+  z-index: 10;
+}
+
+.tech-logo svg {
+  width: 100%;
+  height: 100%;
+  color: #77dd87;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .tech-logo {
+    animation: none !important;
+  }
+}
