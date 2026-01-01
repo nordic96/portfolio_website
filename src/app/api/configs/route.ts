@@ -15,7 +15,7 @@ export async function GET() {
 
         const cursor = configs.find();
         const labels: WithId<Document>[] = await cursor.toArray();
-        if (!!labels && !!labels[0]) {
+        if (labels?.[0]) {
             const validConfigs: Labels[] = [];
             schemaUtils.validateSchemaAndPush<Labels>(
                 ConfigsSchema,

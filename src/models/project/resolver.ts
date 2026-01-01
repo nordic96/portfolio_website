@@ -32,10 +32,10 @@ export const resolver = {
 
                 // Manually map _id to id when using .lean() if virtuals aren't automatically applied by lean()
                 // (which they typically are not for virtual getters without extra configuration or direct Mongoose doc usage)
-                return projectsData.map((cert) => ({
-                    ...cert,
-                    id: cert._id.toString(), // Ensure 'id' is populated correctly from '_id'
-                })) as unknown as IProject[]; // Cast to ICertificate[] (ensure your ICertificate has 'id' as optional or string)
+                return projectsData.map((project) => ({
+                    ...project,
+                    id: project._id.toString(), // Ensure 'id' is populated correctly from '_id'
+                })) as unknown as IProject[]; // Cast to IProject[] (ensure your IProject has 'id' as optional or string)
             } catch (error) {
                 logger.error(`Error fetching projects: ${error}`);
                 throw new Error('Failed to fetch projects from database.');
