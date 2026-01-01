@@ -9,11 +9,15 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --color-ocean-teel: #6b8605;
-  --color-ocean-teel-hover: #7a9706;
-  --color-island-green: #145055;
-  --color-island-green-dark: #0a3035;
-  --color-island-sand: #c1a264;
+  /* Updated color palette - v1.2 */
+  --color-pastel-green: #77dd87;
+  --color-pastel-green-hover: #5fd070;
+  --color-blue-dianne: #1f5b5b;
+  --color-blue-dianne-dark: #164444;
+  --color-copper: #b68b3b;
+  --color-white: #FFFFFF;
+  --color-dark-gray: #333333;
+  --color-text-dark: #2D2D2D;
 }
 
 @media (prefers-color-scheme: dark) {

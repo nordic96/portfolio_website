@@ -167,5 +167,5 @@ Step 4: (if needed)
 
 ### Colour Theme & Consistency
 - BlueDianne #1f5b5b [Primary]
-- Bilbao #367012 [Secondary]
+- Pastel Green #77dd87 [Secondary]
 - Copper #b68b3b

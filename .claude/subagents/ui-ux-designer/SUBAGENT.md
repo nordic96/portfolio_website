@@ -40,6 +40,9 @@ Before analyzing designs or creating specifications:
 
 ### MUST READ Before Starting Any Task
 
+**Design Reference** (`.claude/design_reference/**`)
+- Images for design reference and my prefernce
+
 **Portfolio Analysis** (`.claude/context/portfolio-analysis.md`)
 - Current site analysis
 - Proposed design directions (Option A/B)
