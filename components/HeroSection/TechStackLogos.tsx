@@ -9,6 +9,7 @@ import {
   siTailwindcss,
   siDocker,
   siJest,
+  siSass,
   siCypress,
   siEslint,
 } from 'simple-icons';
@@ -43,7 +44,7 @@ const logoPositions: LogoPosition[] = [
   { icon: siJavascript, top: '40%', left: '72%', rotation: 18, delay: 1.35 },
   { icon: siGithub, top: '60%', left: '68%', rotation: -8, delay: 1.4 },
   { icon: siTailwindcss, top: '75%', left: '58%', rotation: 12, delay: 1.45 },
-  //{ icon: siAmazonwebservices, top: '80%', left: '48%', rotation: -20, delay: 1.5 },
+  { icon: siSass, top: '80%', left: '48%', rotation: -20, delay: 1.5 },
   { icon: siDocker, top: '75%', left: '38%', rotation: 15, delay: 1.55 },
   { icon: zustandIcon, top: '60%', left: '28%', rotation: -10, delay: 1.6 },
   { icon: jotaiIcon, top: '40%', left: '24%', rotation: 22, delay: 1.65 },
