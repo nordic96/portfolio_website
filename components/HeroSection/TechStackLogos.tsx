@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import {
   siReact,
   siNextdotjs,
@@ -10,25 +11,16 @@ import {
   siDocker,
   siJest,
   siSass,
+  siHtml5,
+  siJenkins,
+  siBitbucket,
+  siStorybook,
   siCypress,
   siEslint,
 } from 'simple-icons';
 
-// Zustand and Jotai don't have official simple-icons, using custom SVG data
-const zustandIcon = {
-  svg: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Zustand</title><path fill="currentColor" d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0zm0 2a10 10 0 1 1-10 10A10 10 0 0 1 12 2zm-1 5v10l9-5z"/></svg>',
-  hex: '77dd87',
-  title: 'Zustand',
-};
-
-const jotaiIcon = {
-  svg: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Jotai</title><path fill="currentColor" d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.18l7.5 3.75v7.5L12 19.18l-7.5-3.75v-7.5L12 4.18z"/></svg>',
-  hex: '77dd87',
-  title: 'Jotai',
-};
-
 interface LogoPosition {
-  icon: typeof siReact | typeof zustandIcon;
+  icon: typeof siReact;
   top: string;
   left: string;
   rotation: number;
@@ -41,39 +33,63 @@ const logoPositions: LogoPosition[] = [
   { icon: siReact, top: '15%', left: '48%', rotation: -12, delay: 1.2 },
   { icon: siNextdotjs, top: '10%', left: '58%', rotation: 8, delay: 1.25 },
   { icon: siTypescript, top: '20%', left: '68%', rotation: -15, delay: 1.3 },
-  { icon: siJavascript, top: '40%', left: '72%', rotation: 18, delay: 1.35 },
+  { icon: siJavascript, top: '40%', left: '82%', rotation: 18, delay: 1.35 },
   { icon: siGithub, top: '60%', left: '68%', rotation: -8, delay: 1.4 },
-  { icon: siTailwindcss, top: '75%', left: '58%', rotation: 12, delay: 1.45 },
-  { icon: siSass, top: '80%', left: '48%', rotation: -20, delay: 1.5 },
-  { icon: siDocker, top: '75%', left: '38%', rotation: 15, delay: 1.55 },
-  { icon: zustandIcon, top: '60%', left: '28%', rotation: -10, delay: 1.6 },
-  { icon: jotaiIcon, top: '40%', left: '24%', rotation: 22, delay: 1.65 },
+  { icon: siTailwindcss, top: '75%', left: '78%', rotation: 12, delay: 1.45 },
+  { icon: siSass, top: '80%', left: '18%', rotation: -20, delay: 1.5 },
+  { icon: siDocker, top: '70%', left: '28%', rotation: 15, delay: 1.55 },
+  { icon: siHtml5, top: '10%', left: '18%', rotation: 15, delay: 1.55 },
+  { icon: siJenkins, top: '50%', left: '10%', rotation: 15, delay: 1.55 },
+  { icon: siBitbucket, top: '70%', left: '58%', rotation: 15, delay: 1.55 },
+  { icon: siStorybook, top: '55%', left: '38%', rotation: 15, delay: 1.55 },
   { icon: siEslint, top: '20%', left: '28%', rotation: -5, delay: 1.7 },
   { icon: siJest, top: '10%', left: '38%', rotation: 16, delay: 1.75 },
-  { icon: siCypress, top: '50%', left: '50%', rotation: -18, delay: 1.8 },
+  { icon: siCypress, top: '40%', left: '30%', rotation: -18, delay: 1.8 },
 ];
 
-export default function TechStackLogos() {
+const DELAY_INTERVAL = 1000;
+export default function TechStackLogos({ animation = true }: { animation?: boolean }) {
+  const [logoArr, setLogoArr] = useState<LogoPosition[]>(animation ? [] : logoPositions);
+
+  useEffect(() => {
+    if (!animation) return;
+    let i = 0;
+    const n = logoPositions.length;
+    let intervalId = setInterval(() => {
+      setLogoArr((arr) => {
+        if (i >= n) {
+          clearInterval(intervalId);
+          return arr;
+        }
+        return [...arr, logoPositions[i]];
+      });
+      i++;
+    }, DELAY_INTERVAL);
+    return () => clearInterval(intervalId);
+  }, [animation]);
+
   return (
-    <div className="absolute inset-0 pointer-events-none hidden lg:block overflow-hidden">
-      {logoPositions.map((logo, index) => (
-        <div
-          key={`logo-${index}`}
-          className="tech-logo absolute"
-          style={{
-            top: logo.top,
-            left: logo.left,
-            transform: `rotate(${logo.rotation}deg)`,
-            animationDelay: `${logo.delay}s`,
-          }}
-          aria-hidden="true"
-        >
+    <div className="absolute w-full h-[50dvh] top-0 left-0 pointer-events-none hidden lg:block overflow-hidden">
+      <div className={'relative w-full h-full'}>
+        {logoArr.map((logo, index) => (
           <div
-            className="w-12 h-12"
-            dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
-          />
-        </div>
-      ))}
+            key={`logo-${index}`}
+            className="tech-logo absolute"
+            style={{
+              top: logo.top,
+              left: logo.left,
+              transform: `rotate(${logo.rotation}deg)`,
+              animationDelay: `${logo.delay}s`,
+            }}
+            aria-hidden="true"
+          >
+            <div
+              className="w-14 h-14"
+              dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
