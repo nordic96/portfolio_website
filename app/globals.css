@@ -8,10 +8,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --color-bluedianne: #1f5b5b;
-  --color-bilbao: #367012;
+  --font-inter: var(--font-inter);
+  /* Updated color palette - v1.2 */
+  --color-pastel-green: #77dd87;
+  --color-pastel-green-hover: #5fd070;
+  --color-blue-dianne: #1f5b5b;
+  --color-blue-dianne-dark: #164444;
   --color-copper: #b68b3b;
+  --color-white: #FFFFFF;
+  --color-dark-gray: #333333;
+  --color-text-dark: #2D2D2D;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,4 +31,53 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+/* Tech Stack Logos Animations */
+.tech-logo {
+  filter: grayscale(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: rotate(var(--rotation, 0deg));
+  animation: logoFadeIn 0.6s ease-out forwards;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.tech-logo:hover {
+  opacity: 0.9;
+  filter: grayscale(0%) brightness(1.1);
+  transform: rotate(var(--rotation, 0deg)) scale(1.15);
+  z-index: 10;
+}
+
+.tech-logo svg {
+  width: 100%;
+  height: 100%;
+  color: #77dd87;
+}
+
+/* Fade in animation when logo appears */
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: rotate(var(--rotation, 0deg)) scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 0.5;
+    transform: rotate(var(--rotation, 0deg)) scale(1) translateY(0);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .tech-logo {
+    animation: logoFadeInStatic 0.01ms forwards !important;
+  }
+
+  @keyframes logoFadeInStatic {
+    to {
+      opacity: 0.5;
+    }
+  }
 }
