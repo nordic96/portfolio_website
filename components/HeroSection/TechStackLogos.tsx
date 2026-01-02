@@ -75,7 +75,7 @@ export default function TechStackLogos({
   }, [animation]);
 
   return (
-    <div className="absolute w-full h-[50dvh] top-0 left-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green via-70% to-white">
+    <div className="absolute w-full h-[50dvh] top-0 left-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green via-85% to-white">
       <div className={'relative w-full h-full'}>
         {logoArr.map((logo, index) => (
           <div

@@ -2,7 +2,7 @@ import TechStackLogos from './TechStackLogos';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white px-6 md:px-12">
+    <section className="relative h-[90dvh] flex flex-col items-center justify-center bg-white px-6 md:px-12">
       {/* Tech Stack Logos - Scattered around profile photo */}
       <TechStackLogos animation />
       <div className="container max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-999">
