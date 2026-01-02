@@ -1,8 +1,9 @@
 'use client';
 
+import { useBreakpoint } from '@/app/hooks';
 import { baseWidth } from '@/app/styles';
 import { cn } from '@/app/utils';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Activity } from 'react';
 import {
   siReact,
   siNextdotjs,
@@ -111,6 +112,7 @@ export default function TechStackLogos({
   centerX = 50,
   centerY = 50,
 }: TechStackLogosProps) {
+  const breakpoint = useBreakpoint();
   // Memoize positions to prevent recalculation on every render
   const logoPositions = useMemo(
     () => calculateCircularPositions(radius, centerX, centerY),
@@ -148,7 +150,7 @@ export default function TechStackLogos({
   }, [animation, logoPositions]);
 
   return (
-    <div className="absolute w-full lg:h-190 max-sm:h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green to-white">
+    <div className="absolute w-full h-190 max-sm:h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green to-white">
       <div
         className={cn(
           baseWidth,
@@ -160,7 +162,7 @@ export default function TechStackLogos({
             key={`logo-${index}`}
             className={cn(
               'tech-logo absolute',
-              'flex gap-4 items-center w-50 max-sm:w-25 bg-white py-2 px-4 border-l-pastel-green border-l-20',
+              'flex gap-4 items-center w-50 max-sm:w-20 bg-white py-2 px-4 border-l-pastel-green border-l-20 max-sm:border-l-10',
             )}
             style={
               {
@@ -172,12 +174,14 @@ export default function TechStackLogos({
             aria-hidden="true"
           >
             <div
-              className="min-w-10 h-10 max-sm:w-5 max-sm:h-5"
+              className="min-w-10 h-10 md:min-w-8 md:h-8 max-sm:min-w-6 max-sm:h-6"
               dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
             />
-            <span className={'font-black text max-sm:text-xs uppercase'}>
-              {logo.name}
-            </span>
+            <Activity mode={breakpoint === 'mobile' ? 'hidden' : 'visible'}>
+              <span className={'font-black text max-sm:text-xs uppercase'}>
+                {logo.name}
+              </span>
+            </Activity>
           </div>
         ))}
       </div>
