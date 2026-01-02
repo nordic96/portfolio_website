@@ -148,7 +148,7 @@ export default function TechStackLogos({
   }, [animation, logoPositions]);
 
   return (
-    <div className="absolute w-full h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green to-white">
+    <div className="absolute w-full lg:h-190 max-sm:h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green to-white">
       <div
         className={cn(
           baseWidth,
