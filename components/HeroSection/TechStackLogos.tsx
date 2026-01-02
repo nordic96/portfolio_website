@@ -1,5 +1,7 @@
 'use client';
 
+import { baseWidth } from '@/app/styles';
+import { cn } from '@/app/utils';
 import { useEffect, useState } from 'react';
 import {
   siReact,
@@ -75,8 +77,13 @@ export default function TechStackLogos({
   }, [animation]);
 
   return (
-    <div className="absolute w-full h-[50dvh] top-0 left-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green via-85% to-white">
-      <div className={'relative w-full h-full'}>
+    <div className="absolute w-full h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green via-85% to-white">
+      <div
+        className={cn(
+          baseWidth,
+          'absolute h-full left-[50%] -translate-x-[50%]',
+        )}
+      >
         {logoArr.map((logo, index) => (
           <div
             key={`logo-${index}`}
