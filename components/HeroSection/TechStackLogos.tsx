@@ -48,14 +48,20 @@ const logoPositions: LogoPosition[] = [
 ];
 
 const DELAY_INTERVAL = 500;
-export default function TechStackLogos({ animation = true }: { animation?: boolean }) {
-  const [logoArr, setLogoArr] = useState<LogoPosition[]>(animation ? [] : logoPositions);
+export default function TechStackLogos({
+  animation = true,
+}: {
+  animation?: boolean;
+}) {
+  const [logoArr, setLogoArr] = useState<LogoPosition[]>(
+    animation ? [] : logoPositions,
+  );
 
   useEffect(() => {
     if (!animation) return;
     let i = 0;
     const n = logoPositions.length;
-    let intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       setLogoArr((arr) => {
         if (i >= n) {
           clearInterval(intervalId);
@@ -69,17 +75,19 @@ export default function TechStackLogos({ animation = true }: { animation?: boole
   }, [animation]);
 
   return (
-    <div className="absolute w-full h-[50dvh] top-0 left-0 block overflow-hidden">
+    <div className="absolute w-full h-[50dvh] top-0 left-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green via-70% to-white">
       <div className={'relative w-full h-full'}>
         {logoArr.map((logo, index) => (
           <div
             key={`logo-${index}`}
             className="tech-logo absolute"
-            style={{
-              top: logo.top,
-              left: logo.left,
-              '--rotation': `${logo.rotation}deg`,
-            } as React.CSSProperties}
+            style={
+              {
+                top: logo.top,
+                left: logo.left,
+                '--rotation': `${logo.rotation}deg`,
+              } as React.CSSProperties
+            }
             aria-hidden="true"
           >
             <div

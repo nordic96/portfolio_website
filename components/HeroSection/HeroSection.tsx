@@ -5,8 +5,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-white px-6 md:px-12">
       {/* Tech Stack Logos - Scattered around profile photo */}
       <TechStackLogos animation />
-      <div className="container max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12">
-
+      <div className="container max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-999">
         {/* Profile Photo Placeholder - Will be added in Issue #382 */}
         <div className="w-32 h-32 md:w-40 md:h-40 lg:w-52 lg:h-52 rounded-full bg-gray-100 border-4 border-pastel-green shadow-xl shadow-pastel-green/20" />
 
