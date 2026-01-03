@@ -3,7 +3,7 @@ import { cn } from '@/app/utils';
 
 export default function Footer() {
   return (
-    <footer className={'flex flex-col'}>
+    <footer className={'flex flex-col mt-40 max-sm:mt-20 md:mt-30'}>
       <div
         className={
           'flex flex-col justify-center items-center border-t border-t-text-dark px-8 max-sm:px-4 pt-4 pb-8 text-sm font-light'
