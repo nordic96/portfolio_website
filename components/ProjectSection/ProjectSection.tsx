@@ -22,7 +22,7 @@ export default function ProjectSection() {
       {/** Project Content */}
       <div
         className={
-          'flex flex-wrap grow max-sm:px-4 gap-8 py-16 justify-center h-full'
+          'flex flex-wrap grow max-sm:px-4 gap-8 py-16 justify-center h-full max-sm:flex-col'
         }
       >
         <ProjectCard />
