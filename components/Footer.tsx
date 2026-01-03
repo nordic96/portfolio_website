@@ -1,5 +1,6 @@
 import { baseWidth } from '@/app/styles';
 import { cn } from '@/app/utils';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -11,7 +12,12 @@ export default function Footer() {
       >
         <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
           <div>
-            <span className={'font-black'}>{'Stephen Ko'}</span>
+            <Image
+              alt={'brand_logo'}
+              src={'/assets/sk_logo.svg'}
+              width={120}
+              height={50}
+            />
             <div></div>
           </div>
           <div>
