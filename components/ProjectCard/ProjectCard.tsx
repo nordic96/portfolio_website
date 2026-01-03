@@ -41,7 +41,7 @@ export default function ProjectCard({
   return (
     <article
       className={cn(
-        'group relative flex flex-col gap-4 p-6 max-sm:p-4',
+        'group relative flex flex-col gap-2 p-6 max-sm:p-4',
         // Glassmorphism & modern background
         'bg-white/95 backdrop-blur-sm',
         // Softer border
@@ -55,10 +55,10 @@ export default function ProjectCard({
         // Enhanced hover state with Pastel Green glow
         'hover:shadow-[0_20px_40px_-12px_rgba(119,221,135,0.25),0_8px_16px_-8px_rgba(0,0,0,0.1),0_0_0_1px_rgba(119,221,135,0.1)]',
         'hover:-translate-y-2',
-        'hover:border-[#77dd87]/30',
+        'hover:border-pastel-green/30',
         'hover:scale-[1.02]',
         // Keyboard focus
-        'focus-within:ring-2 focus-within:ring-[#77dd87] focus-within:ring-offset-2',
+        'focus-within:ring-2 focus-within:ring-pastel-green focus-within:ring-offset-2',
         // Cursor
         'cursor-pointer',
         'max-sm:w-full text-text-dark',
@@ -74,7 +74,7 @@ export default function ProjectCard({
         className={cn(
           'relative w-full overflow-hidden rounded-xl group/thumb',
           {
-            'aspect-[4/3]': size === 'large',
+            'aspect-4/3': size === 'large',
             'aspect-square': size === 'small',
           },
         )}
@@ -84,7 +84,7 @@ export default function ProjectCard({
           className={cn(
             'absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10',
             {
-              'from-[#77dd87]/20 via-transparent to-transparent':
+              'from-pastel-green/20 via-transparent to-transparent':
                 size === 'large',
               'from-black/40 via-black/10 to-transparent': size === 'small',
             },
@@ -92,11 +92,11 @@ export default function ProjectCard({
         />
 
         {/* Shine effect on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 bg-gradient-to-br from-white/0 via-white/20 to-white/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 bg-gradient-to-br from-white/0 via-white/20 to-white/0 transform -translate-x-full group-hover:translate-x-full" />
 
         {/* Featured badge */}
         {project.featured && (
-          <div className="absolute top-3 right-3 z-20 px-3 py-1.5 rounded-full bg-[#77dd87] text-white text-xs font-bold uppercase tracking-wider shadow-lg">
+          <div className="absolute top-0 right-0 z-20 px-3 py-1.5 rounded-full bg-pastel-green text-black text-xs font-bold uppercase tracking-wider shadow-lg">
             <span className="sr-only">Featured project - </span>
             Featured
           </div>
@@ -136,7 +136,7 @@ export default function ProjectCard({
       <div className="flex flex-col gap-3 flex-1">
         <h3
           className={cn(
-            'font-bold text-text-dark leading-tight group-hover:text-[#77dd87] transition-colors duration-300',
+            'font-bold text-text-dark leading-tight group-hover:text-pastel-green transition-colors duration-300',
             {
               'text-xl md:text-2xl': size === 'large',
               'text-base md:text-lg': size === 'small',
@@ -153,7 +153,7 @@ export default function ProjectCard({
       </div>
 
       {/* Links Section */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-4 mt-auto">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 mt-auto">
         {githubUrl && (
           <a
             href={githubUrl}
@@ -162,22 +162,22 @@ export default function ProjectCard({
             className={cn(
               'group/link flex items-center justify-center gap-2',
               // Explicit height for consistency
-              'h-11',
+              'h-10',
               // Button-like styling
-              'px-4 py-2.5 rounded-lg',
+              'px-2 py-1 rounded-lg',
               // Subtle background
               'bg-gray-50 border border-gray-200',
               // Smooth transitions
               'transition-all duration-300',
               // Enhanced hover state
-              'hover:bg-[#77dd87] hover:border-[#77dd87]',
-              'hover:shadow-md hover:shadow-[#77dd87]/20',
+              'hover:bg-pastel-green hover:border-pastel-green',
+              'hover:shadow-md hover:shadow-pastel-green/20',
               'hover:-translate-y-0.5',
               // Text styling
               'text-sm font-semibold text-text-dark',
               'hover:text-white',
               // Focus state
-              'focus:outline-none focus:ring-2 focus:ring-[#77dd87] focus:ring-offset-2',
+              'focus:outline-none focus:ring-2 focus:ring-pastel-green focus:ring-offset-2',
               // Responsive
               'w-full sm:w-auto',
             )}
@@ -201,21 +201,21 @@ export default function ProjectCard({
             className={cn(
               'group/link flex items-center justify-center gap-2',
               // Explicit height for consistency
-              'h-11',
+              'h-10',
               // Primary button style
-              'px-4 py-2.5 rounded-lg',
+              'px-2 py-1 rounded-lg',
               // Pastel Green background
-              'bg-[#77dd87] border border-[#77dd87]',
+              'bg-pastel-green border border-pastel-green',
               // Smooth transitions
               'transition-all duration-300',
               // Enhanced hover state
-              'hover:bg-[#5fd070] hover:border-[#5fd070]',
-              'hover:shadow-lg hover:shadow-[#77dd87]/30',
+              'hover:bg-pastel-green-hover hover:border-pastel-green-hover',
+              'hover:shadow-lg hover:shadow-pastel-green/30',
               'hover:-translate-y-0.5 hover:scale-105',
               // Text styling
-              'text-sm font-semibold text-white',
+              'text-sm font-semibold text-black',
               // Focus state
-              'focus:outline-none focus:ring-2 focus:ring-[#77dd87] focus:ring-offset-2',
+              'focus:outline-none focus:ring-2 focus:ring-pastel-green focus:ring-offset-2',
               // Responsive
               'w-full sm:w-auto',
             )}

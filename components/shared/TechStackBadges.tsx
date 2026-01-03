@@ -83,16 +83,16 @@ export default function TechStackBadges({
               // Modern pill design
               'rounded-full',
               // Gradient background with Pastel Green accent
-              'bg-gradient-to-r from-[#77dd87]/10 to-[#77dd87]/5',
+              'bg-gradient-to-r from-pastel-green/10 to-pastel-green/5',
               // Subtle border
-              'border border-[#77dd87]/20',
+              'border border-pastel-green/20',
               // Shadow for depth
               'shadow-sm',
               // Smooth transitions
               'transition-all duration-300',
               // Enhanced hover state
-              'hover:shadow-md hover:border-[#77dd87]/40 hover:scale-105',
-              'hover:bg-gradient-to-r hover:from-[#77dd87]/15 hover:to-[#77dd87]/10',
+              'hover:shadow-md hover:border-pastel-green/40 hover:scale-105',
+              'hover:bg-gradient-to-r hover:from-pastel-green/15 hover:to-pastel-green/10',
               {
                 'px-3 py-1.5': variant === 'default',
                 'px-2.5 py-1': variant === 'compact',
@@ -117,7 +117,7 @@ export default function TechStackBadges({
               <span
                 className={cn(
                   'font-semibold text-text-dark transition-colors duration-300',
-                  'group-hover/badge:text-[#77dd87]',
+                  'group-hover/badge:text-pastel-green',
                   {
                     'text-xs': variant === 'default',
                     'text-[11px]': variant === 'compact',
