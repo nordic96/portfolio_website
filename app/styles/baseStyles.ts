@@ -1,1 +1,1 @@
-export const baseWidth = 'w-full lg:w-360';
+export const baseWidth = 'w-full lg:max-w-360';

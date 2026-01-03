@@ -9,18 +9,16 @@ export default function Footer() {
           'flex flex-col justify-center items-center border-t border-t-text-dark px-8 max-sm:px-4 pt-4 pb-8 text-sm font-light'
         }
       >
-        <div className={cn('flex', baseWidth)}>
-          <div className={'grid grid-cols-3 max-sm:text-xs'}>
-            <div>
-              <span className={'font-black'}>{'Stephen Ko'}</span>
-              <div></div>
-            </div>
-            <div>
-              <span></span>
-            </div>
-            <div>
-              <span></span>
-            </div>
+        <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
+          <div>
+            <span className={'font-black'}>{'Stephen Ko'}</span>
+            <div></div>
+          </div>
+          <div>
+            <span></span>
+          </div>
+          <div>
+            <span></span>
           </div>
         </div>
       </div>
