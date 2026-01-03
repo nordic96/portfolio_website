@@ -162,7 +162,7 @@ export default function ProjectCard({
             className={cn(
               'group/link flex items-center justify-center gap-2',
               // Explicit height for consistency
-              'h-10',
+              'h-11',
               // Button-like styling
               'px-2 py-1 rounded-lg',
               // Subtle background
@@ -201,7 +201,7 @@ export default function ProjectCard({
             className={cn(
               'group/link flex items-center justify-center gap-2',
               // Explicit height for consistency
-              'h-10',
+              'h-11',
               // Primary button style
               'px-2 py-1 rounded-lg',
               // Pastel Green background

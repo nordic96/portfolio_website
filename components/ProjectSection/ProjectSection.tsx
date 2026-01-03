@@ -18,7 +18,7 @@ export default function ProjectSection() {
         {/* Decorative divider */}
         <div className="mt-8 mb-4 w-24 h-1 bg-gradient-to-r from-transparent via-pastel-green to-transparent rounded-full" />
       </div>
-      <div className={'relative w-full flex jsutify-center'}>
+      <div className={'relative w-full flex justify-center'}>
         <div className={'w-full h-[50dvh] absolute inset-0 -z-10'}>
           <Image
             className={'w-full h-[50dvh]'}
