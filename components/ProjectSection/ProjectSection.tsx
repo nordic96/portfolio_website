@@ -19,6 +19,21 @@ export default function ProjectSection() {
           }
         />
       </div>
+
+      {/** Section Header */}
+      <div className="w-full flex flex-col items-center text-center px-4 pt-24 pb-8 max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
+          Featured <span className="text-[#77dd87]">Projects</span>
+        </h2>
+        <p className="text-lg md:text-xl text-gray-600 font-light leading-relaxed max-w-2xl">
+          A curated collection of my most impactful work, showcasing expertise
+          in full-stack development, modern frameworks, and user-centric design.
+        </p>
+
+        {/* Decorative divider */}
+        <div className="mt-8 mb-4 w-24 h-1 bg-gradient-to-r from-transparent via-[#77dd87] to-transparent rounded-full" />
+      </div>
+
       {/** Project Content */}
       <div
         className={

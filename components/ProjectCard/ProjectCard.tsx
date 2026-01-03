@@ -70,9 +70,26 @@ export default function ProjectCard({
       aria-label={`Project: ${title}`}
     >
       {/* Project Thumbnail */}
-      <div className="relative w-full aspect-video overflow-hidden rounded-xl group/thumb">
+      <div
+        className={cn(
+          'relative w-full overflow-hidden rounded-xl group/thumb',
+          {
+            'aspect-[4/3]': size === 'large',
+            'aspect-square': size === 'small',
+          },
+        )}
+      >
         {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#77dd87]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+        <div
+          className={cn(
+            'absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10',
+            {
+              'from-[#77dd87]/20 via-transparent to-transparent':
+                size === 'large',
+              'from-black/40 via-black/10 to-transparent': size === 'small',
+            },
+          )}
+        />
 
         {/* Shine effect on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 bg-gradient-to-br from-white/0 via-white/20 to-white/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
@@ -93,18 +110,39 @@ export default function ProjectCard({
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+
+        {/* Tech Stack Badges - Overlay for small cards */}
+        {size === 'small' && (
+          <div className="absolute bottom-3 left-3 right-3 z-20 bg-white/90 backdrop-blur-md p-2 rounded-lg shadow-lg">
+            <TechStackBadges
+              techStack={techStack}
+              variant="compact"
+              showLabels={false}
+            />
+          </div>
+        )}
       </div>
 
-      {/* Tech Stack Badges */}
-      <TechStackBadges
-        techStack={techStack}
-        variant="compact"
-        showLabels={size === 'large'}
-      />
+      {/* Tech Stack Badges - Below image for large cards */}
+      {size === 'large' && (
+        <TechStackBadges
+          techStack={techStack}
+          variant="compact"
+          showLabels={true}
+        />
+      )}
 
       {/* Metadata Section */}
       <div className="flex flex-col gap-3 flex-1">
-        <h3 className="font-bold text-xl md:text-2xl text-text-dark leading-tight group-hover:text-[#77dd87] transition-colors duration-300">
+        <h3
+          className={cn(
+            'font-bold text-text-dark leading-tight group-hover:text-[#77dd87] transition-colors duration-300',
+            {
+              'text-xl md:text-2xl': size === 'large',
+              'text-base md:text-lg': size === 'small',
+            },
+          )}
+        >
           {title}
         </h3>
         {description && size === 'large' && (
@@ -123,6 +161,8 @@ export default function ProjectCard({
             rel="noopener noreferrer"
             className={cn(
               'group/link flex items-center justify-center gap-2',
+              // Explicit height for consistency
+              'h-11',
               // Button-like styling
               'px-4 py-2.5 rounded-lg',
               // Subtle background
@@ -160,6 +200,8 @@ export default function ProjectCard({
             rel="noopener noreferrer"
             className={cn(
               'group/link flex items-center justify-center gap-2',
+              // Explicit height for consistency
+              'h-11',
               // Primary button style
               'px-4 py-2.5 rounded-lg',
               // Pastel Green background
