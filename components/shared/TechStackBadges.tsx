@@ -79,28 +79,50 @@ export default function TechStackBadges({
           <div
             key={tech}
             className={cn(
-              'flex items-center gap-2 bg-white border-l-4 border-l-[#77dd87]',
-              'transition-all duration-300 hover:scale-105',
+              'group/badge flex items-center gap-1.5',
+              // Modern pill design
+              'rounded-full',
+              // Gradient background with Pastel Green accent
+              'bg-gradient-to-r from-pastel-green/10 to-pastel-green/5',
+              // Subtle border
+              'border border-pastel-green/20',
+              // Shadow for depth
+              'shadow-sm',
+              // Smooth transitions
+              'transition-all duration-300',
+              // Enhanced hover state
+              'hover:shadow-md hover:border-pastel-green/40 hover:scale-105',
+              'hover:bg-gradient-to-r hover:from-pastel-green/15 hover:to-pastel-green/10',
               {
                 'px-3 py-1.5': variant === 'default',
-                'px-2 py-1': variant === 'compact',
+                'px-2.5 py-1': variant === 'compact',
               },
             )}
             title={techData.name}
           >
+            {/* Icon with brand color */}
             <div
-              className={cn({
-                'w-5 h-5': variant === 'default',
-                'w-4 h-4': variant === 'compact',
-              })}
+              className={cn(
+                'transition-all duration-300',
+                'group-hover/badge:brightness-110',
+                {
+                  'w-5 h-5': variant === 'default',
+                  'w-4 h-4': variant === 'compact',
+                },
+              )}
+              style={{ color: `#${techData.icon.hex}` }}
               dangerouslySetInnerHTML={{ __html: techData.icon.svg }}
             />
             {showLabels && (
               <span
-                className={cn('font-semibold text-text-dark uppercase', {
-                  'text-xs': variant === 'default',
-                  'text-[10px]': variant === 'compact',
-                })}
+                className={cn(
+                  'font-semibold text-text-dark transition-colors duration-300',
+                  'group-hover/badge:text-pastel-green',
+                  {
+                    'text-xs': variant === 'default',
+                    'text-[11px]': variant === 'compact',
+                  },
+                )}
               >
                 {techData.name}
               </span>
