@@ -20,34 +20,35 @@
   --color-text-dark: #2D2D2D;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  position: relative;
 }
 
 /* Tech Stack Logos Animations */
 .tech-logo {
-  filter: grayscale(100%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  transform: rotate(var(--rotation, 0deg));
-  animation: logoFadeIn 0.6s ease-out forwards;
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
+  animation: logoFadeIn 0.4s ease-out forwards;
   pointer-events: auto;
   cursor: pointer;
 }
 
 .tech-logo:hover {
-  opacity: 0.9;
+  opacity: 1;
   filter: grayscale(0%) brightness(1.1);
-  transform: rotate(var(--rotation, 0deg)) scale(1.15);
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1.15);
   z-index: 10;
 }
 
@@ -57,15 +58,15 @@ body {
   color: #77dd87;
 }
 
-/* Fade in animation when logo appears */
+/* Fade in animation when logo appears - circular formation compatible */
 @keyframes logoFadeIn {
   from {
     opacity: 0;
-    transform: rotate(var(--rotation, 0deg)) scale(0.8) translateY(10px);
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(0.5);
   }
   to {
-    opacity: 0.5;
-    transform: rotate(var(--rotation, 0deg)) scale(1) translateY(0);
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
   }
 }
 
@@ -77,7 +78,8 @@ body {
 
   @keyframes logoFadeInStatic {
     to {
-      opacity: 0.5;
+      opacity: 0.8;
+      transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
     }
   }
 }
