@@ -17,16 +17,16 @@ export default function Footer() {
         }
       >
         <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
-          <div className={'flex gap-4 w-30 md:w-24 max-sm:w-12'}>
-            <Image
-              alt={'brand_logo'}
-              src={'/assets/sk_logo.svg'}
-              width={120}
-              height={50}
-            />
-            <div>
-              <h3>{t('footer_title')}</h3>
+          <div className={'flex gap-4 items-start justify-starts'}>
+            <div className={'min-w-30 md:w-24 max-sm:w-12'}>
+              <Image
+                alt={'brand_logo'}
+                src={'/assets/sk_logo.svg'}
+                width={120}
+                height={50}
+              />
             </div>
+            <h3>{t('footer_title')}</h3>
           </div>
           <FooterSection headerKey={'language'}>
             <FooterLocaleSwitcher />
