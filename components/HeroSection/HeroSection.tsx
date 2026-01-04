@@ -1,4 +1,7 @@
+import { useTranslations } from 'next-intl';
+
 export default function HeroSection() {
+  const t = useTranslations('HomePage');
   return (
     <section className="lg:pt-70 md:pt-70 max-sm:h-dvh flex flex-col items-center justify-center bg-white px-6 md:px-12">
       {/* Tech Stack Logos - Circular formation around profile photo */}
@@ -13,7 +16,7 @@ export default function HeroSection() {
         <div className={'flex flex-col lg:mt-40 max-sm:mt-15 gap-4 md:gap-6'}>
           {/* Greeting */}
           <p className="text-5xl md:text-4xl max-sm:text-3xl p-1 font-black text-text-dark bg-pastel-green uppercase">
-            Gi Hun Ko, Stephen
+            {t('name')}
           </p>
 
           {/* Headline */}
