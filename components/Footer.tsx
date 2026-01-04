@@ -17,7 +17,7 @@ export default function Footer() {
         }
       >
         <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
-          <div className={'flex gap-4'}>
+          <div className={'flex gap-4 w-30 md:w-24 max-sm:w-12'}>
             <Image
               alt={'brand_logo'}
               src={'/assets/sk_logo.svg'}
