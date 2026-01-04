@@ -7,7 +7,7 @@ export default function HeroSection() {
       {/* Tech Stack Logos - Circular formation around profile photo */}
       <div
         className={
-          'max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-999'
+          'max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-50'
         }
       >
         {/* Profile Photo Placeholder - Will be added in Issue #382 */}
