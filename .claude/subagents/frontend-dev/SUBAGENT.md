@@ -16,6 +16,13 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 
 ### MUST READ Before Starting Any Task
 
+**Skills & Lessons Learned** (`.claude/subagents/frontend-dev/skills/SKILL.md`)
+- CSS gotchas (transforms, animations, accessibility)
+- Component patterns and best practices
+- Common pitfalls and their solutions
+- Quick reference for recurring patterns
+- **Read this FIRST to avoid repeating past mistakes**
+
 **Portfolio Analysis** (`.claude/context/portfolio-analysis.md`)
 - Design specifications and rationale
 - Implementation priorities
@@ -24,12 +31,21 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 - Completed work
 
 **How to use**:
-1. **Always read first**: `view .claude/context/portfolio-analysis.md`
-2. **Follow design decisions**: Implement according to chosen options
-3. **Update after implementation**: Document technical decisions and completions
-4. **Flag blockers**: Update if you discover technical constraints
+1. **Read skills first**: `view .claude/subagents/frontend-dev/skills/SKILL.md`
+2. **Then read portfolio analysis**: `view .claude/context/portfolio-analysis.md`
+3. **Follow design decisions**: Implement according to chosen options
+4. **Update after implementation**: Document technical decisions and completions
+5. **Flag blockers**: Update if you discover technical constraints
+6. **Add new lessons**: Update SKILL.md when you learn something new
 
 ### Document Update Rules
+
+**When to update SKILL.md**:
+- ✅ After solving a tricky CSS/JS bug
+- ✅ When discovering a library quirk or gotcha
+- ✅ After learning a better pattern
+- ✅ When a solution took multiple attempts
+- ✅ For recurring patterns worth documenting
 
 **When to update portfolio-analysis.md**:
 - ✅ After implementing a feature/component

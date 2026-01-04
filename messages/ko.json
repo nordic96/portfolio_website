@@ -1,0 +1,18 @@
+{
+    "HomePage": {
+        "name": "고기훈, Stephen",
+        "headline": "탁월한 웹 경험을 만듭니다",
+        "subheadline": "디자인과 엔지니어링의 조화",
+        "featured_project": "주요 프로젝트 - ",
+        "github": "깃허브",
+        "live_demo": "데모",
+        "project_section_headline": "주요 <highlight>프로젝트</highlight>",
+        "project_section_subheadline": "풀스택 개발, 최신 프레임워크, 사용자 중심 디자인에 대한 전문성을 보여주는 대표 작업 모음입니다."
+    },
+    "Footer": {
+        "footer_title": "스테판 고 포트폴리오 웹페이지",
+        "language": "언어 변경",
+        "footline": "개발자 - 고기훈",
+        "app_version": "앱 버전"
+    }
+}

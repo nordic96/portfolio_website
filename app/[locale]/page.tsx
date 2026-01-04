@@ -3,9 +3,9 @@
 import HeroSection from '@/components/HeroSection';
 import TechStackLogos from '@/components/HeroSection/TechStackLogos';
 import ProjectSection from '@/components/ProjectSection/ProjectSection';
-import { useBreakpoint } from './hooks';
-import { cn } from './utils';
-import { baseWidth } from './styles';
+import { useBreakpoint } from '../hooks';
+import { cn } from '../utils';
+import { baseWidth } from '../styles';
 
 export default function Home() {
   const breakpoint = useBreakpoint();

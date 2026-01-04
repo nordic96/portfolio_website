@@ -1,18 +1,23 @@
 import Image from 'next/image';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import { CDN_BASE } from '@/app/config/cdn';
+import { useTranslations } from 'next-intl';
 
 export default function ProjectSection() {
+  const t = useTranslations('HomePage');
   return (
     <section className={'relative w-full flex flex-col justify-center'}>
       {/** Section Header */}
       <div className="w-full flex flex-col items-center text-center px-4 pt-24 pb-8 max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
-          Featured <span className="text-pastel-green">Projects</span>
+          {t.rich('project_section_headline', {
+            highlight: (chunks) => (
+              <span className="text-pastel-green">{chunks}</span>
+            ),
+          })}
         </h2>
         <p className="text-lg md:text-xl text-gray-600 font-light leading-relaxed max-w-2xl">
-          A curated collection of my most impactful work, showcasing expertise
-          in full-stack development, modern frameworks, and user-centric design.
+          {t('project_section_subheadline')}
         </p>
 
         {/* Decorative divider */}
