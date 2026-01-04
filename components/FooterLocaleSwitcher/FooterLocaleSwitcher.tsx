@@ -21,6 +21,7 @@ export default function FooterLocaleSwitcher() {
       className="border border-[#333] py-1 w-30 mt-1"
       value={currentLocale}
       onChange={onChangeLocale}
+      aria-label="Select language"
     >
       {LOCALES.map((locale, id) => (
         <option value={locale} key={id}>
