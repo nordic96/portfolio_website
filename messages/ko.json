@@ -1,0 +1,18 @@
+{
+    "HomePage": {
+        "name": "고기훈, Stephen",
+        "headline": "I build exceptional web experiences",
+        "subheadline": "that blend design & engineering",
+        "featured_project": "Featured Project - ",
+        "github": "깃허브",
+        "live_demo": "데모",
+        "project_section_headline": "Featured <highlight>Projects</highlight>",
+        "project_section_subheadline": "A curated collection of my most impactful work, showcasing expertise in full-stack development, modern frameworks, and user-centric design."
+    },
+    "Footer": {
+        "footer_title": "스테판 고 포트폴리오 웹페이지",
+        "language": "언어 변경",
+        "footline": "개발자 - 고기훈",
+        "app_version": "앱 버전"
+    }
+}
