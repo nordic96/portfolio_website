@@ -3,6 +3,7 @@
 import HeroSection from '@/components/HeroSection';
 import TechStackLogos from '@/components/HeroSection/TechStackLogos';
 import ProjectSection from '@/components/ProjectSection/ProjectSection';
+import AboutSection from '@/components/AboutSection';
 import { useBreakpoint } from '../hooks';
 import { cn } from '../utils';
 import { baseWidth } from '../styles';
@@ -19,8 +20,8 @@ export default function Home() {
         className={cn(baseWidth, 'flex flex-col justify-center items-center')}
       >
         <HeroSection />
-        {/* Additional sections will be added in future phases */}
         <ProjectSection />
+        <AboutSection />
       </div>
     </main>
   );
