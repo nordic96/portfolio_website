@@ -12,13 +12,15 @@ export default function Header() {
     >
       <div className={cn(baseWidth, 'flex justify-between items-center')}>
         <div className={'flex gap-1 items-center'}>
-          <Image
-            alt={'brand_logo'}
-            src={'/assets/sk_logo_only.svg'}
-            width={50}
-            height={50}
-          />
-          <h3 className="font-black italic">{'STEPHEN KO'}</h3>
+          <div className={'max-sm:w-7'}>
+            <Image
+              alt={'brand_logo'}
+              src={'/assets/sk_logo_only.svg'}
+              width={50}
+              height={50}
+            />
+          </div>
+          <h3 className="font-black max-sm:text-sm italic">{'STEPHEN KO'}</h3>
         </div>
         <div className={'flex items-center'}>
           <LocaleSwitcher />

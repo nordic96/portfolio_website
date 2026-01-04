@@ -38,7 +38,7 @@ export default function LocaleSwitcher() {
           role={'menu'}
           aria-label={'locale options'}
           className={
-            'absolute flex flex-col w-25 gap-1 top-9 right-[50%] translate-x-[50%] bg-white p-2 rounded-md text-sm'
+            'absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] bg-white p-2 rounded-md text-sm'
           }
         >
           {LOCALES.map((locale, key) => {
