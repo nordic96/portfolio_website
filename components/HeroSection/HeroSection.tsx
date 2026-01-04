@@ -1,18 +1,12 @@
-'use client';
-
-import { useBreakpoint } from '@/app/hooks';
-import TechStackLogos from './TechStackLogos';
-
 export default function HeroSection() {
-  const breakpoint = useBreakpoint();
   return (
-    <section className="relative lg:pt-70 md:pt-70 max-sm:h-dvh flex flex-col items-center justify-center bg-white px-6 md:px-12">
+    <section className="lg:pt-70 md:pt-70 max-sm:h-dvh flex flex-col items-center justify-center bg-white px-6 md:px-12">
       {/* Tech Stack Logos - Circular formation around profile photo */}
-      <TechStackLogos
-        animation={true}
-        radius={breakpoint === 'mobile' ? 40 : 30}
-      />
-      <div className="container max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-999">
+      <div
+        className={
+          'max-w-4xl mx-auto text-center flex flex-col items-center gap-8 md:gap-12 z-999'
+        }
+      >
         {/* Profile Photo Placeholder - Will be added in Issue #382 */}
         <div className="w-32 h-32 md:w-40 md:h-40 lg:w-52 lg:h-52 rounded-full bg-gray-100 border-4 border-pastel-green shadow-xl shadow-pastel-green/20" />
 

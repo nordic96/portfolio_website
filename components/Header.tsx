@@ -1,5 +1,6 @@
 import { baseWidth } from '@/app/styles';
 import { cn } from '@/app/utils';
+import Image from 'next/image';
 import { Activity } from 'react';
 
 export default function Header() {
@@ -11,7 +12,15 @@ export default function Header() {
       }
     >
       <div className={cn(baseWidth, 'flex justify-between items-center')}>
-        <h3 className={'font-black max-sm:text-sm'}>{'Stephen Ko'}</h3>
+        <div className={'flex gap-1 items-center'}>
+          <Image
+            alt={'brand_logo'}
+            src={'/assets/sk_logo_only.svg'}
+            width={50}
+            height={50}
+          />
+          <h3 className="font-black italic">{'STEPHEN KO'}</h3>
+        </div>
         <Activity mode={appVersion ? 'visible' : 'hidden'}>
           <span className={'text-xs font-light'}>{`v${appVersion}`}</span>
         </Activity>
