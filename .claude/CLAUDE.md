@@ -72,6 +72,11 @@ Breaking down complex problems into structured thinking steps
 - Tailwind styling
 - Bug fixes
 
+**MUST READ FIRST:** `.claude/subagents/frontend-dev/skills/SKILL.md`
+- Contains lessons learned and best practices
+- Prevents repeating past mistakes
+- Quick reference for CSS gotchas, patterns, and solutions
+
 **Tools available:**
 - Full development tools
 - Git operations
