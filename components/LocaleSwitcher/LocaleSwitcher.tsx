@@ -1,7 +1,13 @@
 'use client';
 
 import { useClickOutside } from '@/app/hooks';
-import { useLangNames, LocaleIconMap, LOCALES } from '@/i18n';
+import {
+  useLangNames,
+  LocaleIconMap,
+  LOCALES,
+  useRouter,
+  usePathname,
+} from '@/i18n';
 import Translate from '@mui/icons-material/Translate';
 import { useLocale } from 'next-intl';
 import { Activity, useRef, useState } from 'react';
@@ -9,12 +15,20 @@ import { Activity, useRef, useState } from 'react';
 export default function LocaleSwitcher() {
   const switchRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const localeNames = useLangNames(locale);
 
   const [expanded, setExpanded] = useState(false);
   useClickOutside(switchRef, () => {
     setExpanded(false);
   });
+
+  const onSwitchLocale =
+    (locale: string) => (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      router.replace(pathname, { locale: locale });
+    };
 
   return (
     <div ref={switchRef} className={'relative flex gap-1 text-text-dark z-50'}>
@@ -48,6 +62,8 @@ export default function LocaleSwitcher() {
                 className={
                   'cursor-pointer flex justify-between items-center gap-1'
                 }
+                aria-label={`Switch to ${locale}`}
+                onClick={onSwitchLocale(locale)}
               >
                 <span className={LocaleIconMap[locale]}></span>
                 <span className="text-xs pr-2">{localeNames.of(locale)}</span>
