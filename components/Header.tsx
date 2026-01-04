@@ -1,10 +1,9 @@
 import { baseWidth } from '@/app/styles';
 import { cn } from '@/app/utils';
 import Image from 'next/image';
-import { Activity } from 'react';
+import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
 
 export default function Header() {
-  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION;
   return (
     <header
       className={
@@ -21,9 +20,9 @@ export default function Header() {
           />
           <h3 className="font-black italic">{'STEPHEN KO'}</h3>
         </div>
-        <Activity mode={appVersion ? 'visible' : 'hidden'}>
-          <span className={'text-xs font-light'}>{`v${appVersion}`}</span>
-        </Activity>
+        <div className={'flex items-center'}>
+          <LocaleSwitcher />
+        </div>
       </div>
     </header>
   );
