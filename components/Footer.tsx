@@ -1,8 +1,10 @@
 import { baseWidth } from '@/app/styles';
 import { cn } from '@/app/utils';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
   return (
     <footer className={'flex flex-col mt-40 max-sm:mt-20 md:mt-30'}>
       <div
@@ -33,9 +35,7 @@ export default function Footer() {
           'flex justify-center px-8 max-sm:px-4 py-2 text-xs bg-text-dark text-white'
         }
       >
-        <span className={cn(baseWidth)}>
-          {'Developed by Gi Hun Ko Stephen'}
-        </span>
+        <span className={cn(baseWidth)}>{t('footline')}</span>
       </div>
     </footer>
   );

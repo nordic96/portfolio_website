@@ -1,5 +1,15 @@
 {
     "HomePage": {
-        "name": "Gi Hun Ko, Stephen"
+        "name": "Gi Hun Ko, Stephen",
+        "headline": "I build exceptional web experiences",
+        "subheadline": "that blend design & engineering",
+        "featured_project": "Featured Project - ",
+        "github": "Github",
+        "live_demo": "Live Demo",
+        "project_section_headline": "Featured <highlight>Projects</highlight>",
+        "project_section_subheadline": "A curated collection of my most impactful work, showcasing expertise in full-stack development, modern frameworks, and user-centric design."
+    },
+    "Footer": {
+        "footline": "Developed by Gi Hun Ko Stephen"
     }
 }

@@ -21,12 +21,12 @@ export default function HeroSection() {
 
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-text-dark leading-tight">
-            I build exceptional web experiences
+            {t('headline')}
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl lg:text-3xl font-extralight text-gray-600 leading-relaxed">
-            that blend design & engineering
+            {t('subheadline')}
           </p>
 
           {/* CTA Buttons Placeholder - Will be added in Phase 2 */}
