@@ -10,7 +10,7 @@ import {
 } from '@/i18n';
 import Translate from '@mui/icons-material/Translate';
 import { useLocale } from 'next-intl';
-import { Activity, useRef, useState } from 'react';
+import { useRef, useState, useCallback, KeyboardEvent } from 'react';
 
 export default function LocaleSwitcher() {
   const switchRef = useRef<HTMLDivElement>(null);
@@ -24,11 +24,29 @@ export default function LocaleSwitcher() {
     setExpanded(false);
   });
 
-  const onSwitchLocale =
-    (locale: string) => (e: React.MouseEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      router.replace(pathname, { locale: locale });
-    };
+  const onSwitchLocale = useCallback(
+    (newLocale: string) => {
+      router.replace(pathname, { locale: newLocale });
+      setExpanded(false);
+    },
+    [router, pathname],
+  );
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>, newLocale: string) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onSwitchLocale(newLocale);
+      } else if (e.key === 'Escape') {
+        setExpanded(false);
+      }
+    },
+    [onSwitchLocale],
+  );
+
+  const handleToggle = useCallback(() => {
+    setExpanded((prev) => !prev);
+  }, []);
 
   return (
     <div ref={switchRef} className={'relative flex gap-1 text-text-dark z-50'}>
@@ -37,41 +55,46 @@ export default function LocaleSwitcher() {
           'cursor-pointer hover:scale-105 hover:text-pastel-green-hover'
         }
         aria-expanded={expanded}
-        aria-haspopup={'menu'}
+        aria-haspopup={'listbox'}
         aria-label={'Language Selection'}
-        onClick={() => setExpanded(true)}
+        onClick={handleToggle}
       >
         <Translate />
       </button>
-      <div className={'flex gap-1 items-center'}>
+      <div className={'flex gap-1 items-center'} aria-hidden="true">
         <span className={LocaleIconMap[locale]}></span>
         <span className="text-xs pr-2">{localeNames.of(locale)}</span>
       </div>
-      <Activity mode={expanded ? 'visible' : 'hidden'}>
+      {expanded && (
         <div
-          role={'menu'}
-          aria-label={'locale options'}
+          role={'listbox'}
+          aria-label={'Select language'}
           className={
-            'absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] bg-white p-2 rounded-md text-sm'
+            'absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] bg-white p-2 rounded-md text-sm shadow-lg border border-gray-200'
           }
         >
-          {LOCALES.map((locale, key) => {
+          {LOCALES.map((localeOption) => {
+            const isSelected = localeOption === locale;
             return (
-              <div
-                key={`locale-${key}-${locale}`}
-                className={
-                  'cursor-pointer flex justify-between items-center gap-1'
-                }
-                aria-label={`Switch to ${locale}`}
-                onClick={onSwitchLocale(locale)}
+              <button
+                key={`locale-${localeOption}`}
+                role={'option'}
+                aria-selected={isSelected}
+                className={`cursor-pointer flex justify-between items-center gap-1 px-2 py-1 rounded hover:bg-pastel-green/20 transition-colors ${
+                  isSelected ? 'bg-pastel-green/10 font-semibold' : ''
+                }`}
+                onClick={() => onSwitchLocale(localeOption)}
+                onKeyDown={(e) => handleKeyDown(e, localeOption)}
               >
-                <span className={LocaleIconMap[locale]}></span>
-                <span className="text-xs pr-2">{localeNames.of(locale)}</span>
-              </div>
+                <span className={LocaleIconMap[localeOption]}></span>
+                <span className="text-xs pr-2">
+                  {localeNames.of(localeOption)}
+                </span>
+              </button>
             );
           })}
         </div>
-      </Activity>
+      )}
     </div>
   );
 }
