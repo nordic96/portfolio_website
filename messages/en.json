@@ -10,6 +10,9 @@
         "project_section_subheadline": "A curated collection of my most impactful work, showcasing expertise in full-stack development, modern frameworks, and user-centric design."
     },
     "Footer": {
-        "footline": "Developed by Gi Hun Ko Stephen"
+        "footer_title": "Stephen Ko's Portfolio Website",
+        "language": "Change Language",
+        "footline": "Developed by Gi Hun Ko Stephen",
+        "app_version": "App Version"
     }
 }
