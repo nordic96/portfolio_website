@@ -234,15 +234,16 @@ portfolio_website/
 │       └── marker-tip.svg       # Highlighter marker asset
 └── .claude/
     ├── CLAUDE.md                # Project instructions
+    ├── agents/                  # Custom subagents
+    │   ├── ui-ux-designer.md    # Design analysis agent
+    │   └── frontend-dev.md      # Implementation agent
     ├── context/
     │   ├── PROJECT_STATUS.md    # This file
     │   ├── DESIGN_SYSTEM.md     # Design specifications
-    │   ├── about-section-review-v1.0.md  # NEW
+    │   ├── about-section-review-v1.0.md
     │   └── screenshots/         # Visual review screenshots
-    ├── subagents/
-    │   └── frontend-dev/
-    │       └── skills/
-    │           └── SKILL.md     # Lessons learned
+    ├── skills/                  # Reusable skills
+    │   └── frontend-dev.md      # Lessons learned & patterns
     └── workflows/
         └── design-to-dev.md
 ```

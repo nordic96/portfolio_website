@@ -44,7 +44,10 @@ Breaking down complex problems into structured thinking steps
 
 ## Subagent System
 
+Custom agents are defined in `.claude/agents/`. Use `/agents` command to list and manage them.
+
 ### @ui-ux-designer
+**File:** `.claude/agents/ui-ux-designer.md`
 **Role:** Design analysis, conceptual design, and UX recommendations
 
 **When to use:**
@@ -62,6 +65,7 @@ Breaking down complex problems into structured thinking steps
 ---
 
 ### @frontend-dev
+**File:** `.claude/agents/frontend-dev.md`
 **Role:** Implementation of designs and features
 
 **When to use:**
@@ -72,7 +76,7 @@ Breaking down complex problems into structured thinking steps
 - Tailwind styling
 - Bug fixes
 
-**MUST READ FIRST:** `.claude/subagents/frontend-dev/skills/SKILL.md`
+**MUST READ FIRST:** `.claude/skills/frontend-dev.md`
 - Contains lessons learned and best practices
 - Prevents repeating past mistakes
 - Quick reference for CSS gotchas, patterns, and solutions
