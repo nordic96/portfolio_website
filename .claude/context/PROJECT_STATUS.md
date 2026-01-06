@@ -1,6 +1,6 @@
 # Portfolio Project - Current Status
 
-**Last Updated:** January 5, 2026
+**Last Updated:** January 6, 2026
 **Current Branch:** dev_#413_claude
 **Development Server:** http://localhost:3000
 
@@ -19,26 +19,29 @@ Personal portfolio website for Stephen Ko (Gi Hun Ko)
 
 ## ✅ Completed Features
 
-### Hero Section v2.0 (January 3, 2026)
+### Hero Section v3.0 (January 6, 2026)
 **Status:** ⭐ COMPLETE - Grade A (94/100)
 
 **Implemented:**
-- ✅ Clean white background with Pastel Green (#77dd87) accents
+- ✅ **Gradient background:** Blue-green (#00CEC8) → Pastel-green (#77dd87) → White
 - ✅ Profile photo placeholder with Pastel Green border
 - ✅ Centered content layout
 - ✅ Typography hierarchy: Name → Headline → Subheadline
-- ✅ 15 tech stack logos in orbital pattern around profile photo
+- ✅ 15 tech stack **post-it cards** in orbital pattern
+- ✅ **Category color-coding** for tech stacks
 - ✅ Responsive design across all breakpoints
 - ✅ All hover effects and interactions working
 
-**Tech Stack Logos (15 total):**
-React, Next.js, TypeScript, JavaScript, GitHub, Bitbucket, Jenkins, Tailwind CSS, SASS, HTML5, Docker, Storybook, ESLint, Jest, Cypress
+**Tech Stack Post-Its (15 total) - Color Coded:**
+- **Frontend (pastel-green):** React, Next.js, TypeScript, JavaScript, HTML5
+- **Utilities (blue-green):** Tailwind CSS, SASS, Storybook, ESLint, Jest, Cypress
+- **CI/CD & Others (pastel-pink):** GitHub, Docker, Jenkins, Bitbucket
 
 **Visual Treatment:**
-- Grayscale (100%) with 50% opacity
-- Random rotations (-20° to +22°)
-- Hover: Color reveal + 1.15x scale
-- Visible on all screen sizes (per user request)
+- Post-it card design with thick colored left border
+- Random rotations (-10 to +10 degrees)
+- Hover: 1.15x scale with increased opacity
+- Visible on all screen sizes
 
 **Screenshots:** All breakpoints captured in `.claude/context/screenshots/`
 
@@ -169,23 +172,59 @@ React, Next.js, TypeScript, JavaScript, GitHub, Bitbucket, Jenkins, Tailwind CSS
 
 ---
 
+### Priority 5: My Journey Year Circles Gradient (Future Enhancement)
+**Status:** Not started - Design spec only
+**Estimated Effort:** 0.5-1 day
+
+**Specification:**
+The timeline year circles in the About section should have a gradient effect showing progression through time:
+
+| Year | Color Position | Effect |
+|------|----------------|--------|
+| 2018 | Most pastel-green | `bg-gradient-to-br from-pastel-green to-pastel-green-hover` |
+| 2019 | 80% green, 20% blue | Gradual blend |
+| 2020 | 60% green, 40% blue | Gradual blend |
+| 2022 | 40% green, 60% blue | Gradual blend |
+| 2024 | 20% green, 80% blue | Gradual blend |
+| 2026 | Most blue-green | `bg-gradient-to-br from-blue-green to-blue-green/80` |
+
+**Implementation Approach:**
+- Pass `index` and `total` to TimelineItem component
+- Calculate gradient interpolation based on position
+- Use CSS custom properties or inline styles for dynamic gradients
+- Maintain white text color for contrast
+- Ensure WCAG AA contrast compliance for all gradient combinations
+
+**Visual Goal:**
+Creates a visual "journey through time" metaphor where colors transition from the past (green) to present/future (blue-green).
+
+---
+
 ## 🎨 Design System
 
-### Color Palette (Pastel Green Theme)
+### Color Palette (Multi-Color Theme v3.0)
 ```css
 /* Primary */
 --pastel-green: #77dd87;
 --pastel-green-hover: #5fd070;
 
-/* Secondary */
---blue-dianne: #1f5b5b;
---copper: #b68b3b;
+/* Secondary Accents */
+--blue-green: #00CEC8;      /* Utilities category, gradients */
+--pastel-pink: #EF80EF;     /* CI/CD category */
+--pastel-brown: #EFB880;    /* Reserved for future use */
 
 /* Base */
 --white: #FFFFFF;
 --dark-gray: #333333;
 --text-dark: #2D2D2D;
 ```
+
+### Tech Stack Category Colors
+| Category | Color | Hex | Technologies |
+|----------|-------|-----|--------------|
+| Frontend | Pastel Green | #77dd87 | React, Next.js, TypeScript, JavaScript, HTML5 |
+| Utilities | Blue-Green | #00CEC8 | Tailwind, SASS, Storybook, ESLint, Jest, Cypress |
+| CI/CD & Others | Pastel Pink | #EF80EF | GitHub, Docker, Jenkins, Bitbucket |
 
 ### Typography
 **Font Family:** Inter (300, 400, 600, 700 weights)
@@ -351,8 +390,8 @@ npm run start      # Start production server
 - **IMPLEMENTATION_PRIORITIES.md** - Detailed roadmap and priorities
 
 **Feature Specifications:**
-- **about-section-spec.md** - About/Personal Story Section (NEXT) ⏭️
 - **highlighter-animation-spec.md** - Hero highlighter animation (deferred)
+- **journey-circles-gradient** - Spec in PROJECT_STATUS.md (Priority 5)
 
 **Implementation Reviews:**
 - **hero-section-review-v2.0.md** - Hero section final review

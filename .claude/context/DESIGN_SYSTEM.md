@@ -1,7 +1,7 @@
 # Portfolio Design System
 
-**Version:** 2.0 (Pastel Green Theme)
-**Last Updated:** January 2, 2026
+**Version:** 3.0 (Multi-Color Theme)
+**Last Updated:** January 6, 2026
 **Status:** Active
 
 ---
@@ -16,13 +16,14 @@
 --color-pastel-green-hover: #5fd070;
 --color-pastel-green-light: rgba(119, 221, 135, 0.1);
 
-/* BlueDianne - Secondary/Depth Color */
---color-blue-dianne: #1f5b5b;
---color-blue-dianne-dark: #164444;
+/* Blue-Green - Secondary Accent Color */
+--color-blue-green: #00CEC8;
 
-/* Copper - Accent Color */
---color-copper: #b68b3b;
---color-copper-light: rgba(182, 139, 59, 0.1);
+/* Pastel Pink - Tertiary Accent Color */
+--color-pastel-pink: #EF80EF;
+
+/* Pastel Brown - Warm Accent (reserved) */
+--color-pastel-brown: #EFB880;
 
 /* Base Colors */
 --color-white: #FFFFFF;
@@ -34,14 +35,16 @@
 
 | Use Case | Color | Tailwind Class | Notes |
 |----------|-------|----------------|-------|
-| Hero Background | White | `bg-white` | Clean, modern base |
-| Primary CTA Background | Pastel Green | `bg-[#77dd87]` | Fresh, inviting |
-| Primary CTA Hover | Pastel Green Hover | `hover:bg-[#5fd070]` | Darker on hover |
-| Accent Text/Highlights | Pastel Green | `text-[#77dd87]` | Visual interest |
-| Profile Photo Border | Pastel Green | `ring-[#77dd87]` | Brand consistency |
-| Secondary Accent | Copper | `text-[#b68b3b]` | Warm touch |
-| Header/Footer Background | Dark Gray | `bg-[#333333]` | Minimal, professional |
-| Body Text | Dark Gray | `text-[#2D2D2D]` | High readability |
+| Hero Background Gradient | Blue-Green to White | `bg-gradient-to-b from-blue-green via-pastel-green to-white` | Dynamic gradient |
+| Tech Stack: Frontend | Pastel Green | `border-l-pastel-green` | React, Next.js, TS, JS, HTML5 |
+| Tech Stack: Utilities | Blue-Green | `border-l-blue-green` | Tailwind, SASS, Storybook, ESLint, Jest, Cypress |
+| Tech Stack: CI/CD & Others | Pastel Pink | `border-l-pastel-pink` | GitHub, Docker, Jenkins, Bitbucket |
+| Primary CTA Background | Pastel Green | `bg-pastel-green` | Fresh, inviting |
+| Primary CTA Hover | Pastel Green Hover | `hover:bg-pastel-green-hover` | Darker on hover |
+| Accent Text/Highlights | Pastel Green | `text-pastel-green` | Visual interest |
+| Profile Photo Border | Pastel Green | `ring-pastel-green` | Brand consistency |
+| Header/Footer Background | Dark Gray | `bg-text-dark` | Minimal, professional |
+| Body Text | Dark Gray | `text-text-dark` | High readability |
 
 ### Accessibility - Color Contrast
 
@@ -198,32 +201,45 @@ className="border-2 border-[#77dd87]
 
 ---
 
-### Tech Stack Logos (Implemented)
+### Tech Stack Post-Its (Implemented)
+
+**Design:** Post-it note style cards with colored left border indicating category
+
+**Categories & Colors:**
+- **Frontend (pastel-green):** React, Next.js, TypeScript, JavaScript, HTML5
+- **Utilities (blue-green):** Tailwind CSS, SASS, Storybook, ESLint, Jest, Cypress
+- **CI/CD & Others (pastel-pink):** GitHub, Docker, Jenkins, Bitbucket
 
 **Logo Styling:**
 ```css
 .tech-logo {
-  filter: grayscale(100%);
-  opacity: 0.5;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: rotate(var(--rotation, 0deg));
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
   pointer-events: auto;
   cursor: pointer;
 }
 
 .tech-logo:hover {
-  opacity: 0.9;
+  opacity: 1;
   filter: grayscale(0%) brightness(1.1);
-  transform: rotate(var(--rotation, 0deg)) scale(1.15);
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1.15);
   z-index: 10;
 }
 ```
 
-**Size:**
-- Desktop/Tablet: `w-14 h-14` (56px)
-- Mobile: `w-8 h-8` (32px)
+**Post-It Card Structure:**
+```tsx
+className="flex gap-4 items-center w-50 max-sm:w-20 bg-white py-2 px-4 border-l-20 max-sm:border-l-10"
+// Border color based on category:
+// border-l-pastel-green | border-l-blue-green | border-l-pastel-pink
+```
 
-**Positioning:** Orbital pattern around profile photo with random rotations (-20° to +22°)
+**Size:**
+- Desktop/Tablet: `w-50` with icon `min-w-10 h-10`
+- Mobile: `w-20` with icon `min-w-6 h-6`
+
+**Positioning:** Orbital pattern around profile photo with random rotations (-10 to +10 degrees)
 
 ---
 
@@ -475,7 +491,20 @@ hover:scale-115
 
 ## Version History
 
-### v2.0 (January 2, 2026) - Current
+### v3.0 (January 6, 2026) - Current
+- **Color Palette Update:**
+  - Added Blue-Green (#00CEC8) as secondary accent
+  - Added Pastel Pink (#EF80EF) as tertiary accent
+  - Added Pastel Brown (#EFB880) as reserved warm accent
+  - Removed Blue-Dianne (#1f5b5b) and Copper (#b68b3b)
+- **Hero Section:**
+  - Added gradient background: `from-blue-green via-pastel-green to-white`
+- **Tech Stack Post-Its:**
+  - Redesigned as post-it note cards with category color coding
+  - Frontend (pastel-green), Utilities (blue-green), CI/CD (pastel-pink)
+- **Removed:** AI Badge experiment from footer
+
+### v2.0 (January 2, 2026)
 - Pastel Green theme implementation
 - White background hero section
 - Tech stack logos with orbital pattern

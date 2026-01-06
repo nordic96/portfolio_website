@@ -60,6 +60,9 @@
         "footer_title": "스테판 고 포트폴리오 웹페이지",
         "language": "언어 변경",
         "footline": "개발자 - 고기훈",
-        "app_version": "앱 버전"
+        "app_version": "앱 버전",
+        "ai_badge": "AI 어시스턴트로 제작",
+        "ai_badge_short": "AI 제작",
+        "ai_badge_aria": "이 포트폴리오는 AI 어시스턴트로 제작되었습니다"
     }
 }

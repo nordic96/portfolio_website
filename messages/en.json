@@ -60,6 +60,9 @@
         "footer_title": "Stephen Ko's Portfolio Website",
         "language": "Change Language",
         "footline": "Developed by Gi Hun Ko Stephen",
-        "app_version": "App Version"
+        "app_version": "App Version",
+        "ai_badge": "Built with AI Assistance",
+        "ai_badge_short": "AI Built",
+        "ai_badge_aria": "This portfolio was built with AI assistance"
     }
 }
