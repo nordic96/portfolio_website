@@ -1,6 +1,7 @@
 'use client';
 
 import { DashboardLayout, GridCard } from '@/components/Dashboard';
+import { TechStackPostIts } from '@/components/TechStackPostIts';
 import Link from 'next/link';
 
 /**
@@ -17,7 +18,7 @@ export default function Home() {
       footer={<DashboardFooter />}
       heroSection={<HeroPlaceholder />}
       projectsCard={<ProjectsPlaceholder />}
-      techStackCard={<TechStackPlaceholder />}
+      techStackCard={<TechStackCard />}
       aboutCard={<AboutPlaceholder />}
       certificationsCard={<CertificationsPlaceholder />}
     />
@@ -141,31 +142,13 @@ function ProjectsPlaceholder() {
 }
 
 /**
- * Tech Stack Card Placeholder
- * Will be replaced with post-it style tech badges
+ * Tech Stack Card - Post-it style tech badges
+ * Implements GitHub Issue #423
  */
-function TechStackPlaceholder() {
-  const techStack = [
-    'React',
-    'TypeScript',
-    'Next.js',
-    'Tailwind',
-    'Node.js',
-    'GraphQL',
-  ];
-
+function TechStackCard() {
   return (
-    <GridCard title="Tech Stack">
-      <div className="flex flex-wrap gap-2">
-        {techStack.map((tech) => (
-          <div
-            key={tech}
-            className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-100 hover:border-pastel-green transition-colors"
-          >
-            <span className="text-xs font-medium text-gray-700">{tech}</span>
-          </div>
-        ))}
-      </div>
+    <GridCard title="Tech Stack" className="py-3">
+      <TechStackPostIts showCategoryColors />
     </GridCard>
   );
 }
