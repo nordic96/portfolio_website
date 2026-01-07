@@ -1,287 +1,277 @@
 # Portfolio Project - Current Status
 
-**Last Updated:** January 6, 2026
+**Last Updated:** January 7, 2026
 **Current Branch:** dev_#413_claude
 **Development Server:** http://localhost:3000
+**Design Version:** 4.0 (Dashboard Layout)
 
 ---
 
-## 📊 Project Overview
+## MAJOR DESIGN CHANGE: v4.0 Dashboard Layout
+
+### Previous Design (v1.0 - v3.0)
+- Vertical scrolling sections (Hero -> Projects -> About -> Contact)
+- Full-width layouts per section
+- Large typography, detailed content
+- 90dvh hero + scrolling content below
+
+### New Design (v4.0 - Dashboard)
+- **100dvh single-view layout** - Everything visible at a glance
+- **Centered grid format** - All sections in compact grid cells
+- **Compact typography** - ~50% smaller than v3.0
+- **Minimal color** - Mostly white with subtle gradient hints
+- **No scrolling required** (desktop/tablet)
+- **Mobile: Single column vertical layout** - Sections stack top-to-bottom with vertical scroll
+
+### Layout Structure
+
+```
++-----------------------------------------------+
+|  Logo                              i18n       |  <- Header
++-----------------------------------------------+
+|                                               |
+|    +----------------------------------+       |
+|    |         Hero Section             |       |  <- Row 1 (full width)
+|    |        (profile photo)           |       |
+|    +-------------------+--------------+       |
+|    |     Projects      | Tech Stack   |       |  <- Row 2
+|    |                   | Post-Its     |       |
+|    +-------------------+--------------+       |
+|    |      About        |Certifications|       |  <- Row 3
+|    |                   |              |       |
+|    +-------------------+--------------+       |
+|                                               |
++-----------------------------------------------+
+|              Footer                           |
++-----------------------------------------------+
+```
+
+### Grid Layout Summary
+| Row | Left Column | Right Column |
+|-----|-------------|--------------|
+| 1 | Hero Section (spans both columns) | - |
+| 2 | Projects | Tech Stack Post-Its |
+| 3 | About | Certifications |
+
+### Design Reference
+- **Sketch:** `docs/img/app_layout.png`
+- **Design System:** `.claude/context/DESIGN_SYSTEM.md`
+
+---
+
+## Project Overview
 
 Personal portfolio website for Stephen Ko (Gi Hun Ko)
 - **Tech Stack:** Next.js 16, React 18, TypeScript, Tailwind CSS
 - **Deployment:** Vercel (https://stephenghk.com)
 - **State Management:** Jotai
 - **i18n:** next-intl (English + Korean)
-- **Current Focus:** Contact/CTA Section (next priority)
+- **Current Focus:** Dashboard Layout Redesign (v4.0)
 
 ---
 
-## ✅ Completed Features
+## Previous Features (v3.0 - TO BE REBUILT)
+
+The following features were completed under v3.0 design but will need to be rebuilt for v4.0:
 
 ### Hero Section v3.0 (January 6, 2026)
-**Status:** ⭐ COMPLETE - Grade A (94/100)
-
-**Implemented:**
-- ✅ **Gradient background:** Blue-green (#00CEC8) → Pastel-green (#77dd87) → White
-- ✅ Profile photo placeholder with Pastel Green border
-- ✅ Centered content layout
-- ✅ Typography hierarchy: Name → Headline → Subheadline
-- ✅ 15 tech stack **post-it cards** in orbital pattern
-- ✅ **Category color-coding** for tech stacks
-- ✅ Responsive design across all breakpoints
-- ✅ All hover effects and interactions working
-
-**Tech Stack Post-Its (15 total) - Color Coded:**
-- **Frontend (pastel-green):** React, Next.js, TypeScript, JavaScript, HTML5
-- **Utilities (blue-green):** Tailwind CSS, SASS, Storybook, ESLint, Jest, Cypress
-- **CI/CD & Others (pastel-pink):** GitHub, Docker, Jenkins, Bitbucket
-
-**Visual Treatment:**
-- Post-it card design with thick colored left border
-- Random rotations (-10 to +10 degrees)
-- Hover: 1.15x scale with increased opacity
-- Visible on all screen sizes
-
-**Screenshots:** All breakpoints captured in `.claude/context/screenshots/`
-
-**Review:** See `hero-section-review-v2.0.md` for detailed analysis
-
----
+- **Previous Grade:** A (94/100)
+- **Status:** REQUIRES REBUILD for dashboard layout
+- What existed:
+  - Gradient background (Blue-green -> Pastel-green -> White)
+  - Profile photo placeholder with Pastel Green border
+  - Large typography hierarchy
+  - 15 tech stack post-it cards in orbital pattern
+  - Full 90dvh section
 
 ### Featured Projects Section (January 3, 2026)
-**Status:** ⭐ COMPLETE - Grade A- (92/100)
-
-**Implemented:**
-- ✅ Bento grid layout with asymmetric card sizes
-- ✅ Glassmorphism cards with backdrop blur
-- ✅ Premium hover interactions (lift, scale, Pastel Green glow)
-- ✅ Modern pill tech badges with gradient backgrounds
-- ✅ Button-style links (GitHub + Live Demo)
-- ✅ Size-aware typography (large vs small cards)
-- ✅ Tech badges overlay on small cards
-- ✅ Featured Projects section header with tagline
-- ✅ Responsive design across all breakpoints
-- ✅ WCAG AA accessibility compliance
-
-**Visual Treatment:**
-- Glassmorphism: `bg-white/95 backdrop-blur-sm`
-- Multi-layer shadows with Pastel Green glow on hover
-- Image zoom effects with diagonal shine animation
-- Rounded-full pill badges with brand colors
-- Sequential fade-in animations
-
-**Screenshots:** All breakpoints captured in `.claude/context/screenshots/`
-
-**Reviews:**
-- Initial: `project-section-design-review.md`
-- Enhancements: `project-card-enhancement-spec.md`
-- Final: `project-cards-implementation-review.md`
-
----
+- **Previous Grade:** A- (92/100)
+- **Status:** REQUIRES REBUILD for dashboard layout
+- What existed:
+  - Bento grid layout with asymmetric card sizes
+  - Glassmorphism cards with backdrop blur
+  - Premium hover interactions
+  - Button-style links
 
 ### About/Personal Story Section (January 5, 2026)
-**Status:** ⭐ COMPLETE - Grade A- (91/100)
-**PR:** #417
-
-**Implemented:**
-- ✅ Section header with "About Me" title and gradient divider
-- ✅ Opening hook with profile photo placeholder
-- ✅ Timeline journey (6 milestones: 2018 → 2026)
-- ✅ Learning philosophy pull quote with glassmorphism
-- ✅ "What Drives Me" closing statement
-- ✅ Scroll-triggered fade-in animations
-- ✅ Responsive timeline (horizontal desktop, vertical mobile)
-- ✅ i18n support (English + Korean translations)
-- ✅ WCAG AA accessibility compliance
-- ✅ `prefers-reduced-motion` support
-
-**Components Created:**
-- `AboutSection.tsx` - Main section container
-- `Timeline.tsx` - Timeline wrapper with connecting line
-- `TimelineItem.tsx` - Individual milestone with year badge
-- `PullQuote.tsx` - Philosophy quote with glassmorphism
-
-**Visual Treatment:**
-- Pastel Green gradient year badges
-- Glassmorphism pull quote (`from-pastel-green/5 to-white`)
-- Staggered timeline animations (150ms delay per item)
-- Semantic HTML (`<section>`, `<article>`, `<time>`, `<blockquote>`)
-
-**Screenshots:** `.claude/context/screenshots/about-section-*.png`
-
-**Review:** See `about-section-review-v1.0.md` for detailed analysis
+- **Previous Grade:** A- (91/100)
+- **Status:** REQUIRES REBUILD for dashboard layout
+- What existed:
+  - Section header with gradient divider
+  - Timeline journey (6 milestones: 2018 -> 2026)
+  - Learning philosophy pull quote
+  - Scroll-triggered fade-in animations
 
 ---
 
-## 🎯 Current Priorities (In Order)
+## New Implementation Priorities (v4.0)
 
-### Priority 1: Contact/CTA Section - NEXT ⏭️
-**Status:** Ready to implement
+### Priority 1: Layout Foundation
+**Status:** NOT STARTED
 **Estimated Effort:** 2-3 days
 
-**Requirements:**
-- Contact form with validation
-- Social links (LinkedIn, GitHub, Email)
-- Availability status indicator
-- Smooth scroll from hero CTA buttons
-- Email integration
+**Tasks:**
+- [ ] Set up 100dvh container structure
+- [ ] Create header with logo and i18n selector
+- [ ] Implement CSS Grid layout (3-column for desktop)
+- [ ] Create base GridCard component
+- [ ] Add responsive breakpoints (desktop/tablet/mobile)
+- [ ] Implement mobile scrollable fallback
 
-**Strategic Value:**
-- Completes trust ladder (Interest → Evidence → Trust → **Action**)
-- Enables direct communication from recruiters
-- Conversion endpoint for portfolio visitors
-
----
-
-### Priority 2: Full Project Archive Page
-**Status:** After Contact section
-**Estimated Effort:** 3-4 days
-
-**Requirements:**
-- Complete project listing (all projects, not just featured)
-- Filtering (Latest/Earliest, by category)
-- Search functionality
-- Pagination or infinite scroll
-- Consistent card design with featured section
+**Technical Details:**
+- `h-dvh` for 100dvh height
+- CSS Grid with `grid-template-columns: 2fr 1fr`
+- Max-width container: 1200px (`max-w-6xl`)
+- Gap: 16px (`gap-4`)
 
 ---
 
-### Priority 3: Profile Photo Replacement (Quick Win)
-**Status:** Waiting for asset
-**Estimated Effort:** 0.5-1 day
+### Priority 2: Hero Section Card
+**Status:** NOT STARTED
+**Estimated Effort:** 1 day
 
 **Tasks:**
-- Replace gray circle placeholder in Hero and About sections
-- Implement Next.js Image component
-- Optimize for responsive sizing
-- Test loading performance
+- [ ] Compact profile photo (80-96px)
+- [ ] Name and headline text (compact typography)
+- [ ] Location/role subtitle
+- [ ] Responsive layout within card
+
+**Design Specs:**
+- Grid position: Row 1, Columns 1-2
+- Profile photo: `w-20 h-20 lg:w-24 lg:h-24`
+- Name: `text-2xl lg:text-3xl font-bold`
+- Headline: `text-base lg:text-lg font-light`
 
 ---
 
-### Priority 4: Highlighter Animation (Polish)
-**Status:** Deferred
+### Priority 3: Supporting Grid Cells
+**Status:** NOT STARTED
+**Estimated Effort:** 2-3 days
+
+**Cells to build:**
+1. **Certifications Card** (Row 1, Column 3)
+   - List of certification badges
+   - Compact list format
+
+2. **Projects Card** (Row 2, Columns 1-2)
+   - 2-3 project thumbnails
+   - Aspect-ratio images
+   - Hover zoom effect
+
+3. **About Card** (Row 2, Column 3)
+   - Brief bio (2-3 sentences)
+   - "Read more" link
+
+4. **Tech Stack Post-Its** (Row 3, Full width)
+   - Horizontal row of tech badges
+   - Post-it style with subtle rotation
+
+---
+
+### Priority 4: Footer
+**Status:** NOT STARTED
+**Estimated Effort:** 0.5 day
+
+**Tasks:**
+- [ ] Social links (GitHub, LinkedIn, Email)
+- [ ] Copyright text
+- [ ] Compact height (48px)
+
+---
+
+### Priority 5: Polish & Content
+**Status:** NOT STARTED
 **Estimated Effort:** 1-2 days
-**Specification:** `highlighter-animation-spec.md`
 
-**Details:**
-- Marker sweeps across "exceptional" in headline
-- Pastel Green highlight (#77dd87, 35% opacity)
-- 800ms delay + 600ms animation
-- Asset provided: `/public/assets/marker-tip.svg` ✅
-
----
-
-### Priority 5: My Journey Year Circles Gradient (Future Enhancement)
-**Status:** Not started - Design spec only
-**Estimated Effort:** 0.5-1 day
-
-**Specification:**
-The timeline year circles in the About section should have a gradient effect showing progression through time:
-
-| Year | Color Position | Effect |
-|------|----------------|--------|
-| 2018 | Most pastel-green | `bg-gradient-to-br from-pastel-green to-pastel-green-hover` |
-| 2019 | 80% green, 20% blue | Gradual blend |
-| 2020 | 60% green, 40% blue | Gradual blend |
-| 2022 | 40% green, 60% blue | Gradual blend |
-| 2024 | 20% green, 80% blue | Gradual blend |
-| 2026 | Most blue-green | `bg-gradient-to-br from-blue-green to-blue-green/80` |
-
-**Implementation Approach:**
-- Pass `index` and `total` to TimelineItem component
-- Calculate gradient interpolation based on position
-- Use CSS custom properties or inline styles for dynamic gradients
-- Maintain white text color for contrast
-- Ensure WCAG AA contrast compliance for all gradient combinations
-
-**Visual Goal:**
-Creates a visual "journey through time" metaphor where colors transition from the past (green) to present/future (blue-green).
+**Tasks:**
+- [ ] Subtle center gradient
+- [ ] Hover interactions
+- [ ] Focus states
+- [ ] Profile photo replacement
+- [ ] Certification logos
+- [ ] Project thumbnails
+- [ ] Bio content
 
 ---
 
-## 🎨 Design System
+## Design System Summary (v4.0)
 
-### Color Palette (Multi-Color Theme v3.0)
+### Color Palette (Minimal)
 ```css
-/* Primary */
---pastel-green: #77dd87;
---pastel-green-hover: #5fd070;
+/* Base - Dominant */
+--color-white: #FFFFFF;
+--color-text-primary: #2D2D2D;
+--color-text-secondary: #6B7280;
 
-/* Secondary Accents */
---blue-green: #00CEC8;      /* Utilities category, gradients */
---pastel-pink: #EF80EF;     /* CI/CD category */
---pastel-brown: #EFB880;    /* Reserved for future use */
+/* Accent - Subtle Use */
+--color-accent-green: #77dd87;
+--color-accent-blue: #00CEC8;
 
-/* Base */
---white: #FFFFFF;
---dark-gray: #333333;
---text-dark: #2D2D2D;
+/* Border */
+--color-border: #E5E7EB;
 ```
 
-### Tech Stack Category Colors
-| Category | Color | Hex | Technologies |
-|----------|-------|-----|--------------|
-| Frontend | Pastel Green | #77dd87 | React, Next.js, TypeScript, JavaScript, HTML5 |
-| Utilities | Blue-Green | #00CEC8 | Tailwind, SASS, Storybook, ESLint, Jest, Cypress |
-| CI/CD & Others | Pastel Pink | #EF80EF | GitHub, Docker, Jenkins, Bitbucket |
+### Typography (Compact)
+| Element | Size | Tailwind |
+|---------|------|----------|
+| Hero Name | 24-30px | text-2xl lg:text-3xl |
+| Hero Headline | 16-18px | text-base lg:text-lg |
+| Section Title | 14px | text-sm uppercase |
+| Body Text | 14px | text-sm |
+| Labels | 12px | text-xs |
 
-### Typography
-**Font Family:** Inter (300, 400, 600, 700 weights)
-
-**Type Scale:**
-- Greeting: text-3xl to text-5xl (responsive)
-- Headline: text-4xl to text-7xl (responsive)
-- Subheadline: text-xl to text-3xl (responsive)
+### Spacing (Compact)
+| Use Case | Size | Tailwind |
+|----------|------|----------|
+| Grid gap | 16px | gap-4 |
+| Card padding | 16-20px | p-4 lg:p-5 |
+| Element spacing | 8px | gap-2 |
 
 ### Responsive Breakpoints
-- Mobile: <768px
-- Tablet: 768-1023px
-- Desktop: ≥1024px
+- **Desktop (>=1024px):** 3-column grid, 100dvh
+- **Tablet (768-1023px):** 2-column grid, 100dvh
+- **Mobile (<768px):** 1-column stack, scrollable
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 portfolio_website/
 ├── app/
 │   ├── [locale]/
-│   │   └── page.tsx             # Homepage with all sections
+│   │   └── page.tsx             # Homepage with dashboard grid
 │   ├── layout.tsx               # Root layout with Inter font
 │   └── globals.css              # Global styles, color palette
 ├── components/
-│   ├── HeroSection/
-│   │   ├── HeroSection.tsx      # Main hero component
-│   │   ├── TechStackLogos.tsx   # 15 tech logos with animations
-│   │   └── index.ts
-│   ├── ProjectSection/
-│   │   └── ProjectSection.tsx   # Featured projects section
-│   ├── ProjectCard/
-│   │   └── ProjectCard.tsx      # Project card component
-│   └── AboutSection/            # NEW
-│       ├── AboutSection.tsx     # Main about section
-│       ├── Timeline.tsx         # Timeline wrapper
-│       ├── TimelineItem.tsx     # Individual milestone
-│       ├── PullQuote.tsx        # Philosophy quote
-│       └── index.ts
-├── messages/
-│   ├── en.json                  # English translations
-│   └── ko.json                  # Korean translations
+│   ├── DashboardLayout/         # NEW - v4.0 layout
+│   │   ├── DashboardLayout.tsx  # 100dvh container
+│   │   ├── GridCard.tsx         # Base card component
+│   │   ├── Header.tsx           # Logo + i18n
+│   │   └── Footer.tsx           # Social links + copyright
+│   ├── HeroCard/                # NEW - Compact hero
+│   │   └── HeroCard.tsx
+│   ├── CertificationsCard/      # NEW
+│   │   └── CertificationsCard.tsx
+│   ├── ProjectsCard/            # NEW - Thumbnail grid
+│   │   └── ProjectsCard.tsx
+│   ├── AboutCard/               # NEW - Brief bio
+│   │   └── AboutCard.tsx
+│   └── TechStackBar/            # NEW - Horizontal post-its
+│       └── TechStackBar.tsx
 ├── public/
 │   └── assets/
-│       └── marker-tip.svg       # Highlighter marker asset
+├── docs/
+│   └── img/
+│       └── app_layout.png       # Design sketch reference
 └── .claude/
     ├── CLAUDE.md                # Project instructions
     ├── agents/                  # Custom subagents
-    │   ├── ui-ux-designer.md    # Design analysis agent
-    │   └── frontend-dev.md      # Implementation agent
     ├── context/
     │   ├── PROJECT_STATUS.md    # This file
-    │   ├── DESIGN_SYSTEM.md     # Design specifications
-    │   ├── about-section-review-v1.0.md
-    │   └── screenshots/         # Visual review screenshots
-    ├── skills/                  # Reusable skills
+    │   ├── DESIGN_SYSTEM.md     # v4.0 design specifications
+    │   └── archive/             # v1.0-v3.0 documentation
+    ├── skills/
     │   └── frontend-dev.md      # Lessons learned & patterns
     └── workflows/
         └── design-to-dev.md
@@ -289,7 +279,7 @@ portfolio_website/
 
 ---
 
-## 🔧 Development Commands
+## Development Commands
 
 ```bash
 npm run dev        # Start development server (localhost:3000)
@@ -301,28 +291,7 @@ npm run start      # Start production server
 
 ---
 
-## 📦 Dependencies
-
-### Core
-- Next.js 16+ (App Router)
-- React 18+
-- TypeScript
-- Tailwind CSS
-
-### UI/Icons
-- simple-icons (for tech stack logos)
-- Material UI Icons (Google Icons)
-
-### State
-- Jotai
-
-### Backend
-- GraphQL Server
-- MongoDB
-
----
-
-## 🤖 Subagent Workflow
+## Subagent Workflow
 
 ### @ui-ux-designer
 **Use for:**
@@ -330,7 +299,6 @@ npm run start      # Start production server
 - Creating design specifications
 - Reviewing implemented features
 - Accessibility audits
-- Providing visual feedback
 
 ### @frontend-dev
 **Use for:**
@@ -338,7 +306,6 @@ npm run start      # Start production server
 - Building React/TypeScript components
 - Tailwind CSS styling
 - Performance optimization
-- Bug fixes and refactoring
 
 **Typical Flow:**
 1. @ui-ux-designer analyzes and creates specs
@@ -348,22 +315,25 @@ npm run start      # Start production server
 
 ---
 
-## 🐛 Known Issues & Notes
+## Archived Documentation
 
-### Resolved Issues (Hero Section v1.3)
-- ✅ Mobile logo visibility (removed `hidden lg:block`)
-- ✅ Hover effects not working (fixed `pointer-events-none`)
-- ✅ Transform/rotation conflict (solved with CSS custom properties)
-- ✅ Fade-in animation (implemented @keyframes, currently disabled)
+Previous v1.0-v3.0 documentation has been moved to `.claude/context/archive/`:
 
-### Future Refinements
-- Name styling may change in final design (currently bold with Pastel Green background)
-- Logo positioning could be adjusted (minor clustering on right side)
-- Mobile logo density (15 logos on small screens is busy but per user spec)
+- `hero-section-review-v1.3.md`
+- `hero-section-review-v2.0.md`
+- `highlighter-animation-spec.md`
+- `tech-stack-logos-spec.md`
+- `project-card-enhancement-spec.md`
+- `project-cards-implementation-review.md`
+- `project-section-design-review.md`
+- `about-section-spec.md`
+- `about-section-review-v1.0.md`
+- `IMPLEMENTATION_PRIORITIES.md`
+- `IMPLEMENTATION_CHECKLIST.md`
 
 ---
 
-## 📝 MCP Servers Enabled
+## MCP Servers Enabled
 
 ### Playwright MCP
 **Use for:**
@@ -381,51 +351,38 @@ npm run start      # Start production server
 
 ---
 
-## 🎓 Learning Resources
+## Next Session Goals
 
-### Context Documents
+1. **Immediate:** Build Layout Foundation (Priority 1)
+   - 100dvh container structure
+   - CSS Grid layout
+   - Base GridCard component
 
-**Core Specifications:**
-- **DESIGN_SYSTEM.md** - Complete design specifications and component patterns
-- **IMPLEMENTATION_PRIORITIES.md** - Detailed roadmap and priorities
+2. **Short-term:** Build Grid Cells (Priorities 2-3)
+   - Hero card
+   - Certifications card
+   - Projects card
+   - About card
+   - Tech stack bar
 
-**Feature Specifications:**
-- **highlighter-animation-spec.md** - Hero highlighter animation (deferred)
-- **journey-circles-gradient** - Spec in PROJECT_STATUS.md (Priority 5)
-
-**Implementation Reviews:**
-- **hero-section-review-v2.0.md** - Hero section final review
-- **project-cards-implementation-review.md** - Featured Projects review
-- **project-card-enhancement-spec.md** - ProjectCard UI enhancements
-
-**Workflow Guides:**
-- **design-to-dev.md** - Multi-agent collaboration patterns
-
-### Historical Reference
-- Implementation reviews in context/archive/ folder
-- Git commit history on dev_#410 branch
-- PR #411: ProjectCard UI enhancements
+3. **Polish:** Add content and interactions (Priority 5)
+   - Profile photo
+   - Hover effects
+   - Gradient background
 
 ---
 
-## 🚀 Next Session Goals
+## Key Decision Log
 
-1. **Immediate:** Implement Contact/CTA Section (Priority 1) ⏭️
-2. **Short-term:** Build Full Project Archive page (Priority 2)
-3. **Quick Win:** Replace profile photo (Priority 3)
-4. **Polish:** Highlighter animation (Priority 4)
-
----
-
-## 📋 Recent PRs
-
-| PR | Feature | Status | Grade |
-|----|---------|--------|-------|
-| #417 | About Section | Pending Review | A- (91/100) |
-| #411 | ProjectCard Enhancements | Merged | A- (92/100) |
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| Jan 7, 2026 | Switch to 100dvh dashboard layout | User-requested redesign, everything-at-a-glance approach |
+| Jan 7, 2026 | Mobile allows scrolling | Impractical to fit all content in 100dvh on small screens |
+| Jan 7, 2026 | Compact typography (-50%) | Required to fit content in single view |
+| Jan 7, 2026 | Archive v3.0 docs | Clean slate for v4.0 implementation |
 
 ---
 
 **For detailed design specifications, see DESIGN_SYSTEM.md**
-**For implementation workflow, see workflows/design-to-dev.md**
-**For About Section review, see about-section-review-v1.0.md**
+**For previous implementations, see context/archive/**
+**For design reference, see docs/img/app_layout.png**

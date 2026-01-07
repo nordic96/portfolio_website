@@ -5,9 +5,41 @@
 Personal portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
 - **Live Site:** https://stephenghk.com
 - **Dev Server:** http://localhost:3000
-- **Current Focus:** Hero Section - Highlighter Animation (Priority 1)
+- **Design Version:** 4.0 (Dashboard Layout)
+- **Current Focus:** 100dvh Dashboard Layout Redesign
 
 **Quick Status:** See `.claude/context/PROJECT_STATUS.md` for current state and priorities
+
+---
+
+## MAJOR REDESIGN: v4.0 Dashboard Layout
+
+The website is undergoing a major redesign from vertical scrolling sections to a **100dvh single-view dashboard layout**.
+
+### Key Changes
+- **Layout:** Vertical scroll -> 100dvh single-view grid
+- **Typography:** Large text -> Compact (~50% smaller)
+- **Color:** Gradient backgrounds -> Minimal white with subtle hints
+- **Content:** Detailed sections -> Compact cards in grid
+
+### Layout Structure
+```
++-----------------------------------------------+
+|  Logo                              i18n       |  <- Header
++-----------------------------------------------+
+|    +-------------------+---------------+      |
+|    |   Hero Section    | Certifications|      |  <- Row 1
+|    +-------------------+---------------+      |
+|    |     Projects      |     About     |      |  <- Row 2
+|    +-------------------+---------------+      |
+|    |       Tech Stack Post-Its        |      |  <- Row 3
++-----------------------------------------------+
+|              Footer                           |
++-----------------------------------------------+
+```
+
+**Design Reference:** `docs/img/app_layout.png`
+**Full Specs:** `.claude/context/DESIGN_SYSTEM.md`
 
 ---
 
@@ -125,44 +157,42 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ---
 
-## Design System
+## Design System (v4.0 Dashboard)
 
-### Color Palette (Multi-Color Theme v3.0)
+### Color Palette (Minimal)
 ```css
-/* Primary */
---pastel-green: #77dd87;
---pastel-green-hover: #5fd070;
+/* Base - Dominant */
+--color-white: #FFFFFF;
+--color-text-primary: #2D2D2D;
+--color-text-secondary: #6B7280;
 
-/* Secondary Accents */
---blue-green: #00CEC8;      /* Utilities category, Hero gradient */
---pastel-pink: #EF80EF;     /* CI/CD category */
---pastel-brown: #EFB880;    /* Reserved for future */
+/* Accent - Subtle Use */
+--color-accent-green: #77dd87;
+--color-accent-blue: #00CEC8;
 
-/* Base Colors */
---white: #FFFFFF;
---dark-gray: #333333;
---text-dark: #2D2D2D;
+/* Border */
+--color-border: #E5E7EB;
 ```
 
-### Usage Guidelines
-- **Pastel Green:** Primary highlights, accents, CTAs, profile borders, Frontend tech stack
-- **Blue-Green:** Hero gradient top, Utilities tech stack category
-- **Pastel Pink:** CI/CD & Others tech stack category
-- **White:** Backgrounds, clean spaces
-- **Dark Gray (#2D2D2D):** Body text on white backgrounds
-- **Header/Footer:** #333 background with white text
+### Typography (Compact)
+| Element | Tailwind |
+|---------|----------|
+| Hero Name | `text-2xl lg:text-3xl font-bold` |
+| Hero Headline | `text-base lg:text-lg font-light` |
+| Section Title | `text-sm font-semibold uppercase` |
+| Body Text | `text-sm` |
+| Labels | `text-xs` |
 
-### Tech Stack Category Colors
-| Category | Color | Technologies |
-|----------|-------|--------------|
-| Frontend | pastel-green | React, Next.js, TypeScript, JavaScript, HTML5 |
-| Utilities | blue-green | Tailwind, SASS, Storybook, ESLint, Jest, Cypress |
-| CI/CD & Others | pastel-pink | GitHub, Docker, Jenkins, Bitbucket |
+### Layout
+- **Container:** `h-dvh` (100dvh)
+- **Grid:** `grid-cols-3 grid-rows-[1fr_1fr_auto]`
+- **Gap:** `gap-4` (16px)
+- **Max Width:** `max-w-6xl` (1200px)
 
-### Typography
-- **Font Family:** Inter (weights: 300, 400, 600, 700)
-- **Loading Strategy:** `display: 'swap'` for performance
-- **Type Scale:** Responsive sizing from text-xl to text-7xl
+### Responsive Breakpoints
+- **Desktop (>=1024px):** 3-column grid, 100dvh
+- **Tablet (768-1023px):** 2-column grid, 100dvh
+- **Mobile (<768px):** 1-column stack, scrollable
 
 **Complete design system:** See `.claude/context/DESIGN_SYSTEM.md`
 
@@ -170,11 +200,12 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ## Project Goals
 
-- ✅ Showcase projects and skills effectively
-- ✅ Create memorable, professional first impression
-- ✅ Ensure exceptional mobile experience
-- ⏳ Optimize for performance and SEO
-- ⏳ Maintain accessibility standards (WCAG AA minimum)
+- **Redesign to dashboard layout** (current focus)
+- Showcase projects and skills at a glance
+- Create memorable, professional first impression
+- Ensure exceptional mobile experience
+- Optimize for performance and SEO
+- Maintain accessibility standards (WCAG AA minimum)
 
 ---
 
@@ -195,48 +226,59 @@ npm run start      # Start production server
 ```
 portfolio_website/
 ├── app/
-│   ├── page.tsx        # Homepage with HeroSection
-│   ├── layout.tsx      # Root layout, Inter font setup
-│   └── globals.css     # Global styles, color palette
+│   ├── [locale]/page.tsx  # Homepage with dashboard grid
+│   ├── layout.tsx         # Root layout, Inter font setup
+│   └── globals.css        # Global styles, color palette
 ├── components/
-│   └── HeroSection/
-│       ├── HeroSection.tsx
-│       ├── TechStackLogos.tsx
-│       └── index.ts
+│   ├── DashboardLayout/   # NEW - v4.0 layout container
+│   ├── HeroCard/          # NEW - Compact hero cell
+│   ├── CertificationsCard/# NEW
+│   ├── ProjectsCard/      # NEW - Thumbnail grid
+│   ├── AboutCard/         # NEW - Brief bio
+│   └── TechStackBar/      # NEW - Horizontal post-its
 ├── public/
-│   └── assets/         # Static assets (images, SVGs)
+│   └── assets/            # Static assets (images, SVGs)
+├── docs/
+│   └── img/app_layout.png # Design sketch reference
 └── .claude/
-    ├── CLAUDE.md       # This file
-    ├── context/        # Context documents
-    └── workflows/      # Workflow guides
+    ├── CLAUDE.md          # This file
+    ├── context/           # Context documents
+    │   ├── PROJECT_STATUS.md
+    │   ├── DESIGN_SYSTEM.md
+    │   └── archive/       # v1.0-v3.0 documentation
+    └── workflows/         # Workflow guides
 ```
 
 ---
 
 ## Current Implementation Status
 
-### ✅ Completed
-- **Hero Section v3.0:** Gradient background (blue-green → pastel-green → white)
-- **Tech Stack Post-Its:** 15 category color-coded post-it cards in orbital pattern
-- **Profile Photo Placeholder:** Pastel Green border, responsive sizing
-- **Typography Hierarchy:** Name, headline, subheadline
-- **Featured Projects Section:** Bento grid with glassmorphism cards
-- **About Section:** Timeline, pull quote, opening/closing statements
-- **Responsive Design:** All breakpoints working (mobile, tablet, desktop)
+### v4.0 Dashboard Layout - TO BUILD
 
-### ⏭️ Next Up
-**Priority 1:** Contact/CTA Section
-- Contact form with validation
-- Social links (LinkedIn, GitHub, Email)
-- Smooth scroll from hero CTA buttons
+**Priority 1: Layout Foundation** (NOT STARTED)
+- 100dvh container structure
+- CSS Grid layout
+- Base GridCard component
+- Header with logo and i18n
+- Footer with social links
 
-### 🔜 Future
-- **Priority 2:** Full Project Archive Page
-- **Priority 3:** Profile Photo replacement
-- **Priority 4:** Highlighter Animation (polish)
-- **Priority 5:** My Journey Year Circles Gradient
+**Priority 2: Grid Cells** (NOT STARTED)
+- Hero card (compact profile + name)
+- Certifications card
+- Projects card (thumbnails)
+- About card (brief bio)
+- Tech Stack bar (horizontal post-its)
 
-**Full priorities:** See `.claude/context/PROJECT_STATUS.md`
+**Priority 3: Polish** (NOT STARTED)
+- Subtle center gradient
+- Hover interactions
+- Content population
+
+### v3.0 Features (ARCHIVED)
+Previous implementations archived to `.claude/context/archive/`:
+- Hero Section with orbital tech logos
+- Featured Projects bento grid
+- About Section with timeline
 
 ---
 
@@ -251,7 +293,7 @@ recommendations using Playwright screenshots
 ### For Implementation
 ```
 @frontend-dev Implement [feature] based on the specs in
-[spec-document.md]
+DESIGN_SYSTEM.md
 ```
 
 ### For Review
@@ -264,14 +306,13 @@ and provide feedback
 
 ## Important Context Documents
 
-### Essential Reading
-- **PROJECT_STATUS.md** - Current state snapshot (read this first!)
-- **DESIGN_SYSTEM.md** - Complete design specifications
-- **IMPLEMENTATION_PRIORITIES.md** - Task priority order
+### Essential Reading (v4.0)
+- **PROJECT_STATUS.md** - Current state and priorities
+- **DESIGN_SYSTEM.md** - v4.0 dashboard layout specifications
 
-### Feature Specifications
-- **highlighter-animation-spec.md** - Next priority feature
-- **hero-section-review-v1.3.md** - Latest implementation review
+### Archived (v1.0-v3.0)
+- All previous specs in `context/archive/`
+- Previous screenshots in `context/archive/screenshots-v3/`
 
 ### Workflow Guides
 - **workflows/design-to-dev.md** - Multi-agent collaboration patterns
@@ -281,18 +322,18 @@ and provide feedback
 ## Quick Reference
 
 ### Current Branch
-`dev_#413_claude` - About section and design updates
+`dev_#413_claude` - Dashboard layout redesign
 
-### Recent Major Commits
-- Hero Section v3.0 with gradient background
-- Tech Stack post-its with category colors
-- About Section with timeline and journey
-- Color palette updated to multi-color theme v3.0
+### Design Philosophy
+- **100dvh:** Everything visible at a glance
+- **Minimal:** White-dominant, subtle accents
+- **Compact:** Reduced typography, tight spacing
+- **Grid:** Structured layout, not free-flowing
 
 ### Accessibility
 - WCAG AA compliance target
-- Color contrast ratios verified
-- Screen reader compatibility
+- Color contrast verified
+- Touch targets minimum 44x44px
 - Keyboard navigation support
 - `prefers-reduced-motion` respected
 
@@ -307,5 +348,5 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 6, 2026
-**Document Version:** 3.0 (Multi-Color Theme)
+**Last Updated:** January 7, 2026
+**Document Version:** 4.0 (Dashboard Layout)
