@@ -1,7 +1,7 @@
 'use client';
 
 import { DashboardLayout, GridCard } from '@/components/Dashboard';
-import { TechStackPostIts } from '@/components/TechStackPostIts';
+import TechStackLogos from '@/components/HeroSection/TechStackLogos';
 import Link from 'next/link';
 
 /**
@@ -143,12 +143,13 @@ function ProjectsPlaceholder() {
 
 /**
  * Tech Stack Card - Post-it style tech badges
+ * Uses compact variant of TechStackLogos (reused from HeroSection)
  * Implements GitHub Issue #423
  */
 function TechStackCard() {
   return (
     <GridCard title="Tech Stack" className="py-3">
-      <TechStackPostIts showCategoryColors />
+      <TechStackLogos variant="compact" />
     </GridCard>
   );
 }
