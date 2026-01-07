@@ -1,28 +1,216 @@
 'use client';
 
-import HeroSection from '@/components/HeroSection';
-import TechStackLogos from '@/components/HeroSection/TechStackLogos';
-import ProjectSection from '@/components/ProjectSection/ProjectSection';
-import AboutSection from '@/components/AboutSection';
-import { useBreakpoint } from '../hooks';
-import { cn } from '../utils';
-import { baseWidth } from '../styles';
+import { DashboardLayout, GridCard } from '@/components/Dashboard';
+import Link from 'next/link';
 
+/**
+ * Dashboard Home Page - v4.0 Layout Foundation
+ *
+ * This implements the 100dvh single-view dashboard layout.
+ * Each section uses placeholder content that will be replaced
+ * in subsequent implementation phases.
+ */
 export default function Home() {
-  const breakpoint = useBreakpoint();
   return (
-    <main className={'relative min-h-screen flex flex-col items-center'}>
-      <TechStackLogos
-        animation={true}
-        radius={breakpoint === 'mobile' ? 40 : 30}
-      />
-      <div
-        className={cn(baseWidth, 'flex flex-col justify-center items-center')}
+    <DashboardLayout
+      header={<DashboardHeader />}
+      footer={<DashboardFooter />}
+      heroSection={<HeroPlaceholder />}
+      projectsCard={<ProjectsPlaceholder />}
+      techStackCard={<TechStackPlaceholder />}
+      aboutCard={<AboutPlaceholder />}
+      certificationsCard={<CertificationsPlaceholder />}
+    />
+  );
+}
+
+/**
+ * Dashboard Header - Compact header with logo and i18n
+ */
+function DashboardHeader() {
+  return (
+    <div className="h-full px-6 flex items-center justify-between border-b border-gray-100">
+      {/* Logo */}
+      <Link
+        href="/"
+        className="text-lg font-bold text-text-dark hover:text-pastel-green transition-colors"
       >
-        <HeroSection />
-        <ProjectSection />
-        <AboutSection />
+        SK
+      </Link>
+
+      {/* i18n Selector Placeholder */}
+      <div className="flex items-center gap-2">
+        <button className="text-sm text-gray-600 hover:text-text-dark transition-colors">
+          EN
+        </button>
+        <span className="text-gray-300">|</span>
+        <button className="text-sm text-gray-600 hover:text-text-dark transition-colors">
+          KO
+        </button>
       </div>
-    </main>
+    </div>
+  );
+}
+
+/**
+ * Dashboard Footer - Compact footer with social links
+ */
+function DashboardFooter() {
+  return (
+    <div className="h-full px-6 flex items-center justify-center border-t border-gray-100">
+      <div className="flex items-center gap-6 text-sm text-gray-500">
+        <a
+          href="#"
+          className="hover:text-pastel-green transition-colors"
+          aria-label="GitHub Profile"
+        >
+          GitHub
+        </a>
+        <a
+          href="#"
+          className="hover:text-pastel-green transition-colors"
+          aria-label="LinkedIn Profile"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="#"
+          className="hover:text-pastel-green transition-colors"
+          aria-label="Email Contact"
+        >
+          Email
+        </a>
+        <span className="text-gray-300">|</span>
+        <span>&copy; 2026 Stephen Ko</span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Hero Section Placeholder
+ * Will be replaced with compact profile photo + name + headline
+ */
+function HeroPlaceholder() {
+  return (
+    <GridCard className="flex items-center gap-6">
+      {/* Profile Photo Placeholder */}
+      <div
+        className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-gray-100 border-2 border-pastel-green flex-shrink-0 flex items-center justify-center"
+        aria-label="Profile photo placeholder"
+      >
+        <span className="text-gray-400 text-xs">Photo</span>
+      </div>
+
+      {/* Text Content */}
+      <div className="flex-1 min-w-0">
+        <h1 className="text-2xl lg:text-3xl font-bold text-text-dark">
+          Stephen Ko
+        </h1>
+        <p className="text-base lg:text-lg font-light text-gray-600 mt-1">
+          I build exceptional web experiences
+        </p>
+        <p className="text-sm text-gray-500 mt-2">
+          Frontend Developer | Seoul, Korea
+        </p>
+      </div>
+    </GridCard>
+  );
+}
+
+/**
+ * Projects Card Placeholder
+ * Will be replaced with project thumbnails grid
+ */
+function ProjectsPlaceholder() {
+  return (
+    <GridCard title="Featured Projects">
+      <div className="grid grid-cols-2 gap-3">
+        {[1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className="aspect-video rounded-lg bg-gray-100 flex items-center justify-center"
+            aria-label={`Project ${i} placeholder`}
+          >
+            <span className="text-gray-400 text-xs">Project {i}</span>
+          </div>
+        ))}
+      </div>
+    </GridCard>
+  );
+}
+
+/**
+ * Tech Stack Card Placeholder
+ * Will be replaced with post-it style tech badges
+ */
+function TechStackPlaceholder() {
+  const techStack = [
+    'React',
+    'TypeScript',
+    'Next.js',
+    'Tailwind',
+    'Node.js',
+    'GraphQL',
+  ];
+
+  return (
+    <GridCard title="Tech Stack">
+      <div className="flex flex-wrap gap-2">
+        {techStack.map((tech) => (
+          <div
+            key={tech}
+            className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-100 hover:border-pastel-green transition-colors"
+          >
+            <span className="text-xs font-medium text-gray-700">{tech}</span>
+          </div>
+        ))}
+      </div>
+    </GridCard>
+  );
+}
+
+/**
+ * About Card Placeholder
+ * Will be replaced with brief bio content
+ */
+function AboutPlaceholder() {
+  return (
+    <GridCard title="About">
+      <p className="text-sm text-gray-600 leading-relaxed">
+        Frontend developer with 5+ years of experience building scalable web
+        applications. Passionate about clean code, accessible design, and
+        continuous learning.
+      </p>
+      <a
+        href="#"
+        className="text-sm text-pastel-green hover:underline mt-3 inline-block"
+      >
+        Read more
+      </a>
+    </GridCard>
+  );
+}
+
+/**
+ * Certifications Card Placeholder
+ * Will be replaced with certification badges
+ */
+function CertificationsPlaceholder() {
+  const certifications = ['AWS Solutions Architect', 'Google Cloud', 'Azure'];
+
+  return (
+    <GridCard title="Certifications">
+      <div className="space-y-2">
+        {certifications.map((cert) => (
+          <div key={cert} className="flex items-center gap-2">
+            <div className="w-5 h-5 rounded bg-gray-100 flex items-center justify-center">
+              <span className="text-gray-400 text-[8px]">icon</span>
+            </div>
+            <span className="text-sm text-text-dark">{cert}</span>
+          </div>
+        ))}
+      </div>
+    </GridCard>
   );
 }
