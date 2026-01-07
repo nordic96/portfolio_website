@@ -16,7 +16,7 @@ export default function Footer() {
           'flex flex-col justify-start items-center border-t border-t-text-dark px-8 max-sm:px-4 pt-4 pb-8 text-sm font-light'
         }
       >
-        <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
+        <div className={cn(baseWidth, 'grid grid-cols-4 max-sm:text-xs')}>
           <div className={'flex gap-4 items-start justify-starts'}>
             <div className={'min-w-30 md:w-24 max-sm:w-12'}>
               <Image
@@ -26,8 +26,8 @@ export default function Footer() {
                 height={50}
               />
             </div>
-            <h3>{t('footer_title')}</h3>
           </div>
+          <FooterSection headerKey={'footer_title'}></FooterSection>
           <FooterSection headerKey={'language'}>
             <FooterLocaleSwitcher />
           </FooterSection>

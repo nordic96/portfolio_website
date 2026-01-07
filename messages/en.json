@@ -9,10 +9,60 @@
         "project_section_headline": "Featured <highlight>Projects</highlight>",
         "project_section_subheadline": "A curated collection of my most impactful work, showcasing expertise in full-stack development, modern frameworks, and user-centric design."
     },
+    "AboutSection": {
+        "title": "About Me",
+        "subtitle": "The Journey Behind the <highlight>Code</highlight>",
+        "aria_label": "About Stephen Ko",
+        "opening_hook": "I'm a software engineer specializing in full-stack development with a passion for building exceptional user experiences. After completing my national service in September 2025, I'm actively seeking opportunities to contribute to innovative teams. My mission is to craft digital products that are not only technically robust but also delightfully intuitive.",
+        "timeline": {
+            "title": "My Journey",
+            "event1": {
+                "year": "2018",
+                "title": "The Beginning",
+                "description": "First exposure to HTML/CSS. Curiosity sparked for web development."
+            },
+            "event2": {
+                "year": "2019",
+                "title": "Building Foundation",
+                "description": "Learned React and JavaScript fundamentals. Built first full-stack projects."
+            },
+            "event3": {
+                "year": "2021",
+                "title": "Expanding Horizons",
+                "description": "Mastered TypeScript and modern build tools. Explored DevOps and deployment pipelines."
+            },
+            "event4": {
+                "year": "2023",
+                "title": "Mastery Phase",
+                "description": "Developed complex applications with team collaboration. Deepened UI/UX design principles."
+            },
+            "event5": {
+                "year": "2025",
+                "title": "Service & Growth",
+                "description": "Completed national service (Sept 2025). Continued learning and built this portfolio."
+            },
+            "event6": {
+                "year": "2026",
+                "title": "Ready for Impact",
+                "description": "Fresh mindset, hungry to contribute. Seeking a team to make meaningful impact."
+            }
+        },
+        "philosophy": {
+            "quote": "This portfolio itself is a testament to continuous learning. Every project, every line of code, represents not just what I've built, but what I've learned along the way. I believe the best developers are perpetual students—curious, humble, and always pushing boundaries.",
+            "citation": "Learning Philosophy"
+        },
+        "drives_me": {
+            "title": "What Drives Me",
+            "content": "I'm driven by the challenge of turning complex problems into elegant solutions. There's nothing quite like the moment when a user interface clicks perfectly, or when clean architecture makes a codebase sing. I'm excited to join a team where I can contribute my skills while continuing to grow alongside talented engineers."
+        }
+    },
     "Footer": {
         "footer_title": "Stephen Ko's Portfolio Website",
         "language": "Change Language",
         "footline": "Developed by Gi Hun Ko Stephen",
-        "app_version": "App Version"
+        "app_version": "App Version",
+        "ai_badge": "Built with AI Assistance",
+        "ai_badge_short": "AI Built",
+        "ai_badge_aria": "This portfolio was built with AI assistance"
     }
 }

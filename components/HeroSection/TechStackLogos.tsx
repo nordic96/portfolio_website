@@ -25,6 +25,7 @@ import {
 interface LogoData {
   icon: typeof siReact;
   name: string;
+  color?: 'pastel-green' | 'blue-green' | 'pastel-pink';
 }
 
 interface LogoPosition extends LogoData {
@@ -36,21 +37,21 @@ interface LogoPosition extends LogoData {
 
 // Logo data (icon + name only)
 const logoData: LogoData[] = [
-  { icon: siReact, name: 'React' },
-  { icon: siNextdotjs, name: 'NextJS' },
-  { icon: siTypescript, name: 'Typescript' },
-  { icon: siJavascript, name: 'Javascript' },
-  { icon: siGithub, name: 'GitHub' },
-  { icon: siTailwindcss, name: 'Tailwind' },
-  { icon: siSass, name: 'SaSS' },
-  { icon: siDocker, name: 'Docker' },
-  { icon: siHtml5, name: 'HTML5' },
-  { icon: siJenkins, name: 'Jenkins' },
-  { icon: siBitbucket, name: 'Bitbucket' },
-  { icon: siStorybook, name: 'Storybook' },
-  { icon: siEslint, name: 'ESLint' },
-  { icon: siJest, name: 'Jest' },
-  { icon: siCypress, name: 'Cypress' },
+  { icon: siReact, name: 'React', color: 'pastel-green' },
+  { icon: siNextdotjs, name: 'NextJS', color: 'pastel-green' },
+  { icon: siTypescript, name: 'Typescript', color: 'pastel-green' },
+  { icon: siJavascript, name: 'Javascript', color: 'pastel-green' },
+  { icon: siGithub, name: 'GitHub', color: 'pastel-pink' },
+  { icon: siTailwindcss, name: 'Tailwind', color: 'blue-green' },
+  { icon: siSass, name: 'SaSS', color: 'blue-green' },
+  { icon: siDocker, name: 'Docker', color: 'pastel-pink' },
+  { icon: siHtml5, name: 'HTML5', color: 'pastel-green' },
+  { icon: siJenkins, name: 'Jenkins', color: 'pastel-pink' },
+  { icon: siBitbucket, name: 'Bitbucket', color: 'pastel-pink' },
+  { icon: siStorybook, name: 'Storybook', color: 'blue-green' },
+  { icon: siEslint, name: 'ESLint', color: 'blue-green' },
+  { icon: siJest, name: 'Jest', color: 'blue-green' },
+  { icon: siCypress, name: 'Cypress', color: 'blue-green' },
 ];
 
 /**
@@ -150,7 +151,7 @@ export default function TechStackLogos({
   }, [animation, logoPositions]);
 
   return (
-    <div className="absolute w-full h-190 max-sm:h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-pastel-green via-pastel-green to-white z-49">
+    <div className="absolute w-full h-190 max-sm:h-[50dvh] top-0 block overflow-hidden bg-gradient-to-b from-blue-green via-pastel-green to-white z-49">
       <div
         className={cn(
           baseWidth,
@@ -162,7 +163,12 @@ export default function TechStackLogos({
             key={`logo-${index}`}
             className={cn(
               'tech-logo absolute',
-              'flex gap-4 items-center w-50 max-sm:w-20 bg-white py-2 px-4 border-l-pastel-green border-l-20 max-sm:border-l-10',
+              'flex gap-4 items-center w-50 max-sm:w-20 bg-white py-2 px-4 border-l-20 max-sm:border-l-10',
+              {
+                'border-l-pastel-green': logo.color === 'pastel-green',
+                'border-l-blue-green': logo.color === 'blue-green',
+                'border-l-pastel-pink': logo.color === 'pastel-pink',
+              },
             )}
             style={
               {

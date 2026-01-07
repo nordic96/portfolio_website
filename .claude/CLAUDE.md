@@ -5,9 +5,41 @@
 Personal portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
 - **Live Site:** https://stephenghk.com
 - **Dev Server:** http://localhost:3000
-- **Current Focus:** Hero Section - Highlighter Animation (Priority 1)
+- **Design Version:** 4.0 (Dashboard Layout)
+- **Current Focus:** 100dvh Dashboard Layout Redesign
 
 **Quick Status:** See `.claude/context/PROJECT_STATUS.md` for current state and priorities
+
+---
+
+## MAJOR REDESIGN: v4.0 Dashboard Layout
+
+The website is undergoing a major redesign from vertical scrolling sections to a **100dvh single-view dashboard layout**.
+
+### Key Changes
+- **Layout:** Vertical scroll -> 100dvh single-view grid
+- **Typography:** Large text -> Compact (~50% smaller)
+- **Color:** Gradient backgrounds -> Minimal white with subtle hints
+- **Content:** Detailed sections -> Compact cards in grid
+
+### Layout Structure
+```
++-----------------------------------------------+
+|  Logo                              i18n       |  <- Header
++-----------------------------------------------+
+|    +-------------------+---------------+      |
+|    |   Hero Section    | Certifications|      |  <- Row 1
+|    +-------------------+---------------+      |
+|    |     Projects      |     About     |      |  <- Row 2
+|    +-------------------+---------------+      |
+|    |       Tech Stack Post-Its        |      |  <- Row 3
++-----------------------------------------------+
+|              Footer                           |
++-----------------------------------------------+
+```
+
+**Design Reference:** `docs/img/app_layout.png`
+**Full Specs:** `.claude/context/DESIGN_SYSTEM.md`
 
 ---
 
@@ -44,7 +76,10 @@ Breaking down complex problems into structured thinking steps
 
 ## Subagent System
 
+Custom agents are defined in `.claude/agents/`. Use `/agents` command to list and manage them.
+
 ### @ui-ux-designer
+**File:** `.claude/agents/ui-ux-designer.md`
 **Role:** Design analysis, conceptual design, and UX recommendations
 
 **When to use:**
@@ -62,6 +97,7 @@ Breaking down complex problems into structured thinking steps
 ---
 
 ### @frontend-dev
+**File:** `.claude/agents/frontend-dev.md`
 **Role:** Implementation of designs and features
 
 **When to use:**
@@ -72,7 +108,7 @@ Breaking down complex problems into structured thinking steps
 - Tailwind styling
 - Bug fixes
 
-**MUST READ FIRST:** `.claude/subagents/frontend-dev/skills/SKILL.md`
+**MUST READ FIRST:** `.claude/skills/frontend-dev.md`
 - Contains lessons learned and best practices
 - Prevents repeating past mistakes
 - Quick reference for CSS gotchas, patterns, and solutions
@@ -121,36 +157,42 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ---
 
-## Design System
+## Design System (v4.0 Dashboard)
 
-### Color Palette (Pastel Green Theme)
+### Color Palette (Minimal)
 ```css
-/* Primary */
---pastel-green: #77dd87;
---pastel-green-hover: #5fd070;
+/* Base - Dominant */
+--color-white: #FFFFFF;
+--color-text-primary: #2D2D2D;
+--color-text-secondary: #6B7280;
 
-/* Secondary */
---blue-dianne: #1f5b5b;
---copper: #b68b3b;
+/* Accent - Subtle Use */
+--color-accent-green: #77dd87;
+--color-accent-blue: #00CEC8;
 
-/* Base Colors */
---white: #FFFFFF;
---dark-gray: #333333;
---text-dark: #2D2D2D;
+/* Border */
+--color-border: #E5E7EB;
 ```
 
-### Usage Guidelines
-- **Pastel Green:** Primary highlights, accents, CTAs, profile borders
-- **White:** Backgrounds, clean spaces
-- **Dark Gray (#2D2D2D):** Body text on white backgrounds
-- **Blue Dianne:** Secondary depth color (future use)
-- **Copper:** Accent color (future use)
-- **Header/Footer:** #333 background with white text
+### Typography (Compact)
+| Element | Tailwind |
+|---------|----------|
+| Hero Name | `text-2xl lg:text-3xl font-bold` |
+| Hero Headline | `text-base lg:text-lg font-light` |
+| Section Title | `text-sm font-semibold uppercase` |
+| Body Text | `text-sm` |
+| Labels | `text-xs` |
 
-### Typography
-- **Font Family:** Inter (weights: 300, 400, 600, 700)
-- **Loading Strategy:** `display: 'swap'` for performance
-- **Type Scale:** Responsive sizing from text-xl to text-7xl
+### Layout
+- **Container:** `h-dvh` (100dvh)
+- **Grid:** `grid-cols-3 grid-rows-[1fr_1fr_auto]`
+- **Gap:** `gap-4` (16px)
+- **Max Width:** `max-w-6xl` (1200px)
+
+### Responsive Breakpoints
+- **Desktop (>=1024px):** 3-column grid, 100dvh
+- **Tablet (768-1023px):** 2-column grid, 100dvh
+- **Mobile (<768px):** 1-column stack, scrollable
 
 **Complete design system:** See `.claude/context/DESIGN_SYSTEM.md`
 
@@ -158,11 +200,12 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ## Project Goals
 
-- ✅ Showcase projects and skills effectively
-- ✅ Create memorable, professional first impression
-- ✅ Ensure exceptional mobile experience
-- ⏳ Optimize for performance and SEO
-- ⏳ Maintain accessibility standards (WCAG AA minimum)
+- **Redesign to dashboard layout** (current focus)
+- Showcase projects and skills at a glance
+- Create memorable, professional first impression
+- Ensure exceptional mobile experience
+- Optimize for performance and SEO
+- Maintain accessibility standards (WCAG AA minimum)
 
 ---
 
@@ -183,46 +226,59 @@ npm run start      # Start production server
 ```
 portfolio_website/
 ├── app/
-│   ├── page.tsx        # Homepage with HeroSection
-│   ├── layout.tsx      # Root layout, Inter font setup
-│   └── globals.css     # Global styles, color palette
+│   ├── [locale]/page.tsx  # Homepage with dashboard grid
+│   ├── layout.tsx         # Root layout, Inter font setup
+│   └── globals.css        # Global styles, color palette
 ├── components/
-│   └── HeroSection/
-│       ├── HeroSection.tsx
-│       ├── TechStackLogos.tsx
-│       └── index.ts
+│   ├── DashboardLayout/   # NEW - v4.0 layout container
+│   ├── HeroCard/          # NEW - Compact hero cell
+│   ├── CertificationsCard/# NEW
+│   ├── ProjectsCard/      # NEW - Thumbnail grid
+│   ├── AboutCard/         # NEW - Brief bio
+│   └── TechStackBar/      # NEW - Horizontal post-its
 ├── public/
-│   └── assets/         # Static assets (images, SVGs)
+│   └── assets/            # Static assets (images, SVGs)
+├── docs/
+│   └── img/app_layout.png # Design sketch reference
 └── .claude/
-    ├── CLAUDE.md       # This file
-    ├── context/        # Context documents
-    └── workflows/      # Workflow guides
+    ├── CLAUDE.md          # This file
+    ├── context/           # Context documents
+    │   ├── PROJECT_STATUS.md
+    │   ├── DESIGN_SYSTEM.md
+    │   └── archive/       # v1.0-v3.0 documentation
+    └── workflows/         # Workflow guides
 ```
 
 ---
 
 ## Current Implementation Status
 
-### ✅ Completed
-- **Hero Section Base:** White background, Pastel Green accents
-- **Profile Photo Placeholder:** Pastel Green border, responsive sizing
-- **Typography Hierarchy:** Name, headline, subheadline
-- **Tech Stack Logos:** 15 logos in orbital pattern with hover effects
-- **Responsive Design:** All breakpoints working (mobile, tablet, desktop)
+### v4.0 Dashboard Layout - TO BUILD
 
-### ⏭️ Next Up
-**Priority 1:** Highlighter Animation
-- Marker tip sweeps across "exceptional" in headline
-- Pastel Green highlight effect
-- Spec: `highlighter-animation-spec.md`
-- Asset provided: `/public/assets/marker-tip.svg`
+**Priority 1: Layout Foundation** (NOT STARTED)
+- 100dvh container structure
+- CSS Grid layout
+- Base GridCard component
+- Header with logo and i18n
+- Footer with social links
 
-### 🔜 Future
-- **Priority 2:** Profile Photo replacement
-- **Priority 3:** CTA Buttons ("View My Work", "Let's Connect")
-- **Priority 4:** Header & Footer (#333 background)
+**Priority 2: Grid Cells** (NOT STARTED)
+- Hero card (compact profile + name)
+- Certifications card
+- Projects card (thumbnails)
+- About card (brief bio)
+- Tech Stack bar (horizontal post-its)
 
-**Full priorities:** See `.claude/context/IMPLEMENTATION_PRIORITIES.md`
+**Priority 3: Polish** (NOT STARTED)
+- Subtle center gradient
+- Hover interactions
+- Content population
+
+### v3.0 Features (ARCHIVED)
+Previous implementations archived to `.claude/context/archive/`:
+- Hero Section with orbital tech logos
+- Featured Projects bento grid
+- About Section with timeline
 
 ---
 
@@ -237,7 +293,7 @@ recommendations using Playwright screenshots
 ### For Implementation
 ```
 @frontend-dev Implement [feature] based on the specs in
-[spec-document.md]
+DESIGN_SYSTEM.md
 ```
 
 ### For Review
@@ -250,14 +306,13 @@ and provide feedback
 
 ## Important Context Documents
 
-### Essential Reading
-- **PROJECT_STATUS.md** - Current state snapshot (read this first!)
-- **DESIGN_SYSTEM.md** - Complete design specifications
-- **IMPLEMENTATION_PRIORITIES.md** - Task priority order
+### Essential Reading (v4.0)
+- **PROJECT_STATUS.md** - Current state and priorities
+- **DESIGN_SYSTEM.md** - v4.0 dashboard layout specifications
 
-### Feature Specifications
-- **highlighter-animation-spec.md** - Next priority feature
-- **hero-section-review-v1.3.md** - Latest implementation review
+### Archived (v1.0-v3.0)
+- All previous specs in `context/archive/`
+- Previous screenshots in `context/archive/screenshots-v3/`
 
 ### Workflow Guides
 - **workflows/design-to-dev.md** - Multi-agent collaboration patterns
@@ -267,18 +322,18 @@ and provide feedback
 ## Quick Reference
 
 ### Current Branch
-`dev_381` - Hero section implementation
+`dev_#413_claude` - Dashboard layout redesign
 
-### Recent Major Commits
-- `5d82da6` - Hero Section base structure (#381)
-- Color scheme updated to Pastel Green (#77dd87)
-- Tech stack logos implemented
-- All responsive breakpoints tested
+### Design Philosophy
+- **100dvh:** Everything visible at a glance
+- **Minimal:** White-dominant, subtle accents
+- **Compact:** Reduced typography, tight spacing
+- **Grid:** Structured layout, not free-flowing
 
 ### Accessibility
 - WCAG AA compliance target
-- Color contrast ratios verified
-- Screen reader compatibility
+- Color contrast verified
+- Touch targets minimum 44x44px
 - Keyboard navigation support
 - `prefers-reduced-motion` respected
 
@@ -293,5 +348,5 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 2, 2026
-**Document Version:** 2.0 (Optimized)
+**Last Updated:** January 7, 2026
+**Document Version:** 4.0 (Dashboard Layout)
