@@ -4,7 +4,7 @@ import { CDN_BASE } from '@/app/config/cdn';
 import { cn } from '@/app/utils';
 import Image from 'next/image';
 import { useState, useCallback } from 'react';
-import GridCard from './GridCard';
+import GridCard, { gridCardDefaultStyle } from './GridCard';
 
 /**
  * Project data structure for the dashboard projects card
@@ -40,10 +40,10 @@ const sampleProjects: Project[] = [
   },
   {
     id: '2',
-    title: 'Task App',
-    thumbnail: 'resources/images/taskapp.png',
-    url: '#',
-    tech: ['React', 'Node.js', 'MongoDB'],
+    title: 'Wink',
+    thumbnail: 'resources/images/wink.png',
+    url: 'https://github.com/nordic96/wink',
+    tech: ['Flutter', 'Android', 'ios'],
   },
   {
     id: '3',
@@ -54,10 +54,10 @@ const sampleProjects: Project[] = [
   },
   {
     id: '4',
-    title: 'Image Classifier',
-    thumbnail: 'resources/images/christopher_imageclassifier.png',
+    title: 'OnionOrNot',
+    thumbnail: 'resources/images/onion.png',
     url: '#',
-    tech: ['TensorFlow', 'Python', 'React'],
+    tech: ['NLP', 'Python', 'Satire Detection'],
   },
 ];
 
@@ -142,70 +142,72 @@ function ProjectThumbnail({
   onBlur,
 }: ProjectThumbnailProps) {
   const { title, thumbnail, tech } = project;
-
   return (
-    <button
-      type="button"
-      className={cn(
-        // Base styles
-        'aspect-video rounded-lg bg-gray-100 overflow-hidden',
-        'relative group cursor-pointer',
-        // Focus styles for keyboard navigation
-        'focus:outline-none focus:ring-2 focus:ring-pastel-green focus:ring-offset-2',
-        // Animation delay for staggered entrance (optional enhancement)
-        'animate-fadeIn',
-      )}
-      style={{
-        animationDelay: `${index * 100}ms`,
-        animationFillMode: 'backwards',
-      }}
-      onClick={onClick}
-      onBlur={onBlur}
-      aria-label={`View ${title} project`}
-    >
-      {/* Thumbnail Image */}
-      <Image
-        src={`${CDN_BASE}/${thumbnail}`}
-        alt={`${title} project thumbnail`}
-        fill
+    <div className={cn(gridCardDefaultStyle, 'flex grow')}>
+      <button
+        type="button"
         className={cn(
-          'object-cover',
-          // Scale on hover - respects prefers-reduced-motion via CSS
-          'transition-transform duration-300 ease-out',
-          'group-hover:scale-105 group-focus:scale-105',
-          // Active state for mobile tap
-          isActive && 'scale-105',
+          // Base styles
+          'flex grow',
+          'aspect-video rounded-lg bg-gray-100 overflow-hidden',
+          'relative group cursor-pointer',
+          // Focus styles for keyboard navigation
+          'focus:outline-none focus:ring-2 focus:ring-pastel-green focus:ring-offset-2',
+          // Animation delay for staggered entrance (optional enhancement)
+          'animate-fadeIn',
         )}
-        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 20vw"
-      />
-
-      {/* Hover/Tap Overlay */}
-      <div
-        className={cn(
-          // Positioning
-          'absolute inset-0',
-          // Gradient background
-          'bg-gradient-to-t from-black/70 via-black/30 to-transparent',
-          // Visibility transition
-          'transition-opacity duration-300',
-          'opacity-0 group-hover:opacity-100 group-focus:opacity-100',
-          // Active state for mobile tap
-          isActive && 'opacity-100',
-          // Flex layout for content positioning
-          'flex flex-col justify-end p-3',
-        )}
-        aria-hidden={!isActive}
+        style={{
+          animationDelay: `${index * 100}ms`,
+          animationFillMode: 'backwards',
+        }}
+        onClick={onClick}
+        onBlur={onBlur}
+        aria-label={`View ${title} project`}
       >
-        {/* Project Title */}
-        <h3 className="text-white font-semibold text-sm truncate">{title}</h3>
+        {/* Thumbnail Image */}
+        <Image
+          src={`${CDN_BASE}/${thumbnail}`}
+          alt={`${title} project thumbnail`}
+          fill
+          className={cn(
+            'object-cover',
+            // Scale on hover - respects prefers-reduced-motion via CSS
+            'transition-transform duration-300 ease-out',
+            'group-hover:scale-105 group-focus:scale-105',
+            // Active state for mobile tap
+            isActive && 'scale-105',
+          )}
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 20vw"
+        />
 
-        {/* Tech Stack */}
-        {tech && tech.length > 0 && (
-          <p className="text-white/80 text-xs truncate mt-0.5">
-            {tech.join(' / ')}
-          </p>
-        )}
-      </div>
-    </button>
+        {/* Hover/Tap Overlay */}
+        <div
+          className={cn(
+            // Positioning
+            'absolute inset-0',
+            // Gradient background
+            'bg-gradient-to-t from-black/70 via-black/30 to-transparent',
+            // Visibility transition
+            'transition-opacity duration-300',
+            'opacity-0 group-hover:opacity-100 group-focus:opacity-100',
+            // Active state for mobile tap
+            isActive && 'opacity-100',
+            // Flex layout for content positioning
+            'flex flex-col justify-end p-3',
+          )}
+          aria-hidden={!isActive}
+        >
+          {/* Project Title */}
+          <h3 className="text-white font-semibold text-sm truncate">{title}</h3>
+
+          {/* Tech Stack */}
+          {tech && tech.length > 0 && (
+            <p className="text-white/80 text-xs truncate mt-0.5">
+              {tech.join(' / ')}
+            </p>
+          )}
+        </div>
+      </button>
+    </div>
   );
 }

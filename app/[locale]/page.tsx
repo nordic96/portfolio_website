@@ -21,7 +21,9 @@ export default function Home() {
       header={<DashboardHeader />}
       footer={<DashboardFooter />}
       heroSection={<HeroPlaceholder />}
-      projectsCard={<ProjectsCard />}
+      projectsCard={
+        <ProjectsCard className={'border-none! p-0! shadow-none!'} />
+      }
       techStackCard={<TechStackCard />}
       aboutCard={<AboutPlaceholder />}
       certificationsCard={<CertificationsPlaceholder />}

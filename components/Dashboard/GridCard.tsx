@@ -26,16 +26,15 @@ interface GridCardProps {
  * </GridCard>
  * ```
  */
+export const gridCardDefaultStyle =
+  'bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow';
 export default function GridCard({
   children,
   className,
   title,
   variant = 'default',
 }: GridCardProps) {
-  const baseStyles =
-    variant === 'default'
-      ? 'bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'
-      : '';
+  const baseStyles = variant === 'default' ? gridCardDefaultStyle : '';
 
   return (
     <div>
