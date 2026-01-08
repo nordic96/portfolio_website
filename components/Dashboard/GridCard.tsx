@@ -59,17 +59,17 @@ function CardLabel({ children }: React.PropsWithChildren<object>) {
   return (
     <div
       className={
-        'flex justify-center items-center rounded-lg bg-gray-50 border-gray-400 border shadow-md p-1 max-w-50 max-sm:w-full'
+        'flex justify-center items-center rounded-lg bg-gray-50 border-gray-200 border shadow-md p-1 lg:max-w-50 md:max-w-40 max-sm:w-fit'
       }
     >
       <div
         className={
-          'border-2 border-red-300 rounded-md flex grow items-center px-4 max-sm:px-2'
+          'border border-red-300 rounded-md flex grow items-center lg:px-4 md:px-2 max-sm:px-2'
         }
       >
         <h2
           className={
-            'text-lg max-sm:text-sm font-semibold font-stretch-extra-condensed text-text-dark'
+            'lg:text-lg md:text-sm max-sm:text-sm font-semibold font-stretch-extra-condensed text-text-dark'
           }
         >
           {children}
