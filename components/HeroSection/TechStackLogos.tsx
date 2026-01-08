@@ -36,6 +36,7 @@ interface LogoPosition extends LogoData {
 }
 
 // Logo data (icon + name only)
+// Color coding: pastel-green = frontend, blue-green = utilities, pastel-pink = CI/CD
 const logoData: LogoData[] = [
   { icon: siReact, name: 'React', color: 'pastel-green' },
   { icon: siNextdotjs, name: 'NextJS', color: 'pastel-green' },
@@ -105,6 +106,8 @@ interface TechStackLogosProps {
   radius?: number; // Radius as percentage of container height (0-100)
   centerX?: number; // Center X as percentage (0-100)
   centerY?: number; // Center Y as percentage (0-100)
+  variant?: 'hero' | 'compact'; // 'hero' = orbital layout, 'compact' = horizontal flex
+  className?: string;
 }
 
 export default function TechStackLogos({
@@ -112,7 +115,89 @@ export default function TechStackLogos({
   radius = 35, // Default radius: 35% of container height
   centerX = 50,
   centerY = 50,
+  variant = 'hero',
+  className,
 }: TechStackLogosProps) {
+  // For compact variant, use the simpler horizontal layout
+  if (variant === 'compact') {
+    return <TechStackCompact className={className} />;
+  }
+
+  // Hero variant: orbital layout
+  return (
+    <TechStackHero
+      animation={animation}
+      radius={radius}
+      centerX={centerX}
+      centerY={centerY}
+    />
+  );
+}
+
+/**
+ * TechStackCompact - Horizontal flex wrap layout for dashboard grid
+ * Reuses the post-it styling from hero variant in a compact format
+ */
+function TechStackCompact({ className }: { className?: string }) {
+  // Generate random rotations for post-it effect (seeded for consistency)
+  const rotations = useMemo(() => {
+    return logoData.map((_, i) => ((i * 7) % 11) - 5); // -5 to +5 degrees
+  }, []);
+
+  return (
+    <div
+      className={cn('flex flex-wrap gap-2 justify-center', className)}
+      role="list"
+      aria-label="Technology stack"
+    >
+      {logoData.map((logo, index) => (
+        <div
+          key={`compact-logo-${index}`}
+          role="listitem"
+          className={cn(
+            'tech-logo-compact',
+            'flex items-center gap-1.5 px-2 py-1',
+            'bg-white border-l-4',
+            'hover:scale-105 transition-transform',
+            'shadow-sm',
+            {
+              'border-l-pastel-green': logo.color === 'pastel-green',
+              'border-l-blue-green': logo.color === 'blue-green',
+              'border-l-pastel-pink': logo.color === 'pastel-pink',
+            },
+          )}
+          style={{
+            transform: `rotate(${rotations[index]}deg)`,
+          }}
+        >
+          <div
+            className="w-4 h-4 flex-shrink-0"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
+          />
+          <span className="text-xs font-semibold text-gray-700 uppercase">
+            {logo.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * TechStackHero - Original orbital layout for hero section
+ */
+function TechStackHero({
+  animation,
+  radius,
+  centerX,
+  centerY,
+}: {
+  animation: boolean;
+  radius: number;
+  centerX: number;
+  centerY: number;
+}) {
   const breakpoint = useBreakpoint();
   // Memoize positions to prevent recalculation on every render
   const logoPositions = useMemo(
