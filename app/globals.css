@@ -82,4 +82,36 @@ body {
       transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
     }
   }
+
+  /* Disable scale animations for project thumbnails */
+  .group-hover\:scale-105,
+  .group-focus\:scale-105 {
+    transform: none !important;
+  }
+
+  .transition-transform,
+  .transition-opacity {
+    transition: none !important;
+  }
+
+  .animate-fadeIn {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Projects Card fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
 }
