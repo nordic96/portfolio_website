@@ -7,6 +7,7 @@ import {
 } from '@/components/Dashboard';
 import TechStackLogos from '@/components/HeroSection/TechStackLogos';
 import Link from 'next/link';
+import { useBreakpoint } from '../hooks';
 
 /**
  * Dashboard Home Page - v4.0 Layout Foundation
@@ -16,12 +17,18 @@ import Link from 'next/link';
  * in subsequent implementation phases.
  */
 export default function Home() {
+  const breakpoint = useBreakpoint();
   return (
     <DashboardLayout
       header={<DashboardHeader />}
       footer={<DashboardFooter />}
       heroSection={<HeroPlaceholder />}
-      projectsCard={<ProjectsCard className={'p-0!'} />}
+      projectsCard={
+        <ProjectsCard
+          maxProjects={breakpoint === 'mobile' ? 4 : 6}
+          className={'p-0!'}
+        />
+      }
       techStackCard={<TechStackCard />}
       aboutCard={<AboutPlaceholder />}
       certificationsCard={<CertificationsPlaceholder />}
@@ -132,9 +139,13 @@ function TechStackCard() {
   return (
     <GridCard title="Tech Stack" className={'py-3 relative'}>
       <div
-        style={{ backgroundImage: 'url(/assets/legal_pad.png)' }}
+        style={{
+          backgroundImage: 'url(/assets/cork_board.png)',
+        }}
         className={'absolute inset-0 bg-cover bg-no-repeat bg-center'}
-      />
+      >
+        <div className={'h-full w-full rotate-45 transform'}></div>
+      </div>
       <TechStackLogos />
     </GridCard>
   );

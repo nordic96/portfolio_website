@@ -24,6 +24,9 @@ import {
   siClaude,
   siMongodb,
   siGraphql,
+  siWebflow,
+  siSplunk,
+  siPython,
 } from 'simple-icons';
 
 type TechStackCategory = 'frontend' | 'cicd' | 'tools' | 'backend';
@@ -53,6 +56,9 @@ const logoData: LogoData[] = [
   { icon: siJest, name: 'Jest', category: 'tools' },
   { icon: siCypress, name: 'Cypress', category: 'tools' },
   { icon: siThreedotjs, name: 'Three.js', category: 'frontend' },
+  { icon: siWebflow, name: 'Webflow', category: 'frontend' },
+  { icon: siSplunk, name: 'Splunk', category: 'cicd' },
+  { icon: siPython, name: 'Python', category: 'backend' },
   { icon: siHuggingface, name: 'HuggingFace', category: 'tools' },
   { icon: siClaude, name: 'Claude', category: 'tools' },
   { icon: siMongodb, name: 'MongoDb', category: 'backend' },

@@ -121,6 +121,8 @@ export default function ProjectsCard({
 
   return (
     <GridCard title="Featured Projects" className={cn(className, 'relative')}>
+      {/** White Overlay */}
+      <div className={'absolute inset-0 bg-white opacity-30 z-49'}></div>
       {/** Grid Cutting Board Background Image */}
       <div
         style={{
@@ -130,7 +132,7 @@ export default function ProjectsCard({
       >
         <div className={'h-full w-full rotate-45 transform'}></div>
       </div>
-      <div className="relative grid grid-cols-2 lg:grid-cols-2 gap-3 max-sm:gap-1 lg:p-2 max-sm:p-1">
+      <div className="relative z-50 grid grid-cols-2 lg:grid-cols-2 gap-3 max-sm:gap-1 lg:p-2 max-sm:p-1">
         {projects.slice(0, maxProjects).map((project, index) => (
           <ProjectThumbnail
             key={project.id}
