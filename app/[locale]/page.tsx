@@ -130,7 +130,11 @@ function HeroPlaceholder() {
  */
 function TechStackCard() {
   return (
-    <GridCard title="Tech Stack" className="py-3">
+    <GridCard title="Tech Stack" className={'py-3 relative'}>
+      <div
+        style={{ backgroundImage: 'url(/assets/legal_pad.png)' }}
+        className={'absolute inset-0 bg-cover bg-no-repeat bg-center'}
+      />
       <TechStackLogos />
     </GridCard>
   );

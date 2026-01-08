@@ -92,7 +92,7 @@ function TechStackCompact({ className }: { className?: string }) {
             'flex items-center gap-1.5 px-2 py-1',
             'bg-white border-l-4',
             'hover:scale-105 transition-transform',
-            'shadow-sm',
+            'shadow-md',
             {
               'border-l-pastel-green': logo.category === 'frontend',
               'border-l-pastel-brown': logo.category === 'backend',
@@ -107,6 +107,7 @@ function TechStackCompact({ className }: { className?: string }) {
           <div
             className="lg:w-6 lg:h-6 md:w-4 md:h-4 max-sm:w-4 max-sm:h-4 shrink-0"
             aria-hidden="true"
+            style={{ fill: `#${logo.icon.hex}` }}
             dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
           />
           <span className="text-xs font-semibold text-gray-700 uppercase">

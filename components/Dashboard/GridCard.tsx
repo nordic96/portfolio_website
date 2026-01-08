@@ -47,7 +47,7 @@ export default function GridCard({
       <div
         className={cn(
           baseStyles,
-          'p-4 lg:p-5',
+          'lg:p-3 max-sm:p-2',
           'overflow-hidden',
           'h-full',
           className,
