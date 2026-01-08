@@ -1,6 +1,10 @@
 'use client';
 
-import { DashboardLayout, GridCard } from '@/components/Dashboard';
+import {
+  DashboardLayout,
+  GridCard,
+  ProjectsCard,
+} from '@/components/Dashboard';
 import TechStackLogos from '@/components/HeroSection/TechStackLogos';
 import Link from 'next/link';
 
@@ -17,7 +21,7 @@ export default function Home() {
       header={<DashboardHeader />}
       footer={<DashboardFooter />}
       heroSection={<HeroPlaceholder />}
-      projectsCard={<ProjectsPlaceholder />}
+      projectsCard={<ProjectsCard />}
       techStackCard={<TechStackCard />}
       aboutCard={<AboutPlaceholder />}
       certificationsCard={<CertificationsPlaceholder />}
@@ -114,28 +118,6 @@ function HeroPlaceholder() {
         <p className="text-sm text-gray-500 mt-2">
           Frontend Developer | Seoul, Korea
         </p>
-      </div>
-    </GridCard>
-  );
-}
-
-/**
- * Projects Card Placeholder
- * Will be replaced with project thumbnails grid
- */
-function ProjectsPlaceholder() {
-  return (
-    <GridCard title="Featured Projects">
-      <div className="grid grid-cols-2 gap-3">
-        {[1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            className="aspect-video rounded-lg bg-gray-100 flex items-center justify-center"
-            aria-label={`Project ${i} placeholder`}
-          >
-            <span className="text-gray-400 text-xs">Project {i}</span>
-          </div>
-        ))}
       </div>
     </GridCard>
   );
