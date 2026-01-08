@@ -40,7 +40,7 @@ export default function DashboardLayout({
   return (
     <div className="min-h-dvh md:h-dvh flex flex-col">
       {/* Header - 60px fixed height */}
-      <header className="h-15 flex-shrink-0">{header}</header>
+      <header className="h-15 shrink-0">{header}</header>
 
       {/* Main Content - Mobile: scrollable, Desktop: fixed */}
       <main className="flex-1 px-4 md:px-6 pb-4 overflow-y-auto md:overflow-hidden">
@@ -71,7 +71,7 @@ export default function DashboardLayout({
       </main>
 
       {/* Footer - 48px fixed height */}
-      <footer className="h-12 flex-shrink-0">{footer}</footer>
+      <footer className="h-12 shrink-0">{footer}</footer>
     </div>
   );
 }

@@ -38,21 +38,23 @@ export default function GridCard({
       : '';
 
   return (
-    <div
-      className={cn(
-        baseStyles,
-        'p-4 lg:p-5',
-        'overflow-hidden',
-        'h-full',
-        className,
-      )}
-    >
+    <div>
       {title && (
-        <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
+        <h2 className="text-lg font-normal text-text-dark tracking-wider mb-3">
           {title}
         </h2>
       )}
-      {children}
+      <div
+        className={cn(
+          baseStyles,
+          'p-4 lg:p-5',
+          'overflow-hidden',
+          'h-full',
+          className,
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }

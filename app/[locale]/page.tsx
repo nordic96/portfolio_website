@@ -97,7 +97,7 @@ function HeroPlaceholder() {
     <GridCard className="flex items-center gap-6">
       {/* Profile Photo Placeholder */}
       <div
-        className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-gray-100 border-2 border-pastel-green flex-shrink-0 flex items-center justify-center"
+        className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-gray-100 border-2 border-pastel-green shrink-0 flex items-center justify-center"
         aria-label="Profile photo placeholder"
       >
         <span className="text-gray-400 text-xs">Photo</span>
@@ -149,7 +149,7 @@ function ProjectsPlaceholder() {
 function TechStackCard() {
   return (
     <GridCard title="Tech Stack" className="py-3">
-      <TechStackLogos variant="compact" />
+      <TechStackLogos />
     </GridCard>
   );
 }
