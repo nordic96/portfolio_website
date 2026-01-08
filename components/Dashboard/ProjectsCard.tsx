@@ -59,6 +59,20 @@ const sampleProjects: Project[] = [
     url: '#',
     tech: ['NLP', 'Python', 'Satire Detection'],
   },
+  {
+    id: '5',
+    title: 'TempPi',
+    thumbnail: 'resources/images/temppi.gif',
+    url: '#',
+    tech: ['IoT', 'RaspberryPi'],
+  },
+  {
+    id: '6',
+    title: 'InfiniteChallenge',
+    thumbnail: 'resources/images/infinite.jpg',
+    url: 'https://github.com/nordic96/Infinite_Challenge',
+    tech: ['Python', 'ComputerVision', 'Image Detection'],
+  },
 ];
 
 /**
@@ -74,7 +88,7 @@ const sampleProjects: Project[] = [
  */
 export default function ProjectsCard({
   projects = sampleProjects,
-  maxProjects = 4,
+  maxProjects = 6,
   className,
 }: ProjectsCardProps) {
   // Track which project is tapped on mobile (for toggle behavior)
@@ -106,8 +120,17 @@ export default function ProjectsCard({
   }, []);
 
   return (
-    <GridCard title="Featured Projects" className={className}>
-      <div className="grid grid-cols-2 lg:grid-cols-2 gap-3">
+    <GridCard title="Featured Projects" className={cn(className, 'relative')}>
+      {/** Grid Cutting Board Background Image */}
+      <div
+        style={{
+          backgroundImage: `url(${CDN_BASE}/resources/assets/grid_cutting_mat.jpeg)`,
+        }}
+        className={'absolute inset-0 bg-cover bg-no-repeat bg-center'}
+      >
+        <div className={'h-full w-full rotate-45 transform'}></div>
+      </div>
+      <div className="relative grid grid-cols-2 lg:grid-cols-2 gap-3 max-sm:gap-1 lg:p-2 max-sm:p-1">
         {projects.slice(0, maxProjects).map((project, index) => (
           <ProjectThumbnail
             key={project.id}

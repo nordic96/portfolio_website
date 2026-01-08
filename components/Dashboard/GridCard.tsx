@@ -1,9 +1,10 @@
 import { cn } from '@/app/utils';
+import { ClassValue } from 'clsx';
 import { ReactNode } from 'react';
 
 interface GridCardProps {
   children: ReactNode;
-  className?: string;
+  className?: string | ClassValue;
   /** Optional title for the card section */
   title?: string;
   /** Whether to show the card border and background */
@@ -37,7 +38,7 @@ export default function GridCard({
   const baseStyles = variant === 'default' ? gridCardDefaultStyle : '';
 
   return (
-    <div>
+    <div className={'flex flex-col grow h-full'}>
       {title && (
         <h2 className="text-lg font-normal text-text-dark tracking-wider mb-3">
           {title}
