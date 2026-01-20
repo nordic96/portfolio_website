@@ -6,6 +6,7 @@ import '@/node_modules/flag-icons/css/flag-icons.min.css';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { StarField } from '@/components/StarField';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
@@ -58,6 +59,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${poppins.variable} ${roboto.variable} antialiased`}>
+        {/* StarField background - renders behind all content */}
+        <StarField starCount={150} />
         <NextIntlClientProvider>
           <Header />
           {children}
