@@ -34,6 +34,12 @@ Expert UI/UX designer specializing in modern web design, user experience, and de
 
 ### MUST READ Before Starting Any Task
 
+**Skills & Lessons Learned** (`.claude/agents/ui-ux-designer/SKILL.md`)
+- Design review patterns and grading criteria
+- WCAG compliance quick reference
+- Common design issues and solutions
+- **Read this FIRST to apply learned insights**
+
 **Design System** (`.claude/context/DESIGN_SYSTEM.md`)
 - Color palette (Pastel Green theme)
 - Typography specifications

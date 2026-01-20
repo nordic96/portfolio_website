@@ -6,7 +6,6 @@ import {
   ProjectsCard,
 } from '@/components/Dashboard';
 import TechStackLogos from '@/components/HeroSection/TechStackLogos';
-import Link from 'next/link';
 import { useBreakpoint } from '../hooks';
 
 /**
@@ -20,8 +19,6 @@ export default function Home() {
   const breakpoint = useBreakpoint();
   return (
     <DashboardLayout
-      header={<DashboardHeader />}
-      footer={<DashboardFooter />}
       heroSection={<HeroPlaceholder />}
       projectsCard={
         <ProjectsCard
@@ -33,69 +30,6 @@ export default function Home() {
       aboutCard={<AboutPlaceholder />}
       certificationsCard={<CertificationsPlaceholder />}
     />
-  );
-}
-
-/**
- * Dashboard Header - Compact header with logo and i18n
- */
-function DashboardHeader() {
-  return (
-    <div className="h-full px-6 flex items-center justify-between border-b border-gray-100">
-      {/* Logo */}
-      <Link
-        href="/"
-        className="text-lg font-bold text-text-dark hover:text-pastel-green transition-colors"
-      >
-        SK
-      </Link>
-
-      {/* i18n Selector Placeholder */}
-      <div className="flex items-center gap-2">
-        <button className="text-sm text-gray-600 hover:text-text-dark transition-colors">
-          EN
-        </button>
-        <span className="text-gray-300">|</span>
-        <button className="text-sm text-gray-600 hover:text-text-dark transition-colors">
-          KO
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Dashboard Footer - Compact footer with social links
- */
-function DashboardFooter() {
-  return (
-    <div className="h-full px-6 flex items-center justify-center border-t border-gray-100">
-      <div className="flex items-center gap-6 text-sm text-gray-500">
-        <a
-          href="#"
-          className="hover:text-pastel-green transition-colors"
-          aria-label="GitHub Profile"
-        >
-          GitHub
-        </a>
-        <a
-          href="#"
-          className="hover:text-pastel-green transition-colors"
-          aria-label="LinkedIn Profile"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="#"
-          className="hover:text-pastel-green transition-colors"
-          aria-label="Email Contact"
-        >
-          Email
-        </a>
-        <span className="text-gray-300">|</span>
-        <span>&copy; 2026 Stephen Ko</span>
-      </div>
-    </div>
   );
 }
 

@@ -76,10 +76,12 @@ Breaking down complex problems into structured thinking steps
 
 ## Subagent System
 
-Custom agents are defined in `.claude/agents/`. Use `/agents` command to list and manage them.
+Custom agents are defined in `.claude/agents/`. Each agent has its own subdirectory with:
+- `<agent-name>.md` - Agent definition and capabilities
+- `SKILL.md` - Lessons learned, patterns, and best practices
 
 ### @ui-ux-designer
-**File:** `.claude/agents/ui-ux-designer.md`
+**Directory:** `.claude/agents/ui-ux-designer/`
 **Role:** Design analysis, conceptual design, and UX recommendations
 
 **When to use:**
@@ -89,6 +91,10 @@ Custom agents are defined in `.claude/agents/`. Use `/agents` command to list an
 - Providing design feedback
 - Accessibility audits
 
+**Files:**
+- `ui-ux-designer.md` - Agent definition
+- `SKILL.md` - Design patterns, review criteria, accessibility guidelines
+
 **Tools available:**
 - Playwright for visual audits
 - Sequential Thinking for design problem breakdown
@@ -97,7 +103,7 @@ Custom agents are defined in `.claude/agents/`. Use `/agents` command to list an
 ---
 
 ### @frontend-dev
-**File:** `.claude/agents/frontend-dev.md`
+**Directory:** `.claude/agents/frontend-dev/`
 **Role:** Implementation of designs and features
 
 **When to use:**
@@ -108,10 +114,9 @@ Custom agents are defined in `.claude/agents/`. Use `/agents` command to list an
 - Tailwind styling
 - Bug fixes
 
-**MUST READ FIRST:** `.claude/skills/frontend-dev.md`
-- Contains lessons learned and best practices
-- Prevents repeating past mistakes
-- Quick reference for CSS gotchas, patterns, and solutions
+**Files:**
+- `frontend-dev.md` - Agent definition
+- `SKILL.md` - CSS gotchas, component patterns, best practices (MUST READ FIRST)
 
 **Tools available:**
 - Full development tools
@@ -153,7 +158,7 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 - Responsive breakpoint behaviors
 - Accessibility requirements
 
-**Detailed workflow:** See `.claude/workflows/design-to-dev.md`
+**Note:** Workflow patterns are documented inline above - no separate file needed.
 
 ---
 
@@ -241,12 +246,18 @@ portfolio_website/
 ├── docs/
 │   └── img/app_layout.png # Design sketch reference
 └── .claude/
-    ├── CLAUDE.md          # This file
-    ├── context/           # Context documents
-    │   ├── PROJECT_STATUS.md
-    │   ├── DESIGN_SYSTEM.md
-    │   └── archive/       # v1.0-v3.0 documentation
-    └── workflows/         # Workflow guides
+    ├── CLAUDE.md          # This file (single source of truth)
+    ├── agents/            # Agent definitions and skills
+    │   ├── frontend-dev/
+    │   │   ├── frontend-dev.md
+    │   │   └── SKILL.md
+    │   └── ui-ux-designer/
+    │       ├── ui-ux-designer.md
+    │       └── SKILL.md
+    └── context/           # Context documents
+        ├── PROJECT_STATUS.md
+        ├── DESIGN_SYSTEM.md
+        └── archive/       # v1.0-v3.0 documentation
 ```
 
 ---
@@ -310,12 +321,13 @@ and provide feedback
 - **PROJECT_STATUS.md** - Current state and priorities
 - **DESIGN_SYSTEM.md** - v4.0 dashboard layout specifications
 
+### Agent Skills
+- **agents/frontend-dev/SKILL.md** - CSS patterns, component architecture, common gotchas
+- **agents/ui-ux-designer/SKILL.md** - Design review criteria, accessibility guidelines
+
 ### Archived (v1.0-v3.0)
 - All previous specs in `context/archive/`
 - Previous screenshots in `context/archive/screenshots-v3/`
-
-### Workflow Guides
-- **workflows/design-to-dev.md** - Multi-agent collaboration patterns
 
 ---
 
@@ -348,5 +360,5 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 7, 2026
+**Last Updated:** January 19, 2026
 **Document Version:** 4.0 (Dashboard Layout)
