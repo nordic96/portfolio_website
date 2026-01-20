@@ -4,8 +4,6 @@ import { cn } from '@/app/utils';
 import { ReactNode } from 'react';
 
 interface DashboardLayoutProps {
-  header: ReactNode;
-  footer: ReactNode;
   heroSection: ReactNode;
   projectsCard: ReactNode;
   techStackCard: ReactNode;
@@ -29,8 +27,6 @@ interface DashboardLayoutProps {
  * - Mobile (<768px): Single column stack, scrollable
  */
 export default function DashboardLayout({
-  header,
-  footer,
   heroSection,
   projectsCard,
   techStackCard,
@@ -39,9 +35,6 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <div className="min-h-dvh md:h-dvh flex flex-col">
-      {/* Header - 60px fixed height */}
-      <header className="h-15 shrink-0">{header}</header>
-
       {/* Main Content - Mobile: scrollable, Desktop: fixed */}
       <main className="flex-1 px-4 md:px-6 pb-4 overflow-y-auto md:overflow-hidden">
         <div
@@ -69,9 +62,6 @@ export default function DashboardLayout({
           <div className="md:col-span-1">{certificationsCard}</div>
         </div>
       </main>
-
-      {/* Footer - 48px fixed height */}
-      <footer className="h-12 shrink-0">{footer}</footer>
     </div>
   );
 }
