@@ -24,6 +24,9 @@ import {
   siClaude,
   siMongodb,
   siGraphql,
+  siWebflow,
+  siSplunk,
+  siPython,
 } from 'simple-icons';
 
 type TechStackCategory = 'frontend' | 'cicd' | 'tools' | 'backend';
@@ -53,6 +56,9 @@ const logoData: LogoData[] = [
   { icon: siJest, name: 'Jest', category: 'tools' },
   { icon: siCypress, name: 'Cypress', category: 'tools' },
   { icon: siThreedotjs, name: 'Three.js', category: 'frontend' },
+  { icon: siWebflow, name: 'Webflow', category: 'frontend' },
+  { icon: siSplunk, name: 'Splunk', category: 'cicd' },
+  { icon: siPython, name: 'Python', category: 'backend' },
   { icon: siHuggingface, name: 'HuggingFace', category: 'tools' },
   { icon: siClaude, name: 'Claude', category: 'tools' },
   { icon: siMongodb, name: 'MongoDb', category: 'backend' },
@@ -92,7 +98,7 @@ function TechStackCompact({ className }: { className?: string }) {
             'flex items-center gap-1.5 px-2 py-1',
             'bg-white border-l-4',
             'hover:scale-105 transition-transform',
-            'shadow-sm',
+            'shadow-md',
             {
               'border-l-pastel-green': logo.category === 'frontend',
               'border-l-pastel-brown': logo.category === 'backend',
@@ -105,8 +111,9 @@ function TechStackCompact({ className }: { className?: string }) {
           }}
         >
           <div
-            className="w-8 h-8 max-sm:w-5 max-sm:h-5 shrink-0"
+            className="lg:w-6 lg:h-6 md:w-4 md:h-4 max-sm:w-4 max-sm:h-4 shrink-0"
             aria-hidden="true"
+            style={{ fill: `#${logo.icon.hex}` }}
             dangerouslySetInnerHTML={{ __html: logo.icon.svg }}
           />
           <span className="text-xs font-semibold text-gray-700 uppercase">
