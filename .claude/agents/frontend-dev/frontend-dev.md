@@ -22,7 +22,7 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 
 ### MUST READ Before Starting Any Task
 
-**Skills & Lessons Learned** (`.claude/skills/frontend-dev.md`)
+**Skills & Lessons Learned** (`.claude/agents/frontend-dev/SKILL.md`)
 - CSS gotchas (transforms, animations, accessibility)
 - Component patterns and best practices
 - Common pitfalls and their solutions
