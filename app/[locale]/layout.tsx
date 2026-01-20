@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins, Roboto } from 'next/font/google';
 
 import '../globals.css';
 import '@/node_modules/flag-icons/css/flag-icons.min.css';
@@ -11,9 +11,22 @@ import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-const inter = Inter({
+// Poppins for headings (Bold Italic)
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['700'],
+  style: ['normal', 'italic'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+// Roboto for body text (Normal/Light)
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-roboto',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -44,7 +57,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${poppins.variable} ${roboto.variable} antialiased`}>
         <NextIntlClientProvider>
           <Header />
           {children}
