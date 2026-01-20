@@ -29,15 +29,11 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 - Quick reference for recurring patterns
 - **Read this FIRST to avoid repeating past mistakes**
 
-**Project Status** (`.claude/context/PROJECT_STATUS.md`)
-- Current implementation state
-- Completed features
-- Technical constraints
-
-**Design System** (`.claude/context/DESIGN_SYSTEM.md`)
-- Color palette specifications
-- Typography scale
-- Spacing guidelines
+**Design System** (`.claude/CLAUDE.md` - Design System section)
+- v5.0 Night Sky color palette
+- Typography scale (Poppins + Roboto)
+- Layout specifications
+- Component reference
 
 ## Workflow
 

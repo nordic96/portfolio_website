@@ -5,41 +5,42 @@
 Personal portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
 - **Live Site:** https://stephenghk.com
 - **Dev Server:** http://localhost:3000
-- **Design Version:** 4.0 (Dashboard Layout)
-- **Current Focus:** 100dvh Dashboard Layout Redesign
+- **Design Version:** 5.0 (Night Sky Theme)
+- **Current Focus:** v5 Redesign - Epic #431
 
-**Quick Status:** See `.claude/context/PROJECT_STATUS.md` for current state and priorities
+**Quick Status:** v5 in progress - 3 of 15 phases complete (Foundation, StarField, Live Projects). See Implementation Status section below for details.
 
 ---
 
-## MAJOR REDESIGN: v4.0 Dashboard Layout
+## MAJOR REDESIGN: v5.0 Night Sky Theme
 
-The website is undergoing a major redesign from vertical scrolling sections to a **100dvh single-view dashboard layout**.
+The website is undergoing a complete visual redesign with a **night sky theme**, animated starfield, and live project previews in iPhone frames.
 
 ### Key Changes
-- **Layout:** Vertical scroll -> 100dvh single-view grid
-- **Typography:** Large text -> Compact (~50% smaller)
-- **Color:** Gradient backgrounds -> Minimal white with subtle hints
-- **Content:** Detailed sections -> Compact cards in grid
+- **Visual Theme:** Night sky gradient background with twinkling stars
+- **Animation:** Canvas-based starfield with organic twinkling
+- **Typography:** Poppins (headings) + Roboto (body), elegant hierarchy
+- **Featured Projects:** iPhone 15 Pro frames with live iframes
+- **Scroll Pattern:** Scrollable vertical layout with layered sections
+- **Color Scheme:** Dark gradient backgrounds with accent highlights
 
-### Layout Structure
-```
-+-----------------------------------------------+
-|  Logo                              i18n       |  <- Header
-+-----------------------------------------------+
-|    +-------------------+---------------+      |
-|    |   Hero Section    | Certifications|      |  <- Row 1
-|    +-------------------+---------------+      |
-|    |     Projects      |     About     |      |  <- Row 2
-|    +-------------------+---------------+      |
-|    |       Tech Stack Post-Its        |      |  <- Row 3
-+-----------------------------------------------+
-|              Footer                           |
-+-----------------------------------------------+
-```
+### Implementation Phases
+**Phase 1:** Foundation (COMPLETE)
+- Color palette and design tokens
+- Poppins/Roboto font integration
+- CSS variable system setup
 
-**Design Reference:** `docs/img/app_layout.png`
-**Full Specs:** `.claude/context/DESIGN_SYSTEM.md`
+**Phase 2:** StarField Animation (COMPLETE)
+- Canvas 2D twinkling stars component
+- Parallax scrolling effect
+- Performance optimized for viewport
+
+**Phase 6:** Live Projects (COMPLETE)
+- iPhone 15 Pro frame component with realistic bezel
+- Lazy-loading iframe with scaling
+- 4-layer design cards for projects
+
+**Remaining:** Phases 3-5, 7-15 (see Epic #431 for full roadmap)
 
 ---
 
@@ -162,51 +163,52 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ---
 
-## Design System (v4.0 Dashboard)
+## Design System (v5.0 Night Sky)
 
-### Color Palette (Minimal)
+### Color Palette (Night Sky Theme)
 ```css
-/* Base - Dominant */
---color-white: #FFFFFF;
---color-text-primary: #2D2D2D;
---color-text-secondary: #6B7280;
+/* Primary - Dark Backgrounds */
+--gradient-sky: linear-gradient(135deg, #0a0e27 0%, #1a0e3f 50%, #0f1633 100%);
+--color-background: #0a0e27;
+--color-text-primary: #ffffff;
+--color-text-secondary: #a8b2d1;
 
-/* Accent - Subtle Use */
---color-accent-green: #77dd87;
---color-accent-blue: #00CEC8;
-
-/* Border */
---color-border: #E5E7EB;
+/* Accent Colors */
+--color-accent-gold: #ffd700;
+--color-accent-cyan: #00d4ff;
+--color-accent-purple: #c084fc;
 ```
 
-### Typography (Compact)
-| Element | Tailwind |
-|---------|----------|
-| Hero Name | `text-2xl lg:text-3xl font-bold` |
-| Hero Headline | `text-base lg:text-lg font-light` |
-| Section Title | `text-sm font-semibold uppercase` |
-| Body Text | `text-sm` |
-| Labels | `text-xs` |
+### Typography (v5.0)
+| Element | Font | Tailwind |
+|---------|------|----------|
+| Headings | Poppins | `font-poppins font-bold text-3xl-4xl` |
+| Body | Roboto | `font-roboto text-base` |
+| Captions | Roboto | `font-roboto text-sm text-text-secondary` |
+
+**Font Setup:** Both fonts loaded in `app/layout.tsx` via Next.js
 
 ### Layout
-- **Container:** `h-dvh` (100dvh)
-- **Grid:** `grid-cols-3 grid-rows-[1fr_1fr_auto]`
-- **Gap:** `gap-4` (16px)
-- **Max Width:** `max-w-6xl` (1200px)
+- **Pattern:** Scrollable vertical with layered sections
+- **Stars:** Canvas background with parallax
+- **Cards:** iPhone Pro frames and design cards
+- **Spacing:** Varied per section for visual interest
 
 ### Responsive Breakpoints
-- **Desktop (>=1024px):** 3-column grid, 100dvh
-- **Tablet (768-1023px):** 2-column grid, 100dvh
-- **Mobile (<768px):** 1-column stack, scrollable
+- **Desktop (>=1024px):** Full width, optimized layouts
+- **Tablet (768-1023px):** Adjusted sizing and spacing
+- **Mobile (<768px):** Single column, touch-optimized
 
-**Complete design system:** See `.claude/context/DESIGN_SYSTEM.md`
+**Design Reference:** Figma designs reviewed by @ui-ux-designer during session
 
 ---
 
 ## Project Goals
 
-- **Redesign to dashboard layout** (current focus)
-- Showcase projects and skills at a glance
+- **v5 Night Sky Theme** - Complete visual redesign with night sky aesthetic
+- Immersive starfield animation as visual centerpiece
+- Live project previews in iPhone frames for engagement
+- Smooth scrolling experience with parallax effects
 - Create memorable, professional first impression
 - Ensure exceptional mobile experience
 - Optimize for performance and SEO
@@ -231,62 +233,66 @@ npm run start      # Start production server
 ```
 portfolio_website/
 ├── app/
-│   ├── [locale]/page.tsx  # Homepage with dashboard grid
-│   ├── layout.tsx         # Root layout, Inter font setup
-│   └── globals.css        # Global styles, color palette
+│   ├── [locale]/page.tsx  # v5 homepage with scrollable sections
+│   ├── layout.tsx         # Root layout, Poppins/Roboto font setup
+│   └── globals.css        # Global styles, v5 color palette
 ├── components/
-│   ├── DashboardLayout/   # NEW - v4.0 layout container
-│   ├── HeroCard/          # NEW - Compact hero cell
-│   ├── CertificationsCard/# NEW
-│   ├── ProjectsCard/      # NEW - Thumbnail grid
-│   ├── AboutCard/         # NEW - Brief bio
-│   └── TechStackBar/      # NEW - Horizontal post-its
+│   ├── StarField/         # Canvas-based twinkling stars (Phase 2)
+│   ├── IPhoneProFrame/    # iPhone 15 Pro bezel component
+│   ├── LiveProjectIframe/ # Lazy-loading iframe wrapper
+│   ├── LiveProjectCard/   # 4-layer design card component
+│   ├── LiveProjectsSection/ # Featured projects section
+│   ├── Dashboard/         # v4.0 components (legacy)
+│   ├── HeroSection/       # Hero with tech logos
+│   ├── ProjectSection/    # Projects grid
+│   └── AboutSection/      # About with timeline
 ├── public/
-│   └── assets/            # Static assets (images, SVGs)
+│   └── assets/            # Static assets (images, SVGs, backgrounds)
 ├── docs/
-│   └── img/app_layout.png # Design sketch reference
+│   └── img/               # Design references
 └── .claude/
     ├── CLAUDE.md          # This file (single source of truth)
-    ├── agents/            # Agent definitions and skills
-    │   ├── frontend-dev/
-    │   │   ├── frontend-dev.md
-    │   │   └── SKILL.md
-    │   └── ui-ux-designer/
-    │       ├── ui-ux-designer.md
-    │       └── SKILL.md
-    └── context/           # Context documents
-        ├── PROJECT_STATUS.md
-        ├── DESIGN_SYSTEM.md
-        └── archive/       # v1.0-v3.0 documentation
+    └── agents/            # Agent definitions and skills
+        ├── frontend-dev/
+        │   ├── frontend-dev.md
+        │   └── SKILL.md
+        └── ui-ux-designer/
+            ├── ui-ux-designer.md
+            └── SKILL.md
 ```
 
 ---
 
-## Current Implementation Status
+## Current Implementation Status (v5.0)
 
-### v4.0 Dashboard Layout - TO BUILD
+### Completed Phases
+**Phase 1: Foundation** (COMPLETE - PR #434)
+- Night sky color palette with CSS variables
+- Poppins (headings) + Roboto (body) fonts
+- Theme tokens in `globals.css`
 
-**Priority 1: Layout Foundation** (NOT STARTED)
-- 100dvh container structure
-- CSS Grid layout
-- Base GridCard component
-- Header with logo and i18n
-- Footer with social links
+**Phase 2: StarField Animation** (COMPLETE - PR #435)
+- Canvas 2D component with twinkling stars
+- Parallax scrolling support
+- Performance optimizations
 
-**Priority 2: Grid Cells** (NOT STARTED)
-- Hero card (compact profile + name)
-- Certifications card
-- Projects card (thumbnails)
-- About card (brief bio)
-- Tech Stack bar (horizontal post-its)
+**Phase 6: Live Projects** (COMPLETE - PR #440)
+- iPhone 15 Pro frame component with accurate bezel
+- Lazy-loading iframe component
+- 4-layer design card system
+- LiveProjectsSection container
 
-**Priority 3: Polish** (NOT STARTED)
-- Subtle center gradient
-- Hover interactions
-- Content population
+### Remaining Phases (3-5, 7-15)
+See Epic #431 for detailed roadmap. Track via GitHub issues #432-439 on `develop_v5` branch.
+
+### v4.0 Features (LEGACY)
+Previous dashboard layout components available in `/components/Dashboard/`:
+- DashboardLayout container
+- GridCard base component
+- ProjectsCard, HeroCard, etc.
 
 ### v3.0 Features (ARCHIVED)
-Previous implementations archived to `.claude/context/archive/`:
+Previous implementations:
 - Hero Section with orbital tech logos
 - Featured Projects bento grid
 - About Section with timeline
@@ -317,48 +323,61 @@ and provide feedback
 
 ## Important Context Documents
 
-### Essential Reading (v4.0)
-- **PROJECT_STATUS.md** - Current state and priorities
-- **DESIGN_SYSTEM.md** - v4.0 dashboard layout specifications
+### Essential Reading (v5.0)
+- **agents/ui-ux-designer/SKILL.md** - Design review criteria, Figma analysis patterns, v5.0 session learnings
+- **agents/frontend-dev/SKILL.md** - CSS patterns, component architecture, Canvas optimization, v5.0 implementation patterns
 
-### Agent Skills
-- **agents/frontend-dev/SKILL.md** - CSS patterns, component architecture, common gotchas
-- **agents/ui-ux-designer/SKILL.md** - Design review criteria, accessibility guidelines
-
-### Archived (v1.0-v3.0)
-- All previous specs in `context/archive/`
-- Previous screenshots in `context/archive/screenshots-v3/`
+### GitHub & Branch Strategy
+- **GitHub Epic #431** - Master plan for v5 redesign with 15 phases
+- **GitHub Issues #432-439** - Individual phase tracking
+- **develop_v5** - Integration branch for all v5 work
+- Feature branches: `feature/phase-#` off develop_v5
+- PRs target develop_v5, not master
+- Example: PR #440 for Phase 6 implementation
 
 ---
 
 ## Quick Reference
 
-### Current Branch
-`dev_#413_claude` - Dashboard layout redesign
+### Current Version & Branch
+- **Version:** 5.0 (Night Sky Theme)
+- **Main Branch:** develop_v5
+- **GitHub Issues:** Epic #431, Sub-issues #432-439
+- **Latest PRs:** #434 (Phase 1), #435 (Phase 2), #440 (Phase 6)
 
-### Design Philosophy
-- **100dvh:** Everything visible at a glance
-- **Minimal:** White-dominant, subtle accents
-- **Compact:** Reduced typography, tight spacing
-- **Grid:** Structured layout, not free-flowing
+### Design Philosophy (v5.0)
+- **Immersive:** Night sky gradient with animated stars
+- **Engaging:** Live project previews in iPhone frames
+- **Elegant:** Poppins headings with Roboto body text
+- **Scrollable:** Layered sections with parallax effects
+- **Smooth:** Organic animations and transitions
+
+### New Components Reference
+- `StarField` - Canvas 2D twinkling star animation with parallax
+- `IPhoneProFrame` - iPhone 15 Pro bezel with rounded corners and notch
+- `LiveProjectIframe` - Lazy-loading iframe with 1px width optimization
+- `LiveProjectCard` - 4-layer design card for projects
+- `LiveProjectsSection` - Container for featured projects
 
 ### Accessibility
 - WCAG AA compliance target
-- Color contrast verified
+- Color contrast verified (dark backgrounds)
 - Touch targets minimum 44x44px
 - Keyboard navigation support
 - `prefers-reduced-motion` respected
+- Canvas animations respect user preferences
 
 ---
 
 ## Contact & Collaboration
 
-**GitHub Issues:** Track work and bugs
-**Branch Strategy:** Feature branches off master
-**Code Review:** Required before merge to master
-**Deployment:** Automatic via Vercel on merge to master
+**GitHub Issues:** Track work via Epic #431 and sub-issues #432-439
+**Branch Strategy:** Feature branches → develop_v5 → master (via PR)
+**Code Review:** Required before merge to develop_v5
+**Deployment:** Manual testing on develop_v5; automatic via Vercel on merge to master
 
 ---
 
-**Last Updated:** January 19, 2026
-**Document Version:** 4.0 (Dashboard Layout)
+**Last Updated:** January 20, 2026
+**Document Version:** 5.0 (Night Sky Theme - In Progress)
+**Progress:** 3 of 15 phases complete

@@ -40,15 +40,11 @@ Expert UI/UX designer specializing in modern web design, user experience, and de
 - Common design issues and solutions
 - **Read this FIRST to apply learned insights**
 
-**Design System** (`.claude/context/DESIGN_SYSTEM.md`)
-- Color palette (Pastel Green theme)
-- Typography specifications
+**Design System** (`.claude/CLAUDE.md` - Design System section)
+- Color palette (v5.0 Night Sky theme)
+- Typography specifications (Poppins + Roboto)
 - Spacing and layout guidelines
-
-**Project Status** (`.claude/context/PROJECT_STATUS.md`)
-- Current implementation state
-- Completed features
-- Priorities and roadmap
+- Component reference
 
 ## MCP Tools Available
 
@@ -105,22 +101,28 @@ When providing design specifications, structure output as:
 
 ## Design System Reference
 
-### Color Palette (Pastel Green Theme)
-- Primary: `#77dd87` (pastel-green)
-- Primary Hover: `#5fd070` (pastel-green-hover)
-- Text Dark: `#2D2D2D`
-- Background: White
+**See `.claude/CLAUDE.md` for complete v5.0 design system**
+
+### Color Palette (v5.0 Night Sky)
+- Dark gradient background: `#0a0e27` to `#1a0e3f` to `#0f1633`
+- Text Primary: `#ffffff`
+- Text Secondary: `#a8b2d1`
+- Accent Gold: `#ffd700`
+- Accent Cyan: `#00d4ff`
+- Accent Purple: `#c084fc`
 
 ### Typography
-- Font Family: Inter (300, 400, 600, 700 weights)
-- Responsive type scale from text-xl to text-7xl
+- Headings: Poppins (bold, 3xl-4xl)
+- Body: Roboto (base, text-base)
+- Captions: Roboto (small, text-sm)
 
-## Design Philosophy
-- **Minimalist but not boring**: Clean with intentional personality
-- **Content-first**: Design supports, doesn't overshadow work
-- **Accessible by default**: WCAG AA minimum
-- **Mobile-first**: Majority of traffic is mobile
-- **Fast and fluid**: Smooth transitions, instant feedback
+## Design Philosophy (v5.0)
+- **Immersive**: Night sky gradient with animated stars
+- **Engaging**: Live project previews in iPhone frames
+- **Elegant**: Poppins headings with Roboto body text
+- **Scrollable**: Layered sections with parallax effects
+- **Smooth**: Organic animations and transitions
+- **Accessible**: WCAG AA minimum, respects prefers-reduced-motion
 
 ## Output Format
 
