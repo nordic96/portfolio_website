@@ -19,8 +19,6 @@ export interface CertificationCardProps {
   badgeAlt?: string;
   /** Optional verification URL (opens in new tab) */
   verificationUrl?: string;
-  /** Optional expiration date in ISO format */
-  expirationDate?: string;
   /** Additional CSS classes */
   className?: string;
 }
@@ -66,14 +64,10 @@ export default function CertificationCard({
   badgeImage,
   badgeAlt,
   verificationUrl,
-  expirationDate,
   className,
 }: CertificationCardProps) {
   const displayName = shortName || name;
   const formattedIssueDate = formatDate(issueDate);
-  const formattedExpirationDate = expirationDate
-    ? formatDate(expirationDate)
-    : null;
 
   const cardContent = (
     <div
@@ -105,16 +99,13 @@ export default function CertificationCard({
       {/* Certification Info - Right Side */}
       <div className="flex flex-col min-w-0 flex-1">
         {/* Issuing Organization */}
-        <p className="text-secondary text-[#a8b2d1] mt-1">{displayName}</p>
+        <p className="text-secondary text-text-white mt-1">{displayName}</p>
 
         {/* Dates */}
         <div className="flex flex-col gap-0.5 mt-2">
-          <p className="text-xs text-[#6b7280]">Issued: {formattedIssueDate}</p>
-          {formattedExpirationDate && (
-            <p className="text-xs text-[#6b7280]">
-              Expires: {formattedExpirationDate}
-            </p>
-          )}
+          <p className="text-xs text-text-white">
+            Issued: {formattedIssueDate}
+          </p>
         </div>
 
         {/* Verification Link */}
