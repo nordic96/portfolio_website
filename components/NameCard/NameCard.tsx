@@ -3,44 +3,55 @@ import { cn } from '@/app/utils';
 import { hoverLiftStyle } from '@/app/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 
-export default function NameCard() {
+interface NameCardProps {
+  variant?: 'small' | 'large';
+}
+export default function NameCard({ variant = 'large' }: NameCardProps) {
   return (
     <section className={'flex flex-col max-sm:items-center'}>
       {/** Signature Container */}
-      <div>
-        <Image
-          src={'/images/signature.svg'}
-          width={289}
-          height={96}
-          alt={'signature'}
-        />
-      </div>
+      <Image
+        src={'/images/signature.svg'}
+        width={289}
+        height={96}
+        alt={'signature'}
+      />
       <div className={'flex gap-3'}>
         {/** Profile Image Container */}
-        <div
-          className={
-            'w-22 aspect-auto border-2 border-accent-yellow rounded-xl p-1 flex items-center'
-          }
-        >
-          <Image
-            src={'/images/profile_img.png'}
-            width={88}
-            height={88}
-            alt={'profile_img'}
-          />
-        </div>
-        {/** Metadata Container */}
-        <div className={'flex flex-col'}>
-          <h2 className={'text-h2'}>Stephen Ko</h2>
-          <span className={'text-secondary'}>
-            Frontend Software Engineer, based in Singapore&nbsp;
-            <span className={'not-italic'}>🇸🇬</span>
-          </span>
-          {/** NameCard Icons Conatiner */}
+        {variant === 'large' && (
           <div
             className={
-              'flex items-center lg:mt-1 gap-1 max-sm:gap-0.5 text-3xl max-sm:text-xl'
+              'w-22 aspect-auto border-2 border-accent-yellow rounded-xl p-1 flex items-center'
             }
+          >
+            <Image
+              src={'/images/profile_img.png'}
+              width={88}
+              height={88}
+              alt={'profile_img'}
+            />
+          </div>
+        )}
+        {/** Metadata Container */}
+        <div className={'flex flex-col'}>
+          {variant === 'large' && <h2 className={'text-h2'}>Stephen Ko</h2>}
+          {variant === 'small' && <h3 className={'text-h3'}>Stephen Ko</h3>}
+          {variant === 'large' && (
+            <span className={'text-secondary'}>
+              Frontend Software Engineer, based in Singapore&nbsp;
+              <span className={'not-italic'}>🇸🇬</span>
+            </span>
+          )}
+          {/** NameCard Icons Conatiner */}
+          <div
+            className={cn(
+              {
+                'text-3xl': variant === 'large',
+                'text-xl': variant === 'small',
+              },
+              'max-sm:text-xl',
+              'flex items-center lg:mt-1 gap-1 max-sm:gap-0.5',
+            )}
           >
             <NamecardIcon
               href={'https://www.linkedin.com/in/gi-hun-ko-863619184/'}
