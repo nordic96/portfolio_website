@@ -9,6 +9,39 @@
         "project_section_headline": "주요 <highlight>프로젝트</highlight>",
         "project_section_subheadline": "풀스택 개발, 최신 프레임워크, 사용자 중심 디자인에 대한 전문성을 보여주는 대표 작업 모음입니다."
     },
+    "Header": {
+        "site_title": "고기훈",
+        "home_link_label": "홈페이지로 이동",
+        "navigation_label": "사이트 네비게이션"
+    },
+    "NameCard": {
+        "section_label": "개인 소개 및 연락처 정보",
+        "signature_alt": "고기훈의 서명",
+        "profile_alt": "고기훈의 프로필 사진",
+        "name": "고기훈",
+        "job_title": "프론트엔드 소프트웨어 엔지니어, 싱가포르 거주",
+        "location_flag_label": "싱가포르 국기",
+        "social_links_label": "소셜 미디어 링크",
+        "linkedin_label": "고기훈의 LinkedIn 프로필 방문 (새 탭에서 열림)",
+        "email_label": "고기훈에게 이메일 보내기",
+        "github_label": "고기훈의 GitHub 프로필 방문 (새 탭에서 열림)"
+    },
+    "Certifications": {
+        "section_title": "자격증",
+        "section_label": "전문 자격증 및 인증서",
+        "issued_label": "발급일",
+        "verify_label": "확인",
+        "aws_saa": {
+            "name": "Solutions Architect - Associate",
+            "issuer": "Amazon Web Services",
+            "badge_alt": "AWS 솔루션스 아키텍트 어소시에이트 자격증 배지"
+        },
+        "lfcs": {
+            "name": "Linux Foundation Certified Systems Administrator",
+            "issuer": "The Linux Foundation",
+            "badge_alt": "리눅스 파운데이션 인증 시스템 관리자 배지"
+        }
+    },
     "AboutSection": {
         "title": "소개",
         "subtitle": "<highlight>코드</highlight> 뒤에 숨겨진 여정",

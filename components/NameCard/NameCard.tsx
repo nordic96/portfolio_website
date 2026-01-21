@@ -2,19 +2,32 @@ import Image from 'next/image';
 import { cn } from '@/app/utils';
 import { hoverLiftStyle } from '@/app/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 
 interface NameCardProps {
   variant?: 'small' | 'large';
 }
+
+interface NamecardIconProps {
+  href: string;
+  ariaLabel: string;
+  children: React.ReactNode;
+}
+
 export default function NameCard({ variant = 'large' }: NameCardProps) {
+  const t = useTranslations('NameCard');
+
   return (
-    <section className={'flex flex-col max-sm:items-center'}>
+    <section
+      className={'flex flex-col max-sm:items-center'}
+      aria-label={t('section_label')}
+    >
       {/** Signature Container */}
       <Image
         src={'/images/signature.svg'}
         width={289}
         height={96}
-        alt={'signature'}
+        alt={t('signature_alt')}
       />
       <div className={'flex gap-3'}>
         {/** Profile Image Container */}
@@ -28,22 +41,27 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
               src={'/images/profile_img.png'}
               width={88}
               height={88}
-              alt={'profile_img'}
+              alt={t('profile_alt')}
             />
           </div>
         )}
         {/** Metadata Container */}
         <div className={'flex flex-col'}>
-          {variant === 'large' && <h2 className={'text-h2'}>Stephen Ko</h2>}
-          {variant === 'small' && <h3 className={'text-h3'}>Stephen Ko</h3>}
+          {variant === 'large' && <h2 className={'text-h2'}>{t('name')}</h2>}
+          {variant === 'small' && <h3 className={'text-h3'}>{t('name')}</h3>}
           {variant === 'large' && (
             <span className={'text-secondary'}>
-              Frontend Software Engineer, based in Singapore&nbsp;
-              <span className={'not-italic'}>🇸🇬</span>
+              {t('job_title')}&nbsp;
+              <span
+                className={'not-italic'}
+                aria-label={t('location_flag_label')}
+              >
+                🇸🇬
+              </span>
             </span>
           )}
-          {/** NameCard Icons Conatiner */}
-          <div
+          {/** NameCard Icons Container */}
+          <nav
             className={cn(
               {
                 'text-3xl': variant === 'large',
@@ -52,32 +70,42 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
               'max-sm:text-xl',
               'flex items-center lg:mt-1 gap-1 max-sm:gap-0.5',
             )}
+            aria-label={t('social_links_label')}
           >
             <NamecardIcon
               href={'https://www.linkedin.com/in/gi-hun-ko-863619184/'}
+              ariaLabel={t('linkedin_label')}
             >
               <LinkedIn fontSize={'inherit'} />
             </NamecardIcon>
-            <NamecardIcon href={'mailto:rhrlgns96@gmail.com'}>
+            <NamecardIcon
+              href={'mailto:rhrlgns96@gmail.com'}
+              ariaLabel={t('email_label')}
+            >
               <Mail fontSize={'inherit'} />
             </NamecardIcon>
-            <NamecardIcon href={'https://github.com/nordic96'}>
+            <NamecardIcon
+              href={'https://github.com/nordic96'}
+              ariaLabel={t('github_label')}
+            >
               <GitHub fontSize={'inherit'} />
             </NamecardIcon>
-          </div>
+          </nav>
         </div>
       </div>
     </section>
   );
 }
 
-function NamecardIcon({
-  children,
-  ...props
-}: React.PropsWithChildren<Pick<React.ComponentProps<'a'>, 'href'>>) {
-  const { href } = props;
+function NamecardIcon({ href, ariaLabel, children }: NamecardIconProps) {
   return (
-    <a href={href} target={'_blank'} className={cn(hoverLiftStyle)}>
+    <a
+      href={href}
+      target={'_blank'}
+      rel="noopener noreferrer"
+      className={cn(hoverLiftStyle)}
+      aria-label={ariaLabel}
+    >
       {children}
     </a>
   );
