@@ -1,6 +1,7 @@
 import {
   siBluetooth,
   siFlutter,
+  siGithub,
   siGooglecolab,
   siNumpy,
   siPython,
@@ -10,6 +11,7 @@ import {
 
 import SmallProjectCard, { SmallProject } from '../SmallProjectCard';
 import GridCard from '../shared/GridCard';
+import PrimaryButton from '../shared/PrimaryButton';
 
 const projectData: SmallProject[] = [
   {
@@ -47,10 +49,15 @@ const projectData: SmallProject[] = [
 export default function SmallProjectSection() {
   return (
     <GridCard title={'Github Projects'} headerClass={'bg-accent-green'}>
-      <div className={'flex flex-col gap-3'}>
+      <div className={'flex flex-col gap-3 items-center'}>
         {projectData.map((p) => {
           return <SmallProjectCard key={p.id} project={p} />;
         })}
+        <PrimaryButton icon={siGithub}>
+          <a href={'https://github.com/nordic96/'} target={'_blank'}>
+            {'Explore My Github Projects'}
+          </a>
+        </PrimaryButton>
       </div>
     </GridCard>
   );

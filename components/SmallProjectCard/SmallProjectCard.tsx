@@ -1,5 +1,6 @@
 'use client';
 
+import { hoverLiftStyle } from '@/app/styles';
 import { cn } from '@/app/utils';
 import { Tooltip } from '@mui/material';
 import { SimpleIcon } from 'simple-icons';
@@ -37,11 +38,7 @@ export default function SmallProjectCard({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        'flex flex-col',
-        'hover:-translate-y-2 transition-transform ease-in-out',
-        className,
-      )}
+      className={cn('flex flex-col', hoverLiftStyle, className)}
     >
       {/* Project Title */}
       <h3 className="text-h3 text-text-white">{title}</h3>
