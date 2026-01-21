@@ -57,34 +57,36 @@ export default function LiveProjectCard({
       </div>
 
       {/* External Info Section - Below phone frame */}
-      <div className="text-center w-full max-w-60">
-        {/* Project Title */}
-        <h3 className="text-h3 font-bold text-text-white">{title}</h3>
-        <div
-          className={'flex flex-col bg-dark-gray opacity-50 rounded-3xl p-3'}
-        >
-          {/* Tech Stack Icons Row */}
-          <div className="flex justify-center items-center gap-1 mt-2">
-            {techStack.map((tech) => {
-              return (
-                <Tooltip
-                  key={`tech-stack-${tech.title}`}
-                  title={tech.title}
-                  arrow
-                >
-                  <div
-                    className="w-6 h-6 flex items-center justify-center fill-white"
+      <a href={url} target={'_blank'}>
+        <div className="text-center w-full max-w-60 hover:-translate-y-4 transition-transform ease-in-out">
+          {/* Project Title */}
+          <h3 className="text-h3 font-bold text-text-white">{title}</h3>
+          <div
+            className={'flex flex-col bg-dark-gray opacity-50 rounded-3xl p-3'}
+          >
+            {/* Tech Stack Icons Row */}
+            <div className="flex justify-center items-center gap-1 mt-2">
+              {techStack.map((tech) => {
+                return (
+                  <Tooltip
+                    key={`tech-stack-${tech.title}`}
                     title={tech.title}
-                    dangerouslySetInnerHTML={{ __html: tech.svg }}
-                  />
-                </Tooltip>
-              );
-            })}
+                    arrow
+                  >
+                    <div
+                      className="w-6 h-6 flex items-center justify-center fill-white"
+                      title={tech.title}
+                      dangerouslySetInnerHTML={{ __html: tech.svg }}
+                    />
+                  </Tooltip>
+                );
+              })}
+            </div>
+            {/* Description */}
+            <p className="text-secondary text-text-white mt-2">{description}</p>
           </div>
-          {/* Description */}
-          <p className="text-secondary text-text-white mt-2">{description}</p>
         </div>
-      </div>
+      </a>
     </div>
   );
 }
