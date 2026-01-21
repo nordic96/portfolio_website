@@ -21,6 +21,14 @@ interface NamecardIconProps {
 export default function NameCard({ variant = 'large' }: NameCardProps) {
   const t = useTranslations('NameCard');
 
+  // Signature dimensions based on variant
+  // Large: default size for main usage
+  // Small: reduced size for footer, with even smaller dimensions on mobile
+  const signatureClassName =
+    variant === 'small'
+      ? 'w-[180px] h-[60px] max-sm:w-[120px] max-sm:h-[40px]'
+      : '';
+
   return (
     <section
       className={'flex flex-col max-sm:items-center'}
@@ -31,8 +39,9 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
         animationDuration={2.5}
         delay={0.3}
         alt={t('signature_alt')}
-        width={289}
-        height={96}
+        width={variant === 'small' ? 180 : 289}
+        height={variant === 'small' ? 60 : 96}
+        className={signatureClassName}
       />
       <div className={'flex gap-3'}>
         {/** Profile Image Container */}

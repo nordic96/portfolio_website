@@ -8,6 +8,7 @@ import {
   useRouter,
   usePathname,
 } from '@/src/i18n';
+import { glassCardBaseStyle } from '@/src/styles';
 import Translate from '@mui/icons-material/Translate';
 import { useLocale } from 'next-intl';
 import { useRef, useState, useCallback, KeyboardEvent } from 'react';
@@ -69,9 +70,7 @@ export default function LocaleSwitcher() {
         <div
           role={'listbox'}
           aria-label={'Select language'}
-          className={
-            'absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] bg-white p-2 rounded-md text-sm shadow-lg border border-gray-200'
-          }
+          className={`absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] text-sm shadow-lg border border-white/20 ${glassCardBaseStyle}`}
         >
           {LOCALES.map((localeOption) => {
             const isSelected = localeOption === locale;
@@ -80,7 +79,7 @@ export default function LocaleSwitcher() {
                 key={`locale-${localeOption}`}
                 role={'option'}
                 aria-selected={isSelected}
-                className={`cursor-pointer flex justify-between items-center gap-1 px-2 py-1 rounded hover:bg-pastel-green/20 transition-colors ${
+                className={`cursor-pointer flex justify-between items-center gap-1 px-2 py-1 rounded hover:bg-pastel-green/20 transition-colors text-white ${
                   isSelected ? 'bg-pastel-green/10 font-semibold' : ''
                 }`}
                 onClick={() => onSwitchLocale(localeOption)}

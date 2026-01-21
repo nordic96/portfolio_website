@@ -89,13 +89,22 @@ export default function CalligraphySignature({
           : 'none',
       };
 
+  // Use inline width/height only if no className is provided that might override dimensions
+  // When className contains dimension classes, rely on those instead
+  const hasDimensionClass =
+    className.includes('w-') || className.includes('h-');
+
   return (
     <div
       className={`relative overflow-visible ${className}`}
-      style={{
-        width,
-        height,
-      }}
+      style={
+        hasDimensionClass
+          ? undefined
+          : {
+              width,
+              height,
+            }
+      }
     >
       <Image
         src="/images/signature.svg"
@@ -103,6 +112,7 @@ export default function CalligraphySignature({
         height={height}
         alt={alt}
         priority
+        className="w-full h-full object-contain"
         style={{
           ...animationStyle,
           // For reduced motion, show full signature immediately
