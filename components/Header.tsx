@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header
       className={
-        'h-12 max-sm:h-8 flex justify-center items-center px-8 max-sm:px-4 text-white'
+        'h-12 max-sm:h-8 flex justify-center items-center px-8 max-sm:px-4 text-white mb-10 max-sm:mb-5'
       }
     >
       <div className={cn(baseWidth, 'flex justify-between items-center')}>
