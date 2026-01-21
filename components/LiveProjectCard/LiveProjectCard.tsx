@@ -43,26 +43,37 @@ export default function LiveProjectCard({
           {/* Live iframe (Layer 2) */}
           <LiveProjectIframe url={url} title={title} />
 
-          {/* Subtle gradient overlay (Layer 3) */}
+          {/* Dark gradient overlay (Layer 3) - darker at bottom for text readability */}
           <div
-            className={cn(
-              'absolute inset-0 z-10 pointer-events-none',
-              // Subtle gradient per spec: transparent to rgba(51,51,51,0.3) at bottom
-            )}
+            className={cn('absolute inset-0 z-10 pointer-events-none')}
             style={{
               background:
-                'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(51,51,51,0.3) 100%)',
+                'linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0,0,0,0.7) 100%)',
             }}
           />
         </IPhoneProFrame>
       </div>
 
-      {/* External Info Section - Below phone frame */}
-      <a href={url} target={'_blank'}>
-        <div className={cn('text-center w-full max-w-60', hoverLiftStyle)}>
+      {/* External Info Section - Overlapping bottom of phone frame */}
+      <a href={url} target={'_blank'} className="relative z-20">
+        <div
+          className={cn(
+            'text-center w-full max-w-60',
+            // Pull up to overlap with phone frame bottom
+            '-mt-20',
+            hoverLiftStyle,
+          )}
+        >
           {/* Project Title */}
           <h3 className="text-h3 font-bold text-text-white">{title}</h3>
-          <div className={cn(glassCardBaseStyle, 'flex flex-col')}>
+          <div
+            className={cn(
+              glassCardBaseStyle,
+              'flex flex-col',
+              // Enhanced blur for overlap effect
+              'backdrop-blur-lg',
+            )}
+          >
             {/* Tech Stack Icons Row */}
             <div className="flex justify-center items-center gap-1 mt-2">
               {techStack.map((tech) => {
