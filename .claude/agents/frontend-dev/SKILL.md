@@ -308,7 +308,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
 **Tailwind:**
 ```tsx
-<section className="h-[100dvh]" />
+<section className="h-dvh" />
 ```
 
 ---

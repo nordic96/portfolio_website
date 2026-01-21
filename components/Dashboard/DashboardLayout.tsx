@@ -6,8 +6,6 @@ import { ReactNode } from 'react';
 interface DashboardLayoutProps {
   heroSection: ReactNode;
   projectsCard: ReactNode;
-  techStackCard: ReactNode;
-  aboutCard: ReactNode;
   certificationsCard: ReactNode;
 }
 
@@ -29,8 +27,6 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({
   heroSection,
   projectsCard,
-  techStackCard,
-  aboutCard,
   certificationsCard,
 }: DashboardLayoutProps) {
   return (
@@ -51,12 +47,6 @@ export default function DashboardLayout({
 
           {/* Row 2: Projects (left) */}
           <div className="md:col-span-1">{projectsCard}</div>
-
-          {/* Row 2: Tech Stack (right) */}
-          <div className="md:col-span-1">{techStackCard}</div>
-
-          {/* Row 3: About (left) */}
-          <div className="md:col-span-1">{aboutCard}</div>
 
           {/* Row 3: Certifications (right) */}
           <div className="md:col-span-1">{certificationsCard}</div>

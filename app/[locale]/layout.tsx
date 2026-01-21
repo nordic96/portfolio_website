@@ -15,7 +15,7 @@ import { setRequestLocale } from 'next-intl/server';
 // Poppins for headings (Bold Italic)
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['700'],
+  weight: ['300', '400', '700'],
   style: ['normal', 'italic'],
   variable: '--font-poppins',
   display: 'swap',
@@ -58,7 +58,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${poppins.variable} ${roboto.variable} antialiased`}>
+      <body
+        className={`${poppins.variable} ${roboto.variable} antialiased bg-night-sky-gradient`}
+      >
         {/* StarField background - renders behind all content */}
         <StarField starCount={150} />
         <NextIntlClientProvider>

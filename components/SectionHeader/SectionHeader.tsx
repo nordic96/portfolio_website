@@ -1,14 +1,13 @@
 import { cn } from '@/app/utils';
+import { ClassValue } from 'clsx';
 
 export interface SectionHeaderProps {
   /** Label text displayed above the title (e.g., "LIVE WEB PROJECTS") */
-  label: string;
-  /** Optional title text displayed below the label (e.g., "Featured Deployments") */
-  title?: string;
+  title: string;
   /** Text alignment for the header */
   alignment?: 'left' | 'center' | 'right';
   /** Additional CSS classes */
-  className?: string;
+  className?: string | ClassValue;
 }
 
 /**
@@ -29,7 +28,6 @@ export interface SectionHeaderProps {
  * ```
  */
 export default function SectionHeader({
-  label,
   title,
   alignment = 'left',
   className,
@@ -41,27 +39,12 @@ export default function SectionHeader({
   };
 
   return (
-    <div
-      className={cn('flex flex-col', alignmentClasses[alignment], className)}
-    >
-      {/* Label: Small, uppercase, accent cyan, letter-spacing */}
-      <span
-        className={cn(
-          'font-roboto font-medium uppercase tracking-wider',
-          // Font size: 12px mobile, 14px desktop
-          'text-xs lg:text-sm',
-          // Accent cyan color
-          'text-accent-cyan',
-        )}
-      >
-        {label}
-      </span>
-
+    <div className={cn('flex flex-col', alignmentClasses[alignment])}>
       {/* Title: Large, bold, white, Poppins font (optional) */}
       {title && (
         <h2
           className={cn(
-            'font-poppins font-bold',
+            'font-poppins font-bold italic',
             // Font size: 24px mobile, 32px desktop
             'text-2xl lg:text-[32px] lg:leading-tight',
             // White text color
@@ -73,6 +56,13 @@ export default function SectionHeader({
           {title}
         </h2>
       )}
+      {/** Section Colour Highlight Divider */}
+      <div
+        className={cn(
+          'h-2 -translate-y-2 rounded-b-xl drop-shadow-2xl',
+          className,
+        )}
+      />
     </div>
   );
 }

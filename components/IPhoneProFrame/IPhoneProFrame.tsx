@@ -44,12 +44,12 @@ export default function IPhoneProFrame({
         )}
       >
         {/* Side buttons - Left (Volume + Silent) */}
-        <div className="absolute left-[-2px] top-[18%] w-[3px] h-[6%] bg-[#2a2a2a] rounded-l-sm" />
-        <div className="absolute left-[-2px] top-[26%] w-[3px] h-[10%] bg-[#2a2a2a] rounded-l-sm" />
-        <div className="absolute left-[-2px] top-[38%] w-[3px] h-[10%] bg-[#2a2a2a] rounded-l-sm" />
+        <div className="absolute -left-0.5 top-[18%] w-0.75 h-[6%] bg-[#2a2a2a] rounded-l-sm" />
+        <div className="absolute -left-0.5 top-[26%] w-0.75 h-[10%] bg-[#2a2a2a] rounded-l-sm" />
+        <div className="absolute -left-0.5 top-[38%] w-0.75 h-[10%] bg-[#2a2a2a] rounded-l-sm" />
 
         {/* Side button - Right (Power) */}
-        <div className="absolute right-[-2px] top-[28%] w-[3px] h-[12%] bg-[#2a2a2a] rounded-r-sm" />
+        <div className="absolute -right-0.5 top-[28%] w-0.75 h-[12%] bg-[#2a2a2a] rounded-r-sm" />
 
         {/* Screen area */}
         <div
