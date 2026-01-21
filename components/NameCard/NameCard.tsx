@@ -1,8 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 import { cn } from '@/app/utils';
 import { hoverLiftStyle } from '@/app/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
+import CalligraphySignature from '@/components/CalligraphySignature';
 
 interface NameCardProps {
   variant?: 'small' | 'large';
@@ -22,12 +25,13 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
       className={'flex flex-col max-sm:items-center'}
       aria-label={t('section_label')}
     >
-      {/** Signature Container */}
-      <Image
-        src={'/images/signature.svg'}
+      {/** Signature Container - Animated calligraphy signature */}
+      <CalligraphySignature
+        animationDuration={2.5}
+        delay={0.3}
+        alt={t('signature_alt')}
         width={289}
         height={96}
-        alt={t('signature_alt')}
       />
       <div className={'flex gap-3'}>
         {/** Profile Image Container */}
