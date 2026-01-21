@@ -273,3 +273,19 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
 }
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark-gray);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 24px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+  }
+}
