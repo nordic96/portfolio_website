@@ -9,6 +9,39 @@
         "project_section_headline": "Featured <highlight>Projects</highlight>",
         "project_section_subheadline": "A curated collection of my most impactful work, showcasing expertise in full-stack development, modern frameworks, and user-centric design."
     },
+    "Header": {
+        "site_title": "STEPHEN KO",
+        "home_link_label": "Go to homepage",
+        "navigation_label": "Site navigation"
+    },
+    "NameCard": {
+        "section_label": "Personal introduction and contact information",
+        "signature_alt": "Stephen Ko's signature",
+        "profile_alt": "Stephen Ko's profile photo",
+        "name": "Stephen Ko",
+        "job_title": "Frontend Software Engineer, based in Singapore",
+        "location_flag_label": "Singapore flag",
+        "social_links_label": "Social media links",
+        "linkedin_label": "Visit Stephen's LinkedIn profile (opens in new tab)",
+        "email_label": "Send email to Stephen",
+        "github_label": "Visit Stephen's GitHub profile (opens in new tab)"
+    },
+    "Certifications": {
+        "section_title": "Certifications",
+        "section_label": "Professional certifications and credentials",
+        "issued_label": "Issued",
+        "verify_label": "Verify",
+        "aws_saa": {
+            "name": "Solutions Architect - Associate",
+            "issuer": "Amazon Web Services",
+            "badge_alt": "AWS Solutions Architect Associate certification badge"
+        },
+        "lfcs": {
+            "name": "Linux Foundation Certified Systems Administrator",
+            "issuer": "The Linux Foundation",
+            "badge_alt": "Linux Foundation Certified Systems Administrator badge"
+        }
+    },
     "AboutSection": {
         "title": "About Me",
         "subtitle": "The Journey Behind the <highlight>Code</highlight>",

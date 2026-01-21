@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
 import { cn } from '@/app/utils';
+import { useTranslations } from 'next-intl';
 
 export interface CertificationCardProps {
   /** Full name of the certification (e.g., "AWS Solutions Architect - Associate") */
@@ -66,6 +67,7 @@ export default function CertificationCard({
   verificationUrl,
   className,
 }: CertificationCardProps) {
+  const t = useTranslations('Certifications');
   const displayName = shortName || name;
   const formattedIssueDate = formatDate(issueDate);
 
@@ -104,14 +106,14 @@ export default function CertificationCard({
         {/* Dates */}
         <div className="flex flex-col gap-0.5 mt-2">
           <p className="text-xs text-text-white">
-            Issued: {formattedIssueDate}
+            {t('issued_label')}: {formattedIssueDate}
           </p>
         </div>
 
         {/* Verification Link */}
         {verificationUrl && (
           <span className="inline-flex items-center gap-1 text-sm text-accent-cyan mt-3 group-hover:underline">
-            Verify
+            {t('verify_label')}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
