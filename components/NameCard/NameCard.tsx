@@ -6,6 +6,7 @@ import { hoverLiftStyle } from '@/app/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import CalligraphySignature from '@/components/CalligraphySignature';
+import { GITHUB_URL, LINKEDIN_URL } from '@/app/config';
 
 interface NameCardProps {
   variant?: 'small' | 'large';
@@ -76,10 +77,7 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
             )}
             aria-label={t('social_links_label')}
           >
-            <NamecardIcon
-              href={'https://www.linkedin.com/in/gi-hun-ko-863619184/'}
-              ariaLabel={t('linkedin_label')}
-            >
+            <NamecardIcon href={LINKEDIN_URL} ariaLabel={t('linkedin_label')}>
               <LinkedIn fontSize={'inherit'} />
             </NamecardIcon>
             <NamecardIcon
@@ -88,10 +86,7 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
             >
               <Mail fontSize={'inherit'} />
             </NamecardIcon>
-            <NamecardIcon
-              href={'https://github.com/nordic96'}
-              ariaLabel={t('github_label')}
-            >
+            <NamecardIcon href={GITHUB_URL} ariaLabel={t('github_label')}>
               <GitHub fontSize={'inherit'} />
             </NamecardIcon>
           </nav>

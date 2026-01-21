@@ -12,6 +12,7 @@ import {
 import SmallProjectCard, { SmallProject } from '../SmallProjectCard';
 import GridCard from '../shared/GridCard';
 import PrimaryButton from '../shared/PrimaryButton';
+import { GITHUB_URL } from '@/app/config';
 
 const projectData: SmallProject[] = [
   {
@@ -54,7 +55,7 @@ export default function SmallProjectSection() {
           return <SmallProjectCard key={p.id} project={p} />;
         })}
         <PrimaryButton icon={siGithub}>
-          <a href={'https://github.com/nordic96/'} target={'_blank'}>
+          <a href={GITHUB_URL} target={'_blank'}>
             {'Explore My Github Projects'}
           </a>
         </PrimaryButton>
