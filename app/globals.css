@@ -65,6 +65,8 @@
   --color-accent-green: var(--accent-green);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-pink: var(--accent-pink);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-yellow: var(--accent-yellow);
 
   /* Legacy Colors (v1.2 compatibility) */
   --color-pastel-green: var(--pastel-green);
