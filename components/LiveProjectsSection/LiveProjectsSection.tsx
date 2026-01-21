@@ -3,12 +3,7 @@
 import { cn } from '@/app/utils';
 import LiveProjectCard, { LiveProject } from '@/components/LiveProjectCard';
 import GridCard from '@/components/Dashboard/GridCard';
-import {
-  siFastapi,
-  siNeo4j,
-  siNextdotjs,
-  siThreedotjs,
-} from 'simple-icons';
+import { siFastapi, siNeo4j, siNextdotjs, siThreedotjs } from 'simple-icons';
 
 /**
  * Live project data from the spec
