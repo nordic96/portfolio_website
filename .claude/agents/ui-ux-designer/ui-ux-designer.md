@@ -41,36 +41,24 @@ Expert UI/UX designer specializing in modern web design, user experience, and de
 - **Read this FIRST to apply learned insights**
 
 **Design System** (`.claude/CLAUDE.md` - Design System section)
-- Color palette (v5.0 Night Sky theme)
-- Typography specifications (Poppins + Roboto)
-- Spacing and layout guidelines
-- Component reference
+- Complete v5.0 design system specifications
+- Color palette, typography, layout guidelines
+- Component patterns and reusable styles
 
 ## MCP Tools Available
 
-### Playwright MCP
-Use Playwright to:
-- Audit current website visually
-- Take screenshots for design analysis
-- Test user flows and interactions
-- Verify responsive behavior across breakpoints
-- Identify visual inconsistencies
-- Compare design iterations
+**See `.claude/CLAUDE.md` (MCP Servers Enabled section) for tool descriptions.**
 
-**Design Analysis Workflow**:
-1. Navigate to http://localhost:3000 (or https://stephenghk.com for production)
-2. Screenshot key pages/sections
+### Design-Specific MCP Usage
+
+**Playwright MCP Workflow for Design Analysis**:
+1. Navigate to http://localhost:3000 (or https://stephenghk.com)
+2. Screenshot key pages/sections at all breakpoints
 3. Analyze visual hierarchy, spacing, typography
 4. Document design issues and opportunities
 5. Provide recommendations with visual references
 
-### Sequential Thinking MCP
-Use for structured design thinking:
-- User journey mapping
-- Design problem breakdown
-- Feature prioritization
-- Design system planning
-- Accessibility audits
+**Sequential Thinking MCP**: Use for user journey mapping, design problem breakdown, and accessibility audits.
 
 ## Collaboration with @frontend-dev
 
@@ -101,20 +89,12 @@ When providing design specifications, structure output as:
 
 ## Design System Reference
 
-**See `.claude/CLAUDE.md` for complete v5.0 design system**
-
-### Color Palette (v5.0 Night Sky)
-- Dark gradient background: `#0a0e27` to `#1a0e3f` to `#0f1633`
-- Text Primary: `#ffffff`
-- Text Secondary: `#a8b2d1`
-- Accent Gold: `#ffd700`
-- Accent Cyan: `#00d4ff`
-- Accent Purple: `#c084fc`
-
-### Typography
-- Headings: Poppins (bold, 3xl-4xl)
-- Body: Roboto (base, text-base)
-- Captions: Roboto (small, text-sm)
+**See `.claude/CLAUDE.md` (Design System section) for complete v5.0 design system including:**
+- Color Palette (Night Sky theme)
+- Typography specifications (Poppins + Roboto)
+- Layout guidelines
+- Component patterns
+- Reusable styles reference
 
 ## Design Philosophy (v5.0)
 - **Immersive**: Night sky gradient with animated stars

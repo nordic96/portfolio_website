@@ -2,7 +2,9 @@
 
 **Purpose:** Capture design patterns, review insights, and best practices discovered during design work.
 
-**Last Updated:** January 19, 2026
+**Scope:** Agent-specific design review criteria, visual analysis patterns, and session learnings. For complete design system specifications, see `.claude/CLAUDE.md`.
+
+**Last Updated:** January 21, 2026
 
 ---
 
@@ -35,23 +37,14 @@
 | UI components | 3:1 | N/A |
 
 ### Portfolio Color Palette Notes (v5.0)
-See `.claude/CLAUDE.md` for complete v5.0 Night Sky color palette.
-
-**Key notes:**
-- Dark gradient backgrounds with white text (#ffffff)
-- Accent colors (gold, cyan, purple) for highlights only
-- Text secondary (#a8b2d1) for captions and labels
+**See `.claude/CLAUDE.md` (Design System section) for complete v5.0 Night Sky color palette specifications.**
 
 ---
 
 ## Typography Best Practices
 
 ### Hierarchy Scale (v5.0 Night Sky)
-See `.claude/CLAUDE.md` for complete v5.0 typography specs.
-
-- Headings: Poppins font, bold, `text-3xl-4xl`
-- Body: Roboto font, `text-base`
-- Captions: Roboto font, `text-sm` with text-secondary color
+**See `.claude/CLAUDE.md` (Design System section) for complete v5.0 typography specifications.**
 
 ### Line Length
 - Optimal: 50-75 characters per line
@@ -61,15 +54,12 @@ See `.claude/CLAUDE.md` for complete v5.0 typography specs.
 
 ## Accessibility Insights
 
-### Touch Target Sizes
-- Minimum: 44x44px (WCAG 2.1 AA)
-- Recommended: 48x48px
-- Spacing between targets: 8px minimum
-
-### Focus States
-- Always provide visible focus indicators
-- Don't rely on color alone
-- Consider `focus-visible` for keyboard-only focus
+**See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive accessibility guidelines including:**
+- ARIA labels and semantic HTML patterns
+- Animation and motion accessibility
+- Internationalization considerations
+- Touch target specifications
+- Focus state requirements
 
 ---
 
@@ -198,5 +188,157 @@ See `.claude/CLAUDE.md` for complete v5.0 typography specs.
 - **Overlay Opacity:** At 30%, gradient overlay maintains sufficient contrast for any white text overlays
 - **Loading Indicators:** Spinner + text provides both visual and text-based feedback for async states
 - **iPhone Frame:** Pure CSS design requires no additional a11y attributes since it's non-interactive decoration
+
+---
+
+## Session Learnings - January 21, 2026
+
+### Design Patterns Validated
+
+- **Glass Card Components Pattern**
+  - **Context:** Establishing consistent visual language for compact cards throughout the dashboard
+  - **Design Details:**
+    - Base style: Dark semi-transparent background (bg-dark-gray/50) with backdrop blur effect
+    - Round corners: `rounded-3xl` for soft, modern appearance
+    - Hover behavior: Subtle lift animation (`-translate-y-2`) to provide interaction feedback
+    - Padding: Consistent `p-3` internal spacing for card content
+  - **Visual Hierarchy:** Card titles placed OUTSIDE and ABOVE glass container, creating visual separation between heading and content container
+  - **When to use:** SmallProjectCard, CertificationCard, metadata sections, tech stack displays
+  - **Key design principle:** Glass effect provides visual depth on dark background while maintaining content legibility
+
+- **Icon Implementation Strategy**
+  - **Tech Logos:** Use SimpleIcon library (2800+ brand logos) with SVG rendering via `dangerouslySetInnerHTML`
+  - **Sizing:** 24x24px for small displays, 32x32px for feature sections
+  - **Spacing:** Consistent 8px gaps between icon groups for visual rhythm
+  - **Color:** Keep native icon colors when possible for brand recognition; desaturate only if design requires
+  - **Accessibility:** Icons that convey meaning need alt text; decorative icons get `aria-hidden="true"`
+
+- **Button & Action Element Design**
+  - **Primary Buttons:** Use glass card styling with icon support for consistent interaction surface
+  - **Link Styling:** Distinguish links from buttons using underline + chevron (`→` or Material UI icon)
+  - **Target Size:** Minimum 44x44px for touch targets on mobile; 48x48px recommended
+  - **Hover States:** Glass cards use lift effect; links use color shift or underline animation
+
+- **Text Animation & Motion**
+  - **Signature Reveal (clip-path):** Simulates natural handwriting from left to right
+  - **Duration:** 2-2.5 seconds for natural appearance (too fast looks jerky, too slow feels delayed)
+  - **Easing:** Use `cubic-bezier(0.4, 0, 0.2, 1)` for smooth, natural deceleration
+  - **Accessibility:** Always provide `prefers-reduced-motion` fallback showing full text immediately
+  - **When to use:** Signature elements, section reveals, emphasis animations
+
+### Design Specifications Established
+
+- **SmallProjectCard Specifications**
+  - Container: Glass card effect with hover lift
+  - Content Layout: Icon + title + description stacked vertically
+  - Responsive: Full width on mobile, constrained width on desktop (max-w-360)
+  - Title: h3 semantic tag, placed outside glass container
+  - Badges/Tags: Display tech stack inline with wrapping support
+
+- **CertificationCard Specifications**
+  - Container: Glass card effect with metadata section inside
+  - Icon Section: Circular badge showing certification provider/type
+  - Text Layout: Name, issuer, date displayed in hierarchy
+  - Verification Link: External link with ARIA label and target="_blank"
+  - Title: h3 placed outside container, uppercase styling
+  - Responsive: Reflows to single column on mobile
+
+- **CalligraphySignature Specifications**
+  - Animation: clip-path reveal from left to right (0 → 100% visible)
+  - Timing: Configurable delay before starting, 2s animation duration
+  - Reduced Motion: Shows full signature immediately when user preference detected
+  - Image: Optimized SVG or PNG with transparent background
+  - Placement: Hero section footer or about section accent
+
+- **Button Design Specifications**
+  - Base Style: Glass card with consistent padding
+  - Icon Support: Simple icon rendering next to text
+  - Hover: Lift effect from hover animation
+  - Active State: Slight scale reduction (0.98) for press feedback
+  - Text: Use semantic typography (text-base for normal, text-sm for compact)
+  - Accessibility: Always include aria-label for icon-only buttons
+
+### Design System Consolidation
+
+- **Centralized Reusable Styles** (New in v5)
+  - Location: `/app/styles/baseStyles.ts` - SINGLE SOURCE OF TRUTH for design tokens
+  - Current Exports:
+    - `glassCardBaseStyle`: Base glass effect styling
+    - `hoverLiftStyle`: Interaction feedback animation
+    - `baseWidth`: Responsive width constraints
+  - Design Principle: All repeated styling patterns MUST be extracted to baseStyles.ts to ensure consistency
+  - When adding new style: Only export if used in 2+ components; test across all components before commit
+
+- **Color Application Guidelines**
+  - Dark gradient backgrounds: Use for section containers and large areas
+  - Text primary (#ffffff): For body text and main content
+  - Text secondary (#a8b2d1): For labels, captions, and secondary information
+  - Accent colors (gold/cyan/purple): Reserve for highlights, badges, and visual emphasis
+  - Border colors: Use subtle variations (dark-gray/30) for section dividers
+
+- **Typography Application**
+  - Headings (h1-h3): Poppins bold for hierarchy and visual impact
+  - Body text: Roboto regular for readability and content
+  - Small labels: Roboto, text-sm, text-secondary color
+  - Uppercase labels: Use for section titles and category badges
+
+### Accessibility Enhancements Documented
+
+See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA, semantic HTML, and motion accessibility requirements. Session validated these patterns in CalligraphySignature and CertificationCard components.
+
+### Internationalization (i18n) Design Implications
+
+- **Text Length Variability:** German/Korean text often 30-50% longer than English
+  - Design with text expansion in mind
+  - Use flexible containers that reflow rather than truncate
+  - Test all languages at full viewport width and mobile
+
+- **Icon + Text Combinations:** Ensure sufficient spacing for all languages
+  - Button text with icon: Minimum 8px gap between icon and text
+  - Card titles: Accommodate 2-line headings in narrow columns
+
+- **Date/Number Formatting:** Varies by locale
+  - Use `next-intl` for automatic locale-specific formatting
+  - Example: "1/21/2026" (en-US) vs "21.01.2026" (de-DE) vs "2026.01.21" (ko-KR)
+  - Never hardcode date formats
+
+### Performance Considerations for Designers
+
+- **Canvas Animations:** Preferred for complex animated backgrounds (starfield, particle effects)
+  - Renders outside DOM, no layout thrashing
+  - Can animate 100+ elements smoothly
+  - Accessibility: Always use `aria-hidden="true"` on canvas elements
+
+- **CSS Transforms:** For UI animations (hover effects, transitions)
+  - Use transform/opacity for best performance (GPU-accelerated)
+  - Avoid width/height/left/right/top animations (cause layout recalculation)
+  - Always combine multiple transforms in single `transform` property
+
+- **Image Optimization:**
+  - Use Next.js Image component with `priority` flag for above-fold content
+  - Lazy-load images below the fold
+  - Provide srcset for responsive images
+
+### Common Design Issues to Prevent
+
+1. **Inconsistent Glass Card Implementation**
+   - Solution: Always import and use `glassCardBaseStyle` from baseStyles.ts
+   - Verify: Check that all cards have matching blur, opacity, and rounded corners
+
+2. **Title Placement Confusion**
+   - Solution: Document explicitly: "Card titles are h3 tags OUTSIDE the glass container"
+   - Verify: h3 should never be inside the glassCardBaseStyle div
+
+3. **Icon Sizing Inconsistency**
+   - Solution: Define icon size constraints (sm: 16px, md: 24px, lg: 32px, xl: 48px)
+   - Verify: All tech stack icons same size within a component
+
+4. **Accessibility Label Gaps**
+   - Solution: Audit before handoff - every link and button needs aria-label if not self-explanatory
+   - Verify: Use screen reader to test; ensure labels make sense out of context
+
+5. **Responsive Layout Breaks**
+   - Solution: Design mobile-first; test text reflow and spacing at 375px, 768px, 1024px
+   - Verify: No horizontal scroll on any breakpoint; touch targets remain 44x44px minimum
 
 ---

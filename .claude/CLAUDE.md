@@ -8,7 +8,7 @@ Personal portfolio website built with Next.js, React, TypeScript, and Tailwind C
 - **Design Version:** 5.0 (Night Sky Theme)
 - **Current Focus:** v5 Redesign - Epic #431
 
-**Quick Status:** v5 in progress - 3 of 15 phases complete (Foundation, StarField, Live Projects). See Implementation Status section below for details.
+**Quick Status:** v5 in progress - 3 of 15 phases complete (Foundation, StarField, Live Projects).
 
 ---
 
@@ -203,6 +203,235 @@ When @ui-ux-designer provides specs, @frontend-dev expects:
 
 ---
 
+## Reusable Styles System
+
+### Base Styles (Centralized in `app/styles/baseStyles.ts`)
+
+All reusable Tailwind style strings are centralized in `/Users/gihunko/projects/portfolio_website/app/styles/baseStyles.ts` to maintain consistency across components.
+
+**Current Base Styles:**
+
+```typescript
+// Glass card effect - dark semi-transparent with blur
+export const glassCardBaseStyle = 'bg-dark-gray/50 backdrop-blur-md rounded-3xl p-3';
+
+// Hover animation - lift on hover
+export const hoverLiftStyle = 'hover:-translate-y-2 transition-transform ease-in-out';
+
+// Base card width - responsive full width with desktop max-width
+export const baseWidth = 'w-full lg:max-w-360';
+```
+
+**Usage Pattern:**
+```typescript
+import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
+
+export function MyCard() {
+  return (
+    <div className={`${glassCardBaseStyle} ${hoverLiftStyle}`}>
+      {/* content */}
+    </div>
+  );
+}
+```
+
+**When to Add New Styles:**
+- Recurring patterns used in 2+ components
+- Shared spacing, dimensions, or effects
+- Design system constants (colors, shadows, etc.)
+- DO NOT add one-off component styles here
+
+---
+
+## Component Patterns (v5.0)
+
+### Card Component Pattern
+
+**Structure:** Card title (h3) placed OUTSIDE and ABOVE the glass card container
+
+```typescript
+export function ExampleCard() {
+  return (
+    <div>
+      {/* Title outside the card */}
+      <h3 className="text-sm font-semibold uppercase mb-2">
+        Card Title
+      </h3>
+
+      {/* Glass card container */}
+      <div className={`${glassCardBaseStyle} mt-3`}>
+        {/* Card content */}
+      </div>
+    </div>
+  );
+}
+```
+
+**Key Points:**
+- `h3` for card titles (semantic hierarchy)
+- `mt-3` is built into GridCard default style
+- Gap between title and card is intentional
+- Glass effect handles hover state
+
+### Icon Integration Pattern
+
+**Tech Icons:** Use `SimpleIcon[]` from `simple-icons` with `dangerouslySetInnerHTML`
+
+```typescript
+import { SimpleIcon } from 'simple-icons';
+
+interface CardProps {
+  icons: SimpleIcon[];
+}
+
+export function TechCard({ icons }: CardProps) {
+  return (
+    <div className="flex gap-2">
+      {icons.map((icon) => (
+        <div
+          key={icon.slug}
+          dangerouslySetInnerHTML={{ __html: icon.svg }}
+          className="w-6 h-6"
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+**Alternatives:**
+- `simple-icons` for tech logos (preferred for tech stack)
+- Material UI Icons (`@mui/icons-material`) for UI icons
+- SVG components for custom icons
+
+### Overlap/Blur Technique (LiveProjectCard)
+
+For sections with overlapping content and glassmorphism:
+
+```typescript
+export function OverlapSection() {
+  return (
+    <div>
+      {/* First section */}
+      <div className="relative z-0">
+        <img src="/background.jpg" alt="" className="w-full" />
+      </div>
+
+      {/* Overlapping card with blur */}
+      <div className={`${glassCardBaseStyle} -mt-12 relative z-10`}>
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-dark/70 rounded-3xl" />
+
+        {/* Content with relative positioning */}
+        <div className="relative">
+          {/* text and content */}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+**Pattern Elements:**
+- Negative margin (`-mt-12`) creates overlap
+- `backdrop-blur-lg` for glassmorphism effect
+- `z-index` layering (z-0 for background, z-10 for card)
+- Dark gradient overlay (70% opacity) ensures text readability
+- Content must be relative positioned to appear above overlay
+
+---
+
+## Accessibility Patterns (v5.0)
+
+### ARIA & Semantic HTML
+
+**Interactive Elements:**
+```typescript
+// Links with ARIA labels
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={`Visit ${title} project`}
+  className="..."
+>
+  Visit Project
+</a>
+
+// Buttons with ARIA labels
+<button
+  onClick={handler}
+  aria-label="Toggle menu"
+  className="..."
+>
+  Menu
+</button>
+```
+
+**Sections:**
+```typescript
+// Use semantic HTML
+<nav>
+  {/* navigation items */}
+</nav>
+
+<section>
+  {/* content section */}
+</section>
+
+<ul>
+  {/* lists for grouped content */}
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+```
+
+### Animations & Motion
+
+**Respect `prefers-reduced-motion`:**
+```typescript
+// In globals.css or component CSS
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// In React components
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export function AnimatedComponent() {
+  return (
+    <div
+      className={prefersReducedMotion ? '' : 'animate-fadeIn'}
+    >
+      {/* content */}
+    </div>
+  );
+}
+```
+
+### Internationalization (next-intl)
+
+**For multilingual components:**
+```typescript
+import { useTranslations } from 'next-intl';
+
+export function LocalizedCard() {
+  const t = useTranslations('components.card');
+
+  return (
+    <h3 className="...">
+      {t('title')} {/* Automatically translated based on locale */}
+    </h3>
+  );
+}
+```
+
+---
+
 ## Project Goals
 
 - **v5 Night Sky Theme** - Complete visual redesign with night sky aesthetic
@@ -235,13 +464,19 @@ portfolio_website/
 ├── app/
 │   ├── [locale]/page.tsx  # v5 homepage with scrollable sections
 │   ├── layout.tsx         # Root layout, Poppins/Roboto font setup
-│   └── globals.css        # Global styles, v5 color palette
+│   ├── globals.css        # Global styles, v5 color palette
+│   └── styles/
+│       └── baseStyles.ts  # Reusable Tailwind style strings (CENTRALIZED)
 ├── components/
 │   ├── StarField/         # Canvas-based twinkling stars (Phase 2)
 │   ├── IPhoneProFrame/    # iPhone 15 Pro bezel component
 │   ├── LiveProjectIframe/ # Lazy-loading iframe wrapper
 │   ├── LiveProjectCard/   # 4-layer design card component
 │   ├── LiveProjectsSection/ # Featured projects section
+│   ├── SmallProjectCard/  # Compact card for GitHub projects
+│   ├── CertificationCard/ # Certification display with badge
+│   ├── CalligraphySignature/ # Animated signature with clip-path reveal
+│   ├── PrimaryButton/     # Shared button with SimpleIcon support
 │   ├── Dashboard/         # v4.0 components (legacy)
 │   ├── HeroSection/       # Hero with tech logos
 │   ├── ProjectSection/    # Projects grid
@@ -309,8 +544,8 @@ recommendations using Playwright screenshots
 
 ### For Implementation
 ```
-@frontend-dev Implement [feature] based on the specs in
-DESIGN_SYSTEM.md
+@frontend-dev Implement [feature] based on the Design System specs
+in CLAUDE.md
 ```
 
 ### For Review
@@ -324,6 +559,7 @@ and provide feedback
 ## Important Context Documents
 
 ### Essential Reading (v5.0)
+- **CLAUDE.md** (this file) - Single source of truth for project-wide patterns, design system, and architecture
 - **agents/ui-ux-designer/SKILL.md** - Design review criteria, Figma analysis patterns, v5.0 session learnings
 - **agents/frontend-dev/SKILL.md** - CSS patterns, component architecture, Canvas optimization, v5.0 implementation patterns
 
@@ -353,11 +589,26 @@ and provide feedback
 - **Smooth:** Organic animations and transitions
 
 ### New Components Reference
+
+**Phase 2 & 6 (Complete):**
 - `StarField` - Canvas 2D twinkling star animation with parallax
 - `IPhoneProFrame` - iPhone 15 Pro bezel with rounded corners and notch
 - `LiveProjectIframe` - Lazy-loading iframe with 1px width optimization
-- `LiveProjectCard` - 4-layer design card for projects
+- `LiveProjectCard` - 4-layer design card for projects (uses overlap/blur technique)
 - `LiveProjectsSection` - Container for featured projects
+
+**Recent Components (This Session):**
+- `SmallProjectCard` - Compact card for GitHub projects with glass effect
+- `CertificationCard` - Certification display with badge, uses `glassCardBaseStyle`
+- `CalligraphySignature` - Animated signature with clip-path reveal effect
+- `PrimaryButton` - Shared button component with SimpleIcon support
+
+**All components follow:**
+- Reusable styles from `/app/styles/baseStyles.ts`
+- Card title pattern (h3 outside container)
+- Glass effect with `glassCardBaseStyle`
+- Hover animations with `hoverLiftStyle`
+- Responsive design using Tailwind breakpoints
 
 ### Accessibility
 - WCAG AA compliance target
@@ -378,6 +629,13 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 20, 2026
+**Last Updated:** January 21, 2026
 **Document Version:** 5.0 (Night Sky Theme - In Progress)
 **Progress:** 3 of 15 phases complete
+
+**Recent Updates (Jan 21):**
+- Added Reusable Styles System section with `baseStyles.ts` patterns
+- Added Component Patterns section (Card, Icon, Overlap/Blur techniques)
+- Added Accessibility Patterns section (ARIA, animations, i18n)
+- Documented new components: SmallProjectCard, CertificationCard, CalligraphySignature, PrimaryButton
+- Updated Key Directories to reflect `/app/styles/` centralization

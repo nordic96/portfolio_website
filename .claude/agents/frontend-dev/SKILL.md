@@ -2,7 +2,9 @@
 
 **Purpose:** Capture recurring patterns, gotchas, and best practices discovered during development to avoid repeating mistakes.
 
-**Last Updated:** January 4, 2026
+**Scope:** Agent-specific implementation details, debugging techniques, and session learnings. For project-wide architecture and design system, see `.claude/CLAUDE.md`.
+
+**Last Updated:** January 21, 2026
 
 ---
 
@@ -426,19 +428,13 @@ useEffect(() => {
 
 ## Quick Reference Commands
 
-```bash
-# Development
-npm run dev          # Start dev server
-npm run build        # Production build
-npm run lint         # ESLint check
-npm run type-check   # TypeScript check
+**See `.claude/CLAUDE.md` (Development Commands section) for all project commands.**
 
-# Git
+Common git and testing commands:
+```bash
 git status
 git diff
 git log --oneline -10
-
-# Testing
 npx playwright screenshot http://localhost:3000
 ```
 
@@ -591,5 +587,181 @@ npx playwright screenshot http://localhost:3000
 - **Single RAF Loop:** Using one `requestAnimationFrame` for all star animations is more efficient than individual timeouts/intervals per star
 - **Lazy Iframe Loading:** Defer iframe creation (`isInView` check) to avoid rendering off-screen content
 - **Reduce Motion:** Properly respecting `prefers-reduced-motion` by canceling RAF prevents unnecessary CPU usage for users who disabled animations
+
+---
+
+## Session Learnings - January 21, 2026
+
+### Mistakes & Fixes
+
+- **Issue:** Type mismatch in LiveProjectsSection - passed `string[]` to component expecting `SimpleIcon[]`
+  - **Root Cause:** Tech stack data was fetched as string identifiers, but component required SimpleIcon objects with SVG data
+  - **Fix:** Map string identifiers to actual SimpleIcon objects before passing as props
+  - **Prevention:** Always verify third-party library types (especially simple-icons) match component prop requirements before implementation
+
+- **Issue:** CertificationCard title placement - initially placed inside glass card container
+  - **Root Cause:** Misinterpreted design specification for card layout hierarchy
+  - **Fix:** Moved h3 title OUTSIDE and ABOVE the glassCardBaseStyle container; created separate flex-col wrapper
+  - **Prevention:** Extract explicit placement rules from design specs: "title outside" vs "title inside" should be codified in design system docs
+
+### Patterns Discovered
+
+- **Pattern: Reusable Style Composition via baseStyles.ts**
+  - **Context:** Multiple cards need consistent glassmorphic styling, hover effects, and sizing
+  - **Implementation:**
+    - Create `baseStyles.ts` exporting constant Tailwind class strings
+    - `glassCardBaseStyle`: `'bg-dark-gray/50 backdrop-blur-md rounded-3xl p-3'` for glass effect
+    - `hoverLiftStyle`: `'hover:-translate-y-2 transition-transform ease-in-out'` for interaction feedback
+    - `baseWidth`: `'w-full lg:max-w-360'` for responsive sizing
+    - Import and compose with `cn()` utility in components
+  - **Files:** `/app/styles/baseStyles.ts`
+  - **Benefits:** Single source of truth for design system, reduces duplication, ensures consistency across SmallProjectCard, CertificationCard, LiveProjectCard metadata sections
+  - **Usage Example:**
+    ```typescript
+    import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
+    className={cn('flex items-center gap-3', glassCardBaseStyle, hoverLiftStyle)}
+    ```
+
+- **Pattern: Title Outside / Card Inside Hierarchy**
+  - **Context:** Cards with glass effect need visual separation between heading and content
+  - **Implementation:**
+    - Wrap both title and card in `flex flex-col`
+    - Place `h3` title OUTSIDE the glassCardBaseStyle container
+    - Card container comes after title with glass styling
+    - Both wrapped together for consistent spacing
+  - **Structure:**
+    ```tsx
+    <div className="flex flex-col">
+      <h3 className="text-h3">{title}</h3>
+      <div className={glassCardBaseStyle}>
+        {/* Card content */}
+      </div>
+    </div>
+    ```
+  - **When to use:** CertificationCard, themed project cards, certification displays with metadata containers
+
+- **Pattern: CSS clip-path Animation for Writing Reveal Effect**
+  - **Context:** Create animated signature or text reveal that simulates writing from left to right
+  - **Implementation:**
+    - Use `clip-path: inset(0 100% 0 0)` for initial hidden state (100% of right edge clipped)
+    - Animate to `clip-path: inset(0 0 0 0)` for full visibility (nothing clipped)
+    - Use cubic-bezier(0.4, 0, 0.2, 1) for smooth easing
+    - Duration: 2-2.5s for natural writing appearance
+  - **Accessibility:**
+    - Respect `prefers-reduced-motion` by detecting `window.matchMedia('(prefers-reduced-motion: reduce)')`
+    - Use `useRef` to track animation state and prevent repeated triggers
+    - Add `addEventListener('change')` for live preference updates
+    - Show full clip-path immediately when reduced motion enabled
+  - **Key Code:**
+    ```typescript
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const hasAnimatedRef = useRef(false);
+
+    useEffect(() => {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setPrefersReducedMotion(mediaQuery.matches);
+
+      const handleMotionChange = (e: MediaQueryListEvent) => {
+        setPrefersReducedMotion(e.matches);
+      };
+
+      mediaQuery.addEventListener('change', handleMotionChange);
+
+      if (!mediaQuery.matches && !hasAnimatedRef.current) {
+        const timer = setTimeout(() => {
+          setIsAnimating(true);
+          hasAnimatedRef.current = true;
+        }, delay * 1000);
+
+        return () => {
+          clearTimeout(timer);
+          mediaQuery.removeEventListener('change', handleMotionChange);
+        };
+      }
+
+      return () => mediaQuery.removeEventListener('change', handleMotionChange);
+    }, [delay]);
+
+    const animationStyle = prefersReducedMotion
+      ? {}
+      : {
+          clipPath: isAnimating ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
+          transition: isAnimating ? `clip-path ${duration}s ease` : 'none',
+        };
+    ```
+
+- **Pattern: Semantic HTML with ARIA for Links**
+  - **Context:** Improve accessibility for external links and navigation
+  - **Implementation:**
+    - Use `<Link>` from next/link for internal navigation (server-side benefits)
+    - Use `<a>` with `target="_blank" rel="noopener noreferrer"` for external links
+    - Add `aria-label` describing action: `aria-label="Verify certification"`
+    - Use semantic nav elements with role attributes where needed
+  - **Prevention Example:**
+    ```tsx
+    // Wrong: <a href="/internal-page"> (causes full page reload)
+    // Right: <Link href="/internal-page"> (Next.js client-side navigation)
+
+    // External link with ARIA:
+    <a
+      href={verificationUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Verify ${name} certification`}
+    >
+      Verify
+    </a>
+    ```
+
+- **Pattern: i18n Message Structure with next-intl**
+  - **Context:** Support multiple languages (English, Korean) with centralized message management
+  - **Implementation:**
+    - Create `messages/en.json` and `messages/ko.json` with same key structure
+    - Use `useTranslations('SectionName')` hook to access section-specific messages
+    - Structure messages by domain: `Certifications`, `Header`, `Footer`, etc.
+  - **Example Structure:**
+    ```json
+    {
+      "Certifications": {
+        "issued_label": "Issued",
+        "verify_label": "Verify →"
+      }
+    }
+    ```
+  - **Usage:**
+    ```typescript
+    const t = useTranslations('Certifications');
+    <p>{t('issued_label')}: {formattedDate}</p>
+    ```
+
+### Debugging Wins
+
+- **Problem:** LiveProjectsSection type error when integrating tech stack data
+  - **Approach:** Traced type from component prop definition → SimpleIcon interface → actual data structure. Identified mismatch between string identifiers and SimpleIcon objects
+  - **Tool/Technique:** TypeScript compiler errors guided investigation; simple-icons package documentation clarified required object structure
+
+- **Problem:** CertificationCard layout not matching design (title placement)
+  - **Approach:** Created visual mockup in mind from design spec, compared with implementation, identified title was nested inside card when it should be outside
+  - **Tool/Technique:** Read component JSX structure against design hierarchy; made targeted DOM restructuring
+
+- **Problem:** Reduce motion preference handling for CalligraphySignature
+  - **Approach:** Added mediaQuery listener with state tracking; tested by changing system accessibility settings; verified animation stops and signature displays immediately
+  - **Tool/Technique:** System settings change testing, useRef for state persistence across renders, cleanup function verification
+
+### Performance Notes
+
+- **Centralized Styles:** Exporting Tailwind strings from `baseStyles.ts` allows build-time optimization and reduces redundant class strings
+- **clip-path Animation:** Uses GPU-accelerated CSS property (clip-path) rather than width/opacity, providing smooth 60fps on most devices
+- **Reduced Motion Performance:** Disabling animation loops via `prefers-reduced-motion` reduces CPU usage for users with vestibular sensitivity
+- **Lazy Image Loading:** CalligraphySignature uses Next.js Image with `priority` flag for critical signature display
+
+### Automation Opportunities
+
+- **Component Generator Template:** Create a scaffold generator for new card-based components that auto-imports from baseStyles.ts
+- **Message Key Validation:** Build a linter rule to ensure message keys in `en.json` exist in `ko.json` and vice versa
+- **Type Safety for SimpleIcon:** Create a custom hook `useSimpleIcons()` that maps string identifiers to SimpleIcon objects automatically
+- **Design System Auditor:** Script to find hardcoded Tailwind classes that should use baseStyles exports
+- **Accessibility Checklist:** Pre-commit hook to scan components for missing ARIA labels on links/buttons
 
 ---
