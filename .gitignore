@@ -1,42 +1,46 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# DEV
-.idx
-.vscode
-
 # dependencies
 /node_modules
 /.pnp
-.pnp.js
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # testing
-/coverage
+src/coverage
+
+# next.js
+/.next/
+/out/
 
 # production
 /build
-/dist/
-.next
 
 # misc
 .DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.pem
 
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-.serverless*
+# env files (can opt-in for committing if needed)
+.env*
 
-# Claude
-.claude/cache/
-.claude/mcp_logs/
-.claude/temp/
+# vercel
+.vercel
 
-# Playwright
-/playwright-report/
-/playwright/.cache/
-/test-results/
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+design-reference/
+
+# Temporary for claude undersatnding
+temp/

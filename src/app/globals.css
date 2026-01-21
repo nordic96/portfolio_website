@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   v5 Night Sky Theme - CSS Custom Properties
+   ========================================================================== */
+
+:root {
+  /* Night Sky Gradient Colors */
+  --night-sky-purple: #855988;
+  --night-sky-deep-purple: #6B4984;
+  --night-sky-indigo: #483475;
+  --night-sky-navy: #2B2F77;
+  --night-sky-deep-navy: #141852;
+  --night-sky-black: #070B34;
+
+  /* Text Colors */
+  --text-white: #FFFFFF;
+  --text-dark: #333333;
+
+  /* Accent Colors */
+  --accent-green: #34C759;
+  --accent-cyan: #00C0E8;
+  --accent-pink: #FF2D55;
+  --accent-indigo: #6155F5;
+  --accent-yellow: #FFCC00;
+
+  /* Background */
+  --background: #070B34;
+  --foreground: #FFFFFF;
+
+  /* Legacy color support (v1.2 compatibility) */
+  --pastel-green: #77dd87;
+  --pastel-green-hover: #5fd070;
+  --blue-green: #00CEC8;
+  --pastel-pink: #EF80EF;
+  --pastel-brown: #EFB880;
+}
+
+/* ==========================================================================
+   Tailwind v4 Theme Configuration
+   ========================================================================== */
+
+@theme inline {
+  /* Background and Foreground */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Font Variables */
+  --font-poppins: var(--font-poppins);
+  --font-roboto: var(--font-roboto);
+
+  /* Night Sky Gradient Palette */
+  --color-night-sky-purple: var(--night-sky-purple);
+  --color-night-sky-deep-purple: var(--night-sky-deep-purple);
+  --color-night-sky-indigo: var(--night-sky-indigo);
+  --color-night-sky-navy: var(--night-sky-navy);
+  --color-night-sky-deep-navy: var(--night-sky-deep-navy);
+  --color-night-sky-black: var(--night-sky-black);
+
+  /* Text Colors */
+  --color-text-white: var(--text-white);
+  --color-text-dark: var(--text-dark);
+
+  /* Accent Colors */
+  --color-accent-green: var(--accent-green);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-yellow: var(--accent-yellow);
+
+  /* Legacy Colors (v1.2 compatibility) */
+  --color-pastel-green: var(--pastel-green);
+  --color-pastel-green-hover: var(--pastel-green-hover);
+  --color-blue-green: var(--blue-green);
+  --color-pastel-pink: var(--pastel-pink);
+  --color-pastel-brown: var(--pastel-brown);
+  --color-white: #FFFFFF;
+  --color-dark-gray: #333333;
+
+  /* Typography Scale - v5 */
+  /* Title: 64px Bold Italic Poppins */
+  --font-size-title: 4rem;
+  --line-height-title: 1.1;
+
+  /* H1: 48px Bold Italic Poppins */
+  --font-size-h1: 3rem;
+  --line-height-h1: 1.2;
+
+  /* H2: 32px Bold Italic Poppins */
+  --font-size-h2: 2rem;
+  --line-height-h2: 1.25;
+
+  /* H3: 24px Bold Italic Poppins */
+  --font-size-h3: 1.5rem;
+  --line-height-h3: 1.3;
+
+  /* Body: 16px Normal Roboto */
+  --font-size-body: 1rem;
+  --line-height-body: 1.5;
+
+  /* Secondary: 16px Light Italic Roboto */
+  --font-size-secondary: 1rem;
+  --line-height-secondary: 1.5;
+}
+
+/* ==========================================================================
+   Night Sky Gradient Background Utility
+   ========================================================================== */
+
+.bg-night-sky-gradient {
+  background: linear-gradient(
+    360deg,
+    #855988 0%,
+    #6B4984 23%,
+    #483475 46%,
+    #2B2F77 67%,
+    #141852 82%,
+    #070B34 100%
+  );
+}
+
+/* ==========================================================================
+   Typography Utility Classes - v5
+   ========================================================================== */
+
+/* Title: 64px Bold Italic Poppins */
+.text-title {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-title);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* H1: 48px Bold Italic Poppins */
+.text-h1 {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* H2: 32px Bold Italic Poppins */
+.text-h2 {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* H3: 24px Bold Italic Poppins */
+.text-h3 {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Body: 16px Normal Roboto */
+.text-body {
+  font-family: var(--font-roboto), sans-serif;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+}
+
+/* Secondary: 16px Light Italic Roboto */
+.text-secondary {
+  font-family: var(--font-roboto), sans-serif;
+  font-size: var(--font-size-secondary);
+  line-height: var(--line-height-secondary);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Font Family Utilities */
+.font-poppins {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.font-roboto {
+  font-family: var(--font-roboto), sans-serif;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* Tech Stack Logos Animations */
+.tech-logo {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
+  animation: logoFadeIn 0.4s ease-out forwards;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.tech-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%) brightness(1.1);
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1.15);
+  z-index: 10;
+}
+
+.tech-logo svg {
+  width: 100%;
+  height: 100%;
+  color: #77dd87;
+}
+
+/* Fade in animation when logo appears - circular formation compatible */
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(0.5);
+  }
+  to {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .tech-logo {
+    animation: logoFadeInStatic 0.01ms forwards !important;
+  }
+
+  @keyframes logoFadeInStatic {
+    to {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
+    }
+  }
+
+  /* Disable scale animations for project thumbnails */
+  .group-hover\:scale-105,
+  .group-focus\:scale-105 {
+    transform: none !important;
+  }
+
+  .transition-transform,
+  .transition-opacity {
+    transition: none !important;
+  }
+
+  .animate-fadeIn {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Projects Card fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark-gray);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 24px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+  }
+}
