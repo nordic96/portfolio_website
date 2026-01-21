@@ -52,7 +52,7 @@ export default function DashboardLayout({
 
           {/* Row 3: Github Projects & Certifications (right) */}
           <div className="md:col-span-1">
-            <div className={'flex gap-3'}>
+            <div className={'flex gap-3 max-sm:flex-col'}>
               {smallProjectsCard}
               {certificationsCard}
             </div>
