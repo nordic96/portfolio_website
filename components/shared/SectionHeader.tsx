@@ -44,6 +44,7 @@ export default function SectionHeader({
       {title && (
         <h2
           className={cn(
+            'z-50',
             'font-poppins font-bold italic',
             // Font size: 24px mobile, 32px desktop
             'text-2xl lg:text-[32px] lg:leading-tight',
@@ -59,6 +60,7 @@ export default function SectionHeader({
       {/** Section Colour Highlight Divider */}
       <div
         className={cn(
+          'z-40',
           'h-2 -translate-y-2 rounded-b-xl drop-shadow-2xl',
           className,
         )}
