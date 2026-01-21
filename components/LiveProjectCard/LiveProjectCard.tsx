@@ -75,7 +75,6 @@ export default function LiveProjectCard({
                   >
                     <div
                       className="w-6 h-6 flex items-center justify-center fill-white"
-                      title={tech.title}
                       dangerouslySetInnerHTML={{ __html: tech.svg }}
                     />
                   </Tooltip>
