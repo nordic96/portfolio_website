@@ -38,20 +38,20 @@ export default function SmallProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'flex flex-col gap-2',
+        'flex flex-col',
         'hover:-translate-y-2 transition-transform ease-in-out',
         className,
       )}
     >
       {/* Project Title */}
-      <h2 className="text-h2 text-text-white">{title}</h2>
+      <h3 className="text-h3 text-text-white">{title}</h3>
 
       {/* Pill-shaped Metadata Container */}
       <div
         className={cn(
           'flex items-center gap-3',
           'bg-dark-gray/50 backdrop-blur-md',
-          'rounded-full',
+          'rounded-4xl',
           'px-4 py-3',
         )}
       >

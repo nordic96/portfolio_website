@@ -2,7 +2,7 @@
 
 import { cn } from '@/app/utils';
 import LiveProjectCard, { LiveProject } from '@/components/LiveProjectCard';
-import GridCard from '@/components/Dashboard/GridCard';
+import GridCard from '@/components/shared/GridCard';
 import {
   siFastapi,
   siHuggingface,

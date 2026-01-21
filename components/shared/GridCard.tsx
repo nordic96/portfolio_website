@@ -1,7 +1,7 @@
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
 import { ReactNode } from 'react';
-import SectionHeader from '../SectionHeader';
+import SectionHeader from './SectionHeader';
 
 interface GridCardProps {
   children: ReactNode;
