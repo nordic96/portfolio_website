@@ -4,7 +4,7 @@ import CertificationCard, {
   CertificationCardProps,
 } from '@/components/CertificationCard';
 import { DashboardLayout } from '@/components/Dashboard';
-import HeroSection from '@/components/HeroSection';
+import NameCard from '@/components/NameCard';
 import LiveProjectsSection from '@/components/LiveProjectsSection';
 import GridCard from '@/components/shared/GridCard';
 import SmallProjectSection from '@/components/SmallProjectSection/SmallProjectSection';
@@ -19,7 +19,7 @@ import SmallProjectSection from '@/components/SmallProjectSection/SmallProjectSe
 export default function Home() {
   return (
     <DashboardLayout
-      heroSection={<HeroSection />}
+      heroSection={<NameCard />}
       projectsCard={<LiveProjectsSection />}
       smallProjectsCard={<SmallProjectSection />}
       certificationsCard={<CertificationsPlaceholder />}

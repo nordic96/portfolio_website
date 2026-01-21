@@ -3,7 +3,7 @@ import { cn } from '@/app/utils';
 import { hoverLiftStyle } from '@/app/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 
-export default function HeroSection() {
+export default function NameCard() {
   return (
     <section className={'flex flex-col max-sm:items-center'}>
       {/** Signature Container */}
