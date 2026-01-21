@@ -1,6 +1,6 @@
 'use client';
 
-import { hoverLiftStyle } from '@/app/styles';
+import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
 import { cn } from '@/app/utils';
 import { Tooltip } from '@mui/material';
 import { SimpleIcon } from 'simple-icons';
@@ -44,14 +44,7 @@ export default function SmallProjectCard({
       <h3 className="text-h3 text-text-white">{title}</h3>
 
       {/* Pill-shaped Metadata Container */}
-      <div
-        className={cn(
-          'flex items-center gap-3',
-          'bg-dark-gray/50 backdrop-blur-md',
-          'rounded-4xl',
-          'px-4 py-3',
-        )}
-      >
+      <div className={cn('flex items-center gap-3', glassCardBaseStyle)}>
         {/* Tech Stack Icons - LEFT */}
         <div className="flex items-center gap-2 shrink-0">
           {techStack.map((tech) => (
