@@ -3,6 +3,12 @@
 import { cn } from '@/app/utils';
 import LiveProjectCard, { LiveProject } from '@/components/LiveProjectCard';
 import GridCard from '@/components/Dashboard/GridCard';
+import {
+  siFastapi,
+  siNeo4j,
+  siNextdotjs,
+  siThreedotjs,
+} from 'simple-icons';
 
 /**
  * Live project data from the spec
@@ -13,14 +19,14 @@ const liveProjects: LiveProject[] = [
     title: "Foodie's Trail",
     url: 'https://sg-eatwhere.vercel.app/',
     description: '3D Web Application Food Blog',
-    techStack: ['threejs', 'nextjs'],
+    techStack: [siThreedotjs, siNextdotjs],
   },
   {
     id: 'white-rabbit',
     title: 'White Rabbit',
     url: 'https://white-rabbit-web.vercel.app/',
     description: 'Graph Knowledge database',
-    techStack: ['neo4j', 'fastapi', 'nextjs'],
+    techStack: [siNeo4j, siFastapi, siNextdotjs],
   },
 ];
 
