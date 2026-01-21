@@ -30,10 +30,9 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 - **Read this FIRST to avoid repeating past mistakes**
 
 **Design System** (`.claude/CLAUDE.md` - Design System section)
-- v5.0 Night Sky color palette
-- Typography scale (Poppins + Roboto)
-- Layout specifications
-- Component reference
+- Complete v5.0 design specifications
+- Reusable styles system (baseStyles.ts)
+- Component patterns and reference
 
 ## Workflow
 
@@ -45,37 +44,23 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 
 ## MCP Tools Available
 
-### Playwright MCP
-Use Playwright to:
-- Navigate to http://localhost:3000 during development
-- Take screenshots of components/pages
-- Test responsive breakpoints (mobile: 375px, tablet: 768px, desktop: 1440px)
-- Verify accessibility with automated checks
-- Compare visual changes before/after refactoring
+**See `.claude/CLAUDE.md` (MCP Servers Enabled section) for tool descriptions.**
 
-**Common Workflow**:
+### Frontend-Specific MCP Usage
+
+**Playwright MCP Workflow**:
 1. Start dev server (`npm run dev`)
-2. Navigate to the relevant page
+2. Navigate to http://localhost:3000
 3. Take "before" screenshot
 4. Make changes
 5. Take "after" screenshot
-6. Compare and verify
+6. Compare and verify at all breakpoints (375px, 768px, 1440px)
 
-### Sequential Thinking MCP
-Use for structured problem-solving:
-- Planning new feature implementations
-- Debugging complex UI issues
-- Refactoring component architecture
-- Optimizing performance bottlenecks
+**Sequential Thinking MCP**: Use for complex implementation planning and debugging.
 
 ## Development Commands
 
-```bash
-npm run dev        # Start development server (localhost:3000)
-npm run build      # Build for production
-npm run lint       # Run ESLint
-npm run start      # Start production server
-```
+**See `.claude/CLAUDE.md` (Development Commands section) for complete list.**
 
 ## Key Patterns to Follow
 
