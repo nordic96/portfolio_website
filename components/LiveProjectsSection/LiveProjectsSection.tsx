@@ -62,9 +62,8 @@ export default function LiveProjectsSection({
         className={cn(
           // Responsive grid: 1 column mobile, 2 columns desktop
           'grid grid-cols-1 md:grid-cols-2',
-          'gap-6 lg:gap-8',
           // Center content and add padding
-          'p-4 lg:p-6',
+          'px-4 lg:px-6',
           'place-items-center',
         )}
       >

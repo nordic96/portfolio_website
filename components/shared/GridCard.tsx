@@ -29,7 +29,7 @@ interface GridCardProps {
  * </GridCard>
  * ```
  */
-export const gridCardDefaultStyle = '';
+export const gridCardDefaultStyle = 'mt-3';
 export default function GridCard({
   children,
   className,
