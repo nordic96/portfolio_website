@@ -18,14 +18,12 @@ export default function Footer() {
       >
         <div className={cn(baseWidth, 'grid grid-cols-4 max-sm:text-xs')}>
           <div className={'flex gap-4 items-start justify-starts'}>
-            <div className={'min-w-30 md:w-24 max-sm:w-12'}>
-              <Image
-                alt={'brand_logo'}
-                src={'/assets/sk_logo.svg'}
-                width={120}
-                height={50}
-              />
-            </div>
+            <Image
+              alt={'brand_logo'}
+              src={'/images/signature.svg'}
+              width={200}
+              height={90}
+            />
           </div>
           <FooterSection headerKey={'footer_title'}></FooterSection>
           <FooterSection headerKey={'language'}>
