@@ -18,7 +18,7 @@ const projectData: SmallProject[] = [
   {
     id: 'wink',
     title: 'Wink',
-    url: '',
+    url: 'https://github.com/nordic96/wink',
     description:
       'Experimental flutter app for pinginig close range distance using core-bluetooth',
     techStack: [siFlutter, siBluetooth],
@@ -26,7 +26,7 @@ const projectData: SmallProject[] = [
   {
     id: 'temppi',
     title: 'TempPi',
-    url: '',
+    url: 'https://github.com/nordic96/TempPiApp',
     description:
       'IoT project using RaspberryPi 1 module with thermometer sensor to detect room temperature',
     techStack: [siRaspberrypi, siSpring],
@@ -34,14 +34,14 @@ const projectData: SmallProject[] = [
   {
     id: 'onion',
     title: 'OnionOrNot',
-    url: '',
+    url: 'https://github.com/nordic96/OnionOrNot',
     description: 'Satire detection Natural Language Processing project',
     techStack: [siPython, siGooglecolab],
   },
   {
     id: 'covid',
     title: 'Covid19 Chest X-Ray',
-    url: '',
+    url: 'https://www.youtube.com/watch?v=yVC9sNB-Ucg&list=PLs-H3fc40DvA-mpvdsMi8Yhs3eR6y1kpN&index=7',
     description: 'Covid19 SaarS detection from chest x-ray image analyis',
     techStack: [siGooglecolab, siPython, siNumpy],
   },
