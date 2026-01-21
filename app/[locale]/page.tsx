@@ -1,10 +1,9 @@
 'use client';
 
-import {
-  DashboardLayout,
-  GridCard,
-  ProjectsCard,
-} from '@/components/Dashboard';
+import { DashboardLayout } from '@/components/Dashboard';
+import LiveProjectsSection from '@/components/LiveProjectsSection';
+import GridCard from '@/components/shared/GridCard';
+import SmallProjectSection from '@/components/SmallProjectSection/SmallProjectSection';
 
 /**
  * Dashboard Home Page - v4.0 Layout Foundation
@@ -17,7 +16,8 @@ export default function Home() {
   return (
     <DashboardLayout
       heroSection={<></>}
-      projectsCard={<ProjectsCard className={'p-0!'} />}
+      projectsCard={<LiveProjectsSection />}
+      smallProjectsCard={<SmallProjectSection />}
       certificationsCard={<CertificationsPlaceholder />}
     />
   );

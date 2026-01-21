@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 interface DashboardLayoutProps {
   heroSection: ReactNode;
   projectsCard: ReactNode;
+  smallProjectsCard: ReactNode;
   certificationsCard: ReactNode;
 }
 
@@ -27,6 +28,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({
   heroSection,
   projectsCard,
+  smallProjectsCard,
   certificationsCard,
 }: DashboardLayoutProps) {
   return (
@@ -48,8 +50,13 @@ export default function DashboardLayout({
           {/* Row 2: Projects (left) */}
           <div className="md:col-span-1">{projectsCard}</div>
 
-          {/* Row 3: Certifications (right) */}
-          <div className="md:col-span-1">{certificationsCard}</div>
+          {/* Row 3: Github Projects & Certifications (right) */}
+          <div className="md:col-span-1">
+            <div className={'flex gap-3'}>
+              {smallProjectsCard}
+              {certificationsCard}
+            </div>
+          </div>
         </div>
       </main>
     </div>

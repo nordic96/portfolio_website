@@ -1,1 +1,3 @@
-export { default as TechStackBadges } from './TechStackBadges';
+export * from './SectionHeader';
+export * from './GridCard';
+export * from './PrimaryButton';

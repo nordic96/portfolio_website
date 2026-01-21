@@ -49,7 +49,7 @@ export default function LocaleSwitcher() {
   }, []);
 
   return (
-    <div ref={switchRef} className={'relative flex gap-1 text-text-dark z-50'}>
+    <div ref={switchRef} className={'relative flex gap-1 text-text-white z-50'}>
       <button
         className={
           'cursor-pointer hover:scale-105 hover:text-pastel-green-hover'

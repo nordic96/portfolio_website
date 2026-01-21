@@ -1,7 +1,7 @@
 import { cn } from '@/app/utils';
 import { ClassValue } from 'clsx';
 import { ReactNode } from 'react';
-import SectionHeader from '../SectionHeader';
+import SectionHeader from './SectionHeader';
 
 interface GridCardProps {
   children: ReactNode;
@@ -40,7 +40,7 @@ export default function GridCard({
   const baseStyles = variant === 'default' ? gridCardDefaultStyle : '';
 
   return (
-    <div className={'flex flex-col grow h-full gap-3'}>
+    <div className={'flex flex-col grow h-full'}>
       {title && (
         <SectionHeader
           title={title}
@@ -48,15 +48,7 @@ export default function GridCard({
           className={headerClass}
         />
       )}
-      <div
-        className={cn(
-          baseStyles,
-          'lg:p-3 max-sm:p-2',
-          'overflow-hidden',
-          'h-full',
-          className,
-        )}
-      >
+      <div className={cn(baseStyles, 'overflow-hidden', 'h-full', className)}>
         {children}
       </div>
     </div>

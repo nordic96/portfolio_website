@@ -1,5 +1,6 @@
 'use client';
 
+import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
 import { cn } from '@/app/utils';
 import IPhoneProFrame from '@/components/IPhoneProFrame';
 import LiveProjectIframe from '@/components/LiveProjectIframe';
@@ -58,12 +59,10 @@ export default function LiveProjectCard({
 
       {/* External Info Section - Below phone frame */}
       <a href={url} target={'_blank'}>
-        <div className="text-center w-full max-w-60 hover:-translate-y-4 transition-transform ease-in-out">
+        <div className={cn('text-center w-full max-w-60', hoverLiftStyle)}>
           {/* Project Title */}
           <h3 className="text-h3 font-bold text-text-white">{title}</h3>
-          <div
-            className={'flex flex-col bg-dark-gray opacity-50 rounded-3xl p-3'}
-          >
+          <div className={cn(glassCardBaseStyle, 'flex flex-col')}>
             {/* Tech Stack Icons Row */}
             <div className="flex justify-center items-center gap-1 mt-2">
               {techStack.map((tech) => {
