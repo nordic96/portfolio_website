@@ -1,5 +1,8 @@
 'use client';
 
+import CertificationCard, {
+  CertificationCardProps,
+} from '@/components/CertificationCard';
 import { DashboardLayout } from '@/components/Dashboard';
 import LiveProjectsSection from '@/components/LiveProjectsSection';
 import GridCard from '@/components/shared/GridCard';
@@ -28,19 +31,40 @@ export default function Home() {
  * Will be replaced with certification badges
  */
 function CertificationsPlaceholder() {
-  const certifications = ['AWS Solutions Architect', 'Google Cloud', 'Azure'];
+  const certifications: (CertificationCardProps & { id: string })[] = [
+    {
+      id: 'aws-casa',
+      name: 'Solutions Architect - Associate',
+      issuer: 'Amazon Web Services',
+      issueDate: '2023-02-25',
+      badgeImage:
+        'https://images.credly.com/size/680x680/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png',
+      verificationUrl:
+        'https://www.credly.com/badges/5a00ab1a-d116-4fe6-aad8-52105d3b0603',
+    },
+    {
+      id: 'lfcsa',
+      name: 'Linux Foundation Certified Systems Administrator',
+      issuer: 'The Linux Foundation',
+      issueDate: '2025-03-24',
+      badgeImage:
+        'https://images.credly.com/size/680x680/images/1e6611ca-8afe-4ecc-ad4d-305fba52ee7e/1_LFCS-600x600.png',
+      verificationUrl:
+        'https://www.credly.com/badges/4176e5cc-c892-4af0-b4da-59c056bb5aa6/public_url',
+    },
+  ];
 
   return (
-    <GridCard title="Certifications">
+    <GridCard
+      title="Certifications"
+      headerClass={'bg-accent-indigo'}
+      className={'lg:min-w-90'}
+    >
       <div className="space-y-2">
-        {certifications.map((cert) => (
-          <div key={cert} className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-gray-100 flex items-center justify-center">
-              <span className="text-gray-400 text-[8px]">icon</span>
-            </div>
-            <span className="text-sm text-text-dark">{cert}</span>
-          </div>
-        ))}
+        {certifications.map((cert) => {
+          const { id, ...props } = cert;
+          return <CertificationCard key={id} {...props} />;
+        })}
       </div>
     </GridCard>
   );

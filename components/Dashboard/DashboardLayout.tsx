@@ -37,7 +37,7 @@ export default function DashboardLayout({
       <main className="flex-1 px-4 md:px-6 pb-4 overflow-y-auto md:overflow-hidden">
         <div
           className={cn(
-            'h-full max-w-6xl mx-auto',
+            'h-full max-w-360 mx-auto',
             // Mobile: single column vertical stack
             'flex flex-col gap-4',
             // Desktop: 2-column grid with 3 rows

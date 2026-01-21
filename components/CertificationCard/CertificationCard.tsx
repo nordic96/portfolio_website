@@ -80,10 +80,8 @@ export default function CertificationCard({
       className={cn(
         // Glass card styling
         glassCardBaseStyle,
-        // Additional padding for certification card
-        'p-4 lg:p-6',
         // Flexbox layout: badge on left, info on right
-        'flex items-start gap-4',
+        'flex items-center gap-4',
         // Hover effects
         hoverLiftStyle,
         // Subtle glow on hover
@@ -106,11 +104,8 @@ export default function CertificationCard({
 
       {/* Certification Info - Right Side */}
       <div className="flex flex-col min-w-0 flex-1">
-        {/* Certification Name */}
-        <h3 className="text-h3 text-text-white leading-snug">{displayName}</h3>
-
         {/* Issuing Organization */}
-        <p className="text-secondary text-[#a8b2d1] mt-1">{issuer}</p>
+        <p className="text-secondary text-[#a8b2d1] mt-1">{displayName}</p>
 
         {/* Dates */}
         <div className="flex flex-col gap-0.5 mt-2">
@@ -151,17 +146,27 @@ export default function CertificationCard({
   // Wrap in anchor if verification URL is provided
   if (verificationUrl) {
     return (
-      <a
-        href={verificationUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block"
-        aria-label={`Verify ${name} certification`}
-      >
-        {cardContent}
-      </a>
+      <div className={'flex flex-col'}>
+        {/* Certification Name */}
+        <h3 className="text-h3 text-text-white leading-snug">{issuer}</h3>
+        <a
+          href={verificationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+          aria-label={`Verify ${name} certification`}
+        >
+          {cardContent}
+        </a>
+      </div>
     );
   }
 
-  return cardContent;
+  return (
+    <div className={'flex flex-col'}>
+      {/* Certification Name */}
+      <h3 className="text-h3 text-text-white leading-snug">{issuer}</h3>
+      {cardContent}
+    </div>
+  );
 }
