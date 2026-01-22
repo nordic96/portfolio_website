@@ -20,6 +20,8 @@ const liveProjects: LiveProject[] = [
     id: 'white_rabbit',
     title: 'White Rabbit',
     url: 'https://white-rabbit-web.vercel.app',
+    fallbackUrl:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets@master/resources/images/white_rabbit_mobileview.png',
     description:
       'Graph Knowledge database of world’s mysteries with Neo4J, FastAPI and Next.js',
     techStack: [siNextdotjs, siReact, siFastapi, siNeo4j, siHuggingface],
@@ -28,6 +30,8 @@ const liveProjects: LiveProject[] = [
     id: 'foodies_trail',
     title: "Foodie's Trail SG",
     url: 'https://sg-eatwhere.vercel.app',
+    fallbackUrl:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets@master/resources/images/foodies_trail_mobileview.png',
     description:
       '3D Web Application Food Blog for Personal Projects, using three.js & Next.js',
     techStack: [siThreedotjs, siReact, siNextdotjs, siHuggingface],

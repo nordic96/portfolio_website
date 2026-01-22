@@ -11,6 +11,7 @@ export interface LiveProject {
   id: string;
   title: string;
   url: string;
+  fallbackUrl?: string;
   description: string;
   techStack: SimpleIcon[];
 }
