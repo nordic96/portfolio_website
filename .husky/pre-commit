@@ -1,0 +1,5 @@
+#!/bin/bash
+npm test
+# .husky/pre-commit
+npm run lint
+git update-index --again

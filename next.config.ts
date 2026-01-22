@@ -1,15 +1,21 @@
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
-    env: {
-        VERSION: process.env.APP_VERSION,
-    },
-    images: {
-        remotePatterns: [new URL('https://cdn.jsdelivr.net/**')],
-    },
-    serverExternalPackages: ['pino', 'thread-stream', 'pino-pretty'],
-    output: 'standalone',
-    transpilePackages: ['@mui/material', '@mui/icons-material'],
+  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.credly.com',
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);

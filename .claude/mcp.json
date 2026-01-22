@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSER": "chromium"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-figma"
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+    "HomePage": {
+        "name": "고기훈, Stephen",
+        "headline": "탁월한 웹 경험을 만듭니다",
+        "subheadline": "디자인과 엔지니어링의 조화",
+        "featured_project": "주요 프로젝트 - ",
+        "github": "깃허브",
+        "live_demo": "데모",
+        "project_section_headline": "주요 <highlight>프로젝트</highlight>",
+        "project_section_subheadline": "풀스택 개발, 최신 프레임워크, 사용자 중심 디자인에 대한 전문성을 보여주는 대표 작업 모음입니다."
+    },
+    "Header": {
+        "site_title": "고기훈",
+        "home_link_label": "홈페이지로 이동",
+        "navigation_label": "사이트 네비게이션"
+    },
+    "NameCard": {
+        "section_label": "개인 소개 및 연락처 정보",
+        "signature_alt": "고기훈의 서명",
+        "profile_alt": "고기훈의 프로필 사진",
+        "name": "고기훈",
+        "job_title": "프론트엔드 소프트웨어 엔지니어, 싱가포르 거주",
+        "location_flag_label": "싱가포르 국기",
+        "social_links_label": "소셜 미디어 링크",
+        "linkedin_label": "고기훈의 LinkedIn 프로필 방문 (새 탭에서 열림)",
+        "email_label": "고기훈에게 이메일 보내기",
+        "github_label": "고기훈의 GitHub 프로필 방문 (새 탭에서 열림)"
+    },
+    "Certifications": {
+        "section_title": "자격증",
+        "section_label": "전문 자격증 및 인증서",
+        "issued_label": "발급일",
+        "verify_label": "확인",
+        "aws_saa": {
+            "name": "Solutions Architect - Associate",
+            "issuer": "Amazon Web Services",
+            "badge_alt": "AWS 솔루션스 아키텍트 어소시에이트 자격증 배지"
+        },
+        "lfcs": {
+            "name": "Linux Foundation Certified Systems Administrator",
+            "issuer": "The Linux Foundation",
+            "badge_alt": "리눅스 파운데이션 인증 시스템 관리자 배지"
+        }
+    },
+    "AboutSection": {
+        "title": "소개",
+        "subtitle": "<highlight>코드</highlight> 뒤에 숨겨진 여정",
+        "aria_label": "고기훈 소개",
+        "opening_hook": "저는 뛰어난 사용자 경험을 만드는 것에 열정을 가진 풀스택 소프트웨어 엔지니어입니다. 2025년 9월 국방의 의무를 마친 후, 혁신적인 팀에 기여할 기회를 적극적으로 찾고 있습니다. 제 목표는 기술적으로 견고하면서도 사용하기 즐거운 디지털 제품을 만드는 것입니다.",
+        "timeline": {
+            "title": "나의 여정",
+            "event1": {
+                "year": "2018",
+                "title": "시작",
+                "description": "HTML/CSS를 처음 접하고 웹 개발에 대한 호기심이 생겼습니다."
+            },
+            "event2": {
+                "year": "2019",
+                "title": "기초 다지기",
+                "description": "React와 JavaScript 기초를 배우고 첫 풀스택 프로젝트를 완성했습니다."
+            },
+            "event3": {
+                "year": "2021",
+                "title": "영역 확장",
+                "description": "TypeScript와 최신 빌드 도구를 마스터하고 DevOps와 배포 파이프라인을 탐구했습니다."
+            },
+            "event4": {
+                "year": "2023",
+                "title": "숙련 단계",
+                "description": "팀 협업으로 복잡한 애플리케이션을 개발하고 UI/UX 디자인 원칙을 심화했습니다."
+            },
+            "event5": {
+                "year": "2025",
+                "title": "복무 & 성장",
+                "description": "국방의 의무 완료 (2025년 9월). 학습을 계속하며 이 포트폴리오를 제작했습니다."
+            },
+            "event6": {
+                "year": "2026",
+                "title": "도약 준비",
+                "description": "새로운 마음가짐으로 기여할 준비가 되어 있습니다. 의미 있는 영향을 만들 팀을 찾고 있습니다."
+            }
+        },
+        "philosophy": {
+            "quote": "이 포트폴리오 자체가 지속적인 학습의 증거입니다. 모든 프로젝트, 모든 코드 한 줄은 제가 만든 것뿐만 아니라 그 과정에서 배운 것을 나타냅니다. 최고의 개발자는 영원한 학생이라고 믿습니다—호기심 많고, 겸손하며, 항상 한계를 넓혀가는.",
+            "citation": "학습 철학"
+        },
+        "drives_me": {
+            "title": "나를 움직이는 것",
+            "content": "복잡한 문제를 우아한 해결책으로 바꾸는 도전에서 동기를 얻습니다. 사용자 인터페이스가 완벽하게 맞아떨어지거나 깔끔한 아키텍처가 코드베이스를 빛나게 할 때의 순간은 비할 데가 없습니다. 재능 있는 엔지니어들과 함께 성장하며 제 기술을 기여할 수 있는 팀에 합류하기를 기대합니다."
+        }
+    },
+    "Footer": {
+        "footer_title": "스테판 고 포트폴리오 웹페이지",
+        "language": "언어 변경",
+        "footline": "개발자 - 고기훈",
+        "app_version": "앱 버전",
+        "ai_badge": "AI 어시스턴트로 제작",
+        "ai_badge_short": "AI 제작",
+        "ai_badge_aria": "이 포트폴리오는 AI 어시스턴트로 제작되었습니다"
+    }
+}
