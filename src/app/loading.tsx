@@ -16,7 +16,7 @@ import CalligraphySignature from '@/src/components/CalligraphySignature';
 export default function Loading() {
   return (
     <div
-      className="min-h-dvh flex flex-col items-center justify-center bg-night-sky-gradient"
+      className="min-h-screen min-h-dvh flex flex-col items-center justify-center bg-night-sky-gradient"
       role="status"
       aria-label="Loading page content"
     >

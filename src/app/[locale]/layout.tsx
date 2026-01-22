@@ -63,15 +63,13 @@ export default async function RootLayout({
       <body
         className={`${poppins.variable} ${roboto.variable} antialiased bg-night-sky-gradient`}
       >
-        <Suspense fallback={<Loading />}>
-          {/* StarField background - renders behind all content */}
-          <StarField starCount={150} />
-          <NextIntlClientProvider messages={messages}>
-            <Header />
-            {children}
-            <Footer />
-          </NextIntlClientProvider>
-        </Suspense>
+        {/* StarField background - persistent across navigation */}
+        <StarField starCount={150} />
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Footer />
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>
