@@ -32,7 +32,7 @@ export default function DashboardLayout({
   certificationsCard,
 }: DashboardLayoutProps) {
   return (
-    <div className="min-h-dvh md:h-dvh flex flex-col">
+    <div className="flex flex-col grow">
       {/* Main Content - Mobile: scrollable, Desktop: fixed */}
       <main className="flex-1 px-4 md:px-6 pb-4 overflow-y-auto md:overflow-hidden">
         <div
@@ -41,7 +41,7 @@ export default function DashboardLayout({
             // Mobile: single column vertical stack
             'flex flex-col gap-4',
             // Desktop: 2-column grid with 3 rows
-            'md:grid md:grid-cols-2 md:grid-rows-[auto_1fr_1fr] md:gap-4',
+            'md:grid md:grid-cols-2 md:grid-rows-[auto_1fr] md:gap-4',
           )}
         >
           {/* Row 1: Hero Section - spans both columns on desktop */}

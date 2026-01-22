@@ -1,11 +1,14 @@
 'use client';
 
 import { cn } from '@/src/utils';
+import { useBreakpoint } from '@/src/hooks/useBreakpoint';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 interface LiveProjectIframeProps {
   url: string;
   title: string;
+  fallbackUrl?: string;
   className?: string;
 }
 
@@ -20,15 +23,23 @@ type LoadingState = 'idle' | 'loading' | 'loaded' | 'error';
  * - Loading spinner while iframe loads
  * - Error fallback for failed loads
  * - Smooth fade-in transition when loaded
+ * - Mobile fallback: Static image instead of iframe on mobile (<768px)
+ *   to prevent memory crashes from loading full websites
  */
 export default function LiveProjectIframe({
   url,
   title,
+  fallbackUrl,
   className,
 }: LiveProjectIframeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [loadingState, setLoadingState] = useState<LoadingState>('idle');
+  const breakpoint = useBreakpoint();
+
+  // Determine if we should use the static fallback image (mobile only)
+  const isMobile = breakpoint === 'mobile';
+  const useFallback = isMobile && !!fallbackUrl;
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -64,6 +75,15 @@ export default function LiveProjectIframe({
     setLoadingState('error');
   };
 
+  // Handler for fallback image load
+  const handleImageLoad = () => {
+    setLoadingState('loaded');
+  };
+
+  const handleImageError = () => {
+    setLoadingState('error');
+  };
+
   return (
     <div
       ref={containerRef}
@@ -72,7 +92,7 @@ export default function LiveProjectIframe({
         className,
       )}
     >
-      {/* Loading Spinner */}
+      {/* Loading Spinner - shown for both iframe and fallback image */}
       {(loadingState === 'idle' || loadingState === 'loading') && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
           <div className="flex flex-col items-center gap-3">
@@ -104,8 +124,29 @@ export default function LiveProjectIframe({
         </div>
       )}
 
-      {/* Iframe Container - Scale technique for website preview */}
-      {isInView && (
+      {/* Mobile Fallback - Static image instead of iframe to prevent memory crashes */}
+      {useFallback && isInView && (
+        <div
+          className={cn(
+            'absolute inset-0',
+            'transition-opacity duration-500',
+            loadingState === 'loaded' ? 'opacity-100' : 'opacity-0',
+          )}
+        >
+          <Image
+            src={fallbackUrl}
+            alt={`${title} preview`}
+            fill
+            className="object-cover object-top"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            sizes="(max-width: 768px) 100vw, 240px"
+          />
+        </div>
+      )}
+
+      {/* Iframe Container - Scale technique for website preview (tablet/desktop only) */}
+      {!useFallback && isInView && (
         <div
           className={cn(
             'absolute inset-0',

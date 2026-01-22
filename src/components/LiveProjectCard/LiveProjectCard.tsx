@@ -11,6 +11,7 @@ export interface LiveProject {
   id: string;
   title: string;
   url: string;
+  fallbackUrl?: string;
   description: string;
   techStack: SimpleIcon[];
 }
@@ -33,15 +34,19 @@ export default function LiveProjectCard({
   project,
   className,
 }: LiveProjectCardProps) {
-  const { title, url, description, techStack } = project;
+  const { title, url, fallbackUrl, description, techStack } = project;
 
   return (
     <div className={cn('flex flex-col items-center', className)}>
-      {/* iPhone Frame with iframe content */}
-      <div className="w-full max-w-50 lg:max-w-60">
+      {/* iPhone Frame with iframe content - full width on mobile, constrained on sm+ */}
+      <div className="w-full sm:max-w-50 lg:max-w-60">
         <IPhoneProFrame>
-          {/* Live iframe (Layer 2) */}
-          <LiveProjectIframe url={url} title={title} />
+          {/* Live iframe (Layer 2) - uses static fallback image on mobile */}
+          <LiveProjectIframe
+            url={url}
+            title={title}
+            fallbackUrl={fallbackUrl}
+          />
 
           {/* Dark gradient overlay (Layer 3) - darker at bottom for text readability */}
           <div
@@ -58,7 +63,7 @@ export default function LiveProjectCard({
       <a href={url} target={'_blank'} className="relative z-20">
         <div
           className={cn(
-            'text-center w-full max-w-60',
+            'text-center w-full sm:max-w-50 lg:max-w-60',
             // Pull up to overlap with phone frame bottom
             '-mt-20',
             hoverLiftStyle,
