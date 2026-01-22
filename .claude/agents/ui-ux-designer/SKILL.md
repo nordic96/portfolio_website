@@ -261,13 +261,9 @@
 ### Design System Consolidation
 
 - **Centralized Reusable Styles** (New in v5)
-  - Location: `/app/styles/baseStyles.ts` - SINGLE SOURCE OF TRUTH for design tokens
-  - Current Exports:
-    - `glassCardBaseStyle`: Base glass effect styling
-    - `hoverLiftStyle`: Interaction feedback animation
-    - `baseWidth`: Responsive width constraints
-  - Design Principle: All repeated styling patterns MUST be extracted to baseStyles.ts to ensure consistency
-  - When adding new style: Only export if used in 2+ components; test across all components before commit
+  - **See:** `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
+  - **Location:** `/app/styles/baseStyles.ts` - SINGLE SOURCE OF TRUTH for design tokens
+  - **Design Principle:** All repeated styling patterns MUST be extracted to baseStyles.ts to ensure consistency
 
 - **Color Application Guidelines**
   - Dark gradient backgrounds: Use for section containers and large areas
@@ -340,5 +336,102 @@ See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA,
 5. **Responsive Layout Breaks**
    - Solution: Design mobile-first; test text reflow and spacing at 375px, 768px, 1024px
    - Verify: No horizontal scroll on any breakpoint; touch targets remain 44x44px minimum
+
+---
+
+## Session Learnings - January 22, 2026
+
+### Design Review Methodology - Comprehensive Breakpoint Testing
+
+- **Breakpoint Audit Pattern**
+  - **Context:** Systematic visual review of website across all responsive breakpoints
+  - **Breakpoints Used:** 375px (mobile), 393px (mobile-large), 768px (tablet), 1024px (tablet-large), 1440px (desktop)
+  - **Tools:** Playwright MCP for consistent screenshot capture at exact viewport sizes
+  - **Workflow:**
+    1. Set exact viewport to each breakpoint
+    2. Capture full-page screenshot
+    3. Compare against design specs and previous version
+    4. Document component-specific findings
+    5. Create categorized issue list (bugs, polish, enhancements)
+  - **Key Finding:** Mobile iframe rendering (375px-393px) shows content overflow and icon sizing issues; desktop (1440px) shows layout properly scaled
+  - **Documentation:** Screenshots saved with breakpoint label for reference during implementation
+
+### Mistakes & Fixes
+
+- **Issue:** Mobile iframes failing to scale properly on smaller screens (375px-393px)
+  - **Root Cause:** 400% scale technique works well on larger screens but causes viewport overflow on mobile
+  - **Finding:** This is a technical issue requiring iframe scroll behavior and content clipping strategy
+  - **Categorization:** Bug to be addressed in mobile optimization phase
+
+- **Issue:** SmallProjectCard tech stack icons overlap at mobile breakpoints
+  - **Root Cause:** Icon sizing (24px) and gap spacing (8px) don't adapt to narrow mobile width
+  - **Finding:** Icons need responsive sizing or wrapping strategy for mobile
+  - **Categorization:** Bug requiring component refinement for mobile
+
+### Patterns Discovered
+
+- **Pattern: Design Review Checksheet for All Breakpoints**
+  - **Context:** Ensuring visual consistency and identifying regressions across device sizes
+  - **Checklist Items:**
+    - Layout integrity (no overflow, proper spacing)
+    - Text readability (font sizes appropriate, contrast maintained)
+    - Interactive elements (touch targets 44x44px minimum, proper spacing)
+    - Image/iframe scaling (responsive images, embedded content sizing)
+    - Color contrast (verify at each breakpoint with WCAG standards)
+    - Animation smoothness (parallax, transitions, canvas animations)
+  - **Documentation:** Create visual reference guide with screenshots at each breakpoint
+
+- **Pattern: GitHub Issue Templates for Design Findings**
+  - **Context:** Structured bug and enhancement reporting from design reviews
+  - **Structure:**
+    - Title: Component name + Issue type (Bug: ..., Polish: ..., Enhancement: ...)
+    - Breakpoints Affected: List specific viewport sizes where issue appears
+    - Screenshot References: Include breakpoint tags for identification
+    - Visual Impact: Grade severity (Critical, High, Medium, Low)
+    - Current Behavior: What's currently displayed
+    - Expected Behavior: What should display per design spec
+    - Suggested Fix: Optional implementation guidance
+  - **Categorization:** Separate issues by component and breakpoint for clarity
+
+- **Pattern: Milestone-Based Issue Organization for Release Planning**
+  - **Context:** Organizing multiple design findings into release milestone
+  - **Structure:**
+    - Milestone name: "v5.1 Milestone" or "Jan 22 Design Polish"
+    - Epic grouping: Section Animations, Spotify Integration, GitHub Activity, etc.
+    - Related issues: Group by priority and implementation phase
+    - Blocking relationships: Identify dependencies between issues
+  - **Rationale:** Enables clear release planning and developer prioritization
+  - **Tool:** GitHub CLI for batch creation (see frontend patterns for automation)
+
+### Design Quality Assurance Insights
+
+- **Issue Categorization Framework**
+  - **Bugs:** Functionality broken or not working as designed (iframe crashes, rendering errors)
+  - **Polish:** Visual refinement and consistency (spacing, sizing, animation timing)
+  - **Enhancements:** New features or improvements (loading states, additional animations)
+  - **Blockers:** Items that must be fixed before release (crashes, severe layout issues)
+
+- **Breakpoint-Specific Issues**
+  - Mobile (375px-393px): Often shows overflow/scaling problems, icon sizing conflicts
+  - Tablet (768px): May show transition artifacts or spacing anomalies
+  - Desktop (1024px-1440px): Usually works well; focus on hover states and interactions
+
+- **Design System Validation**
+  - Verify `glassCardBaseStyle` consistency at all breakpoints
+  - Confirm `hoverLiftStyle` animation smoothness across devices
+  - Check `baseWidth` responsive behavior matches design intent
+  - Validate color contrast at all breakpoint sizes
+
+### Accessibility Review Findings
+
+- Canvas-based animations require viewport-specific testing (some mobile browsers may have lower FPS)
+- Icon scaling affects touch target size on mobile; verify minimum 44x44px remains
+- iframe content scaling (400% → 25%) may affect text readability on mobile; test actual content
+
+### Documentation Improvements
+
+- Add explicit breakpoint testing to design review checklist
+- Create issue template that includes "Affected Breakpoints" field
+- Document GitHub CLI patterns for batch issue creation workflow
 
 ---

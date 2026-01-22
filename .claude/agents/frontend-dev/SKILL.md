@@ -608,37 +608,14 @@ npx playwright screenshot http://localhost:3000
 
 - **Pattern: Reusable Style Composition via baseStyles.ts**
   - **Context:** Multiple cards need consistent glassmorphic styling, hover effects, and sizing
-  - **Implementation:**
-    - Create `baseStyles.ts` exporting constant Tailwind class strings
-    - `glassCardBaseStyle`: `'bg-dark-gray/50 backdrop-blur-md rounded-3xl p-3'` for glass effect
-    - `hoverLiftStyle`: `'hover:-translate-y-2 transition-transform ease-in-out'` for interaction feedback
-    - `baseWidth`: `'w-full lg:max-w-360'` for responsive sizing
-    - Import and compose with `cn()` utility in components
+  - **Implementation:** See `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
   - **Files:** `/app/styles/baseStyles.ts`
-  - **Benefits:** Single source of truth for design system, reduces duplication, ensures consistency across SmallProjectCard, CertificationCard, LiveProjectCard metadata sections
-  - **Usage Example:**
-    ```typescript
-    import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
-    className={cn('flex items-center gap-3', glassCardBaseStyle, hoverLiftStyle)}
-    ```
+  - **Key exports:** `glassCardBaseStyle`, `hoverLiftStyle`, `baseWidth`
 
 - **Pattern: Title Outside / Card Inside Hierarchy**
   - **Context:** Cards with glass effect need visual separation between heading and content
-  - **Implementation:**
-    - Wrap both title and card in `flex flex-col`
-    - Place `h3` title OUTSIDE the glassCardBaseStyle container
-    - Card container comes after title with glass styling
-    - Both wrapped together for consistent spacing
-  - **Structure:**
-    ```tsx
-    <div className="flex flex-col">
-      <h3 className="text-h3">{title}</h3>
-      <div className={glassCardBaseStyle}>
-        {/* Card content */}
-      </div>
-    </div>
-    ```
-  - **When to use:** CertificationCard, themed project cards, certification displays with metadata containers
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns > Card Component Pattern) for complete documentation
+  - **Key Rule:** h3 title placed OUTSIDE glassCardBaseStyle container, never inside
 
 - **Pattern: CSS clip-path Animation for Writing Reveal Effect**
   - **Context:** Create animated signature or text reveal that simulates writing from left to right
@@ -763,5 +740,146 @@ npx playwright screenshot http://localhost:3000
 - **Type Safety for SimpleIcon:** Create a custom hook `useSimpleIcons()` that maps string identifiers to SimpleIcon objects automatically
 - **Design System Auditor:** Script to find hardcoded Tailwind classes that should use baseStyles exports
 - **Accessibility Checklist:** Pre-commit hook to scan components for missing ARIA labels on links/buttons
+
+---
+
+## Session Learnings - January 22, 2026
+
+### GitHub CLI Workflow Automation
+
+- **Pattern: Batch GitHub Milestone & Issue Creation**
+  - **Context:** Creating v5.1 milestone with 9 related issues from design review findings
+  - **Workflow Steps:**
+    1. Create milestone: `gh milestone create "v5.1 Milestone" -d "Phase 3-5 improvements and bug fixes"`
+    2. Get milestone ID: `gh milestone list --json number,title | grep v5.1`
+    3. Batch create issues with: `gh issue create --title "..." --body "..." --milestone <id> --label "bug,mobile"`
+  - **Benefits:** Reproducible issue creation, batch operations, consistent labeling and metadata
+  - **Scalability:** Can create 9+ issues in <30 seconds with script automation
+
+- **Pattern: Structured Issue Templates with Reproduction Steps**
+  - **Context:** Design review findings need consistent documentation for implementation
+  - **Template Structure:**
+    ```markdown
+    ## Type: [Bug|Polish|Enhancement]
+
+    ## Affected Breakpoints
+    - 375px: [description]
+    - 393px: [description]
+    - 768px: [description]
+
+    ## Current Behavior
+    [What's broken/wrong]
+
+    ## Expected Behavior
+    [Per design spec]
+
+    ## Suggested Fix
+    [Optional technical guidance]
+
+    ## Screenshots
+    [Breakpoint labels: mobile-375, mobile-393, tablet-768, etc.]
+    ```
+  - **Labels:** Use `bug`, `mobile`, `desktop`, `polish`, `enhancement` for filtering
+  - **Priority:** Add `priority:critical`, `priority:high`, `priority:low` for triaging
+
+### Mobile Responsive Design Debugging
+
+- **Issue: iframe Content Overflow on Mobile (375px-393px)**
+  - **Root Cause:** 400% scale technique doesn't account for mobile viewport constraints; content width exceeds container
+  - **Investigation:** Playwright screenshots at exact mobile breakpoints revealed horizontal scroll
+  - **Fix Strategy:**
+    - Implement CSS `overflow: hidden` with clipping on mobile
+    - Consider reducing scale percentage on mobile (e.g., 200% instead of 400%)
+    - Alternative: Use viewport-aware scale calculation
+  - **Prevention:** Test iframes at 375px during development, not just desktop
+  - **Related Issue:** #461 (GitHub mobile crashes)
+
+- **Issue: SmallProjectCard Tech Icons Overlap on Mobile**
+  - **Root Cause:** Fixed icon size (24px) + fixed gap (8px) don't reflow in narrow columns
+  - **Investigation:** Tested at 375px showed icons compressing and overlapping text
+  - **Fix Strategy:**
+    - Add `flex-wrap` for icon container to allow wrapping
+    - Reduce icon size on mobile: `w-4 h-4 md:w-6 md:h-6`
+    - Or reduce gap on mobile: `gap-1 md:gap-2`
+  - **Prevention:** Test all card components at 375px and 393px explicitly
+  - **Related Issue:** #462 (SmallProjectCard icons mobile)
+
+### Responsive Testing Best Practices
+
+- **Breakpoint Testing Checklist**
+  - Test at exact breakpoints: 375px, 393px, 768px, 1024px, 1440px
+  - Use Playwright for consistent viewport capture: `await page.setViewportSize({ width: 375, height: 667 })`
+  - Compare against previous screenshots to catch regressions
+  - Document findings by component (LiveProjectCard, SmallProjectCard, IPhoneProFrame, etc.)
+
+- **Mobile-Specific Component Testing**
+  - Verify touch targets remain 44x44px at smaller viewports
+  - Check text wrapping and line breaks at narrow widths
+  - Test scrolling performance on actual mobile devices (canvas animations, iframe scrolling)
+  - Verify images load correctly and don't cause layout shift
+
+- **Responsive CSS Gotchas**
+  - Using `w-full` on container doesn't guarantee content fits (check children widths)
+  - `grid` layouts can overflow on mobile; use `flex` or stack on mobile instead
+  - `fixed` positioning may behave differently on mobile (test with actual device)
+  - Negative margins (`-mt-12`) can cause overflow on narrow screens
+
+### Issue Tracking & Prioritization
+
+- **Categorization System**
+  - **Bugs:** Crashes, rendering errors, broken functionality → Fix immediately
+  - **Polish:** Spacing, alignment, sizing refinements → Plan for release milestone
+  - **Enhancements:** New features, additional states → Consider for future phases
+  - **Blockers:** Breaks deployment or user experience → Highest priority
+
+- **Milestone Planning**
+  - Group related issues by feature/section (Section Animations, GitHub Activity, etc.)
+  - Mark blocking dependencies with labels or issue references
+  - Plan phases to enable parallel work (e.g., mobile fixes don't block desktop enhancements)
+
+### Pattern: Responsive Component Development Workflow
+
+1. **Design specification** → Review at all 5 breakpoints
+2. **Initial implementation** → Test at desktop (1440px)
+3. **Breakpoint testing** → Capture screenshots at 375px, 768px, 1024px
+4. **Mobile debugging** → Fix issues found at 375px-393px
+5. **Tablet validation** → Ensure transitions are smooth at 768px
+6. **Documentation** → Add breakpoint notes to component patterns
+
+### Mistakes & Fixes
+
+- **Issue:** Developed components without testing on mobile; discovered iframe/icon issues only during design review
+  - **Root Cause:** Focused on desktop-first development without validating mobile early
+  - **Fix:** Created comprehensive breakpoint testing workflow before marking features complete
+  - **Prevention:** Add "Test at 375px and 1440px" to component implementation checklist
+
+- **Issue:** Issue documentation lacked breakpoint specificity; made triage harder
+  - **Root Cause:** Didn't use structured template for capturing findings
+  - **Fix:** Created GitHub issue template with "Affected Breakpoints" field
+  - **Prevention:** Use template for all design review findings
+
+### Performance Notes
+
+- Mobile debugging with Playwright: Exact viewport sizes (375, 393) are critical; approximate sizes miss edge cases
+- Batch GitHub operations: Using CLI is 5x faster than web UI for 9+ issues
+- Screenshot comparison: Save with breakpoint labels for quick reference during implementation
+
+### Debugging Wins
+
+- **Problem:** Understanding why SmallProjectCard icons overlap on mobile
+  - **Approach:** Captured Playwright screenshots at 375px, compared to 1440px version, identified fixed sizing conflict
+  - **Tool/Technique:** Playwright viewport sizing + screenshot comparison
+
+- **Problem:** Identifying all mobile-specific issues in one systematic review
+  - **Approach:** Tested all major components at each breakpoint (375, 393, 768, 1024, 1440px) using Playwright
+  - **Tool/Technique:** Documented findings by component in structured issue format
+
+### Automation Opportunities (Updated)
+
+- **Playwright Breakpoint Testing Script:** Create reusable script that tests all components at standard breakpoints
+- **GitHub CLI Batch Issues:** Template for creating milestone with related issues from findings
+- **Screenshot Comparison Tool:** Automated visual diff between breakpoints to catch regressions
+- **Mobile Audit Checklist:** Linter rule to flag fixed-size components that should be responsive
+- **Issue Template Generator:** CLI tool to create properly formatted issues with breakpoint metadata
 
 ---

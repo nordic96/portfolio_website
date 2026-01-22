@@ -8,13 +8,13 @@ Personal portfolio website built with Next.js, React, TypeScript, and Tailwind C
 - **Design Version:** 5.0 (Night Sky Theme)
 - **Current Focus:** v5 Redesign - Epic #431
 
-**Quick Status:** v5 in progress - 3 of 15 phases complete (Foundation, StarField, Live Projects).
+**Quick Status:** v5.0 deployed to production. v5.1 in progress - mobile/tablet refinements (see Current Implementation Status section below).
 
 ---
 
 ## MAJOR REDESIGN: v5.0 Night Sky Theme
 
-The website is undergoing a complete visual redesign with a **night sky theme**, animated starfield, and live project previews in iPhone frames.
+The website has completed a major visual redesign with a **night sky theme**, animated starfield, and live project previews in iPhone frames.
 
 ### Key Changes
 - **Visual Theme:** Night sky gradient background with twinkling stars
@@ -40,7 +40,7 @@ The website is undergoing a complete visual redesign with a **night sky theme**,
 - Lazy-loading iframe with scaling
 - 4-layer design cards for projects
 
-**Remaining:** Phases 3-5, 7-15 (see Epic #431 for full roadmap)
+**Status:** v5.0 core phases complete and deployed. Additional phases (3-5, 7-15) and v5.1 refinements tracked in GitHub. See "Current Implementation Status" section below for details.
 
 ---
 
@@ -517,6 +517,13 @@ portfolio_website/
 - 4-layer design card system
 - LiveProjectsSection container
 
+### v5.1 Milestone (Next Iteration)
+**Milestone #12:** Mobile & tablet refinements with 9 issues
+- **GitHub Issues:** #454-#462
+- **High Priority:** Live Project iFrame crashes on mobile (#460), SmallProjectCard icon visibility (#461)
+- **Epic:** Polish Mobile & Tablet Breakpoints (#462)
+- **Focus:** Responsive design fixes, accessibility improvements
+
 ### Remaining Phases (3-5, 7-15)
 See Epic #431 for detailed roadmap. Track via GitHub issues #432-439 on `develop_v5` branch.
 
@@ -531,6 +538,49 @@ Previous implementations:
 - Hero Section with orbital tech logos
 - Featured Projects bento grid
 - About Section with timeline
+
+---
+
+## Known Issues (v5.0 & v5.1 Priority)
+
+### HIGH Priority
+**#460: Live Project iFrame crashes on mobile**
+- iFrame component fails to render correctly on mobile viewports (<768px)
+- Causes layout instability and page unavailability on small screens
+- Impacts LiveProjectsSection with iPhone frames
+- Status: Open - targeted for v5.1
+
+**#461: SmallProjectCard tech icons not visible on mobile**
+- Tech icons from `simple-icons` not displaying on mobile/tablet
+- Icons render on desktop but fail responsively
+- Affects SmallProjectCard component tech stack display
+- Status: Open - targeted for v5.1
+
+### MEDIUM Priority
+**#462: Polish Mobile & Tablet Breakpoints (Epic)**
+- Comprehensive responsive design refinements
+- Spacing, sizing, and layout adjustments for <1024px viewports
+- Accessibility improvements for touch devices
+- Status: Open - broader epic encompassing multiple issues
+
+### Design Review Findings (Jan 22)
+**Overall Grade:** B (78/100)
+- **Desktop:** A+ (responsive, elegant, accessible)
+- **Tablet (768-1023px):** B- (spacing issues, sizing inconsistencies)
+- **Mobile (<768px):** B (functional but needs polish; iframe and icon rendering issues)
+
+**Confirmed Issues from Review:**
+- iFrame mobile rendering failures in LiveProjectsSection
+- Icon sizing inconsistency in SmallProjectCard at tablet+ breakpoints
+- Signature (CalligraphySignature) sizing needs mobile optimization
+- Text sizing and line-height improvements needed on mobile
+- Touch target spacing adequate but could be optimized
+
+**Strengths:**
+- Color palette and contrast excellent across all breakpoints
+- Typography hierarchy clear and readable
+- Animation performance stable (StarField optimized)
+- Keyboard navigation working properly
 
 ---
 
@@ -565,8 +615,10 @@ and provide feedback
 
 ### GitHub & Branch Strategy
 - **GitHub Epic #431** - Master plan for v5 redesign with 15 phases
-- **GitHub Issues #432-439** - Individual phase tracking
+- **GitHub Issues #432-439** - Individual phase tracking (Phases 1-2, 6 complete)
+- **GitHub Milestone #12** - v5.1 iteration with issues #454-#462
 - **develop_v5** - Integration branch for all v5 work
+- **develop** - Current active branch for v5.1 work
 - Feature branches: `feature/phase-#` off develop_v5
 - PRs target develop_v5, not master
 - Example: PR #440 for Phase 6 implementation
@@ -576,10 +628,9 @@ and provide feedback
 ## Quick Reference
 
 ### Current Version & Branch
-- **Version:** 5.0 (Night Sky Theme)
-- **Main Branch:** develop_v5
-- **GitHub Issues:** Epic #431, Sub-issues #432-439
-- **Latest PRs:** #434 (Phase 1), #435 (Phase 2), #440 (Phase 6)
+- **Version:** 5.0 (Night Sky Theme - Deployed)
+- **Next Iteration:** v5.1 (mobile/tablet refinements)
+- **See:** GitHub & Branch Strategy section for complete workflow details
 
 ### Design Philosophy (v5.0)
 - **Immersive:** Night sky gradient with animated stars
@@ -629,13 +680,14 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 21, 2026
-**Document Version:** 5.0 (Night Sky Theme - In Progress)
-**Progress:** 3 of 15 phases complete
+**Last Updated:** January 22, 2026
+**Document Version:** 5.0 (Night Sky Theme - Deployed)
+**Progress:** 3 of 15 phases complete; v5.1 planned
 
-**Recent Updates (Jan 21):**
-- Added Reusable Styles System section with `baseStyles.ts` patterns
-- Added Component Patterns section (Card, Icon, Overlap/Blur techniques)
-- Added Accessibility Patterns section (ARIA, animations, i18n)
-- Documented new components: SmallProjectCard, CertificationCard, CalligraphySignature, PrimaryButton
-- Updated Key Directories to reflect `/app/styles/` centralization
+**Recent Updates (Jan 22):**
+- Added Known Issues section documenting #460, #461, #462
+- Added Design Review Findings with breakpoint analysis (B grade 78/100)
+- Updated status: v5.0 deployed to production
+- Added v5.1 Milestone #12 tracking (issues #454-#462)
+- Updated GitHub & Branch Strategy to reference v5.1 and develop branch
+- Documented mobile/tablet refinement priorities for next iteration
