@@ -184,6 +184,9 @@
 
 ### Accessibility Validation
 
+**See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive accessibility guidelines including ARIA patterns, motion preferences, and touch targets.**
+
+Session-specific findings:
 - **Canvas Content:** StarField correctly uses `aria-hidden="true"` since it's decorative
 - **Overlay Opacity:** At 30%, gradient overlay maintains sufficient contrast for any white text overlays
 - **Loading Indicators:** Spinner + text provides both visual and text-based feedback for async states
@@ -260,27 +263,27 @@
 
 ### Design System Consolidation
 
+<<<<<<< Updated upstream
 - **Centralized Reusable Styles** (New in v5)
   - **See:** `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
   - **Location:** `/app/styles/baseStyles.ts` - SINGLE SOURCE OF TRUTH for design tokens
   - **Design Principle:** All repeated styling patterns MUST be extracted to baseStyles.ts to ensure consistency
+=======
+**See `.claude/CLAUDE.md` for complete design system specifications:**
+- Reusable Styles System (`/app/styles/baseStyles.ts`)
+- Color Palette (Night Sky Theme)
+- Typography specifications
+- Component Patterns (card structure, icons, overlays)
+>>>>>>> Stashed changes
 
-- **Color Application Guidelines**
-  - Dark gradient backgrounds: Use for section containers and large areas
-  - Text primary (#ffffff): For body text and main content
-  - Text secondary (#a8b2d1): For labels, captions, and secondary information
-  - Accent colors (gold/cyan/purple): Reserve for highlights, badges, and visual emphasis
-  - Border colors: Use subtle variations (dark-gray/30) for section dividers
+Session-specific design decisions:
+- **Glass Card Pattern:** Validated title-outside-container approach with `glassCardBaseStyle`
+- **Icon Sizing:** Standardized sm/md/lg sizing via `useSimpleIcons` hook
+- **Color Application:** Confirmed accent colors reserved for highlights, not structural elements
 
-- **Typography Application**
-  - Headings (h1-h3): Poppins bold for hierarchy and visual impact
-  - Body text: Roboto regular for readability and content
-  - Small labels: Roboto, text-sm, text-secondary color
-  - Uppercase labels: Use for section titles and category badges
+### Accessibility Enhancements Validated
 
-### Accessibility Enhancements Documented
-
-See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA, semantic HTML, and motion accessibility requirements. Session validated these patterns in CalligraphySignature and CertificationCard components.
+Session validated accessibility patterns from CLAUDE.md in CalligraphySignature and CertificationCard components (see CLAUDE.md Accessibility Patterns section for full guidelines).
 
 ### Internationalization (i18n) Design Implications
 
@@ -341,6 +344,7 @@ See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA,
 
 ## Session Learnings - January 22, 2026
 
+<<<<<<< Updated upstream
 ### Design Review Methodology - Comprehensive Breakpoint Testing
 
 - **Breakpoint Audit Pattern**
@@ -433,5 +437,114 @@ See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA,
 - Add explicit breakpoint testing to design review checklist
 - Create issue template that includes "Affected Breakpoints" field
 - Document GitHub CLI patterns for batch issue creation workflow
+=======
+### Design Review & Milestones
+
+- **v5.1 Milestone Created** with 9 issues covering mobile optimization, bug fixes, and polish
+- **Comprehensive Breakpoint Analysis** across 5 critical viewports (375px, 393px, 768px, 1024px, 1440px)
+- **Overall Grade: B (78/100)** - Good foundation with improvement opportunities in mobile experience
+
+### Mistakes & Fixes
+
+- **Issue:** iFrame component renders at full scale on mobile, crashes browser memory
+  - **Root Cause:** Design didn't account for mobile resource constraints; desktop iframe at 100% too heavy
+  - **Fix:** Implement mobile fallback using static screenshot with `useBreakpoint` detection
+  - **Prevention:** During design specs, always specify mobile optimization strategy for heavy components
+
+- **Issue:** SmallProjectCard tech stack icons rendered inconsistently across components
+  - **Root Cause:** Different sizing and styling applied per component rather than centralized
+  - **Fix:** Created `useSimpleIcons` hook with standardized responsive sizing (sm/md/lg)
+  - **Prevention:** Define reusable component patterns in design system before handoff; specify exact icon sizes and spacing
+
+- **Issue:** Loading state not designed for global loading page
+  - **Root Cause:** Focused on happy path; didn't design for intermediate states
+  - **Fix:** Added CalligraphySignature + animated loading bar to `loading.tsx`
+  - **Prevention:** Design state machines for all async operations (idle, loading, success, error)
+
+### Patterns Discovered
+
+- **Pattern: Breakpoint-Based Component Complexity Management**
+  - **Context:** Heavy components need different rendering strategies per viewport
+  - **Design Strategy:** See `.claude/CLAUDE.md` (Responsive Breakpoints section) for project-wide breakpoint standards
+  - **Session Application:** Designed mobile fallback strategy for Issue #460 (iFrame mobile crashes)
+  - **Key Design Insight:** Always specify what to show on each breakpoint during handoff - design for degradation, not just augmentation
+
+- **Pattern: Async State Design System**
+  - **Context:** Components with data loading need visual feedback
+  - **Four-State Design:**
+    - **Idle:** Before user interaction (optional minimal indicator)
+    - **Loading:** Data in-flight (spinner + status text)
+    - **Success:** Data loaded (content revealed with fade-in)
+    - **Error:** Failed to load (error icon + explanatory message)
+  - **Visual Grammar:**
+    - Loading: Animated circular spinner, centered in container
+    - Success: 300ms fade-in transition, smooth reveal
+    - Error: Neutral color icon (not red for critical), clear explanation text
+  - **When to apply:** All async components (iframes, API calls, heavy computations)
+
+- **Pattern: Touch Target Accessibility in Detailed UI**
+  - **Context:** Desktop-designed components have small touch targets for mobile
+  - **Guidelines:** See `.claude/CLAUDE.md` (Accessibility section) for WCAG AA touch target standards
+  - **Session Validation:** Verified 44x44px minimum on Issue #457 (Footer Polish)
+  - **Verification Method:** Tested at 375px viewport without zoom
+
+- **Pattern: Loading State Design for Portfolio Sections**
+  - **Context:** Global loading page for initial page load
+  - **Design Components:**
+    - Signature/logo animation (clip-path reveal)
+    - Loading progress bar (animated linear progress)
+    - Subtle background (gradient or static)
+  - **Duration:** Keep loading state simple and fast (< 500ms for most users)
+  - **UX Principle:** Show elegant branding while loading, not generic spinner
+
+- **Pattern: Icon Sizing Responsiveness**
+  - **Context:** Tech stack and social icons need viewport-specific sizing
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns - Icon Integration Pattern) for complete `useSimpleIcons` documentation with sm/md/lg sizing
+  - **Session Validation:** Confirmed 8px gaps between icons maintain visual rhythm across breakpoints
+
+### Debugging Wins
+
+- **Problem:** Determining optimal breakpoints for mobile fallback
+  - **Approach:** Analyzed actual mobile viewport sizes (375px iPhone SE, 393px Pixel 6, etc.)
+  - **Tool/Technique:** Playwright screenshot capture at multiple viewports to identify breaking points
+
+- **Problem:** Understanding what should trigger mobile-specific rendering
+  - **Approach:** Tested iFrame memory usage at different viewport sizes; identified 768px as critical threshold
+  - **Tool/Technique:** Browser DevTools memory profiler to assess component footprint at each breakpoint
+
+- **Problem:** Ensuring loading state is elegant and on-brand
+  - **Approach:** Reviewed portfolio brand guidelines; incorporated CalligraphySignature as loading indicator
+  - **Tool/Technique:** Visual comparison of loading designs against brand identity
+
+### Design Review Metrics (v5.1)
+
+**Assessment by Category (Out of 100):**
+- Visual Design: 82/100 (Colors, spacing, hierarchy excellent; some polish needed)
+- Usability: 75/100 (Navigation clear; mobile CTA placement needs refinement)
+- Accessibility: 80/100 (WCAG AA mostly met; touch targets validated)
+- Responsiveness: 75/100 (Desktop excellent; mobile experience has optimization opportunities)
+- Performance: 78/100 (StarField optimized; mobile iFrame needs fallback)
+
+**Key Findings:**
+- iPhone frame design highly realistic and engaging
+- StarField animation performs well across devices
+- Mobile breakpoints show scaling issues on small screens (375px)
+- Touch target sizes generally meet WCAG AA minimum (44x44px)
+- Color contrast adequate for dark theme
+
+**Recommendations for v5.2:**
+1. Optimize heading sizes for mobile (currently too large at 375px)
+2. Increase whitespace in card layouts on tablet
+3. Test modal/popup performance on older mobile devices
+4. Refine footer layout for small screens
+
+### Automation Opportunities (Jan 22 - v5.1)
+
+- **Visual Regression:** Automated breakpoint testing (375/393/768/1024/1440px)
+- **Accessibility Bot:** Pre-handoff scan for touch targets, contrast, unlabeled icons
+- **State Validator:** Ensure async components have all 4 states designed
+- **Icon Size Checker:** Verify sm/md/lg consistency across designs
+- **Performance Annotator:** Flag heavy components needing mobile strategy in design specs
+>>>>>>> Stashed changes
 
 ---

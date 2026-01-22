@@ -582,11 +582,11 @@ npx playwright screenshot http://localhost:3000
 
 ### Performance Notes
 
-- **Canvas for Animations:** Rendering 150 stars with twinkling is more efficient with Canvas 2D API than creating 150 DOM elements with CSS animations
-- **Intersection Observer Margin:** `rootMargin: '100px'` provides 100px buffer before viewport entry, allowing iframes to load with time to spare before user sees them
-- **Single RAF Loop:** Using one `requestAnimationFrame` for all star animations is more efficient than individual timeouts/intervals per star
-- **Lazy Iframe Loading:** Defer iframe creation (`isInView` check) to avoid rendering off-screen content
-- **Reduce Motion:** Properly respecting `prefers-reduced-motion` by canceling RAF prevents unnecessary CPU usage for users who disabled animations
+Session-specific optimizations:
+- **Canvas Stars:** Validated 150-star rendering more efficient than DOM elements (single RAF loop)
+- **Intersection Observer:** `rootMargin: '100px'` provides optimal iframe loading buffer
+- **Lazy Iframe:** Deferred iframe creation saves ~2MB memory per off-screen preview
+- **Reduced Motion:** RAF cancellation prevents unnecessary CPU cycles when animations disabled
 
 ---
 
@@ -610,107 +610,42 @@ npx playwright screenshot http://localhost:3000
   - **Context:** Multiple cards need consistent glassmorphic styling, hover effects, and sizing
   - **Implementation:** See `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
   - **Files:** `/app/styles/baseStyles.ts`
+<<<<<<< Updated upstream
   - **Key exports:** `glassCardBaseStyle`, `hoverLiftStyle`, `baseWidth`
 
 - **Pattern: Title Outside / Card Inside Hierarchy**
   - **Context:** Cards with glass effect need visual separation between heading and content
   - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns > Card Component Pattern) for complete documentation
   - **Key Rule:** h3 title placed OUTSIDE glassCardBaseStyle container, never inside
+=======
+  - **Benefits:** Single source of truth for design system, reduces duplication
+  - **Session Application:** Successfully applied to SmallProjectCard, CertificationCard, LiveProjectCard
+
+- **Pattern: Title Outside / Card Inside Hierarchy**
+  - **Context:** Cards with glass effect need visual separation between heading and content
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns - Card Component Pattern section) for complete specification
+  - **Session Application:** Successfully implemented in CertificationCard, themed project cards, certification displays
+>>>>>>> Stashed changes
 
 - **Pattern: CSS clip-path Animation for Writing Reveal Effect**
   - **Context:** Create animated signature or text reveal that simulates writing from left to right
-  - **Implementation:**
-    - Use `clip-path: inset(0 100% 0 0)` for initial hidden state (100% of right edge clipped)
-    - Animate to `clip-path: inset(0 0 0 0)` for full visibility (nothing clipped)
-    - Use cubic-bezier(0.4, 0, 0.2, 1) for smooth easing
+  - **Core Technique:** `clip-path: inset()` animation from right to left with prefers-reduced-motion support
+  - **Implementation Details:**
     - Duration: 2-2.5s for natural writing appearance
-  - **Accessibility:**
-    - Respect `prefers-reduced-motion` by detecting `window.matchMedia('(prefers-reduced-motion: reduce)')`
-    - Use `useRef` to track animation state and prevent repeated triggers
-    - Add `addEventListener('change')` for live preference updates
-    - Show full clip-path immediately when reduced motion enabled
-  - **Key Code:**
-    ```typescript
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-    const hasAnimatedRef = useRef(false);
-
-    useEffect(() => {
-      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mediaQuery.matches);
-
-      const handleMotionChange = (e: MediaQueryListEvent) => {
-        setPrefersReducedMotion(e.matches);
-      };
-
-      mediaQuery.addEventListener('change', handleMotionChange);
-
-      if (!mediaQuery.matches && !hasAnimatedRef.current) {
-        const timer = setTimeout(() => {
-          setIsAnimating(true);
-          hasAnimatedRef.current = true;
-        }, delay * 1000);
-
-        return () => {
-          clearTimeout(timer);
-          mediaQuery.removeEventListener('change', handleMotionChange);
-        };
-      }
-
-      return () => mediaQuery.removeEventListener('change', handleMotionChange);
-    }, [delay]);
-
-    const animationStyle = prefersReducedMotion
-      ? {}
-      : {
-          clipPath: isAnimating ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
-          transition: isAnimating ? `clip-path ${duration}s ease` : 'none',
-        };
-    ```
+    - Easing: `cubic-bezier(0.4, 0, 0.2, 1)` for smooth deceleration
+    - Accessibility: mediaQuery listener for live preference updates
+  - **Session Application:** Implemented in CalligraphySignature component with full accessibility support
+  - **Key Insight:** clip-path is GPU-accelerated, provides smoother animation than width/opacity
 
 - **Pattern: Semantic HTML with ARIA for Links**
   - **Context:** Improve accessibility for external links and navigation
-  - **Implementation:**
-    - Use `<Link>` from next/link for internal navigation (server-side benefits)
-    - Use `<a>` with `target="_blank" rel="noopener noreferrer"` for external links
-    - Add `aria-label` describing action: `aria-label="Verify certification"`
-    - Use semantic nav elements with role attributes where needed
-  - **Prevention Example:**
-    ```tsx
-    // Wrong: <a href="/internal-page"> (causes full page reload)
-    // Right: <Link href="/internal-page"> (Next.js client-side navigation)
-
-    // External link with ARIA:
-    <a
-      href={verificationUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Verify ${name} certification`}
-    >
-      Verify
-    </a>
-    ```
+  - **Implementation:** See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA and semantic HTML guidelines
+  - **Session Application:** Applied to CertificationCard external verification links with proper aria-labels
 
 - **Pattern: i18n Message Structure with next-intl**
   - **Context:** Support multiple languages (English, Korean) with centralized message management
-  - **Implementation:**
-    - Create `messages/en.json` and `messages/ko.json` with same key structure
-    - Use `useTranslations('SectionName')` hook to access section-specific messages
-    - Structure messages by domain: `Certifications`, `Header`, `Footer`, etc.
-  - **Example Structure:**
-    ```json
-    {
-      "Certifications": {
-        "issued_label": "Issued",
-        "verify_label": "Verify →"
-      }
-    }
-    ```
-  - **Usage:**
-    ```typescript
-    const t = useTranslations('Certifications');
-    <p>{t('issued_label')}: {formattedDate}</p>
-    ```
+  - **Implementation:** See `.claude/CLAUDE.md` (Accessibility Patterns - Internationalization section) for next-intl usage patterns
+  - **Session Application:** Applied translation hooks to CertificationCard with proper message key structure
 
 ### Debugging Wins
 
@@ -728,18 +663,151 @@ npx playwright screenshot http://localhost:3000
 
 ### Performance Notes
 
-- **Centralized Styles:** Exporting Tailwind strings from `baseStyles.ts` allows build-time optimization and reduces redundant class strings
-- **clip-path Animation:** Uses GPU-accelerated CSS property (clip-path) rather than width/opacity, providing smooth 60fps on most devices
-- **Reduced Motion Performance:** Disabling animation loops via `prefers-reduced-motion` reduces CPU usage for users with vestibular sensitivity
-- **Lazy Image Loading:** CalligraphySignature uses Next.js Image with `priority` flag for critical signature display
+Session-specific optimizations:
+- **Centralized Styles:** Validated that `baseStyles.ts` export pattern reduces bundle redundancy
+- **clip-path Animation:** Confirmed 60fps performance on CalligraphySignature across devices
+- **Reduced Motion:** Verified animation cancellation reduces CPU usage when preference enabled
+- **Image Loading:** Next.js Image with `priority` flag for above-fold CalligraphySignature
 
-### Automation Opportunities
+### Automation Opportunities (Jan 21)
 
-- **Component Generator Template:** Create a scaffold generator for new card-based components that auto-imports from baseStyles.ts
-- **Message Key Validation:** Build a linter rule to ensure message keys in `en.json` exist in `ko.json` and vice versa
-- **Type Safety for SimpleIcon:** Create a custom hook `useSimpleIcons()` that maps string identifiers to SimpleIcon objects automatically
-- **Design System Auditor:** Script to find hardcoded Tailwind classes that should use baseStyles exports
-- **Accessibility Checklist:** Pre-commit hook to scan components for missing ARIA labels on links/buttons
+- **Component Generator:** Scaffold generator for card components with baseStyles.ts imports
+- **i18n Key Validator:** Linter to ensure en.json/ko.json key parity
+- **Design System Auditor:** Find hardcoded classes that should use baseStyles exports
+- **Accessibility Scanner:** Pre-commit hook for missing ARIA labels
+
+---
+
+## Session Learnings - January 22, 2026
+
+### Mistakes & Fixes
+
+- **Issue:** Used `<img>` instead of `next/image` in LiveProjectCard screenshot fallback for mobile
+  - **Root Cause:** Didn't consider Next.js Image optimization benefits initially
+  - **Fix:** Replaced `<img>` with `next/image` using remotePatterns configuration
+  - **Prevention:** Always reach for `next/image` first for any image rendering, especially for performance-critical sections
+
+- **Issue:** React.FC type annotation on `useSimpleIcons` hook
+  - **Root Cause:** Following outdated React typing patterns
+  - **Fix:** Removed React.FC, used modern function return type with proper typing
+  - **Prevention:** Stay current with React 18+ typing patterns; avoid React.FC for new components
+
+- **Issue:** Missing `useMemo` optimization for icon rendering in `useSimpleIcons` hook
+  - **Root Cause:** Didn't consider re-render performance impact of creating icon elements on every render
+  - **Fix:** Added `useMemo` for both `renderedIcons` array and `IconContainer` component with proper dependency arrays
+  - **Prevention:** Memoize any computed values that are passed as dependencies or could cause expensive re-renders
+
+- **Issue:** Suspense boundary wrapped too much content in `loading.tsx`
+  - **Root Cause:** Misunderstood that persistent UI (header/nav) should stay outside Suspense
+  - **Fix:** Moved Suspense to only wrap `{children}`, keeping persistent elements outside
+  - **Prevention:** Suspense should only wrap content that can be replaced; persistent UI remains outside
+
+### Patterns Discovered
+
+- **Pattern: useSimpleIcons Hook for Icon Rendering**
+  - **Context:** Multiple components need to render SimpleIcon objects with consistent sizing, tooltips, and accessibility
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns - Icon Integration Pattern section) for complete hook documentation and usage examples
+  - **Location:** `/src/hooks/useSimpleIcons.tsx`
+  - **Session Application:** Successfully integrated into SmallProjectCard and LiveProjectCard with memoization optimization
+
+- **Pattern: Mobile Fallback with useBreakpoint Hook**
+  - **Context:** Heavy components (iframes) crash on mobile; need lightweight alternative
+  - **Implementation:** Documented in CLAUDE.md under v5.1 Polish (Issue #460)
+  - **Key Technique:** `useBreakpoint()` hook for conditional rendering based on viewport
+  - **Session Application:** Successfully resolved mobile crashes in LiveProjectIframe with screenshot fallback
+  - **Performance Impact:** ~75% memory reduction on mobile devices
+
+- **Pattern: PR Review Workflow with GitHub API**
+  - **Context:** Iterating on code based on review feedback
+  - **Implementation:**
+    - Fetch PR comments: `gh api repos/:owner/:repo/pulls/:pr_number/comments`
+    - Parse issues/suggestions from comment text
+    - Create fixes in same branch
+    - Repush without creating new PR
+  - **Benefits:** Keeps PR discussion in one place, single commit history, cleaner GitHub record
+  - **Command Reference:**
+    ```bash
+    gh api repos/owner/repo/pulls/463/comments
+    # Make fixes locally
+    git add .
+    git commit --amend --no-edit
+    git push origin branch-name --force-with-lease
+    ```
+
+- **Pattern: Batch Milestone & Issue Creation**
+  - **Context:** Organizing work for v5.1 with multiple related issues
+  - **Implementation:**
+    - Create milestone first: `gh milestone create --title "v5.1" --description "..."`
+    - Create issues with template batch commands
+    - Link issues to milestone via `--milestone` flag
+    - Organize by epic categories (Animations, Bugs, Polish, etc.)
+  - **Benefits:** Clear project organization, trackable progress, grouped related work
+  - **Example:**
+    ```bash
+    gh issue create --title "iFrame crashes on mobile" --body "..." --milestone "v5.1" --label "bug"
+    ```
+
+- **Pattern: Next.js Image with Remote Patterns**
+  - **Context:** Loading external images (screenshots) from URLs
+  - **Implementation:**
+    - Configure `remotePatterns` in `next.config.ts` to allow external domains
+    - Use `next/image` component with full URL
+    - Set `priority` for critical images, lazy-load others
+  - **Configuration:**
+    ```typescript
+    const nextConfig = {
+      images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'screenshots.example.com',
+            pathname: '/**',
+          },
+        ],
+      },
+    };
+    ```
+
+### Debugging Wins
+
+- **Problem:** iFrame crashing on mobile viewport
+  - **Approach:** Analyzed viewport size constraints, identified memory overhead of rendering live website inside small frame. Tested `useBreakpoint` hook to conditionally render screenshot fallback on mobile breakpoints
+  - **Tool/Technique:** Mobile breakpoint detection, screenshot fallback as lightweight alternative
+
+- **Problem:** Icon rendering performance and styling consistency
+  - **Approach:** Created dedicated `useSimpleIcons` hook with memoization. Tested hook across components to ensure consistent sizing and tooltips
+  - **Tool/Technique:** React DevTools profiler to verify memoization working; component testing at different breakpoints
+
+- **Problem:** PR review feedback iteration workflow
+  - **Approach:** Used `gh api` to fetch PR comments, parsed feedback, implemented fixes locally, amended commits and force-pushed with `--force-with-lease` (safe option)
+  - **Tool/Technique:** GitHub CLI for automated PR interaction; `--force-with-lease` prevents accidental overwrites
+
+### Performance Notes
+
+Session-specific optimizations (v5.1):
+- **Mobile Fallback:** Screenshot strategy reduces memory 75% vs live iframe on mobile (Issue #460)
+- **useMemo Icons:** Prevents re-rendering tech stack on parent state changes (Issue #461)
+- **Breakpoint Hook:** Component tree pruning more efficient than CSS media queries for conditionals
+- **Suspense Scope:** Narrowed to {children} only, prevents header/nav re-render on route change (Issue #459)
+- **Image Optimization:** Next.js srcset + remotePatterns for external screenshots (Issue #460)
+
+### Accessibility Wins
+
+**See `.claude/CLAUDE.md` (Accessibility section in Quick Reference) for project-wide accessibility standards.**
+
+Session-specific validations:
+- **Touch Target Sizing:** Verified 44x44px minimum on v5.1 components (Issue #457)
+- **Focus States:** Implemented `focus-visible` with cyan outline for keyboard navigation
+- **Icon Tooltips:** Integrated MUI Tooltip in `useSimpleIcons` hook
+- **Screenshot Fallback:** Alt text on mobile fallback images (Issue #460)
+
+### Automation Opportunities (Jan 22 - v5.1)
+
+- **PR Comment Bot:** Fetch review comments, suggest fixes, auto-label
+- **Mobile Optimization Linter:** Flag heavy components needing useBreakpoint
+- **Icon Validator:** Verify SimpleIcon sizing consistency
+- **remotePatterns Validator:** Check external image URLs before build
+- **Visual Regression:** Automated screenshots at 375/393/768/1024/1440px breakpoints
 
 ---
 

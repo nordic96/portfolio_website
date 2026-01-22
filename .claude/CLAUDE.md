@@ -8,7 +8,11 @@ Personal portfolio website built with Next.js, React, TypeScript, and Tailwind C
 - **Design Version:** 5.0 (Night Sky Theme)
 - **Current Focus:** v5 Redesign - Epic #431
 
+<<<<<<< Updated upstream
 **Quick Status:** v5.0 deployed to production. v5.1 in progress - mobile/tablet refinements (see Current Implementation Status section below).
+=======
+**Quick Status:** v5.0 core complete (3 of 15 phases) + v5.1 polish complete (4 issues resolved).
+>>>>>>> Stashed changes
 
 ---
 
@@ -275,23 +279,26 @@ export function ExampleCard() {
 
 ### Icon Integration Pattern
 
-**Tech Icons:** Use `SimpleIcon[]` from `simple-icons` with `dangerouslySetInnerHTML`
+**Tech Icons:** Use `useSimpleIcons` hook for consistent rendering with responsive sizing
 
 ```typescript
-import { SimpleIcon } from 'simple-icons';
+import { useSimpleIcons } from '@/hooks/useSimpleIcons';
 
 interface CardProps {
-  icons: SimpleIcon[];
+  iconSlugs: string[];
+  size?: 'sm' | 'md' | 'lg'; // responsive: 16px, 24px, 32px
 }
 
-export function TechCard({ icons }: CardProps) {
+export function TechCard({ iconSlugs, size = 'md' }: CardProps) {
+  const { icons, IconContainer } = useSimpleIcons(iconSlugs, size);
+
   return (
     <div className="flex gap-2">
       {icons.map((icon) => (
-        <div
+        <IconContainer
           key={icon.slug}
-          dangerouslySetInnerHTML={{ __html: icon.svg }}
-          className="w-6 h-6"
+          icon={icon}
+          ariaLabel={icon.title}
         />
       ))}
     </div>
@@ -299,8 +306,15 @@ export function TechCard({ icons }: CardProps) {
 }
 ```
 
+**Hook Details:**
+- **Location:** `/src/hooks/useSimpleIcons.tsx`
+- **Returns:** `{ icons: SimpleIcon[]; IconContainer: React.FC }`
+- **Sizes:** 'sm' (16px), 'md' (24px), 'lg' (32px)
+- **Features:** useMemo optimization, Tooltip on hover, accessibility via aria-label
+- **Used by:** SmallProjectCard, LiveProjectCard
+
 **Alternatives:**
-- `simple-icons` for tech logos (preferred for tech stack)
+- `simple-icons` directly for tech logos (use hook for consistency)
 - Material UI Icons (`@mui/icons-material`) for UI icons
 - SVG components for custom icons
 
@@ -338,6 +352,70 @@ export function OverlapSection() {
 - `z-index` layering (z-0 for background, z-10 for card)
 - Dark gradient overlay (70% opacity) ensures text readability
 - Content must be relative positioned to appear above overlay
+
+### Layout & Loading Patterns
+
+**Suspense Boundary (app/layout.tsx):**
+Wrap only `{children}` in Suspense, not the entire layout:
+
+```typescript
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang={locale}>
+      <body>
+        {/* Headers, navigation, etc. - NOT in Suspense */}
+
+        {/* Only children trigger loading.tsx */}
+        <Suspense fallback={<LoadingPage />}>
+          {children}
+        </Suspense>
+      </body>
+    </html>
+  );
+}
+```
+
+**Global Loading Page (app/loading.tsx):**
+Displays centered CalligraphySignature with animated loading bar:
+
+```typescript
+export default function Loading() {
+  return (
+    <div className="min-h-screen bg-gradient-sky flex flex-col items-center justify-center gap-8">
+      <CalligraphySignature width={200} height={80} />
+      <div className="loading-bar" />
+    </div>
+  );
+}
+```
+
+**Animation (globals.css):**
+```css
+@keyframes loading-bar {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+.loading-bar {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, #00d4ff, #c084fc);
+  animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-bar {
+    animation: none;
+    width: 100px;
+    opacity: 0.5;
+  }
+}
+```
 
 ---
 
@@ -463,14 +541,15 @@ npm run start      # Start production server
 portfolio_website/
 ├── app/
 │   ├── [locale]/page.tsx  # v5 homepage with scrollable sections
-│   ├── layout.tsx         # Root layout, Poppins/Roboto font setup
-│   ├── globals.css        # Global styles, v5 color palette
+│   ├── layout.tsx         # Root layout with Suspense boundary, font setup
+│   ├── loading.tsx        # Global loading page with CalligraphySignature
+│   ├── globals.css        # Global styles, v5 color palette, animations
 │   └── styles/
 │       └── baseStyles.ts  # Reusable Tailwind style strings (CENTRALIZED)
 ├── components/
 │   ├── StarField/         # Canvas-based twinkling stars (Phase 2)
 │   ├── IPhoneProFrame/    # iPhone 15 Pro bezel component
-│   ├── LiveProjectIframe/ # Lazy-loading iframe wrapper
+│   ├── LiveProjectIframe/ # Lazy-loading iframe with mobile fallback
 │   ├── LiveProjectCard/   # 4-layer design card component
 │   ├── LiveProjectsSection/ # Featured projects section
 │   ├── SmallProjectCard/  # Compact card for GitHub projects
@@ -481,6 +560,8 @@ portfolio_website/
 │   ├── HeroSection/       # Hero with tech logos
 │   ├── ProjectSection/    # Projects grid
 │   └── AboutSection/      # About with timeline
+├── hooks/
+│   └── useSimpleIcons.tsx # Hook for consistent SimpleIcon rendering with responsive sizing
 ├── public/
 │   └── assets/            # Static assets (images, SVGs, backgrounds)
 ├── docs/
@@ -498,7 +579,7 @@ portfolio_website/
 
 ---
 
-## Current Implementation Status (v5.0)
+## Current Implementation Status (v5.0 with v5.1 Polish)
 
 ### Completed Phases
 **Phase 1: Foundation** (COMPLETE - PR #434)
@@ -517,12 +598,38 @@ portfolio_website/
 - 4-layer design card system
 - LiveProjectsSection container
 
+<<<<<<< Updated upstream
 ### v5.1 Milestone (Next Iteration)
 **Milestone #12:** Mobile & tablet refinements with 9 issues
 - **GitHub Issues:** #454-#462
 - **High Priority:** Live Project iFrame crashes on mobile (#460), SmallProjectCard icon visibility (#461)
 - **Epic:** Polish Mobile & Tablet Breakpoints (#462)
 - **Focus:** Responsive design fixes, accessibility improvements
+=======
+### v5.1 Polish (COMPLETE)
+**Issue #460 - iFrame Mobile Crashes** (PR #463 - MERGED)
+- Added `fallbackUrl` prop to LiveProjectIframe
+- Mobile detection via `useBreakpoint` hook
+- Renders `next/image` fallback on mobile instead of iframe
+- iPhone frames full-width on mobile
+
+**Issue #461 - SmallProjectCard Icons** (PR #464)
+- Created `useSimpleIcons` hook at `src/hooks/useSimpleIcons.tsx`
+- Responsive sizing (sm/md/lg), useMemo optimization
+- Tooltip hover support with accessibility
+- Updated SmallProjectCard and LiveProjectCard to use hook
+
+**Issue #459 - Global Loading Page** (PR #466)
+- Created `src/app/loading.tsx` with CalligraphySignature + loading bar
+- Loading-bar animation in globals.css
+- Suspense boundary in layout.tsx wraps only {children}
+- Respects prefers-reduced-motion
+
+**Issue #457 - Footer Polish** (PR #465)
+- CalligraphySignature mobile size: 150x50px
+- 44px touch targets on social icons (WCAG AA)
+- Focus-visible states with cyan outline
+>>>>>>> Stashed changes
 
 ### Remaining Phases (3-5, 7-15)
 See Epic #431 for detailed roadmap. Track via GitHub issues #432-439 on `develop_v5` branch.
@@ -628,9 +735,16 @@ and provide feedback
 ## Quick Reference
 
 ### Current Version & Branch
+<<<<<<< Updated upstream
 - **Version:** 5.0 (Night Sky Theme - Deployed)
 - **Next Iteration:** v5.1 (mobile/tablet refinements)
 - **See:** GitHub & Branch Strategy section for complete workflow details
+=======
+- **Version:** 5.1 (Night Sky Theme - Polished)
+- **Main Branch:** develop_v5
+- **GitHub Issues:** Epic #431 (v5.0), Issues #457-461 (v5.1)
+- **Latest PRs:** #463 (Mobile Fallback), #464 (Icon Hook), #465 (Footer), #466 (Loading)
+>>>>>>> Stashed changes
 
 ### Design Philosophy (v5.0)
 - **Immersive:** Night sky gradient with animated stars
@@ -639,20 +753,27 @@ and provide feedback
 - **Scrollable:** Layered sections with parallax effects
 - **Smooth:** Organic animations and transitions
 
-### New Components Reference
+### New Components & Hooks Reference
 
 **Phase 2 & 6 (Complete):**
 - `StarField` - Canvas 2D twinkling star animation with parallax
 - `IPhoneProFrame` - iPhone 15 Pro bezel with rounded corners and notch
-- `LiveProjectIframe` - Lazy-loading iframe with 1px width optimization
+- `LiveProjectIframe` - Lazy-loading iframe with mobile image fallback
 - `LiveProjectCard` - 4-layer design card for projects (uses overlap/blur technique)
 - `LiveProjectsSection` - Container for featured projects
 
-**Recent Components (This Session):**
-- `SmallProjectCard` - Compact card for GitHub projects with glass effect
+**v5.1 Polish Components:**
+- `SmallProjectCard` - Compact card for GitHub projects with glass effect, uses `useSimpleIcons`
 - `CertificationCard` - Certification display with badge, uses `glassCardBaseStyle`
 - `CalligraphySignature` - Animated signature with clip-path reveal effect
 - `PrimaryButton` - Shared button component with SimpleIcon support
+
+**Global Features (v5.1):**
+- `loading.tsx` - Global loading page with CalligraphySignature and animated loading bar
+- Suspense boundary in `layout.tsx` wraps only {children} for loading state
+
+**Custom Hooks:**
+- `useSimpleIcons` - Consistent SimpleIcon rendering with responsive sizing, tooltip support, and accessibility
 
 **All components follow:**
 - Reusable styles from `/app/styles/baseStyles.ts`
@@ -660,6 +781,7 @@ and provide feedback
 - Glass effect with `glassCardBaseStyle`
 - Hover animations with `hoverLiftStyle`
 - Responsive design using Tailwind breakpoints
+- Mobile-first approach with 44px touch targets (WCAG AA)
 
 ### Accessibility
 - WCAG AA compliance target
@@ -681,6 +803,7 @@ and provide feedback
 ---
 
 **Last Updated:** January 22, 2026
+<<<<<<< Updated upstream
 **Document Version:** 5.0 (Night Sky Theme - Deployed)
 **Progress:** 3 of 15 phases complete; v5.1 planned
 
@@ -691,3 +814,16 @@ and provide feedback
 - Added v5.1 Milestone #12 tracking (issues #454-#462)
 - Updated GitHub & Branch Strategy to reference v5.1 and develop branch
 - Documented mobile/tablet refinement priorities for next iteration
+=======
+**Document Version:** 5.1 (Night Sky Theme - Polished)
+**Progress:** 3 of 15 phases complete + v5.1 polish
+
+**Recent Updates (Jan 22 - v5.1 Polish):**
+- Added `useSimpleIcons` hook documentation with responsive sizing and accessibility
+- Updated Icon Integration Pattern to reference hook instead of direct rendering
+- Added v5.1 Polish section documenting 4 completed issues (#460, #461, #459, #457)
+- Documented global loading page with Suspense boundary pattern
+- Updated LiveProjectIframe to include mobile fallback behavior
+- Updated Key Directories to include `hooks/` and note `loading.tsx` and `layout.tsx` changes
+- Updated component accessibility with 44px touch target documentation
+>>>>>>> Stashed changes
