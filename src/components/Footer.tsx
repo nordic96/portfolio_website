@@ -17,16 +17,23 @@ export default function Footer() {
           'flex flex-col justify-start items-center border-t border-t-text-dark px-8 max-sm:px-4 pt-4 pb-8 text-sm font-light'
         }
       >
-        <div className={cn(baseWidth, 'grid grid-cols-3 max-sm:text-xs')}>
-          <div className={'flex gap-4 items-start justify-starts'}>
+        <div
+          className={cn(
+            baseWidth,
+            'grid grid-cols-[240px_auto] max-sm:grid-cols-[160px_auto] max-sm:text-xs',
+          )}
+        >
+          <div className={'flex gap-4 items-start justify-start'}>
             <NameCard variant={'small'} />
           </div>
-          <FooterSection headerKey={'language'}>
-            <FooterLocaleSwitcher />
-          </FooterSection>
-          <FooterSection headerKey={'app_version'}>
-            {`v${getAppVersion()}`}
-          </FooterSection>
+          <div className={'flex flex-col gap-3'}>
+            <FooterSection headerKey={'language'}>
+              <FooterLocaleSwitcher />
+            </FooterSection>
+            <FooterSection headerKey={'app_version'}>
+              {`v${getAppVersion()}`}
+            </FooterSection>
+          </div>
         </div>
       </div>
       <div
