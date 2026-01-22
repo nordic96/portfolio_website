@@ -194,6 +194,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
