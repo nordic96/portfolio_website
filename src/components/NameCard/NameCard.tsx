@@ -45,18 +45,16 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
       <div className={'flex gap-3'}>
         {/** Profile Image Container */}
         {variant === 'large' && (
-          <div
+          <Image
             className={
-              'w-22 aspect-auto border-2 border-accent-yellow rounded-xl p-1 flex items-center'
+              'min-w-22 max-sm:min-w-25 aspect-auto border-2 border-accent-yellow rounded-xl p-1 object-cover'
             }
-          >
-            <Image
-              src={'/images/profile_img.png'}
-              width={88}
-              height={88}
-              alt={t('profile_alt')}
-            />
-          </div>
+            src={'/images/profile_img.png'}
+            width={88}
+            height={88}
+            alt={t('profile_alt')}
+            draggable={false}
+          />
         )}
         {/** Metadata Container */}
         <div className={'flex flex-col'}>
@@ -80,7 +78,6 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
                 'text-3xl': variant === 'large',
                 'text-xl': variant === 'small',
               },
-              'max-sm:text-xl',
               // Removed gap since 44px touch targets provide sufficient spacing
               // Use negative margin to align icons with text edge
               'flex items-center lg:mt-1 -ml-2',
@@ -114,12 +111,12 @@ function NamecardIcon({ href, ariaLabel, children }: NamecardIconProps) {
       rel="noopener noreferrer"
       className={cn(
         // Base styles with minimum 44x44px touch target for accessibility
-        'min-w-[44px] min-h-[44px] inline-flex items-center justify-center',
+        'min-w-11 min-h-11 inline-flex items-center justify-center',
         // Hover animation - subtle scale and lift
         'transition-all duration-200 ease-in-out',
         'hover:-translate-y-1 hover:scale-110 hover:text-accent-yellow',
         // Focus-visible state for keyboard navigation (WCAG AA)
-        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        'focus-visible:outline-2 focus-visible:outline-offset-2',
         'focus-visible:outline-accent-cyan focus-visible:rounded-lg',
         // Remove default focus outline for mouse users
         'focus:outline-none',
