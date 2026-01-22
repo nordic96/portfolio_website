@@ -10,7 +10,7 @@ import { StarField } from '@/src/components/StarField';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 
 // Poppins for headings (Bold Italic)
 const poppins = Poppins({
@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     'Portfolio of Stephen Ko, a software engineer based in Singapore specializing in modern web technologies.',
 };
 
-type Props = {
+type Props = Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-};
+}>;
 
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -53,8 +53,8 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  //Enable static rendering
-  setRequestLocale(locale);
+
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>
@@ -63,7 +63,7 @@ export default async function RootLayout({
       >
         {/* StarField background - renders behind all content */}
         <StarField starCount={150} />
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <Header />
           {children}
           <Footer />
