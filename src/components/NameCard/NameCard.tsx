@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { cn } from '@/src/utils';
-import { hoverLiftStyle } from '@/src/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import CalligraphySignature from '@/src/components/CalligraphySignature';
@@ -23,10 +22,10 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
 
   // Signature dimensions based on variant
   // Large: default size for main usage
-  // Small: reduced size for footer, with even smaller dimensions on mobile
+  // Small: reduced size for footer, with mobile-optimized dimensions (150x50px)
   const signatureClassName =
     variant === 'small'
-      ? 'w-[180px] h-[60px] max-sm:w-[120px] max-sm:h-[40px]'
+      ? 'w-[180px] h-[60px] max-sm:w-[150px] max-sm:h-[50px]'
       : '';
 
   return (
@@ -82,7 +81,9 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
                 'text-xl': variant === 'small',
               },
               'max-sm:text-xl',
-              'flex items-center lg:mt-1 gap-1 max-sm:gap-0.5',
+              // Removed gap since 44px touch targets provide sufficient spacing
+              // Use negative margin to align icons with text edge
+              'flex items-center lg:mt-1 -ml-2',
             )}
             aria-label={t('social_links_label')}
           >
@@ -111,7 +112,18 @@ function NamecardIcon({ href, ariaLabel, children }: NamecardIconProps) {
       href={href}
       target={'_blank'}
       rel="noopener noreferrer"
-      className={cn(hoverLiftStyle)}
+      className={cn(
+        // Base styles with minimum 44x44px touch target for accessibility
+        'min-w-[44px] min-h-[44px] inline-flex items-center justify-center',
+        // Hover animation - subtle scale and lift
+        'transition-all duration-200 ease-in-out',
+        'hover:-translate-y-1 hover:scale-110 hover:text-accent-yellow',
+        // Focus-visible state for keyboard navigation (WCAG AA)
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        'focus-visible:outline-accent-cyan focus-visible:rounded-lg',
+        // Remove default focus outline for mouse users
+        'focus:outline-none',
+      )}
       aria-label={ariaLabel}
     >
       {children}
