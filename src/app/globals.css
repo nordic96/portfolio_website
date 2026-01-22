@@ -280,6 +280,33 @@ body {
   animation: fadeIn 0.4s ease-out forwards;
 }
 
+/* ==========================================================================
+   Loading Bar Animation
+   ========================================================================== */
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.animate-loading-bar {
+  width: 25%;
+  animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+/* Respect reduced motion preference for loading bar */
+@media (prefers-reduced-motion: reduce) {
+  .animate-loading-bar {
+    animation: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+}
+
 @layer utilities {
   ::-webkit-scrollbar {
     width: 12px;

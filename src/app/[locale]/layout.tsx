@@ -12,6 +12,8 @@ import { routing } from '@/src/i18n/routing';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
 import { Analytics } from '@vercel/analytics/next';
+import { Suspense } from 'react';
+import Loading from '../loading';
 
 // Poppins for headings (Bold Italic)
 const poppins = Poppins({
@@ -54,7 +56,6 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-
   const messages = await getMessages();
 
   return (
@@ -62,13 +63,15 @@ export default async function RootLayout({
       <body
         className={`${poppins.variable} ${roboto.variable} antialiased bg-night-sky-gradient`}
       >
-        {/* StarField background - renders behind all content */}
-        <StarField starCount={150} />
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          {children}
-          <Footer />
-        </NextIntlClientProvider>
+        <Suspense fallback={<Loading />}>
+          {/* StarField background - renders behind all content */}
+          <StarField starCount={150} />
+          <NextIntlClientProvider messages={messages}>
+            <Header />
+            {children}
+            <Footer />
+          </NextIntlClientProvider>
+        </Suspense>
         <Analytics />
       </body>
     </html>
