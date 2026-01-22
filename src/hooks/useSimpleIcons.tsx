@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { SimpleIcon } from 'simple-icons';
 import { Tooltip } from '@mui/material';
 import { cn } from '@/src/utils';
@@ -35,7 +36,7 @@ interface UseSimpleIconsReturn {
   /** Array of rendered icon elements with metadata */
   icons: RenderedIcon[];
   /** Pre-composed icon container with flex layout */
-  IconContainer: React.FC<{ className?: string }>;
+  IconContainer: ({ className }: { className?: string }) => React.JSX.Element;
 }
 
 /**
@@ -92,35 +93,43 @@ export function useSimpleIcons({
 }: UseSimpleIconsOptions): UseSimpleIconsReturn {
   const sizeClass = getResponsiveSizeClass(size);
 
-  const renderedIcons: RenderedIcon[] = icons.map((icon) => {
-    const iconElement = (
-      <div
-        className={cn(
-          'flex items-center justify-center shrink-0',
-          sizeClass,
-          colorClass,
-          className,
-        )}
-        dangerouslySetInnerHTML={{ __html: icon.svg }}
-        aria-label={icon.title}
-        role="img"
-      />
-    );
+  const renderedIcons: RenderedIcon[] = useMemo(
+    () =>
+      icons.map((icon) => {
+        const iconElement = (
+          <div
+            className={cn(
+              'flex items-center justify-center shrink-0',
+              sizeClass,
+              colorClass,
+              className,
+            )}
+            /**
+             * SAFETY: SVG content from 'simple-icons' package (trusted source).
+             * No user input involved. Static SVG strings only.
+             */
+            dangerouslySetInnerHTML={{ __html: icon.svg }}
+            aria-label={icon.title}
+            role="img"
+          />
+        );
 
-    const element = showTooltip ? (
-      <Tooltip key={`icon-${icon.slug}`} title={icon.title} arrow>
-        {iconElement}
-      </Tooltip>
-    ) : (
-      <span key={`icon-${icon.slug}`}>{iconElement}</span>
-    );
+        const element = showTooltip ? (
+          <Tooltip key={`icon-${icon.slug}`} title={icon.title} arrow>
+            {iconElement}
+          </Tooltip>
+        ) : (
+          <span key={`icon-${icon.slug}`}>{iconElement}</span>
+        );
 
-    return {
-      key: icon.slug,
-      title: icon.title,
-      element,
-    };
-  });
+        return {
+          key: icon.slug,
+          title: icon.title,
+          element,
+        };
+      }),
+    [icons, sizeClass, className, showTooltip, colorClass],
+  );
 
   /**
    * IconContainer - Pre-built flex container with responsive layout
@@ -130,24 +139,29 @@ export function useSimpleIcons({
    * - Responsive gap (gap-1.5 on mobile, gap-2 on desktop)
    * - Centered alignment by default
    */
-  const IconContainer: React.FC<{ className?: string }> = ({
-    className: containerClassName,
-  }) => (
-    <div
-      className={cn(
-        'flex flex-wrap items-center gap-1.5 md:gap-2',
-        containerClassName,
-      )}
-      role="list"
-      aria-label="Technologies used"
-    >
-      {renderedIcons.map(({ key, element }) => (
-        <span key={key} role="listitem">
-          {element}
-        </span>
-      ))}
-    </div>
-  );
+  const IconContainer = useMemo(() => {
+    const Component = ({
+      className: containerClassName,
+    }: {
+      className?: string;
+    }) => (
+      <div
+        className={cn(
+          'flex flex-wrap items-center gap-1.5 md:gap-2',
+          containerClassName,
+        )}
+        role="list"
+        aria-label="Technologies used"
+      >
+        {renderedIcons.map(({ key, element }) => (
+          <span key={key} role="listitem">
+            {element}
+          </span>
+        ))}
+      </div>
+    );
+    return Component;
+  }, [renderedIcons]);
 
   return {
     icons: renderedIcons,

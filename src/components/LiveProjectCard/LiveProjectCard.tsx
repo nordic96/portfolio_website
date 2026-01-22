@@ -1,11 +1,12 @@
 'use client';
 
+import { SimpleIcon } from 'simple-icons';
+
 import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
+import { useSimpleIcons } from '@/src/hooks';
 import IPhoneProFrame from '@/src/components/IPhoneProFrame';
 import LiveProjectIframe from '@/src/components/LiveProjectIframe';
-import { SimpleIcon } from 'simple-icons';
-import { useSimpleIcons } from '@/src/hooks';
 
 export interface LiveProject {
   id: string;
