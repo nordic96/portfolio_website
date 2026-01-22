@@ -4,8 +4,8 @@ import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
 import IPhoneProFrame from '@/src/components/IPhoneProFrame';
 import LiveProjectIframe from '@/src/components/LiveProjectIframe';
-import { Tooltip } from '@mui/material';
 import { SimpleIcon } from 'simple-icons';
+import { useSimpleIcons } from '@/src/hooks';
 
 export interface LiveProject {
   id: string;
@@ -35,6 +35,10 @@ export default function LiveProjectCard({
   className,
 }: LiveProjectCardProps) {
   const { title, url, fallbackUrl, description, techStack } = project;
+  const { IconContainer } = useSimpleIcons({
+    icons: techStack,
+    size: { mobile: 'md', desktop: 'lg' },
+  });
 
   return (
     <div className={cn('flex flex-col items-center', className)}>
@@ -80,22 +84,7 @@ export default function LiveProjectCard({
             )}
           >
             {/* Tech Stack Icons Row */}
-            <div className="flex justify-center items-center gap-1 mt-2">
-              {techStack.map((tech) => {
-                return (
-                  <Tooltip
-                    key={`tech-stack-${tech.title}`}
-                    title={tech.title}
-                    arrow
-                  >
-                    <div
-                      className="w-6 h-6 flex items-center justify-center fill-white"
-                      dangerouslySetInnerHTML={{ __html: tech.svg }}
-                    />
-                  </Tooltip>
-                );
-              })}
-            </div>
+            <IconContainer className="flex justify-center items-center gap-1 mt-2" />
             {/* Description */}
             <p className="text-secondary text-text-white mt-2">{description}</p>
           </div>
