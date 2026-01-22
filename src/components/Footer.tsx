@@ -23,7 +23,7 @@ export default function Footer() {
             'grid grid-cols-[240px_auto] max-sm:grid-cols-[160px_auto] max-sm:text-xs',
           )}
         >
-          <div className={'flex gap-4 items-start justify-starts'}>
+          <div className={'flex gap-4 items-start justify-start'}>
             <NameCard variant={'small'} />
           </div>
           <div className={'flex flex-col gap-3'}>
