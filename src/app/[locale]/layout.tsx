@@ -1,39 +1,40 @@
-import type { Metadata } from 'next';
-import { Poppins, Roboto } from 'next/font/google';
+import type { Metadata } from "next";
+import { Poppins, Roboto } from "next/font/google";
 
-import '../globals.css';
-import '@/node_modules/flag-icons/css/flag-icons.min.css';
+import "../globals.css";
+import "@/node_modules/flag-icons/css/flag-icons.min.css";
 
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
-import { StarField } from '@/src/components/StarField';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { routing } from '@/src/i18n/routing';
-import { notFound } from 'next/navigation';
-import { getMessages } from 'next-intl/server';
+import Header from "@/src/components/Header";
+import Footer from "@/src/components/Footer";
+import { StarField } from "@/src/components/StarField";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { routing } from "@/src/i18n/routing";
+import { notFound } from "next/navigation";
+import { getMessages } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
 
 // Poppins for headings (Bold Italic)
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-poppins',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-poppins",
+  display: "swap",
 });
 
 // Roboto for body text (Normal/Light)
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['300', '400'],
-  style: ['normal', 'italic'],
-  variable: '--font-roboto',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  variable: "--font-roboto",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'Stephen Ko - Software Engineer',
+  title: "Stephen Ko - Software Engineer",
   description:
-    'Portfolio of Stephen Ko, a software engineer based in Singapore specializing in modern web technologies.',
+    "Portfolio of Stephen Ko, a software engineer based in Singapore specializing in modern web technologies.",
 };
 
 type Props = Readonly<{
@@ -68,6 +69,7 @@ export default async function RootLayout({
           {children}
           <Footer />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
