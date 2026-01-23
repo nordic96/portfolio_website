@@ -263,18 +263,12 @@ Session-specific findings:
 
 ### Design System Consolidation
 
-<<<<<<< Updated upstream
-- **Centralized Reusable Styles** (New in v5)
-  - **See:** `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
-  - **Location:** `/app/styles/baseStyles.ts` - SINGLE SOURCE OF TRUTH for design tokens
-  - **Design Principle:** All repeated styling patterns MUST be extracted to baseStyles.ts to ensure consistency
-=======
 **See `.claude/CLAUDE.md` for complete design system specifications:**
-- Reusable Styles System (`/app/styles/baseStyles.ts`)
+- Reusable Styles System (`/app/styles/baseStyles.ts`) - includes glassCardBaseStyle with v5.1 responsive padding
 - Color Palette (Night Sky Theme)
-- Typography specifications
+- Typography specifications (3-tier responsive system)
 - Component Patterns (card structure, icons, overlays)
->>>>>>> Stashed changes
+- Animation Hooks (useStaggeredAnimation, useSectionAnimation)
 
 Session-specific design decisions:
 - **Glass Card Pattern:** Validated title-outside-container approach with `glassCardBaseStyle`
@@ -545,6 +539,135 @@ Session validated accessibility patterns from CLAUDE.md in CalligraphySignature 
 - **State Validator:** Ensure async components have all 4 states designed
 - **Icon Size Checker:** Verify sm/md/lg consistency across designs
 - **Performance Annotator:** Flag heavy components needing mobile strategy in design specs
->>>>>>> Stashed changes
+
+---
+
+## Session Learnings - January 23, 2026
+
+### Design Validation Patterns
+
+- **Pattern: Responsive Typography & Spacing Specifications**
+  - **Context:** Designers must specify responsive behavior across mobile/tablet/desktop
+  - **See `.claude/CLAUDE.md` for:**
+    - Complete 3-tier responsive typography system (lines 398-428)
+    - Responsive spacing patterns in baseStyles (lines 206-258)
+    - Icon sizing matrix with sm/md/lg/xl variants (lines 293-330)
+  - **Design Handoff Checklist:**
+    - Create Figma artboards at 375px, 768px, 1440px
+    - Label exact type sizes per breakpoint
+    - Specify padding/gap responsive values (e.g., "p-3 md:p-4 lg:p-6")
+    - Document icon size variants (sm/md/lg/xl) for each context
+  - **Key Principle:** Provide explicit responsive specifications to prevent developer guesswork
+
+### Mistakes & Fixes
+
+- **Issue:** Icon sizing specs not provided to frontend developers
+  - **Root Cause:** Design handed off with example sizes but no standardized naming or breakpoint variants
+  - **Fix:** Created explicit sizing matrix (sm/md/lg/xl) in design system documentation
+  - **Prevention:** Always provide icon size specifications with breakpoint variants in design handoff
+
+- **Issue:** Responsive padding values inconsistent across components
+  - **Root Cause:** Each component designed independently without coordinating base spacing system
+  - **Fix:** Standardized on `p-3 md:p-4 lg:p-6` pattern for all cards
+  - **Prevention:** Define responsive spacing system before component design; apply consistently to all
+
+- **Issue:** Arbitrary Tailwind sizes (w-[20px]) suggested instead of standard classes
+  - **Root Cause:** Frontend created custom values when standard 4-multiple values could work
+  - **Fix:** Updated design system to require standard Tailwind (w-5 = 20px) for all responsive values
+  - **Prevention:** During handoff, educate frontend on Tailwind value constraints; specify sizes that align with 4-unit grid
+
+### Patterns Discovered
+
+- **Pattern: Scroll-Triggered Animation Specification**
+  - **Context:** Sections reveal content on scroll with staggered timing
+  - **See `.claude/CLAUDE.md`** (lines 332-397) for complete implementation of:
+    - `useStaggeredAnimation` hook (500ms default delay, configurable)
+    - `useSectionAnimation` hook (simple fade-in)
+    - Accessibility support (prefers-reduced-motion)
+  - **Design Handoff Requirements:**
+    - Specify animation type (staggered vs. simple fade)
+    - Provide timing values (delay between items, duration)
+    - Indicate which sections use which hook
+  - **Key Principle:** Designers specify behavior; implementation uses standard hooks from CLAUDE.md
+
+- **Pattern: Loading State Design System**
+  - **Context:** Components with async operations need designed loading, error, and success states
+  - **Four-State Design System:**
+    ```
+    Idle: Before interaction (optional subtle indicator)
+    Loading: Spinner + status text (500-2000ms typical)
+    Success: Content fade-in (300ms smooth reveal)
+    Error: Icon + message (persistent until retry)
+    ```
+  - **Applied to:** Global loading page, iframe loading state
+  - **Design Specification:** Show all four states visually in Figma
+  - **Color Usage:** Success = green accent; Error = orange/neutral (not red for eye strain)
+  - **Accessibility:** Ensure spinner has aria-label; error message is descriptive
+
+- **Pattern: Breakpoint-Specific Component Variants in Handoff**
+  - **Context:** Some components need different visual treatment at different breakpoints
+  - **Specification Method:**
+    - Create separate Figma frames for each critical breakpoint (375px, 768px, 1440px)
+    - Label each frame clearly: "Mobile", "Tablet", "Desktop"
+    - Show responsive changes explicitly (e.g., icon size change, text reflow)
+    - Annotate where layout differs significantly
+  - **Handoff Document:** Include screenshot showing all three variants side-by-side
+  - **Developer Guidance:** Specify which components change layout vs. which scale uniformly
+
+### Design System Improvements
+
+- **Updated Icon Sizing Guidance** (see `.claude/CLAUDE.md` Component Patterns for implementation)
+  - Established sm/md/lg/xl sizing tiers
+  - Documented responsive variants per component type
+  - Provided hook specification for consistent rendering
+
+- **Responsive Spacing Matrix** (see `.claude/CLAUDE.md` Reusable Styles System)
+  - Standardized card padding: `p-3 md:p-4 lg:p-6`
+  - Section gaps: `gap-2 md:gap-3 lg:gap-4`
+  - Ensures visual consistency across all breakpoints
+
+- **Typography Breakpoint Coverage**
+  - Mobile base sizing defined
+  - Tablet (md: 768px) expansion specified
+  - Desktop (lg: 1024px) final sizing locked
+
+### Debugging Wins
+
+- **Problem:** Understanding why icons appeared inconsistent across breakpoints
+  - **Approach:** Reviewed useSimpleIcons implementation; identified missing responsive size variants
+  - **Tool/Technique:** Figma comparison at multiple breakpoints + frontend code inspection
+
+- **Problem:** Determining when component layout should change vs. scale
+  - **Approach:** Tested at actual breakpoints (375px vs 1440px); documented which elements reflow vs. stay proportional
+  - **Tool/Technique:** Playwright viewport testing at each breakpoint with screenshots
+
+- **Problem:** Verifying animation timing felt natural
+  - **Approach:** Tested staggered animation at different delays (50ms, 100ms, 150ms); 100ms felt most natural
+  - **Tool/Technique:** Live testing at localhost:3000; recorded video comparison
+
+### Documentation Improvements
+
+**All responsive patterns now documented in `.claude/CLAUDE.md` (single source of truth):**
+- 3-tier responsive typography system (mobile/tablet/desktop)
+- Icon sizing matrix (sm/md/lg/xl) with `useSimpleIcons` hook
+- Spacing system with responsive baseStyles
+- Animation hooks (useStaggeredAnimation, useSectionAnimation)
+- Breakpoint handoff format (Figma frames at 375px/768px/1440px)
+
+### Accessibility Enhancements
+
+- **Icon Accessibility:** sm/md/lg sizing maintains 44x44px touch target minimum at all breakpoints
+- **Animation Accessibility:** All scroll-triggered animations respect prefers-reduced-motion
+- **Loading States:** Spinner and error messages have proper aria-labels for screen readers
+- **Text Contrast:** Responsive sizing maintains WCAG AA contrast across all breakpoints
+
+### Automation Opportunities (Jan 23 - v5.1 completion)
+
+- **Design System Audit:** Verify all components use responsive variants (p-3/md:p-4/lg:p-6 pattern)
+- **Icon Size Consistency:** Scan Figma designs for non-standard icon sizes; suggest sm/md/lg mapping
+- **Typography Validator:** Ensure all text has 3-tier responsive definition (mobile/tablet/desktop)
+- **Breakpoint Screenshot:** Auto-generate Figma exports at 375px, 768px, 1440px
+- **Animation Spec Checker:** Verify all animations have timing, delay, and reduced-motion rules
+- **Spacing Audit:** Find hardcoded spacing values; suggest standardized variants
 
 ---
