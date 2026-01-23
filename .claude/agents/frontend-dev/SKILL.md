@@ -608,24 +608,16 @@ Session-specific optimizations:
 
 - **Pattern: Reusable Style Composition via baseStyles.ts**
   - **Context:** Multiple cards need consistent glassmorphic styling, hover effects, and sizing
-  - **Implementation:** See `.claude/CLAUDE.md` (Reusable Styles System section) for complete baseStyles.ts documentation
+  - **Implementation:** See `.claude/CLAUDE.md` (Reusable Styles System, lines 206-258) for complete baseStyles.ts documentation
+  - **Key exports:** `glassCardBaseStyle` (with v5.1 responsive padding), `hoverLiftStyle`, `baseWidth`
   - **Files:** `/app/styles/baseStyles.ts`
-<<<<<<< Updated upstream
-  - **Key exports:** `glassCardBaseStyle`, `hoverLiftStyle`, `baseWidth`
+  - **Session Application:** Applied to SmallProjectCard, CertificationCard, LiveProjectCard
 
 - **Pattern: Title Outside / Card Inside Hierarchy**
   - **Context:** Cards with glass effect need visual separation between heading and content
-  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns > Card Component Pattern) for complete documentation
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns, lines 263-289) for complete card pattern specification
   - **Key Rule:** h3 title placed OUTSIDE glassCardBaseStyle container, never inside
-=======
-  - **Benefits:** Single source of truth for design system, reduces duplication
-  - **Session Application:** Successfully applied to SmallProjectCard, CertificationCard, LiveProjectCard
-
-- **Pattern: Title Outside / Card Inside Hierarchy**
-  - **Context:** Cards with glass effect need visual separation between heading and content
-  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns - Card Component Pattern section) for complete specification
-  - **Session Application:** Successfully implemented in CertificationCard, themed project cards, certification displays
->>>>>>> Stashed changes
+  - **Session Application:** Validated in CertificationCard, themed project cards, certification displays
 
 - **Pattern: CSS clip-path Animation for Writing Reveal Effect**
   - **Context:** Create animated signature or text reveal that simulates writing from left to right
@@ -706,9 +698,10 @@ Session-specific optimizations:
 
 - **Pattern: useSimpleIcons Hook for Icon Rendering**
   - **Context:** Multiple components need to render SimpleIcon objects with consistent sizing, tooltips, and accessibility
-  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns - Icon Integration Pattern section) for complete hook documentation and usage examples
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns, lines 293-330) for complete hook documentation with sm/md/lg sizing
   - **Location:** `/src/hooks/useSimpleIcons.tsx`
-  - **Session Application:** Successfully integrated into SmallProjectCard and LiveProjectCard with memoization optimization
+  - **Returns:** `{ icons: SimpleIcon[]; IconContainer: React.FC }` with responsive sizing and tooltip support
+  - **Session Application:** Integrated into SmallProjectCard and LiveProjectCard with useMemo optimization
 
 - **Pattern: Mobile Fallback with useBreakpoint Hook**
   - **Context:** Heavy components (iframes) crash on mobile; need lightweight alternative
@@ -811,44 +804,140 @@ Session-specific validations:
 
 ---
 
+## Session Learnings - January 23, 2026
+
+### Mistakes & Fixes
+
+- **Issue:** Hardcoded icon sizes in SmallProjectCard not responding to breakpoints
+  - **Root Cause:** Fixed 24px sizing ignored responsive design requirements; same size on mobile, tablet, desktop
+  - **Fix:** Updated `useSimpleIcons` hook to support responsive sizing directly; removed `getResponsiveSizeClass` function complexity
+  - **Prevention:** Always consider responsive variants when creating hooks; simplify by using direct Tailwind class composition with clsx
+
+- **Issue:** SVG icons from SimpleIcons not scaling within flex containers on responsive layouts
+  - **Root Cause:** SVG had fixed dimensions that weren't responsive to container width
+  - **Fix:** Applied `[&>svg]:w-full [&>svg]:h-full` to force SVG to fill parent container dimensions
+  - **Prevention:** When rendering SVGs in containers, explicitly set width/height to 100% using child selector in Tailwind
+
+- **Issue:** Arbitrary Tailwind values used for responsive sizing instead of standard classes
+  - **Root Cause:** Created `w-[20px]` instead of using standard `w-5` (20px divisible by 4)
+  - **Fix:** Switched to standard Tailwind classes (w-4, w-6, w-8) for all responsive sizing
+  - **Prevention:** Always use standard Tailwind utility classes when values are divisible by 4 (4, 8, 12, 16, 20, 24, 32, etc.)
+
+### Patterns Discovered
+
+- **Pattern: 3-Tier Responsive Typography System**
+  - **Context:** Consistent text sizing across mobile, tablet, desktop
+  - **See `.claude/CLAUDE.md`** (lines 398-428) for complete responsive typography documentation
+  - **Implementation:** CSS custom properties in globals.css with media queries
+  - **Usage:** Apply `.text-title`, `.text-h1`, `.text-h2`, etc. classes
+  - **Key Principle:** Mobile-first scaling with md: and lg: breakpoint overrides
+  - **Session Application:** Applied to Hero, Section Headings, Card Titles in v5.1
+
+- **Pattern: Responsive baseStyles with glassCardBaseStyle Updates**
+  - **Context:** Reusable styles need responsive padding and gap variants
+  - **See `.claude/CLAUDE.md`** (lines 206-258) for current glassCardBaseStyle specification
+  - **Current Value:** `bg-dark-gray/50 backdrop-blur-md rounded-3xl max-sm:p-3 md:p-2.5 lg:p-3`
+  - **Pattern:** Mobile-first base value, then md: and lg: overrides in single string
+  - **Session Note:** Use standard Tailwind classes (p-2.5) over arbitrary values (p-[10px])
+
+- **Pattern: Scroll-Triggered Animation Hooks**
+  - **Context:** Multiple sections need unified animation pattern for revealing content on scroll
+  - **See `.claude/CLAUDE.md`** (lines 332-397) for complete hook documentation:
+    - `useStaggeredAnimation` - Staggered reveal with configurable delay (default 500ms)
+    - `useSectionAnimation` - Simple fade-in for entire section
+  - **Location:** `/src/hooks/useStaggeredAnimation.ts` and `/src/hooks/useSectionAnimation.ts`
+  - **Features:** Intersection Observer API, prefers-reduced-motion support, configurable timing
+  - **Session Application:** Applied to SmallProjectCard, CertificationCard, LiveProjectCard sections (staggered); Hero/Footer (simple fade)
+
+- **Pattern: Vercel Build Ignore Script for Branch Filtering**
+  - **Context:** Restrict production builds to main branches (develop/master), skip builds on feature branches
+  - **Implementation:** `vercel_build_ignore_step.sh` script
+  - **Location:** Project root, referenced in `vercel.json` build settings
+  - **Script Logic:**
+    ```bash
+    #!/bin/bash
+    if [[ "$VERCEL_GIT_COMMIT_REF" != "master" && "$VERCEL_GIT_COMMIT_REF" != "develop" ]]; then
+      echo "Skipping build on branch: $VERCEL_GIT_COMMIT_REF"
+      exit 0
+    fi
+    ```
+  - **Configuration in vercel.json:**
+    ```json
+    {
+      "buildCommand": "bash vercel_build_ignore_step.sh && npm run build"
+    }
+    ```
+  - **Benefits:** Prevents unnecessary builds on feature branches, saves build minutes, faster feedback on main branches
+
+### Debugging Wins
+
+- **Problem:** Icon sizing inconsistency across responsive breakpoints
+  - **Approach:** Tested `useSimpleIcons` hook at 375px, 768px, 1440px using Playwright; identified fixed sizing
+  - **Tool/Technique:** Playwright viewport testing + component visual inspection
+
+- **Problem:** SVG icons not filling containers properly
+  - **Approach:** Inspected SVG in DevTools; found inline width/height attributes overriding container flex
+  - **Tool/Technique:** Browser DevTools CSS inspector to identify conflicting styles
+
+- **Problem:** Determining correct standard Tailwind classes for arbitrary sizes
+  - **Approach:** Referenced Tailwind spacing scale; identified all base-4 multiples (4, 8, 12, 16, 20, 24, 32, 48, 64)
+  - **Tool/Technique:** Tailwind documentation + manual verification of divisibility by 4
+
+- **Problem:** Section animations not triggering consistently on scroll
+  - **Approach:** Added console logging to useStaggeredAnimation; verified Intersection Observer was detecting visibility
+  - **Tool/Technique:** React DevTools profiler + console debugging for observer callbacks
+
+### Performance Notes
+
+Session-specific optimizations (v5.1 completion):
+- **useSimpleIcons with clsx:** Direct object composition more efficient than function-based `getResponsiveSizeClass`
+- **SVG Child Selectors:** `[&>svg]:w-full` compiles to single CSS rule vs. per-component styling
+- **Standard Tailwind Classes:** Enables aggressive tree-shaking; arbitrary values `w-[20px]` create larger CSS output
+- **Staggered Animations:** Intersection Observer only for visible elements; hidden items don't trigger updates
+- **Vercel Build Ignore:** Prevents unnecessary build time on feature branches (typical: 2-5 min saved per PR)
+
+### Responsive Testing Workflow Validated
+
+- **5-Breakpoint Strategy:** Test at 375px, 393px, 768px, 1024px, 1440px covers 95% of user devices
+- **Playwright Viewport Automation:** Setting exact viewport sizes more reliable than browser zoom
+- **Component-Level Testing:** Test individual components (cards, buttons) before full page screenshots
+- **Regression Tracking:** Save baseline screenshots to catch future changes quickly
+- **Mobile-First Validation:** Always start at 375px, verify then expand to larger viewports
+
+### Accessibility Wins
+
+- **Icon Accessibility:** useSimpleIcons hook integrates MUI Tooltip for screen reader announcements
+- **Touch Targets:** Verified 44x44px minimum maintained at all breakpoints (even with responsive sizing)
+- **Color Contrast:** Validated all text maintains WCAG AA compliance at responsive text sizes
+- **Animation Respect:** useStaggeredAnimation respects prefers-reduced-motion by showing all items immediately
+
+### Automation Opportunities (Jan 23 - v5.1 completion)
+
+- **Responsive Testing Bot:** CLI tool to generate Playwright screenshots at all 5 breakpoints automatically
+- **Tailwind Validator:** Pre-commit linter to flag arbitrary values (w-[20px]) in favor of standard classes
+- **Icon Size Auditor:** Scan codebase for inconsistent icon sizing; suggest standardization
+- **Breakpoint Consistency:** Linter to ensure all components use consistent md: and lg: breakpoints
+- **Build Script Validator:** Verify vercel.json references correct build ignore script
+
+---
+
 ## Session Learnings - January 22, 2026
 
 ### GitHub CLI Workflow Automation
 
-- **Pattern: Batch GitHub Milestone & Issue Creation**
-  - **Context:** Creating v5.1 milestone with 9 related issues from design review findings
-  - **Workflow Steps:**
-    1. Create milestone: `gh milestone create "v5.1 Milestone" -d "Phase 3-5 improvements and bug fixes"`
-    2. Get milestone ID: `gh milestone list --json number,title | grep v5.1`
-    3. Batch create issues with: `gh issue create --title "..." --body "..." --milestone <id> --label "bug,mobile"`
-  - **Benefits:** Reproducible issue creation, batch operations, consistent labeling and metadata
-  - **Scalability:** Can create 9+ issues in <30 seconds with script automation
+**Session-specific patterns for v5.1 milestone and issue management:**
 
-- **Pattern: Structured Issue Templates with Reproduction Steps**
-  - **Context:** Design review findings need consistent documentation for implementation
-  - **Template Structure:**
-    ```markdown
-    ## Type: [Bug|Polish|Enhancement]
+- **Batch Milestone & Issue Creation:** Create milestone with `gh milestone create`, then batch issues with `--milestone` flag
+- **Structured Issue Templates:** Include Type, Affected Breakpoints, Current/Expected Behavior, Screenshots
+- **PR Review Iteration:** Use `gh api repos/:owner/:repo/pulls/:pr/comments` to fetch feedback, amend commits with `--force-with-lease`
 
-    ## Affected Breakpoints
-    - 375px: [description]
-    - 393px: [description]
-    - 768px: [description]
-
-    ## Current Behavior
-    [What's broken/wrong]
-
-    ## Expected Behavior
-    [Per design spec]
-
-    ## Suggested Fix
-    [Optional technical guidance]
-
-    ## Screenshots
-    [Breakpoint labels: mobile-375, mobile-393, tablet-768, etc.]
-    ```
-  - **Labels:** Use `bug`, `mobile`, `desktop`, `polish`, `enhancement` for filtering
-  - **Priority:** Add `priority:critical`, `priority:high`, `priority:low` for triaging
+**Key Commands:**
+```bash
+gh milestone create "v5.1" -d "Description"
+gh issue create --title "..." --milestone "v5.1" --label "bug,mobile"
+gh api repos/owner/repo/pulls/463/comments
+git commit --amend --no-edit && git push origin branch --force-with-lease
+```
 
 ### Mobile Responsive Design Debugging
 
