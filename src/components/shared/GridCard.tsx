@@ -2,6 +2,7 @@ import { cn } from '@/src/utils';
 import { ClassValue } from 'clsx';
 import { ReactNode } from 'react';
 import SectionHeader from './SectionHeader';
+import { useTranslations } from 'next-intl';
 
 interface GridCardProps {
   children: ReactNode;
@@ -37,13 +38,14 @@ export default function GridCard({
   title,
   variant = 'default',
 }: GridCardProps) {
+  const headerT = useTranslations('SectionHeader');
   const baseStyles = variant === 'default' ? gridCardDefaultStyle : '';
 
   return (
     <div className={'flex flex-col grow h-full'}>
-      {title && (
+      {title && headerT.has(title) && (
         <SectionHeader
-          title={title}
+          title={headerT(title)}
           alignment={'center'}
           className={headerClass}
         />

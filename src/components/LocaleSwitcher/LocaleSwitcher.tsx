@@ -70,7 +70,7 @@ export default function LocaleSwitcher() {
         <div
           role={'listbox'}
           aria-label={'Select language'}
-          className={`absolute flex flex-col w-25 gap-1 top-9 max-sm:top-7 right-[50%] translate-x-[50%] text-sm shadow-lg border border-white/20 ${glassCardBaseStyle}`}
+          className={`absolute flex flex-col w-30 top-9 max-sm:top-7 right-[50%] translate-x-[50%] text-base shadow-lg border border-white/20 ${glassCardBaseStyle}`}
         >
           {LOCALES.map((localeOption) => {
             const isSelected = localeOption === locale;

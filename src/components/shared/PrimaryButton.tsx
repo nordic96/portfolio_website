@@ -17,7 +17,8 @@ export default function PrimaryButton({
     <button
       className={cn(
         'cursor-pointer',
-        'flex items-center justify-center gap-3 max-w-70 px-4 py-3',
+        'flex items-center justify-center gap-3 md:gap-1 max-w-70 px-4 lg:py-3 md:py-2 max-sm:py-3',
+        'lg:text-base md:text-xs',
         'shadow-2xl',
         hoverLiftStyle,
         variant === 'primary' ? 'bg-dark-gray rounded-full' : '',
