@@ -1,3 +1,5 @@
+'use client';
+
 import {
   siAndroid,
   siBluetooth,
@@ -17,6 +19,7 @@ import GridCard from '../shared/GridCard';
 import PrimaryButton from '../shared/PrimaryButton';
 import { GITHUB_URL } from '@/src/config';
 import { useTranslations } from 'next-intl';
+import { useStaggeredAnimation } from '@/src/hooks';
 
 const projectData: SmallProject[] = [
   {
@@ -47,17 +50,31 @@ const projectData: SmallProject[] = [
 
 export default function SmallProjectSection() {
   const t = useTranslations('ProjectSection');
+
+  // Staggered animation for project cards + button (itemCount = projects + 1 for button)
+  const { containerRef, getItemClassName } =
+    useStaggeredAnimation<HTMLDivElement>({
+      itemCount: projectData.length + 1,
+      staggerDelay: 500,
+    });
+
   return (
     <GridCard title={'github_projects'} headerClass={'bg-accent-green'}>
-      <div className={'flex flex-col gap-3 items-center'}>
-        {projectData.map((p) => {
-          return <SmallProjectCard key={p.id} project={p} />;
+      <div ref={containerRef} className={'flex flex-col gap-3 items-center'}>
+        {projectData.map((p, index) => {
+          return (
+            <div key={p.id} className={getItemClassName(index)}>
+              <SmallProjectCard project={p} />
+            </div>
+          );
         })}
-        <PrimaryButton icon={siGithub}>
-          <a href={GITHUB_URL} target={'_blank'}>
-            {t('view_more')}
-          </a>
-        </PrimaryButton>
+        <div className={getItemClassName(projectData.length)}>
+          <PrimaryButton icon={siGithub}>
+            <a href={GITHUB_URL} target={'_blank'}>
+              {t('view_more')}
+            </a>
+          </PrimaryButton>
+        </div>
       </div>
     </GridCard>
   );

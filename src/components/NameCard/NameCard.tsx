@@ -6,6 +6,7 @@ import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import CalligraphySignature from '@/src/components/CalligraphySignature';
 import { GITHUB_URL, LINKEDIN_URL } from '@/src/config';
+import { useSectionAnimation } from '@/src/hooks';
 
 interface NameCardProps {
   variant?: 'small' | 'large';
@@ -20,6 +21,9 @@ interface NamecardIconProps {
 export default function NameCard({ variant = 'large' }: NameCardProps) {
   const t = useTranslations('NameCard');
 
+  // Section fade-in animation (only for large variant which is the hero)
+  const { sectionRef, animationClassName } = useSectionAnimation();
+
   // Signature dimensions based on variant - responsive sizing
   // Large: 220px mobile -> 250px tablet -> 289px desktop
   // Small: 150px mobile -> 165px tablet -> 180px desktop
@@ -30,7 +34,11 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
 
   return (
     <section
-      className={'flex flex-col max-md:items-center'}
+      ref={variant === 'large' ? sectionRef : undefined}
+      className={cn(
+        'flex flex-col max-md:items-center',
+        variant === 'large' && animationClassName,
+      )}
       aria-label={t('section_label')}
     >
       {/** Signature Container - Animated calligraphy signature */}

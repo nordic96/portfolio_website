@@ -24,6 +24,10 @@ interface DashboardLayoutProps {
  * Responsive Behavior:
  * - Desktop (>=768px): 2-column grid, 100dvh fixed
  * - Mobile (<768px): Single column stack, scrollable
+ *
+ * Animations:
+ * - Each child section manages its own animations via useStaggeredAnimation
+ * - Hero section uses useSectionAnimation for entrance fade-in
  */
 export default function DashboardLayout({
   heroSection,
