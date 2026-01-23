@@ -11,14 +11,6 @@ import { cn } from '@/src/utils';
  * - md: 20px (mobile default)
  * - lg: 24px (desktop default)
  */
-type IconSize = 'max-sm' | 'md' | 'lg';
-
-interface ResponsiveSize {
-  mobile: IconSize;
-  tablet?: IconSize;
-  desktop: IconSize;
-}
-
 interface UseSimpleIconsOptions {
   /** Array of SimpleIcon objects to render */
   icons: SimpleIcon[];
@@ -148,9 +140,4 @@ export function useSimpleIcons({
   };
 }
 
-export type {
-  IconSize,
-  ResponsiveSize,
-  UseSimpleIconsOptions,
-  UseSimpleIconsReturn,
-};
+export type { UseSimpleIconsOptions, UseSimpleIconsReturn };

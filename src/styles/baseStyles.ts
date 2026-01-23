@@ -6,4 +6,4 @@ export const hoverLiftStyle =
  * Used in LiveProject Metadata Container & SmallProject card container
  */
 export const glassCardBaseStyle =
-  'bg-dark-gray/50 backdrop-blur-md rounded-3xl max-sm:p-3 md:p-2.5 lg:p-3 gap-2 md:gap-2.5 lg:gap-3';
+  'bg-dark-gray/50 backdrop-blur-md rounded-3xl max-sm:p-3 md:p-2.5 lg:p-3';

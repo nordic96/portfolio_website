@@ -60,7 +60,7 @@ export default function SmallProjectCard({
       <div
         className={cn(
           // Responsive layout: column on mobile, row on tablet+
-          'flex flex-col md:flex-col md:items-start',
+          'flex flex-col md:flex-col md:items-start gap-2 md:gap-2.5 lg:gap-3',
           glassCardBaseStyle,
         )}
       >
