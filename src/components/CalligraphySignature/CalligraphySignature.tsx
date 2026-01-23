@@ -112,6 +112,7 @@ export default function CalligraphySignature({
         height={height}
         alt={alt}
         priority
+        draggable={false}
         className="w-full h-full object-contain"
         style={{
           ...animationStyle,

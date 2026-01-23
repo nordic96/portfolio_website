@@ -20,17 +20,17 @@ interface NamecardIconProps {
 export default function NameCard({ variant = 'large' }: NameCardProps) {
   const t = useTranslations('NameCard');
 
-  // Signature dimensions based on variant
-  // Large: default size for main usage
-  // Small: reduced size for footer, with mobile-optimized dimensions (150x50px)
+  // Signature dimensions based on variant - responsive sizing
+  // Large: 220px mobile -> 250px tablet -> 289px desktop
+  // Small: 150px mobile -> 165px tablet -> 180px desktop
   const signatureClassName =
     variant === 'small'
-      ? 'w-[180px] h-[60px] max-sm:w-[150px] max-sm:h-[50px]'
-      : '';
+      ? 'w-[150px] h-[50px] md:w-[165px] md:h-[55px] lg:w-[180px] lg:h-[60px]'
+      : 'w-[220px] h-[73px] md:w-[250px] md:h-[83px] lg:w-[289px] lg:h-[96px]';
 
   return (
     <section
-      className={'flex flex-col max-sm:items-center'}
+      className={'flex flex-col max-md:items-center'}
       aria-label={t('section_label')}
     >
       {/** Signature Container - Animated calligraphy signature */}
@@ -42,13 +42,15 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
         height={variant === 'small' ? 60 : 96}
         className={signatureClassName}
       />
-      <div className={'flex gap-3'}>
-        {/** Profile Image Container */}
+      <div className={'flex gap-2 md:gap-3'}>
+        {/** Profile Image Container - responsive sizing */}
         {variant === 'large' && (
           <Image
-            className={
-              'min-w-22 max-sm:min-w-25 aspect-auto border-2 border-accent-yellow rounded-xl p-1 object-cover'
-            }
+            className={cn(
+              // Responsive min-width: 72px mobile, 80px tablet, 88px desktop
+              'min-w-18 md:min-w-20 lg:min-w-22',
+              'aspect-auto border-2 border-accent-yellow rounded-xl p-1 object-cover',
+            )}
             src={'/images/profile_img.png'}
             width={88}
             height={88}
@@ -71,16 +73,18 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
               </span>
             </span>
           )}
-          {/** NameCard Icons Container */}
+          {/** NameCard Icons Container - responsive icon sizing */}
           <nav
             className={cn(
               {
-                'text-3xl': variant === 'large',
-                'text-xl': variant === 'small',
+                // Large variant: 24px mobile, 28px tablet, 30px desktop
+                'text-2xl md:text-[28px] lg:text-3xl': variant === 'large',
+                // Small variant: 18px mobile, 20px tablet, 24px desktop
+                'text-lg md:text-xl lg:text-xl': variant === 'small',
               },
               // Removed gap since 44px touch targets provide sufficient spacing
               // Use negative margin to align icons with text edge
-              'flex items-center lg:mt-1 -ml-2',
+              'flex items-center mt-0.5 md:mt-1 -ml-2',
             )}
             aria-label={t('social_links_label')}
           >

@@ -11,13 +11,9 @@ import { cn } from '@/src/utils';
  * - md: 20px (mobile default)
  * - lg: 24px (desktop default)
  */
-type IconSize = 'sm' | 'md' | 'lg';
-
 interface UseSimpleIconsOptions {
   /** Array of SimpleIcon objects to render */
   icons: SimpleIcon[];
-  /** Size preset or responsive object */
-  size?: IconSize | { mobile: IconSize; desktop: IconSize };
   /** Additional className for the icon container */
   className?: string;
   /** Show tooltip on hover (default: true) */
@@ -40,32 +36,6 @@ interface UseSimpleIconsReturn {
 }
 
 /**
- * Size mapping to Tailwind classes
- */
-const sizeClasses: Record<IconSize, string> = {
-  sm: 'w-4 h-4',
-  md: 'w-5 h-5',
-  lg: 'w-6 h-6',
-};
-
-/**
- * Responsive size mapping to Tailwind classes
- */
-const getResponsiveSizeClass = (
-  size: IconSize | { mobile: IconSize; desktop: IconSize },
-): string => {
-  if (typeof size === 'string') {
-    return sizeClasses[size];
-  }
-  // Responsive: mobile size + md: desktop size
-  const mobileClass = sizeClasses[size.mobile];
-  const desktopClass = sizeClasses[size.desktop]
-    .replace('w-', 'md:w-')
-    .replace('h-', 'md:h-');
-  return `${mobileClass} ${desktopClass}`;
-};
-
-/**
  * useSimpleIcons - Hook for consistent SimpleIcon rendering across components
  *
  * Features:
@@ -86,13 +56,10 @@ const getResponsiveSizeClass = (
  */
 export function useSimpleIcons({
   icons,
-  size = { mobile: 'md', desktop: 'lg' },
   className,
   showTooltip = true,
   colorClass = 'fill-white',
 }: UseSimpleIconsOptions): UseSimpleIconsReturn {
-  const sizeClass = getResponsiveSizeClass(size);
-
   const renderedIcons: RenderedIcon[] = useMemo(
     () =>
       icons.map((icon) => {
@@ -100,7 +67,11 @@ export function useSimpleIcons({
           <div
             className={cn(
               'flex items-center justify-center shrink-0',
-              sizeClass,
+              {
+                'max-sm:w-4 max-sm:h-4': true,
+                'md:w-5 md:h-5': true,
+                'lg:w-6 lg:h-6': true,
+              },
               colorClass,
               className,
             )}
@@ -128,7 +99,7 @@ export function useSimpleIcons({
           element,
         };
       }),
-    [icons, sizeClass, className, showTooltip, colorClass],
+    [icons, className, showTooltip, colorClass],
   );
 
   /**
@@ -169,4 +140,4 @@ export function useSimpleIcons({
   };
 }
 
-export type { IconSize, UseSimpleIconsOptions, UseSimpleIconsReturn };
+export type { UseSimpleIconsOptions, UseSimpleIconsReturn };

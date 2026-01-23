@@ -62,7 +62,7 @@ function CertificationsSection() {
 
   return (
     <GridCard
-      title={t('section_title')}
+      title={'certs'}
       headerClass={'bg-accent-indigo'}
       className={'lg:min-w-90'}
     >
