@@ -9,6 +9,7 @@ import LiveProjectsSection from '@/src/components/LiveProjectsSection';
 import GridCard from '@/src/components/shared/GridCard';
 import SmallProjectSection from '@/src/components/SmallProjectSection/SmallProjectSection';
 import { useTranslations } from 'next-intl';
+import { useStaggeredAnimation } from '@/src/hooks';
 
 /**
  * Dashboard Home Page - v4.0 Layout Foundation
@@ -31,6 +32,7 @@ export default function Home() {
 /**
  * Certifications Section
  * Displays professional certification badges with verification links
+ * Uses staggered animation for items appearing one by one from top to bottom
  */
 function CertificationsSection() {
   const t = useTranslations('Certifications');
@@ -60,6 +62,13 @@ function CertificationsSection() {
     },
   ];
 
+  // Staggered animation for certification cards
+  const { containerRef, getItemClassName } =
+    useStaggeredAnimation<HTMLUListElement>({
+      itemCount: certifications.length,
+      staggerDelay: 500,
+    });
+
   return (
     <GridCard
       title={'certs'}
@@ -67,11 +76,11 @@ function CertificationsSection() {
       className={'lg:min-w-90'}
     >
       <section aria-label={t('section_label')}>
-        <ul className="space-y-2 list-none" role="list">
-          {certifications.map((cert) => {
+        <ul ref={containerRef} className="space-y-2 list-none" role="list">
+          {certifications.map((cert, index) => {
             const { id, ...props } = cert;
             return (
-              <li key={id}>
+              <li key={id} className={getItemClassName(index)}>
                 <CertificationCard {...props} />
               </li>
             );
