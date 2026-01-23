@@ -1,0 +1,67 @@
+{
+    "Header": {
+        "site_title": "STEPHEN KO",
+        "home_link_label": "前往主页",
+        "navigation_label": "网站导航"
+    },
+    "NameCard": {
+        "section_label": "个人介绍及联系方式",
+        "signature_alt": "Stephen Ko 的签名",
+        "profile_alt": "Stephen Ko 的个人头像",
+        "name": "Stephen Ko",
+        "job_title": "前端软件工程师，常驻新加坡",
+        "location_flag_label": "新加坡国旗",
+        "social_links_label": "社交媒体链接",
+        "linkedin_label": "访问 Stephen 的 LinkedIn 个人资料（在新标签页打开）",
+        "email_label": "给 Stephen 发送邮件",
+        "github_label": "访问 Stephen 的 GitHub 个人资料（在新标签页打开）"
+    },
+    "SectionHeader": {
+        "live_project": "已上线的 Web 项目",
+        "github_projects": "GitHub 项目",
+        "certs": "证书与资质"
+    },
+    "ProjectSection": {
+        "view_more": "查看更多项目"
+    },
+    "Certifications": {
+        "section_label": "专业证书与资质",
+        "issued_label": "颁发日期",
+        "verify_label": "验证",
+        "aws_saa": {
+            "name": "解决方案架构师 – 助理级 (Solutions Architect - Associate)",
+            "issuer": "Amazon Web Services",
+            "badge_alt": "AWS 解决方案架构师 – 助理级认证徽章"
+        },
+        "lfcs": {
+            "name": "Linux Foundation 认证系统管理员",
+            "issuer": "Linux Foundation",
+            "badge_alt": "Linux Foundation 认证系统管理员徽章"
+        }
+    },
+    "Projects": {
+        "wink": {
+            "desc": "使用 Core-Bluetooth 估算近距离范围的实验性 Flutter 应用程序"
+        },
+        "temppi": {
+            "desc": "物联网项目，使用带有温度传感器的 RaspberryPi 1 模块检测室温"
+        },
+        "onion": {
+            "desc": "用于讽刺检测的自然语言处理 (NLP) 项目"
+        },
+        "covid": {
+            "desc": "基于胸部 X 光图像分析的 Covid19 SARS 检测"
+        },
+        "foodies_trail": {
+            "desc": "用于个人项目的 3D Web 应用美食博客，使用 Three.js 和 Next.js 开发"
+        },
+        "white_rabbit": {
+            "desc": "世界未解之谜图谱知识库，使用 Neo4J、FastAPI 和 Next.js 开发"
+        }
+    },
+    "Footer": {
+        "language": "更改语言",
+        "footline": "由 Gi Hun Ko Stephen 开发",
+        "app_version": "应用版本"
+    }
+}

@@ -30,12 +30,12 @@
         "verify_label": "확인",
         "aws_saa": {
             "name": "Solutions Architect - Associate",
-            "issuer": "아마존 웹 서비스",
+            "issuer": "AWS (아마존 웹 서비스)",
             "badge_alt": "AWS 솔루션스 아키텍트 어소시에이트 자격증 배지"
         },
         "lfcs": {
             "name": "Linux Foundation Certified Systems Administrator",
-            "issuer": "리눅스 파운데이션",
+            "issuer": "Linux Foundation (리눅스 재단)",
             "badge_alt": "리눅스 파운데이션 인증 시스템 관리자 배지"
         }
     },

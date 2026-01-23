@@ -1,0 +1,67 @@
+{
+    "Header": {
+        "site_title": "STEPHEN KO",
+        "home_link_label": "ホームページへ移動",
+        "navigation_label": "サイトナビゲーション"
+    },
+    "NameCard": {
+        "section_label": "自己紹介と連絡先情報",
+        "signature_alt": "Stephen Ko の署名",
+        "profile_alt": "Stephen Ko のプロフィール写真",
+        "name": "Stephen Ko",
+        "job_title": "シンガポール在住のフロントエンド・ソフトウェアエンジニア",
+        "location_flag_label": "シンガポールの国旗",
+        "social_links_label": "ソーシャルメディアリンク",
+        "linkedin_label": "Stephen の LinkedIn プロフィールを見る（新しいタブで開く）",
+        "email_label": "Stephen にメールを送る",
+        "github_label": "Stephen の GitHub プロフィールを見る（新しいタブで開く）"
+    },
+    "SectionHeader": {
+        "live_project": "公開中の Web プロジェクト",
+        "github_projects": "GitHub プロジェクト",
+        "certs": "認定資格"
+    },
+    "ProjectSection": {
+        "view_more": "他のプロジェクトを見る"
+    },
+    "Certifications": {
+        "section_label": "専門資格と証明書",
+        "issued_label": "発行日",
+        "verify_label": "検証",
+        "aws_saa": {
+            "name": "ソリューションアーキテクト – アソシエイト",
+            "issuer": "Amazon Web Services",
+            "badge_alt": "AWS ソリューションアーキテクト – アソシエイト認定バッジ"
+        },
+        "lfcs": {
+            "name": "Linux Foundation 認定システム管理者",
+            "issuer": "The Linux Foundation",
+            "badge_alt": "Linux Foundation 認定システム管理者バッジ"
+        }
+    },
+    "Projects": {
+        "wink": {
+            "desc": "Core-Bluetooth を使用して近距離を測定する実験的な Flutter アプリ"
+        },
+        "temppi": {
+            "desc": "温度センサー付き RaspberryPi 1 モジュールを使用して室温を検出する IoT プロジェクト"
+        },
+        "onion": {
+            "desc": "自然言語処理を用いた風刺検出プロジェクト"
+        },
+        "covid": {
+            "desc": "胸部 X 線画像解析による Covid19 SARS 検出"
+        },
+        "foodies_trail": {
+            "desc": "Three.js と Next.js を使用した、個人プロジェクト用の 3D Web アプリ・フードブログ"
+        },
+        "white_rabbit": {
+            "desc": "Neo4J、FastAPI、Next.js を使用した、世界の不思議に関するグラフナレッジデータベース"
+        }
+    },
+    "Footer": {
+        "language": "言語を変更",
+        "footline": "開発者: Gi Hun Ko Stephen",
+        "app_version": "アプリバージョン"
+    }
+}
