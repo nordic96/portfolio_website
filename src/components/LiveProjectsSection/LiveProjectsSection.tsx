@@ -14,6 +14,7 @@ import {
   siThreedotjs,
   siWebgl,
 } from 'simple-icons';
+import { useStaggeredAnimation } from '@/src/hooks';
 
 /**
  * TODO:will refactor project data to remote json
@@ -51,11 +52,19 @@ interface LiveProjectsSectionProps {
  * - 2 cards side by side on desktop
  * - Stacked vertically on mobile
  * - Uses GridCard wrapper for consistent styling with dashboard
+ * - Staggered entrance animation for cards
  */
 export default function LiveProjectsSection({
   className,
   projects = liveProjects,
 }: LiveProjectsSectionProps) {
+  // Staggered animation for project cards
+  const { containerRef, getItemClassName } =
+    useStaggeredAnimation<HTMLDivElement>({
+      itemCount: projects.length,
+      staggerDelay: 500,
+    });
+
   return (
     <GridCard
       title={'live_project'}
@@ -63,6 +72,7 @@ export default function LiveProjectsSection({
       headerClass={'bg-accent-pink'}
     >
       <div
+        ref={containerRef}
         className={cn(
           // Responsive grid: 1 column mobile/tablet, 2 columns desktop
           'grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2',
@@ -73,12 +83,10 @@ export default function LiveProjectsSection({
           'place-items-start',
         )}
       >
-        {projects.map((project) => (
-          <LiveProjectCard
-            key={project.id}
-            project={project}
-            className="w-full"
-          />
+        {projects.map((project, index) => (
+          <div key={project.id} className={getItemClassName(index)}>
+            <LiveProjectCard project={project} className="w-full" />
+          </div>
         ))}
       </div>
     </GridCard>

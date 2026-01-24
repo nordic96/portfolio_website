@@ -396,6 +396,92 @@ body {
   }
 }
 
+/* ==========================================================================
+   Staggered Animation Classes (Section Animations - Issue #454)
+   ========================================================================== */
+
+/* Fade in from bottom animation */
+@keyframes staggerFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base state for staggered items - hidden */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Visible state - animated */
+.stagger-item-visible {
+  animation: staggerFadeInUp 0.5s ease-out forwards;
+}
+
+/* Section fade-in animation (for Hero, Footer, etc.) */
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section-fade-in {
+  animation: sectionFadeIn 0.6s ease-out forwards;
+}
+
+/* Delayed section animations */
+.animate-section-delay-1 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-section-delay-2 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animate-section-delay-3 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Respect reduced motion preference for staggered animations */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-item-visible {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-section-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-section-delay-1,
+  .animate-section-delay-2,
+  .animate-section-delay-3 {
+    animation-delay: 0s;
+    opacity: 1;
+  }
+}
+
 @layer utilities {
   ::-webkit-scrollbar {
     width: 12px;

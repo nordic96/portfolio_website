@@ -1,3 +1,5 @@
+'use client';
+
 import { baseWidth } from '@/src/styles';
 import { cn } from '@/src/utils';
 import { useTranslations } from 'next-intl';
@@ -7,11 +9,20 @@ import { PropsWithChildren } from 'react';
 import { ClassValue } from 'clsx';
 import { getAppVersion } from '@/src/config';
 import NameCard from './NameCard';
+import { useSectionAnimation } from '@/src/hooks';
 
 export default function Footer() {
   const t = useTranslations('Footer');
+  const { sectionRef, animationClassName } = useSectionAnimation();
+
   return (
-    <footer className={'flex flex-col mt-20 md:mt-24 lg:mt-40'}>
+    <footer
+      ref={sectionRef}
+      className={cn(
+        'flex flex-col mt-20 md:mt-24 lg:mt-40',
+        animationClassName,
+      )}
+    >
       <div
         className={cn(
           'flex flex-col justify-start items-center',
