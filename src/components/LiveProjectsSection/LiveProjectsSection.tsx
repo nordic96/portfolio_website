@@ -19,20 +19,18 @@ const liveProjects: LiveProject[] = [
   {
     id: 'white_rabbit',
     title: 'White Rabbit',
-    url: 'https://white-rabbit-web.vercel.app',
     websiteUrl: 'https://white-rabbit-web.vercel.app',
-    githubUrl: 'https://github.com/nordic96/white-rabbit-web',
+    githubUrl: 'https://github.com/nordic96/white_rabbit',
     description:
-      'Graph Knowledge database of world\'s mysteries with Neo4J, FastAPI and Next.js',
+      "Graph Knowledge database of world's mysteries with Neo4J, FastAPI and Next.js",
     techStack: [siNextdotjs, siReact, siFastapi, siNeo4j, siHuggingface],
     healthCheckEnabled: true,
   },
   {
     id: 'foodies_trail',
     title: "Foodie's Trail SG",
-    url: 'https://sg-eatwhere.vercel.app',
     websiteUrl: 'https://sg-eatwhere.vercel.app',
-    githubUrl: 'https://github.com/nordic96/sg-eatwhere',
+    githubUrl: 'https://github.com/nordic96/sg_eatwhere',
     description:
       '3D Web Application Food Blog for Personal Projects, using three.js & Next.js',
     techStack: [siThreedotjs, siReact, siNextdotjs, siHuggingface],

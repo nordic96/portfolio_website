@@ -49,20 +49,20 @@ export default function PrimaryButton({
     hoverLiftStyle,
     // Size variants - ensure 44px minimum touch target
     size === 'default'
-      ? 'px-5 py-3 text-sm min-h-[44px]'
-      : 'px-4 py-2 text-xs min-h-[44px]',
+      ? 'px-5 py-3 text-sm min-h-11'
+      : 'px-4 py-2 text-xs min-h-11',
     // Variant styles
     variant === 'primary'
       ? 'bg-dark-gray rounded-full shadow-lg hover:shadow-xl'
       : 'bg-transparent border border-white/30 rounded-full hover:bg-white/10',
-    className
+    className,
   );
 
   const iconElement = icon && (
     <div
       className={cn(
-        'fill-white flex-shrink-0',
-        size === 'default' ? 'w-5 h-5' : 'w-4 h-4'
+        'fill-white shrink-0',
+        size === 'default' ? 'w-5 h-5' : 'w-4 h-4',
       )}
       dangerouslySetInnerHTML={{ __html: icon.svg }}
       aria-hidden="true"
@@ -71,7 +71,7 @@ export default function PrimaryButton({
 
   // Render as link
   if ('as' in props && props.as === 'link') {
-    const { as, href, ...linkProps } = props as LinkProps;
+    const { href, ...linkProps } = props as LinkProps;
     return (
       <a
         href={href}
@@ -87,7 +87,7 @@ export default function PrimaryButton({
   }
 
   // Render as button (default)
-  const { as, ...buttonProps } = props as ButtonProps;
+  const { ...buttonProps } = props as ButtonProps;
   return (
     <button className={baseStyles} {...buttonProps}>
       {iconElement}

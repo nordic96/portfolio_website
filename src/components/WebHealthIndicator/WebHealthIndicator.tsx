@@ -11,32 +11,33 @@ interface WebHealthIndicatorProps {
 
 /**
  * Status color mapping based on design specs:
- * - Green (#22c55e): Site is live and responsive
- * - Yellow (#eab308): Site is slow or partially available
- * - Red (#ef4444): Site is down or unreachable
- * - Gray (#9ca3af): Status unknown/checking
+ * Colors are defined as CSS variables in globals.css:
+ * - --status-live (#22c55e): Site is live and responsive
+ * - --status-slow (#eab308): Site is slow or partially available
+ * - --status-down (#ef4444): Site is down or unreachable
+ * - --status-unknown (#9ca3af): Status unknown/checking
  */
 const statusConfig: Record<
   HealthStatus,
   { color: string; label: string; ariaLabel: string }
 > = {
   live: {
-    color: 'bg-[#22c55e]',
+    color: 'bg-status-live',
     label: 'Live',
     ariaLabel: 'Website is live and responsive',
   },
   slow: {
-    color: 'bg-[#eab308]',
+    color: 'bg-status-slow',
     label: 'Slow',
     ariaLabel: 'Website is slow or partially available',
   },
   down: {
-    color: 'bg-[#ef4444]',
+    color: 'bg-status-down',
     label: 'Down',
     ariaLabel: 'Website is down or unreachable',
   },
   unknown: {
-    color: 'bg-[#9ca3af]',
+    color: 'bg-status-unknown',
     label: 'Unknown',
     ariaLabel: 'Website status is unknown',
   },
@@ -67,9 +68,11 @@ export default function WebHealthIndicator({
       <span
         className={cn(
           'w-3 h-3 rounded-full',
-          isLoading ? 'bg-[#9ca3af] animate-pulse' : config.color,
+          isLoading ? 'bg-status-unknown animate-pulse' : config.color,
           // Add a subtle glow effect for live status
-          status === 'live' && !isLoading && 'shadow-[0_0_8px_rgba(34,197,94,0.5)]'
+          status === 'live' &&
+            !isLoading &&
+            'shadow-[0_0_8px_var(--status-live)]',
         )}
         aria-hidden="true"
       />

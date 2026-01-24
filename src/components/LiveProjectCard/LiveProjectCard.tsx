@@ -9,14 +9,15 @@ import WebHealthIndicator from '@/src/components/WebHealthIndicator';
 import PrimaryButton from '@/src/components/shared/PrimaryButton';
 import { Tooltip } from '@mui/material';
 import { SimpleIcon, siGithub } from 'simple-icons';
+import { useTranslations } from 'next-intl';
+import { Language } from '@mui/icons-material';
 
 export interface LiveProject {
   id: string;
   title: string;
-  url: string;
   description: string;
   techStack: SimpleIcon[];
-  /** URL for the website (used for "Visit Website" button) */
+  /** URL for the website (used for "Visit Website" button and iframe preview) */
   websiteUrl: string;
   /** Optional GitHub repository URL */
   githubUrl?: string;
@@ -46,7 +47,6 @@ export default function LiveProjectCard({
 }: LiveProjectCardProps) {
   const {
     title,
-    url,
     description,
     techStack,
     websiteUrl,
@@ -56,6 +56,7 @@ export default function LiveProjectCard({
 
   // Use the health check hook
   const { status, isLoading } = useHealthCheck(websiteUrl, healthCheckEnabled);
+  const t = useTranslations('ProjectCard');
 
   return (
     <div className={cn('flex flex-col items-center', className)}>
@@ -63,7 +64,7 @@ export default function LiveProjectCard({
       <div className="w-full max-w-50 lg:max-w-60">
         <IPhoneProFrame>
           {/* Live iframe (Layer 2) */}
-          <LiveProjectIframe url={url} title={title} />
+          <LiveProjectIframe url={websiteUrl} title={title} />
 
           {/* Dark gradient overlay (Layer 3) - darker at bottom for text readability */}
           <div
@@ -83,7 +84,7 @@ export default function LiveProjectCard({
             'text-center w-full max-w-60',
             // Pull up to overlap with phone frame bottom
             '-mt-20',
-            hoverLiftStyle
+            hoverLiftStyle,
           )}
         >
           {/* Project Title */}
@@ -93,7 +94,7 @@ export default function LiveProjectCard({
               glassCardBaseStyle,
               'flex flex-col',
               // Enhanced blur for overlap effect
-              'backdrop-blur-lg'
+              'backdrop-blur-lg',
             )}
           >
             {/* Tech Stack Icons Row */}
@@ -129,23 +130,24 @@ export default function LiveProjectCard({
               <PrimaryButton
                 as="link"
                 href={websiteUrl}
-                variant="primary"
+                variant="secondary"
                 size="small"
                 aria-label={`Visit ${title} website`}
               >
-                Visit Website
+                <Language />
+                {t('website')}
               </PrimaryButton>
 
               {githubUrl && (
                 <PrimaryButton
                   as="link"
                   href={githubUrl}
-                  variant="secondary"
+                  variant="primary"
                   size="small"
                   icon={siGithub}
                   aria-label={`View ${title} on GitHub`}
                 >
-                  GitHub
+                  {t('github')}
                 </PrimaryButton>
               )}
             </div>

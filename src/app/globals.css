@@ -24,6 +24,12 @@
   --accent-indigo: #6155F5;
   --accent-yellow: #FFCC00;
 
+  /* Web Health Status Colors */
+  --status-live: #22c55e;
+  --status-slow: #eab308;
+  --status-down: #ef4444;
+  --status-unknown: #9ca3af;
+
   /* Background */
   --background: #070B34;
   --foreground: #FFFFFF;
@@ -76,6 +82,12 @@
   --color-pastel-brown: var(--pastel-brown);
   --color-white: #FFFFFF;
   --color-dark-gray: #333333;
+
+  /* Web Health Status Colors */
+  --color-status-live: var(--status-live);
+  --color-status-slow: var(--status-slow);
+  --color-status-down: var(--status-down);
+  --color-status-unknown: var(--status-unknown);
 
   /* Typography Scale - v5 */
   /* Title: 64px Bold Italic Poppins */

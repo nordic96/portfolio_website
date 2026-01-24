@@ -32,7 +32,7 @@ const CACHE_DURATION = 5 * 60 * 1000;
  */
 export function useHealthCheck(
   url: string,
-  enabled: boolean = true
+  enabled: boolean = true,
 ): HealthCheckState {
   const [state, setState] = useState<HealthCheckState>({
     status: 'unknown',
@@ -64,7 +64,7 @@ export function useHealthCheck(
 
     try {
       const response = await fetch(
-        `/api/health-check?url=${encodeURIComponent(url)}`
+        `/api/health-check?url=${encodeURIComponent(url)}`,
       );
 
       if (!mountedRef.current) return;

@@ -97,5 +97,9 @@
         "ai_badge": "Built with AI Assistance",
         "ai_badge_short": "AI Built",
         "ai_badge_aria": "This portfolio was built with AI assistance"
+    },
+    "ProjectCard": {
+        "website": "Website",
+        "github": "Github"
     }
 }

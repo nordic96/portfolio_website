@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
   if (!url) {
     return NextResponse.json(
       { error: 'URL parameter is required' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -78,8 +78,7 @@ export async function GET(request: NextRequest) {
     const responseTime = Date.now() - startTime;
 
     // Determine if it was a timeout or connection error
-    const isTimeout =
-      error instanceof Error && error.name === 'AbortError';
+    const isTimeout = error instanceof Error && error.name === 'AbortError';
 
     const result: HealthCheckResponse = {
       url,
