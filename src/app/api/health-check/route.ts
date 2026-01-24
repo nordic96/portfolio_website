@@ -1,3 +1,4 @@
+import { ALLOWED_DOMAINS } from '@/src/config/domains';
 import { NextRequest, NextResponse } from 'next/server';
 
 export type HealthStatus = 'live' | 'slow' | 'down' | 'unknown';
@@ -30,6 +31,11 @@ export async function GET(request: NextRequest) {
       { error: 'URL parameter is required' },
       { status: 400 },
     );
+  }
+
+  const urlObj = new URL(url);
+  if (!ALLOWED_DOMAINS.includes(urlObj.hostname)) {
+    return NextResponse.json({ error: 'Domain not allowed' }, { status: 403 });
   }
 
   // Validate URL format
