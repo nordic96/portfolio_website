@@ -1,11 +1,11 @@
 'use client';
 
 import { cn } from '@/src/utils';
-import type { HealthStatus } from '@/src/app/api/health-check/route';
+import type { PingStatus } from '@/src/hooks/useImagePing';
 import { useTranslations } from 'next-intl';
 
 interface WebHealthIndicatorProps {
-  status: HealthStatus;
+  status: PingStatus;
   isLoading?: boolean;
   className?: string;
 }
@@ -14,28 +14,19 @@ interface WebHealthIndicatorProps {
  * Status color mapping based on design specs:
  * Colors are defined as CSS variables in globals.css:
  * - --status-live (#22c55e): Site is live and responsive
- * - --status-slow (#eab308): Site is slow or partially available
- * - --status-down (#ef4444): Site is down or unreachable
  * - --status-unknown (#9ca3af): Status unknown/checking
+ *
+ * Simplified to two states for client-side image ping approach
+ * (no SSRF risk, graceful CORS fallback)
  */
 const statusConfig: Record<
-  HealthStatus,
+  PingStatus,
   { color: string; label: string; ariaLabel: string }
 > = {
   live: {
     color: 'bg-status-live',
     label: 'Live',
     ariaLabel: 'Website is live and responsive',
-  },
-  slow: {
-    color: 'bg-status-slow',
-    label: 'Slow',
-    ariaLabel: 'Website is slow or partially available',
-  },
-  down: {
-    color: 'bg-status-down',
-    label: 'Down',
-    ariaLabel: 'Website is down or unreachable',
   },
   unknown: {
     color: 'bg-status-unknown',

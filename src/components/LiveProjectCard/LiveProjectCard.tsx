@@ -4,7 +4,7 @@ import { SimpleIcon, siGithub } from 'simple-icons';
 
 import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
-import { useHealthCheck } from '@/src/hooks';
+import { useImagePing } from '@/src/hooks';
 import WebHealthIndicator from '@/src/components/WebHealthIndicator';
 import PrimaryButton from '@/src/components/shared/PrimaryButton';
 import { Language } from '@mui/icons-material';
@@ -56,8 +56,8 @@ export default function LiveProjectCard({
     healthCheckEnabled = true,
   } = project;
 
-  // Use the health check hook
-  const { status, isLoading } = useHealthCheck(websiteUrl, healthCheckEnabled);
+  // Client-side health check via image ping (no SSRF risk)
+  const { status, isLoading } = useImagePing(websiteUrl, healthCheckEnabled);
   const cardT = useTranslations('ProjectCard');
   const t = useTranslations('Projects');
   const { IconContainer } = useSimpleIcons({
