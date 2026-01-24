@@ -1,15 +1,16 @@
 'use client';
 
+import { SimpleIcon } from 'simple-icons';
+
 import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
-import { Tooltip } from '@mui/material';
-import { SimpleIcon } from 'simple-icons';
+import { useSimpleIcons } from '@/src/hooks';
+import { useTranslations } from 'next-intl';
 
 export interface SmallProject {
   id: string;
   title: string;
   url: string;
-  description: string;
   techStack: SimpleIcon[];
 }
 
@@ -22,43 +23,54 @@ interface SmallProjectCardProps {
  * SmallProjectCard - Compact card for GitHub/smaller projects
  *
  * Structure (from design spec):
- * - Title (h2, Poppins bold italic, white)
+ * - Title (h3, Poppins bold italic, white)
  * - Pill-shaped glassmorphism metadata container
- *   - LEFT: Tech stack icons (24px)
- *   - RIGHT: Description (light italic, Roboto)
+ *   - Mobile (<768px): Icons stacked above description (vertical layout)
+ *   - Tablet/Desktop (>=768px): Icons LEFT, Description RIGHT (horizontal layout)
+ *
+ * Icon sizing (responsive):
+ * - Mobile (<768px): 16px (sm) for compact display
+ * - Tablet (768-1023px): 20px (md) for intermediate display
+ * - Desktop (>=1024px): 24px (lg) for standard display
  */
 export default function SmallProjectCard({
   project,
   className,
 }: SmallProjectCardProps) {
-  const { title, url, description, techStack } = project;
+  const { id, title, url, techStack } = project;
+  const projectT = useTranslations('Projects');
+  const { IconContainer } = useSimpleIcons({
+    icons: techStack,
+  });
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn('flex flex-col', hoverLiftStyle, className)}
+      className={cn('flex flex-col max-sm:w-full', hoverLiftStyle, className)}
+      aria-label={`View ${title} project on GitHub`}
     >
       {/* Project Title */}
-      <h3 className="text-h3 text-text-white">{title}</h3>
+      <h3 className={'text-h3 md:text-lg text-text-white'}>{title}</h3>
 
       {/* Pill-shaped Metadata Container */}
-      <div className={cn('flex items-center gap-3', glassCardBaseStyle)}>
-        {/* Tech Stack Icons - LEFT */}
-        <div className="flex items-center gap-2 shrink-0">
-          {techStack.map((tech) => (
-            <Tooltip key={`tech-${tech.title}`} title={tech.title} arrow>
-              <div
-                className="w-6 h-6 flex items-center justify-center fill-white"
-                dangerouslySetInnerHTML={{ __html: tech.svg }}
-              />
-            </Tooltip>
-          ))}
-        </div>
+      {/* Mobile: vertical stack (icons above description) */}
+      {/* Tablet/Desktop: horizontal layout (icons left, description right) */}
+      <div
+        className={cn(
+          // Responsive layout: column on mobile, row on tablet+
+          'flex flex-col md:flex-col md:items-start gap-2 md:gap-2.5 lg:gap-3',
+          glassCardBaseStyle,
+        )}
+      >
+        {/* Tech Stack Icons */}
+        <IconContainer className="shrink-0" />
 
-        {/* Description - RIGHT */}
-        <p className="text-secondary text-text-white">{description}</p>
+        {/* Description */}
+        <p className="text-secondary text-text-white">
+          {projectT(`${id}.desc`)}
+        </p>
       </div>
     </a>
   );

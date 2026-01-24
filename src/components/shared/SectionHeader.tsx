@@ -46,12 +46,12 @@ export default function SectionHeader({
           className={cn(
             'z-50',
             'font-poppins font-bold italic',
-            // Font size: 24px mobile, 32px desktop
-            'text-2xl lg:text-[32px] lg:leading-tight',
+            // Responsive font size: 20px mobile, 26px tablet, 32px desktop
+            'text-xl md:leading-snug lg:text-[32px] lg:leading-tight',
             // White text color
             'text-text-white',
-            // Spacing between label and title
-            'mt-1 lg:mt-2',
+            // Responsive spacing between label and title
+            'mt-1 md:mt-1.5 lg:mt-2',
           )}
         >
           {title}

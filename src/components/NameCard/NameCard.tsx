@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { cn } from '@/src/utils';
-import { hoverLiftStyle } from '@/src/styles';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import CalligraphySignature from '@/src/components/CalligraphySignature';
 import { GITHUB_URL, LINKEDIN_URL } from '@/src/config';
+import { useSectionAnimation } from '@/src/hooks';
 
 interface NameCardProps {
   variant?: 'small' | 'large';
@@ -21,17 +21,24 @@ interface NamecardIconProps {
 export default function NameCard({ variant = 'large' }: NameCardProps) {
   const t = useTranslations('NameCard');
 
-  // Signature dimensions based on variant
-  // Large: default size for main usage
-  // Small: reduced size for footer, with even smaller dimensions on mobile
+  // Section fade-in animation (only for large variant which is the hero)
+  const { sectionRef, animationClassName } = useSectionAnimation();
+
+  // Signature dimensions based on variant - responsive sizing
+  // Large: 220px mobile -> 250px tablet -> 289px desktop
+  // Small: 150px mobile -> 165px tablet -> 180px desktop
   const signatureClassName =
     variant === 'small'
-      ? 'w-[180px] h-[60px] max-sm:w-[120px] max-sm:h-[40px]'
-      : '';
+      ? 'w-[150px] h-[50px] md:w-[165px] md:h-[55px] lg:w-[180px] lg:h-[60px]'
+      : 'w-[220px] h-[73px] md:w-[250px] md:h-[83px] lg:w-[289px] lg:h-[96px]';
 
   return (
     <section
-      className={'flex flex-col max-sm:items-center'}
+      ref={variant === 'large' ? sectionRef : undefined}
+      className={cn(
+        'flex flex-col max-md:items-center',
+        variant === 'large' && animationClassName,
+      )}
       aria-label={t('section_label')}
     >
       {/** Signature Container - Animated calligraphy signature */}
@@ -43,21 +50,21 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
         height={variant === 'small' ? 60 : 96}
         className={signatureClassName}
       />
-      <div className={'flex gap-3'}>
-        {/** Profile Image Container */}
+      <div className={'flex gap-2 md:gap-3'}>
+        {/** Profile Image Container - responsive sizing */}
         {variant === 'large' && (
-          <div
-            className={
-              'w-22 aspect-auto border-2 border-accent-yellow rounded-xl p-1 flex items-center'
-            }
-          >
-            <Image
-              src={'/images/profile_img.png'}
-              width={88}
-              height={88}
-              alt={t('profile_alt')}
-            />
-          </div>
+          <Image
+            className={cn(
+              // Responsive min-width: 72px mobile, 80px tablet, 88px desktop
+              'min-w-18 md:min-w-20 lg:min-w-22',
+              'aspect-auto border-2 border-accent-yellow rounded-xl p-1 object-cover',
+            )}
+            src={'/images/profile_img.png'}
+            width={88}
+            height={88}
+            alt={t('profile_alt')}
+            draggable={false}
+          />
         )}
         {/** Metadata Container */}
         <div className={'flex flex-col'}>
@@ -74,15 +81,18 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
               </span>
             </span>
           )}
-          {/** NameCard Icons Container */}
+          {/** NameCard Icons Container - responsive icon sizing */}
           <nav
             className={cn(
               {
-                'text-3xl': variant === 'large',
-                'text-xl': variant === 'small',
+                // Large variant: 24px mobile, 28px tablet, 30px desktop
+                'text-2xl md:text-[28px] lg:text-3xl': variant === 'large',
+                // Small variant: 18px mobile, 20px tablet, 24px desktop
+                'text-lg md:text-xl lg:text-xl': variant === 'small',
               },
-              'max-sm:text-xl',
-              'flex items-center lg:mt-1 gap-1 max-sm:gap-0.5',
+              // Removed gap since 44px touch targets provide sufficient spacing
+              // Use negative margin to align icons with text edge
+              'flex items-center mt-0.5 md:mt-1 -ml-2',
             )}
             aria-label={t('social_links_label')}
           >
@@ -111,7 +121,18 @@ function NamecardIcon({ href, ariaLabel, children }: NamecardIconProps) {
       href={href}
       target={'_blank'}
       rel="noopener noreferrer"
-      className={cn(hoverLiftStyle)}
+      className={cn(
+        // Base styles with minimum 44x44px touch target for accessibility
+        'min-w-11 min-h-11 inline-flex items-center justify-center',
+        // Hover animation - subtle scale and lift
+        'transition-all duration-200 ease-in-out',
+        'hover:-translate-y-1 hover:scale-110 hover:text-accent-yellow',
+        // Focus-visible state for keyboard navigation (WCAG AA)
+        'focus-visible:outline-2 focus-visible:outline-offset-2',
+        'focus-visible:outline-accent-cyan focus-visible:rounded-lg',
+        // Remove default focus outline for mouse users
+        'focus:outline-none',
+      )}
       aria-label={ariaLabel}
     >
       {children}
