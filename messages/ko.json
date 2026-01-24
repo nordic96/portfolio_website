@@ -63,5 +63,11 @@
         "language": "언어 변경",
         "footline": "개발자 - Stephen Ko",
         "app_version": "앱 버전"
+    },
+    "WebHealthIndicator": {
+        "status_live": "Website is live and responsive",
+        "status_slow": "Website is slow or partially available",
+        "status_down": "Website is down or unreachable",
+        "status_unknown": "Website status is unknown"
     }
 }
