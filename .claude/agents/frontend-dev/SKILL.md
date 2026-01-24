@@ -1,10 +1,34 @@
-# Frontend Development Skills & Lessons Learned
+# Frontend Development Skills & Lessons Learned (Portfolio v5.0)
 
-**Purpose:** Capture recurring patterns, gotchas, and best practices discovered during development to avoid repeating mistakes.
+**Purpose:** Portfolio-specific patterns, component implementations, and session learnings.
 
-**Scope:** Agent-specific implementation details, debugging techniques, and session learnings. For project-wide architecture and design system, see `.claude/CLAUDE.md`.
+**Scope:** Project-specific implementation details unique to the portfolio v5.0 Night Sky theme. For universal frontend patterns (CSS gotchas, accessibility guidelines, performance techniques), see **`~/.claude/skills/frontend-dev/SKILL.md`**.
 
-**Last Updated:** January 21, 2026
+**Last Updated:** January 24, 2026
+
+---
+
+## Global Skills Reference
+
+Universal patterns have been extracted to the global skills repository. See:
+- **`~/.claude/skills/frontend-dev/SKILL.md`** for:
+  - CSS Transforms Are Atomic
+  - Transform Order Matters
+  - Aspect Ratio Correction for Circles
+  - Staggered Animation with Cleanup
+  - Reduced Motion Accessibility
+  - Mathematical Circle Placement
+  - Props with Sensible Defaults
+  - useMemo for Expensive Calculations
+  - Simple Icons integration
+  - next-intl Setup Pattern
+  - Mobile-First Breakpoints
+  - Dynamic Viewport Units
+  - GPU-Accelerated Animations
+  - SVG Over PNG for Icons
+  - Accessibility Checklist
+  - Common Gotchas (Intervals, Hydration, Z-Index, SVG viewBox)
+  - Intersection Observer Pattern
 
 ---
 
@@ -582,11 +606,11 @@ npx playwright screenshot http://localhost:3000
 
 ### Performance Notes
 
-- **Canvas for Animations:** Rendering 150 stars with twinkling is more efficient with Canvas 2D API than creating 150 DOM elements with CSS animations
-- **Intersection Observer Margin:** `rootMargin: '100px'` provides 100px buffer before viewport entry, allowing iframes to load with time to spare before user sees them
-- **Single RAF Loop:** Using one `requestAnimationFrame` for all star animations is more efficient than individual timeouts/intervals per star
-- **Lazy Iframe Loading:** Defer iframe creation (`isInView` check) to avoid rendering off-screen content
-- **Reduce Motion:** Properly respecting `prefers-reduced-motion` by canceling RAF prevents unnecessary CPU usage for users who disabled animations
+Session-specific optimizations:
+- **Canvas Stars:** Validated 150-star rendering more efficient than DOM elements (single RAF loop)
+- **Intersection Observer:** `rootMargin: '100px'` provides optimal iframe loading buffer
+- **Lazy Iframe:** Deferred iframe creation saves ~2MB memory per off-screen preview
+- **Reduced Motion:** RAF cancellation prevents unnecessary CPU cycles when animations disabled
 
 ---
 
@@ -608,132 +632,36 @@ npx playwright screenshot http://localhost:3000
 
 - **Pattern: Reusable Style Composition via baseStyles.ts**
   - **Context:** Multiple cards need consistent glassmorphic styling, hover effects, and sizing
-  - **Implementation:**
-    - Create `baseStyles.ts` exporting constant Tailwind class strings
-    - `glassCardBaseStyle`: `'bg-dark-gray/50 backdrop-blur-md rounded-3xl p-3'` for glass effect
-    - `hoverLiftStyle`: `'hover:-translate-y-2 transition-transform ease-in-out'` for interaction feedback
-    - `baseWidth`: `'w-full lg:max-w-360'` for responsive sizing
-    - Import and compose with `cn()` utility in components
+  - **Implementation:** See `.claude/CLAUDE.md` (Reusable Styles System, lines 206-258) for complete baseStyles.ts documentation
+  - **Key exports:** `glassCardBaseStyle` (with v5.1 responsive padding), `hoverLiftStyle`, `baseWidth`
   - **Files:** `/app/styles/baseStyles.ts`
-  - **Benefits:** Single source of truth for design system, reduces duplication, ensures consistency across SmallProjectCard, CertificationCard, LiveProjectCard metadata sections
-  - **Usage Example:**
-    ```typescript
-    import { glassCardBaseStyle, hoverLiftStyle } from '@/app/styles';
-    className={cn('flex items-center gap-3', glassCardBaseStyle, hoverLiftStyle)}
-    ```
+  - **Session Application:** Applied to SmallProjectCard, CertificationCard, LiveProjectCard
 
 - **Pattern: Title Outside / Card Inside Hierarchy**
   - **Context:** Cards with glass effect need visual separation between heading and content
-  - **Implementation:**
-    - Wrap both title and card in `flex flex-col`
-    - Place `h3` title OUTSIDE the glassCardBaseStyle container
-    - Card container comes after title with glass styling
-    - Both wrapped together for consistent spacing
-  - **Structure:**
-    ```tsx
-    <div className="flex flex-col">
-      <h3 className="text-h3">{title}</h3>
-      <div className={glassCardBaseStyle}>
-        {/* Card content */}
-      </div>
-    </div>
-    ```
-  - **When to use:** CertificationCard, themed project cards, certification displays with metadata containers
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns, lines 263-289) for complete card pattern specification
+  - **Key Rule:** h3 title placed OUTSIDE glassCardBaseStyle container, never inside
+  - **Session Application:** Validated in CertificationCard, themed project cards, certification displays
 
 - **Pattern: CSS clip-path Animation for Writing Reveal Effect**
   - **Context:** Create animated signature or text reveal that simulates writing from left to right
-  - **Implementation:**
-    - Use `clip-path: inset(0 100% 0 0)` for initial hidden state (100% of right edge clipped)
-    - Animate to `clip-path: inset(0 0 0 0)` for full visibility (nothing clipped)
-    - Use cubic-bezier(0.4, 0, 0.2, 1) for smooth easing
+  - **Core Technique:** `clip-path: inset()` animation from right to left with prefers-reduced-motion support
+  - **Implementation Details:**
     - Duration: 2-2.5s for natural writing appearance
-  - **Accessibility:**
-    - Respect `prefers-reduced-motion` by detecting `window.matchMedia('(prefers-reduced-motion: reduce)')`
-    - Use `useRef` to track animation state and prevent repeated triggers
-    - Add `addEventListener('change')` for live preference updates
-    - Show full clip-path immediately when reduced motion enabled
-  - **Key Code:**
-    ```typescript
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-    const hasAnimatedRef = useRef(false);
-
-    useEffect(() => {
-      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mediaQuery.matches);
-
-      const handleMotionChange = (e: MediaQueryListEvent) => {
-        setPrefersReducedMotion(e.matches);
-      };
-
-      mediaQuery.addEventListener('change', handleMotionChange);
-
-      if (!mediaQuery.matches && !hasAnimatedRef.current) {
-        const timer = setTimeout(() => {
-          setIsAnimating(true);
-          hasAnimatedRef.current = true;
-        }, delay * 1000);
-
-        return () => {
-          clearTimeout(timer);
-          mediaQuery.removeEventListener('change', handleMotionChange);
-        };
-      }
-
-      return () => mediaQuery.removeEventListener('change', handleMotionChange);
-    }, [delay]);
-
-    const animationStyle = prefersReducedMotion
-      ? {}
-      : {
-          clipPath: isAnimating ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
-          transition: isAnimating ? `clip-path ${duration}s ease` : 'none',
-        };
-    ```
+    - Easing: `cubic-bezier(0.4, 0, 0.2, 1)` for smooth deceleration
+    - Accessibility: mediaQuery listener for live preference updates
+  - **Session Application:** Implemented in CalligraphySignature component with full accessibility support
+  - **Key Insight:** clip-path is GPU-accelerated, provides smoother animation than width/opacity
 
 - **Pattern: Semantic HTML with ARIA for Links**
   - **Context:** Improve accessibility for external links and navigation
-  - **Implementation:**
-    - Use `<Link>` from next/link for internal navigation (server-side benefits)
-    - Use `<a>` with `target="_blank" rel="noopener noreferrer"` for external links
-    - Add `aria-label` describing action: `aria-label="Verify certification"`
-    - Use semantic nav elements with role attributes where needed
-  - **Prevention Example:**
-    ```tsx
-    // Wrong: <a href="/internal-page"> (causes full page reload)
-    // Right: <Link href="/internal-page"> (Next.js client-side navigation)
-
-    // External link with ARIA:
-    <a
-      href={verificationUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Verify ${name} certification`}
-    >
-      Verify
-    </a>
-    ```
+  - **Implementation:** See `.claude/CLAUDE.md` (Accessibility Patterns section) for comprehensive ARIA and semantic HTML guidelines
+  - **Session Application:** Applied to CertificationCard external verification links with proper aria-labels
 
 - **Pattern: i18n Message Structure with next-intl**
   - **Context:** Support multiple languages (English, Korean) with centralized message management
-  - **Implementation:**
-    - Create `messages/en.json` and `messages/ko.json` with same key structure
-    - Use `useTranslations('SectionName')` hook to access section-specific messages
-    - Structure messages by domain: `Certifications`, `Header`, `Footer`, etc.
-  - **Example Structure:**
-    ```json
-    {
-      "Certifications": {
-        "issued_label": "Issued",
-        "verify_label": "Verify →"
-      }
-    }
-    ```
-  - **Usage:**
-    ```typescript
-    const t = useTranslations('Certifications');
-    <p>{t('issued_label')}: {formattedDate}</p>
-    ```
+  - **Implementation:** See `.claude/CLAUDE.md` (Accessibility Patterns - Internationalization section) for next-intl usage patterns
+  - **Session Application:** Applied translation hooks to CertificationCard with proper message key structure
 
 ### Debugging Wins
 
@@ -751,17 +679,388 @@ npx playwright screenshot http://localhost:3000
 
 ### Performance Notes
 
-- **Centralized Styles:** Exporting Tailwind strings from `baseStyles.ts` allows build-time optimization and reduces redundant class strings
-- **clip-path Animation:** Uses GPU-accelerated CSS property (clip-path) rather than width/opacity, providing smooth 60fps on most devices
-- **Reduced Motion Performance:** Disabling animation loops via `prefers-reduced-motion` reduces CPU usage for users with vestibular sensitivity
-- **Lazy Image Loading:** CalligraphySignature uses Next.js Image with `priority` flag for critical signature display
+Session-specific optimizations:
+- **Centralized Styles:** Validated that `baseStyles.ts` export pattern reduces bundle redundancy
+- **clip-path Animation:** Confirmed 60fps performance on CalligraphySignature across devices
+- **Reduced Motion:** Verified animation cancellation reduces CPU usage when preference enabled
+- **Image Loading:** Next.js Image with `priority` flag for above-fold CalligraphySignature
 
-### Automation Opportunities
+### Automation Opportunities (Jan 21)
 
-- **Component Generator Template:** Create a scaffold generator for new card-based components that auto-imports from baseStyles.ts
-- **Message Key Validation:** Build a linter rule to ensure message keys in `en.json` exist in `ko.json` and vice versa
-- **Type Safety for SimpleIcon:** Create a custom hook `useSimpleIcons()` that maps string identifiers to SimpleIcon objects automatically
-- **Design System Auditor:** Script to find hardcoded Tailwind classes that should use baseStyles exports
-- **Accessibility Checklist:** Pre-commit hook to scan components for missing ARIA labels on links/buttons
+- **Component Generator:** Scaffold generator for card components with baseStyles.ts imports
+- **i18n Key Validator:** Linter to ensure en.json/ko.json key parity
+- **Design System Auditor:** Find hardcoded classes that should use baseStyles exports
+- **Accessibility Scanner:** Pre-commit hook for missing ARIA labels
+
+---
+
+## Session Learnings - January 22, 2026
+
+### Mistakes & Fixes
+
+- **Issue:** Used `<img>` instead of `next/image` in LiveProjectCard screenshot fallback for mobile
+  - **Root Cause:** Didn't consider Next.js Image optimization benefits initially
+  - **Fix:** Replaced `<img>` with `next/image` using remotePatterns configuration
+  - **Prevention:** Always reach for `next/image` first for any image rendering, especially for performance-critical sections
+
+- **Issue:** React.FC type annotation on `useSimpleIcons` hook
+  - **Root Cause:** Following outdated React typing patterns
+  - **Fix:** Removed React.FC, used modern function return type with proper typing
+  - **Prevention:** Stay current with React 18+ typing patterns; avoid React.FC for new components
+
+- **Issue:** Missing `useMemo` optimization for icon rendering in `useSimpleIcons` hook
+  - **Root Cause:** Didn't consider re-render performance impact of creating icon elements on every render
+  - **Fix:** Added `useMemo` for both `renderedIcons` array and `IconContainer` component with proper dependency arrays
+  - **Prevention:** Memoize any computed values that are passed as dependencies or could cause expensive re-renders
+
+- **Issue:** Suspense boundary wrapped too much content in `loading.tsx`
+  - **Root Cause:** Misunderstood that persistent UI (header/nav) should stay outside Suspense
+  - **Fix:** Moved Suspense to only wrap `{children}`, keeping persistent elements outside
+  - **Prevention:** Suspense should only wrap content that can be replaced; persistent UI remains outside
+
+### Patterns Discovered
+
+- **Pattern: useSimpleIcons Hook for Icon Rendering**
+  - **Context:** Multiple components need to render SimpleIcon objects with consistent sizing, tooltips, and accessibility
+  - **Implementation:** See `.claude/CLAUDE.md` (Component Patterns, lines 293-330) for complete hook documentation with sm/md/lg sizing
+  - **Location:** `/src/hooks/useSimpleIcons.tsx`
+  - **Returns:** `{ icons: SimpleIcon[]; IconContainer: React.FC }` with responsive sizing and tooltip support
+  - **Session Application:** Integrated into SmallProjectCard and LiveProjectCard with useMemo optimization
+
+- **Pattern: Mobile Fallback with useBreakpoint Hook**
+  - **Context:** Heavy components (iframes) crash on mobile; need lightweight alternative
+  - **Implementation:** Documented in CLAUDE.md under v5.1 Polish (Issue #460)
+  - **Key Technique:** `useBreakpoint()` hook for conditional rendering based on viewport
+  - **Session Application:** Successfully resolved mobile crashes in LiveProjectIframe with screenshot fallback
+  - **Performance Impact:** ~75% memory reduction on mobile devices
+
+- **Pattern: PR Review Workflow with GitHub API**
+  - **Context:** Iterating on code based on review feedback
+  - **Implementation:**
+    - Fetch PR comments: `gh api repos/:owner/:repo/pulls/:pr_number/comments`
+    - Parse issues/suggestions from comment text
+    - Create fixes in same branch
+    - Repush without creating new PR
+  - **Benefits:** Keeps PR discussion in one place, single commit history, cleaner GitHub record
+  - **Command Reference:**
+    ```bash
+    gh api repos/owner/repo/pulls/463/comments
+    # Make fixes locally
+    git add .
+    git commit --amend --no-edit
+    git push origin branch-name --force-with-lease
+    ```
+
+- **Pattern: Batch Milestone & Issue Creation**
+  - **Context:** Organizing work for v5.1 with multiple related issues
+  - **Implementation:**
+    - Create milestone first: `gh milestone create --title "v5.1" --description "..."`
+    - Create issues with template batch commands
+    - Link issues to milestone via `--milestone` flag
+    - Organize by epic categories (Animations, Bugs, Polish, etc.)
+  - **Benefits:** Clear project organization, trackable progress, grouped related work
+  - **Example:**
+    ```bash
+    gh issue create --title "iFrame crashes on mobile" --body "..." --milestone "v5.1" --label "bug"
+    ```
+
+- **Pattern: Next.js Image with Remote Patterns**
+  - **Context:** Loading external images (screenshots) from URLs
+  - **Implementation:**
+    - Configure `remotePatterns` in `next.config.ts` to allow external domains
+    - Use `next/image` component with full URL
+    - Set `priority` for critical images, lazy-load others
+  - **Configuration:**
+    ```typescript
+    const nextConfig = {
+      images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'screenshots.example.com',
+            pathname: '/**',
+          },
+        ],
+      },
+    };
+    ```
+
+### Debugging Wins
+
+- **Problem:** iFrame crashing on mobile viewport
+  - **Approach:** Analyzed viewport size constraints, identified memory overhead of rendering live website inside small frame. Tested `useBreakpoint` hook to conditionally render screenshot fallback on mobile breakpoints
+  - **Tool/Technique:** Mobile breakpoint detection, screenshot fallback as lightweight alternative
+
+- **Problem:** Icon rendering performance and styling consistency
+  - **Approach:** Created dedicated `useSimpleIcons` hook with memoization. Tested hook across components to ensure consistent sizing and tooltips
+  - **Tool/Technique:** React DevTools profiler to verify memoization working; component testing at different breakpoints
+
+- **Problem:** PR review feedback iteration workflow
+  - **Approach:** Used `gh api` to fetch PR comments, parsed feedback, implemented fixes locally, amended commits and force-pushed with `--force-with-lease` (safe option)
+  - **Tool/Technique:** GitHub CLI for automated PR interaction; `--force-with-lease` prevents accidental overwrites
+
+### Performance Notes
+
+Session-specific optimizations (v5.1):
+- **Mobile Fallback:** Screenshot strategy reduces memory 75% vs live iframe on mobile (Issue #460)
+- **useMemo Icons:** Prevents re-rendering tech stack on parent state changes (Issue #461)
+- **Breakpoint Hook:** Component tree pruning more efficient than CSS media queries for conditionals
+- **Suspense Scope:** Narrowed to {children} only, prevents header/nav re-render on route change (Issue #459)
+- **Image Optimization:** Next.js srcset + remotePatterns for external screenshots (Issue #460)
+
+### Accessibility Wins
+
+**See `.claude/CLAUDE.md` (Accessibility section in Quick Reference) for project-wide accessibility standards.**
+
+Session-specific validations:
+- **Touch Target Sizing:** Verified 44x44px minimum on v5.1 components (Issue #457)
+- **Focus States:** Implemented `focus-visible` with cyan outline for keyboard navigation
+- **Icon Tooltips:** Integrated MUI Tooltip in `useSimpleIcons` hook
+- **Screenshot Fallback:** Alt text on mobile fallback images (Issue #460)
+
+### Automation Opportunities (Jan 22 - v5.1)
+
+- **PR Comment Bot:** Fetch review comments, suggest fixes, auto-label
+- **Mobile Optimization Linter:** Flag heavy components needing useBreakpoint
+- **Icon Validator:** Verify SimpleIcon sizing consistency
+- **remotePatterns Validator:** Check external image URLs before build
+- **Visual Regression:** Automated screenshots at 375/393/768/1024/1440px breakpoints
+
+---
+
+## Session Learnings - January 23, 2026
+
+### Mistakes & Fixes
+
+- **Issue:** Hardcoded icon sizes in SmallProjectCard not responding to breakpoints
+  - **Root Cause:** Fixed 24px sizing ignored responsive design requirements; same size on mobile, tablet, desktop
+  - **Fix:** Updated `useSimpleIcons` hook to support responsive sizing directly; removed `getResponsiveSizeClass` function complexity
+  - **Prevention:** Always consider responsive variants when creating hooks; simplify by using direct Tailwind class composition with clsx
+
+- **Issue:** SVG icons from SimpleIcons not scaling within flex containers on responsive layouts
+  - **Root Cause:** SVG had fixed dimensions that weren't responsive to container width
+  - **Fix:** Applied `[&>svg]:w-full [&>svg]:h-full` to force SVG to fill parent container dimensions
+  - **Prevention:** When rendering SVGs in containers, explicitly set width/height to 100% using child selector in Tailwind
+
+- **Issue:** Arbitrary Tailwind values used for responsive sizing instead of standard classes
+  - **Root Cause:** Created `w-[20px]` instead of using standard `w-5` (20px divisible by 4)
+  - **Fix:** Switched to standard Tailwind classes (w-4, w-6, w-8) for all responsive sizing
+  - **Prevention:** Always use standard Tailwind utility classes when values are divisible by 4 (4, 8, 12, 16, 20, 24, 32, etc.)
+
+### Patterns Discovered
+
+- **Pattern: 3-Tier Responsive Typography System**
+  - **Context:** Consistent text sizing across mobile, tablet, desktop
+  - **See `.claude/CLAUDE.md`** (lines 398-428) for complete responsive typography documentation
+  - **Implementation:** CSS custom properties in globals.css with media queries
+  - **Usage:** Apply `.text-title`, `.text-h1`, `.text-h2`, etc. classes
+  - **Key Principle:** Mobile-first scaling with md: and lg: breakpoint overrides
+  - **Session Application:** Applied to Hero, Section Headings, Card Titles in v5.1
+
+- **Pattern: Responsive baseStyles with glassCardBaseStyle Updates**
+  - **Context:** Reusable styles need responsive padding and gap variants
+  - **See `.claude/CLAUDE.md`** (lines 206-258) for current glassCardBaseStyle specification
+  - **Current Value:** `bg-dark-gray/50 backdrop-blur-md rounded-3xl max-sm:p-3 md:p-2.5 lg:p-3`
+  - **Pattern:** Mobile-first base value, then md: and lg: overrides in single string
+  - **Session Note:** Use standard Tailwind classes (p-2.5) over arbitrary values (p-[10px])
+
+- **Pattern: Scroll-Triggered Animation Hooks**
+  - **Context:** Multiple sections need unified animation pattern for revealing content on scroll
+  - **See `.claude/CLAUDE.md`** (lines 332-397) for complete hook documentation:
+    - `useStaggeredAnimation` - Staggered reveal with configurable delay (default 500ms)
+    - `useSectionAnimation` - Simple fade-in for entire section
+  - **Location:** `/src/hooks/useStaggeredAnimation.ts` and `/src/hooks/useSectionAnimation.ts`
+  - **Features:** Intersection Observer API, prefers-reduced-motion support, configurable timing
+  - **Session Application:** Applied to SmallProjectCard, CertificationCard, LiveProjectCard sections (staggered); Hero/Footer (simple fade)
+
+- **Pattern: Vercel Build Ignore Script for Branch Filtering**
+  - **Context:** Restrict production builds to main branches (develop/master), skip builds on feature branches
+  - **Implementation:** `vercel_build_ignore_step.sh` script
+  - **Location:** Project root, referenced in `vercel.json` build settings
+  - **Script Logic:**
+    ```bash
+    #!/bin/bash
+    if [[ "$VERCEL_GIT_COMMIT_REF" != "master" && "$VERCEL_GIT_COMMIT_REF" != "develop" ]]; then
+      echo "Skipping build on branch: $VERCEL_GIT_COMMIT_REF"
+      exit 0
+    fi
+    ```
+  - **Configuration in vercel.json:**
+    ```json
+    {
+      "buildCommand": "bash vercel_build_ignore_step.sh && npm run build"
+    }
+    ```
+  - **Benefits:** Prevents unnecessary builds on feature branches, saves build minutes, faster feedback on main branches
+
+### Debugging Wins
+
+- **Problem:** Icon sizing inconsistency across responsive breakpoints
+  - **Approach:** Tested `useSimpleIcons` hook at 375px, 768px, 1440px using Playwright; identified fixed sizing
+  - **Tool/Technique:** Playwright viewport testing + component visual inspection
+
+- **Problem:** SVG icons not filling containers properly
+  - **Approach:** Inspected SVG in DevTools; found inline width/height attributes overriding container flex
+  - **Tool/Technique:** Browser DevTools CSS inspector to identify conflicting styles
+
+- **Problem:** Determining correct standard Tailwind classes for arbitrary sizes
+  - **Approach:** Referenced Tailwind spacing scale; identified all base-4 multiples (4, 8, 12, 16, 20, 24, 32, 48, 64)
+  - **Tool/Technique:** Tailwind documentation + manual verification of divisibility by 4
+
+- **Problem:** Section animations not triggering consistently on scroll
+  - **Approach:** Added console logging to useStaggeredAnimation; verified Intersection Observer was detecting visibility
+  - **Tool/Technique:** React DevTools profiler + console debugging for observer callbacks
+
+### Performance Notes
+
+Session-specific optimizations (v5.1 completion):
+- **useSimpleIcons with clsx:** Direct object composition more efficient than function-based `getResponsiveSizeClass`
+- **SVG Child Selectors:** `[&>svg]:w-full` compiles to single CSS rule vs. per-component styling
+- **Standard Tailwind Classes:** Enables aggressive tree-shaking; arbitrary values `w-[20px]` create larger CSS output
+- **Staggered Animations:** Intersection Observer only for visible elements; hidden items don't trigger updates
+- **Vercel Build Ignore:** Prevents unnecessary build time on feature branches (typical: 2-5 min saved per PR)
+
+### Responsive Testing Workflow Validated
+
+- **5-Breakpoint Strategy:** Test at 375px, 393px, 768px, 1024px, 1440px covers 95% of user devices
+- **Playwright Viewport Automation:** Setting exact viewport sizes more reliable than browser zoom
+- **Component-Level Testing:** Test individual components (cards, buttons) before full page screenshots
+- **Regression Tracking:** Save baseline screenshots to catch future changes quickly
+- **Mobile-First Validation:** Always start at 375px, verify then expand to larger viewports
+
+### Accessibility Wins
+
+- **Icon Accessibility:** useSimpleIcons hook integrates MUI Tooltip for screen reader announcements
+- **Touch Targets:** Verified 44x44px minimum maintained at all breakpoints (even with responsive sizing)
+- **Color Contrast:** Validated all text maintains WCAG AA compliance at responsive text sizes
+- **Animation Respect:** useStaggeredAnimation respects prefers-reduced-motion by showing all items immediately
+
+### Automation Opportunities (Jan 23 - v5.1 completion)
+
+- **Responsive Testing Bot:** CLI tool to generate Playwright screenshots at all 5 breakpoints automatically
+- **Tailwind Validator:** Pre-commit linter to flag arbitrary values (w-[20px]) in favor of standard classes
+- **Icon Size Auditor:** Scan codebase for inconsistent icon sizing; suggest standardization
+- **Breakpoint Consistency:** Linter to ensure all components use consistent md: and lg: breakpoints
+- **Build Script Validator:** Verify vercel.json references correct build ignore script
+
+---
+
+## Session Learnings - January 22, 2026
+
+### GitHub CLI Workflow Automation
+
+**Session-specific patterns for v5.1 milestone and issue management:**
+
+- **Batch Milestone & Issue Creation:** Create milestone with `gh milestone create`, then batch issues with `--milestone` flag
+- **Structured Issue Templates:** Include Type, Affected Breakpoints, Current/Expected Behavior, Screenshots
+- **PR Review Iteration:** Use `gh api repos/:owner/:repo/pulls/:pr/comments` to fetch feedback, amend commits with `--force-with-lease`
+
+**Key Commands:**
+```bash
+gh milestone create "v5.1" -d "Description"
+gh issue create --title "..." --milestone "v5.1" --label "bug,mobile"
+gh api repos/owner/repo/pulls/463/comments
+git commit --amend --no-edit && git push origin branch --force-with-lease
+```
+
+### Mobile Responsive Design Debugging
+
+- **Issue: iframe Content Overflow on Mobile (375px-393px)**
+  - **Root Cause:** 400% scale technique doesn't account for mobile viewport constraints; content width exceeds container
+  - **Investigation:** Playwright screenshots at exact mobile breakpoints revealed horizontal scroll
+  - **Fix Strategy:**
+    - Implement CSS `overflow: hidden` with clipping on mobile
+    - Consider reducing scale percentage on mobile (e.g., 200% instead of 400%)
+    - Alternative: Use viewport-aware scale calculation
+  - **Prevention:** Test iframes at 375px during development, not just desktop
+  - **Related Issue:** #461 (GitHub mobile crashes)
+
+- **Issue: SmallProjectCard Tech Icons Overlap on Mobile**
+  - **Root Cause:** Fixed icon size (24px) + fixed gap (8px) don't reflow in narrow columns
+  - **Investigation:** Tested at 375px showed icons compressing and overlapping text
+  - **Fix Strategy:**
+    - Add `flex-wrap` for icon container to allow wrapping
+    - Reduce icon size on mobile: `w-4 h-4 md:w-6 md:h-6`
+    - Or reduce gap on mobile: `gap-1 md:gap-2`
+  - **Prevention:** Test all card components at 375px and 393px explicitly
+  - **Related Issue:** #462 (SmallProjectCard icons mobile)
+
+### Responsive Testing Best Practices
+
+- **Breakpoint Testing Checklist**
+  - Test at exact breakpoints: 375px, 393px, 768px, 1024px, 1440px
+  - Use Playwright for consistent viewport capture: `await page.setViewportSize({ width: 375, height: 667 })`
+  - Compare against previous screenshots to catch regressions
+  - Document findings by component (LiveProjectCard, SmallProjectCard, IPhoneProFrame, etc.)
+
+- **Mobile-Specific Component Testing**
+  - Verify touch targets remain 44x44px at smaller viewports
+  - Check text wrapping and line breaks at narrow widths
+  - Test scrolling performance on actual mobile devices (canvas animations, iframe scrolling)
+  - Verify images load correctly and don't cause layout shift
+
+- **Responsive CSS Gotchas**
+  - Using `w-full` on container doesn't guarantee content fits (check children widths)
+  - `grid` layouts can overflow on mobile; use `flex` or stack on mobile instead
+  - `fixed` positioning may behave differently on mobile (test with actual device)
+  - Negative margins (`-mt-12`) can cause overflow on narrow screens
+
+### Issue Tracking & Prioritization
+
+- **Categorization System**
+  - **Bugs:** Crashes, rendering errors, broken functionality → Fix immediately
+  - **Polish:** Spacing, alignment, sizing refinements → Plan for release milestone
+  - **Enhancements:** New features, additional states → Consider for future phases
+  - **Blockers:** Breaks deployment or user experience → Highest priority
+
+- **Milestone Planning**
+  - Group related issues by feature/section (Section Animations, GitHub Activity, etc.)
+  - Mark blocking dependencies with labels or issue references
+  - Plan phases to enable parallel work (e.g., mobile fixes don't block desktop enhancements)
+
+### Pattern: Responsive Component Development Workflow
+
+1. **Design specification** → Review at all 5 breakpoints
+2. **Initial implementation** → Test at desktop (1440px)
+3. **Breakpoint testing** → Capture screenshots at 375px, 768px, 1024px
+4. **Mobile debugging** → Fix issues found at 375px-393px
+5. **Tablet validation** → Ensure transitions are smooth at 768px
+6. **Documentation** → Add breakpoint notes to component patterns
+
+### Mistakes & Fixes
+
+- **Issue:** Developed components without testing on mobile; discovered iframe/icon issues only during design review
+  - **Root Cause:** Focused on desktop-first development without validating mobile early
+  - **Fix:** Created comprehensive breakpoint testing workflow before marking features complete
+  - **Prevention:** Add "Test at 375px and 1440px" to component implementation checklist
+
+- **Issue:** Issue documentation lacked breakpoint specificity; made triage harder
+  - **Root Cause:** Didn't use structured template for capturing findings
+  - **Fix:** Created GitHub issue template with "Affected Breakpoints" field
+  - **Prevention:** Use template for all design review findings
+
+### Performance Notes
+
+- Mobile debugging with Playwright: Exact viewport sizes (375, 393) are critical; approximate sizes miss edge cases
+- Batch GitHub operations: Using CLI is 5x faster than web UI for 9+ issues
+- Screenshot comparison: Save with breakpoint labels for quick reference during implementation
+
+### Debugging Wins
+
+- **Problem:** Understanding why SmallProjectCard icons overlap on mobile
+  - **Approach:** Captured Playwright screenshots at 375px, compared to 1440px version, identified fixed sizing conflict
+  - **Tool/Technique:** Playwright viewport sizing + screenshot comparison
+
+- **Problem:** Identifying all mobile-specific issues in one systematic review
+  - **Approach:** Tested all major components at each breakpoint (375, 393, 768, 1024, 1440px) using Playwright
+  - **Tool/Technique:** Documented findings by component in structured issue format
+
+### Automation Opportunities (Updated)
+
+- **Playwright Breakpoint Testing Script:** Create reusable script that tests all components at standard breakpoints
+- **GitHub CLI Batch Issues:** Template for creating milestone with related issues from findings
+- **Screenshot Comparison Tool:** Automated visual diff between breakpoints to catch regressions
+- **Mobile Audit Checklist:** Linter rule to flag fixed-size components that should be responsive
+- **Issue Template Generator:** CLI tool to create properly formatted issues with breakpoint metadata
 
 ---

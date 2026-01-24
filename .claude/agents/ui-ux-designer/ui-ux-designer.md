@@ -32,18 +32,25 @@ Expert UI/UX designer specializing in modern web design, user experience, and de
 
 ## Required Context Files
 
-### MUST READ Before Starting Any Task
+### Reading Order (Most Important First)
 
-**Skills & Lessons Learned** (`.claude/agents/ui-ux-designer/SKILL.md`)
-- Design review patterns and grading criteria
-- WCAG compliance quick reference
-- Common design issues and solutions
-- **Read this FIRST to apply learned insights**
+1. **Global Skills** (`~/.claude/skills/ui-ux-designer/SKILL.md`)
+   - Universal design review patterns
+   - WCAG compliance guidelines
+   - Typography and spacing best practices
+   - Review grading criteria
+   - **Read FIRST to apply accumulated design wisdom**
 
-**Design System** (`.claude/CLAUDE.md` - Design System section)
-- Complete v5.0 design system specifications
-- Color palette, typography, layout guidelines
-- Component patterns and reusable styles
+2. **Project Skills** (`.claude/agents/ui-ux-designer/SKILL.md`)
+   - v5.0 Night Sky theme decisions
+   - Session learnings and review insights
+   - Glass card patterns, iPhone frame specs
+   - **Read SECOND for portfolio-specific context**
+
+3. **Design System** (`.claude/CLAUDE.md` - Design System section)
+   - Complete v5.0 design system specifications
+   - Color palette, typography, layout guidelines
+   - Component patterns and reusable styles
 
 ## MCP Tools Available
 

@@ -8,13 +8,13 @@ Personal portfolio website built with Next.js, React, TypeScript, and Tailwind C
 - **Design Version:** 5.0 (Night Sky Theme)
 - **Current Focus:** v5 Redesign - Epic #431
 
-**Quick Status:** v5 in progress - 3 of 15 phases complete (Foundation, StarField, Live Projects).
+**Quick Status:** v5.0 core complete (3 of 15 phases). v5.1 polish in progress - responsive typography, mobile breakpoints, animations, and legacy cleanup planned.
 
 ---
 
 ## MAJOR REDESIGN: v5.0 Night Sky Theme
 
-The website is undergoing a complete visual redesign with a **night sky theme**, animated starfield, and live project previews in iPhone frames.
+The website has completed a major visual redesign with a **night sky theme**, animated starfield, and live project previews in iPhone frames.
 
 ### Key Changes
 - **Visual Theme:** Night sky gradient background with twinkling stars
@@ -40,7 +40,7 @@ The website is undergoing a complete visual redesign with a **night sky theme**,
 - Lazy-loading iframe with scaling
 - 4-layer design cards for projects
 
-**Remaining:** Phases 3-5, 7-15 (see Epic #431 for full roadmap)
+**Status:** v5.0 core phases complete and deployed. Additional phases (3-5, 7-15) and v5.1 refinements tracked in GitHub. See "Current Implementation Status" section below for details.
 
 ---
 
@@ -212,8 +212,8 @@ All reusable Tailwind style strings are centralized in `/Users/gihunko/projects/
 **Current Base Styles:**
 
 ```typescript
-// Glass card effect - dark semi-transparent with blur
-export const glassCardBaseStyle = 'bg-dark-gray/50 backdrop-blur-md rounded-3xl p-3';
+// Glass card effect - dark semi-transparent with blur, responsive padding (v5.1)
+export const glassCardBaseStyle = 'bg-dark-gray/50 backdrop-blur-md rounded-3xl max-sm:p-3 md:p-2.5 lg:p-3';
 
 // Hover animation - lift on hover
 export const hoverLiftStyle = 'hover:-translate-y-2 transition-transform ease-in-out';
@@ -221,6 +221,14 @@ export const hoverLiftStyle = 'hover:-translate-y-2 transition-transform ease-in
 // Base card width - responsive full width with desktop max-width
 export const baseWidth = 'w-full lg:max-w-360';
 ```
+
+**v5.1 Updates:**
+- `glassCardBaseStyle` now includes 3-tier responsive padding:
+  - Mobile (<768px): `p-3` (12px)
+  - Tablet (768-1023px): `p-2.5` (10px)
+  - Desktop (>=1024px): `p-3` (12px)
+- Uses Tailwind's mobile-first approach with `max-sm:`, `md:`, `lg:` prefixes
+- Prefer standard Tailwind classes over arbitrary values (e.g., `p-2.5` instead of `p-[10px]`)
 
 **Usage Pattern:**
 ```typescript
@@ -240,6 +248,13 @@ export function MyCard() {
 - Shared spacing, dimensions, or effects
 - Design system constants (colors, shadows, etc.)
 - DO NOT add one-off component styles here
+
+**Tailwind Best Practices (v5.1):**
+- Prefer standard Tailwind classes over arbitrary values
+- Example: Use `p-2.5` instead of `p-[10px]`
+- Example: Use `max-sm:p-3 md:p-2.5 lg:p-3` instead of arbitrary responsive values
+- Standard classes benefit from Tailwind's optimization and are more maintainable
+- Arbitrary values only when no standard class exists for the value
 
 ---
 
@@ -275,23 +290,26 @@ export function ExampleCard() {
 
 ### Icon Integration Pattern
 
-**Tech Icons:** Use `SimpleIcon[]` from `simple-icons` with `dangerouslySetInnerHTML`
+**Tech Icons:** Use `useSimpleIcons` hook for consistent rendering with responsive sizing
 
 ```typescript
-import { SimpleIcon } from 'simple-icons';
+import { useSimpleIcons } from '@/hooks/useSimpleIcons';
 
 interface CardProps {
-  icons: SimpleIcon[];
+  iconSlugs: string[];
+  size?: 'sm' | 'md' | 'lg'; // responsive: 16px, 24px, 32px
 }
 
-export function TechCard({ icons }: CardProps) {
+export function TechCard({ iconSlugs, size = 'md' }: CardProps) {
+  const { icons, IconContainer } = useSimpleIcons(iconSlugs, size);
+
   return (
     <div className="flex gap-2">
       {icons.map((icon) => (
-        <div
+        <IconContainer
           key={icon.slug}
-          dangerouslySetInnerHTML={{ __html: icon.svg }}
-          className="w-6 h-6"
+          icon={icon}
+          ariaLabel={icon.title}
         />
       ))}
     </div>
@@ -299,10 +317,114 @@ export function TechCard({ icons }: CardProps) {
 }
 ```
 
+**Hook Details:**
+- **Location:** `/src/hooks/useSimpleIcons.tsx`
+- **Returns:** `{ icons: SimpleIcon[]; IconContainer: React.FC }`
+- **Sizes:** 'sm' (16px), 'md' (24px), 'lg' (32px)
+- **Features:** useMemo optimization, Tooltip on hover, accessibility via aria-label
+- **Used by:** SmallProjectCard, LiveProjectCard
+
 **Alternatives:**
-- `simple-icons` for tech logos (preferred for tech stack)
+- `simple-icons` directly for tech logos (use hook for consistency)
 - Material UI Icons (`@mui/icons-material`) for UI icons
 - SVG components for custom icons
+
+### Animation Hooks (v5.1)
+
+**useStaggeredAnimation Hook**
+
+For scroll-triggered sequential animations with staggered delays:
+
+```typescript
+import { useStaggeredAnimation } from '@/hooks/useStaggeredAnimation';
+
+export function ProjectGrid() {
+  const { ref, itemRefs } = useStaggeredAnimation(items.length, {
+    delay: 500, // 500ms between items (default)
+  });
+
+  return (
+    <div ref={ref} className="grid gap-4">
+      {items.map((item, idx) => (
+        <div
+          key={item.id}
+          ref={(el) => {
+            if (el) itemRefs.current[idx] = el;
+          }}
+          className="opacity-0 data-[animated]:opacity-100 transition-opacity"
+        >
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+**Hook Details:**
+- **Location:** `/src/hooks/useStaggeredAnimation.ts`
+- **Features:** Intersection Observer API, respects `prefers-reduced-motion`
+- **Parameters:** Number of items, delay in milliseconds (default: 500ms)
+- **Returns:** `{ ref, itemRefs }` for container and individual items
+- **Used by:** SmallProjectCard, CertificationCard, LiveProjectCard sections
+
+**useSectionAnimation Hook**
+
+For simple fade-in animations on viewport entry:
+
+```typescript
+import { useSectionAnimation } from '@/hooks/useSectionAnimation';
+
+export function HeroSection() {
+  const { ref } = useSectionAnimation();
+
+  return (
+    <section
+      ref={ref}
+      className="opacity-0 data-[animated]:opacity-100 transition-opacity"
+    >
+      {/* content */}
+    </section>
+  );
+}
+```
+
+**Hook Details:**
+- **Location:** `/src/hooks/useSectionAnimation.ts`
+- **Features:** Simple fade-in, respects `prefers-reduced-motion`
+- **Returns:** `{ ref }` for section container
+- **Used by:** Hero and Footer sections
+
+### Responsive Typography System (v5.1)
+
+Typography scales across 3 breakpoints defined in `globals.css`:
+
+| Element | Mobile (<768px) | Tablet (768-1023px) | Desktop (>=1024px) | Font | Class |
+|---------|-----------------|---------------------|-------------------|------|-------|
+| Title | 36px | 48px | 64px | Poppins | `.text-title` |
+| H1 | 28px | 36px | 48px | Poppins | `.text-h1` |
+| H2 | 22px | 28px | 32px | Poppins | `.text-h2` |
+| H3 | 18px | 20px | 24px | Poppins | `.text-h3` |
+| Body | 14px | 15px | 16px | Roboto | `.text-body` |
+| Secondary | 13px | 14px | 16px | Roboto | `.text-secondary` |
+
+**Usage Pattern:**
+```typescript
+export function Section() {
+  return (
+    <>
+      <h1 className="text-title">Welcome</h1>
+      <p className="text-body">Body text automatically scales across breakpoints</p>
+    </>
+  );
+}
+```
+
+**Implementation:**
+- CSS custom properties in `:root` (e.g., `--font-size-title`)
+- Media queries for responsive scaling
+- Line-height optimized per breakpoint
+- Defined in `/src/app/globals.css` (lines 81-150+)
 
 ### Overlap/Blur Technique (LiveProjectCard)
 
@@ -338,6 +460,70 @@ export function OverlapSection() {
 - `z-index` layering (z-0 for background, z-10 for card)
 - Dark gradient overlay (70% opacity) ensures text readability
 - Content must be relative positioned to appear above overlay
+
+### Layout & Loading Patterns
+
+**Suspense Boundary (app/layout.tsx):**
+Wrap only `{children}` in Suspense, not the entire layout:
+
+```typescript
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang={locale}>
+      <body>
+        {/* Headers, navigation, etc. - NOT in Suspense */}
+
+        {/* Only children trigger loading.tsx */}
+        <Suspense fallback={<LoadingPage />}>
+          {children}
+        </Suspense>
+      </body>
+    </html>
+  );
+}
+```
+
+**Global Loading Page (app/loading.tsx):**
+Displays centered CalligraphySignature with animated loading bar:
+
+```typescript
+export default function Loading() {
+  return (
+    <div className="min-h-screen bg-gradient-sky flex flex-col items-center justify-center gap-8">
+      <CalligraphySignature width={200} height={80} />
+      <div className="loading-bar" />
+    </div>
+  );
+}
+```
+
+**Animation (globals.css):**
+```css
+@keyframes loading-bar {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+.loading-bar {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, #00d4ff, #c084fc);
+  animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-bar {
+    animation: none;
+    width: 100px;
+    opacity: 0.5;
+  }
+}
+```
 
 ---
 
@@ -463,14 +649,15 @@ npm run start      # Start production server
 portfolio_website/
 ├── app/
 │   ├── [locale]/page.tsx  # v5 homepage with scrollable sections
-│   ├── layout.tsx         # Root layout, Poppins/Roboto font setup
-│   ├── globals.css        # Global styles, v5 color palette
+│   ├── layout.tsx         # Root layout with Suspense boundary, font setup
+│   ├── loading.tsx        # Global loading page with CalligraphySignature
+│   ├── globals.css        # Global styles, v5 color palette, animations
 │   └── styles/
 │       └── baseStyles.ts  # Reusable Tailwind style strings (CENTRALIZED)
 ├── components/
 │   ├── StarField/         # Canvas-based twinkling stars (Phase 2)
 │   ├── IPhoneProFrame/    # iPhone 15 Pro bezel component
-│   ├── LiveProjectIframe/ # Lazy-loading iframe wrapper
+│   ├── LiveProjectIframe/ # Lazy-loading iframe with mobile fallback
 │   ├── LiveProjectCard/   # 4-layer design card component
 │   ├── LiveProjectsSection/ # Featured projects section
 │   ├── SmallProjectCard/  # Compact card for GitHub projects
@@ -481,6 +668,12 @@ portfolio_website/
 │   ├── HeroSection/       # Hero with tech logos
 │   ├── ProjectSection/    # Projects grid
 │   └── AboutSection/      # About with timeline
+├── hooks/
+│   ├── useSimpleIcons.tsx # Hook for consistent SimpleIcon rendering with responsive sizing
+│   ├── useStaggeredAnimation.ts # Scroll-triggered staggered animations (v5.1)
+│   ├── useSectionAnimation.ts # Simple fade-in on viewport entry (v5.1)
+│   ├── useBreakpoint.ts # Responsive breakpoint detection
+│   └── useClickOutside.ts # Click-outside detection
 ├── public/
 │   └── assets/            # Static assets (images, SVGs, backgrounds)
 ├── docs/
@@ -498,7 +691,7 @@ portfolio_website/
 
 ---
 
-## Current Implementation Status (v5.0)
+## Current Implementation Status (v5.0 with v5.1 Polish)
 
 ### Completed Phases
 **Phase 1: Foundation** (COMPLETE - PR #434)
@@ -517,6 +710,38 @@ portfolio_website/
 - 4-layer design card system
 - LiveProjectsSection container
 
+### v5.1 Polish (IN PROGRESS)
+
+**Issue #462 - Mobile & Tablet Breakpoints** (PR #468)
+- Created 3-tier responsive typography system in `globals.css`
+  - Desktop (>=1024px), Tablet (768-1023px), Mobile (<768px)
+  - Applies to: Title, H1, H2, H3, Body, Secondary text
+- Updated `glassCardBaseStyle` with responsive padding
+  - `max-sm:p-3 md:p-2.5 lg:p-3` for mobile-first sizing
+- Simplified `useSimpleIcons` hook for consistency
+- Applied to SmallProjectCard, CertificationCard, and other components
+
+**Issue #454 - Section Animations** (PR #469)
+- Created `useStaggeredAnimation` hook at `src/hooks/useStaggeredAnimation.ts`
+  - Scroll-triggered staggered animations with 500ms delay between items
+  - Respects `prefers-reduced-motion` user preference
+  - Used in SmallProjectCard, CertificationCard, LiveProjectCard sections
+- Created `useSectionAnimation` hook at `src/hooks/useSectionAnimation.ts`
+  - Simple fade-in animation on viewport entry
+  - Respects `prefers-reduced-motion` user preference
+  - Applied to Hero and Footer sections
+- Both hooks use Intersection Observer API for performance
+
+**Previous v5.1 Issues (Complete)**
+- **#460 - iFrame Mobile Crashes:** Mobile detection via `useBreakpoint` hook, renders fallback image on mobile
+- **#461 - SmallProjectCard Icons:** `useSimpleIcons` hook with responsive sizing, tooltip support
+- **#459 - Global Loading Page:** CalligraphySignature + animated loading bar in `app/loading.tsx`
+- **#457 - Footer Polish:** 44px touch targets, focus-visible states
+
+**Issue #467 - Legacy Cleanup** (Created)
+- Planned removal of unused v3/v4 code from `/components/Dashboard/` and legacy sections
+- Track via GitHub for v5.2 cleanup phase
+
 ### Remaining Phases (3-5, 7-15)
 See Epic #431 for detailed roadmap. Track via GitHub issues #432-439 on `develop_v5` branch.
 
@@ -531,6 +756,35 @@ Previous implementations:
 - Hero Section with orbital tech logos
 - Featured Projects bento grid
 - About Section with timeline
+
+---
+
+## v5.1 Progress & Known Issues
+
+### Issues In Progress
+**#462 - Mobile & Tablet Breakpoints** (PR #468)
+- 3-tier responsive typography system (mobile/tablet/desktop)
+- Responsive padding in `glassCardBaseStyle`
+- Affects: SmallProjectCard, CertificationCard, LiveProjectCard
+- Status: IN PROGRESS
+
+**#454 - Section Animations** (PR #469)
+- Staggered animations with `useStaggeredAnimation` hook
+- Fade-in animations with `useSectionAnimation` hook
+- Applied to: SmallProjectCard, CertificationCard, LiveProjectCard sections, Hero, Footer
+- Status: IN PROGRESS
+
+### Resolved Issues (v5.1)
+**#460 - iFrame Mobile Crashes:** Fixed with mobile fallback image (PR #463)
+**#461 - SmallProjectCard Icons:** Resolved with `useSimpleIcons` hook (PR #464)
+**#459 - Global Loading Page:** Implemented loading.tsx with Suspense (PR #466)
+**#457 - Footer Polish:** 44px touch targets, focus-visible states (PR #465)
+
+### Planned Issues (v5.2)
+**#467 - Legacy Cleanup**
+- Remove unused v3/v4 code from `/components/Dashboard/`
+- Archive old component patterns
+- Update docs to reflect v5.x as primary version
 
 ---
 
@@ -558,6 +812,24 @@ and provide feedback
 
 ## Important Context Documents
 
+### Global Skills Repository
+
+Universal patterns shared across all projects are stored in `nordic_claude_agent_skills`:
+
+- **`frontend-dev/SKILL.md`** - Universal CSS gotchas, accessibility patterns, performance techniques
+- **`ui-ux-designer/SKILL.md`** - Universal design principles, WCAG guidelines, review criteria
+
+**Repository:** https://github.com/nordic96/nordic_claude_agent_skills
+
+**Loading Methods:**
+- **Local Development:** Symlinked from `~/.claude/skills/` to local clone
+- **GitHub Actions:** Fetched to `.claude/global-skills/` via pre-clone step in workflow
+
+**Layered Context Loading:**
+1. Global Skills (`.claude/global-skills/` or `~/.claude/skills/`) - Universal patterns
+2. Project Skills (`.claude/agents/`) - Project-specific patterns
+3. Project CLAUDE.md - Architecture and design system
+
 ### Essential Reading (v5.0)
 - **CLAUDE.md** (this file) - Single source of truth for project-wide patterns, design system, and architecture
 - **agents/ui-ux-designer/SKILL.md** - Design review criteria, Figma analysis patterns, v5.0 session learnings
@@ -565,8 +837,10 @@ and provide feedback
 
 ### GitHub & Branch Strategy
 - **GitHub Epic #431** - Master plan for v5 redesign with 15 phases
-- **GitHub Issues #432-439** - Individual phase tracking
+- **GitHub Issues #432-439** - Individual phase tracking (Phases 1-2, 6 complete)
+- **GitHub Milestone #12** - v5.1 iteration with issues #454-#462
 - **develop_v5** - Integration branch for all v5 work
+- **develop** - Current active branch for v5.1 work
 - Feature branches: `feature/phase-#` off develop_v5
 - PRs target develop_v5, not master
 - Example: PR #440 for Phase 6 implementation
@@ -576,10 +850,11 @@ and provide feedback
 ## Quick Reference
 
 ### Current Version & Branch
-- **Version:** 5.0 (Night Sky Theme)
-- **Main Branch:** develop_v5
-- **GitHub Issues:** Epic #431, Sub-issues #432-439
-- **Latest PRs:** #434 (Phase 1), #435 (Phase 2), #440 (Phase 6)
+- **Version:** 5.1 (Night Sky Theme - In Progress)
+- **Active Branch:** develop (v5.1 work)
+- **GitHub Epic #431:** Master v5.0 redesign plan (3 of 15 phases complete)
+- **GitHub Milestone #12:** v5.1 polish (issues #454-#462)
+- **Latest PRs:** #468 (Mobile Breakpoints), #469 (Animations), #463-#466 (v5.1 foundation)
 
 ### Design Philosophy (v5.0)
 - **Immersive:** Night sky gradient with animated stars
@@ -588,20 +863,31 @@ and provide feedback
 - **Scrollable:** Layered sections with parallax effects
 - **Smooth:** Organic animations and transitions
 
-### New Components Reference
+### New Components & Hooks Reference
 
 **Phase 2 & 6 (Complete):**
 - `StarField` - Canvas 2D twinkling star animation with parallax
 - `IPhoneProFrame` - iPhone 15 Pro bezel with rounded corners and notch
-- `LiveProjectIframe` - Lazy-loading iframe with 1px width optimization
+- `LiveProjectIframe` - Lazy-loading iframe with mobile image fallback
 - `LiveProjectCard` - 4-layer design card for projects (uses overlap/blur technique)
 - `LiveProjectsSection` - Container for featured projects
 
-**Recent Components (This Session):**
-- `SmallProjectCard` - Compact card for GitHub projects with glass effect
+**v5.1 Polish Components:**
+- `SmallProjectCard` - Compact card for GitHub projects with glass effect, uses `useSimpleIcons`
 - `CertificationCard` - Certification display with badge, uses `glassCardBaseStyle`
 - `CalligraphySignature` - Animated signature with clip-path reveal effect
 - `PrimaryButton` - Shared button component with SimpleIcon support
+
+**Global Features (v5.1):**
+- `loading.tsx` - Global loading page with CalligraphySignature and animated loading bar
+- Suspense boundary in `layout.tsx` wraps only {children} for loading state
+
+**Custom Hooks (v5.1):**
+- `useSimpleIcons` - Consistent SimpleIcon rendering with responsive sizing, tooltip support, and accessibility
+- `useStaggeredAnimation` - Scroll-triggered staggered animations with configurable delays (500ms default)
+- `useSectionAnimation` - Simple fade-in on viewport entry with intersection observer
+- `useBreakpoint` - Responsive breakpoint detection for mobile/tablet/desktop
+- `useClickOutside` - Click-outside detection for modals and menus
 
 **All components follow:**
 - Reusable styles from `/app/styles/baseStyles.ts`
@@ -609,6 +895,7 @@ and provide feedback
 - Glass effect with `glassCardBaseStyle`
 - Hover animations with `hoverLiftStyle`
 - Responsive design using Tailwind breakpoints
+- Mobile-first approach with 44px touch targets (WCAG AA)
 
 ### Accessibility
 - WCAG AA compliance target
@@ -629,13 +916,15 @@ and provide feedback
 
 ---
 
-**Last Updated:** January 21, 2026
-**Document Version:** 5.0 (Night Sky Theme - In Progress)
-**Progress:** 3 of 15 phases complete
+**Last Updated:** January 23, 2026
+**Document Version:** 5.1 (Night Sky Theme - In Progress)
+**Progress:** 3 of 15 core phases complete + v5.1 polish (issues #454, #462 in PR)
 
-**Recent Updates (Jan 21):**
-- Added Reusable Styles System section with `baseStyles.ts` patterns
-- Added Component Patterns section (Card, Icon, Overlap/Blur techniques)
-- Added Accessibility Patterns section (ARIA, animations, i18n)
-- Documented new components: SmallProjectCard, CertificationCard, CalligraphySignature, PrimaryButton
-- Updated Key Directories to reflect `/app/styles/` centralization
+**Recent Updates (Jan 23 - v5.1 Polish Continued):**
+- Added v5.1 Animation Hooks documentation (`useStaggeredAnimation`, `useSectionAnimation`)
+- Documented 3-tier responsive typography system (mobile/tablet/desktop)
+- Updated `glassCardBaseStyle` with responsive padding (PR #468)
+- Added note on Tailwind class preference (standard over arbitrary values)
+- Updated v5.1 Progress section with PR #468-#469 status
+- Resolved merge conflicts from upstream v5.0 deployment
+- Documented hooks in Key Directories section

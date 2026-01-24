@@ -24,6 +24,12 @@
   --accent-indigo: #6155F5;
   --accent-yellow: #FFCC00;
 
+  /* Web Health Status Colors */
+  --status-live: #22c55e;
+  --status-slow: #eab308;
+  --status-down: #ef4444;
+  --status-unknown: #9ca3af;
+
   /* Background */
   --background: #070B34;
   --foreground: #FFFFFF;
@@ -77,28 +83,38 @@
   --color-white: #FFFFFF;
   --color-dark-gray: #333333;
 
-  /* Typography Scale - v5 */
-  /* Title: 64px Bold Italic Poppins */
+  /* Web Health Status Colors */
+  --color-status-live: var(--status-live);
+  --color-status-slow: var(--status-slow);
+  --color-status-down: var(--status-down);
+  --color-status-unknown: var(--status-unknown);
+
+  /* ==========================================================================
+     Typography Scale - v5.1 Responsive
+     Desktop (>=1024px) | Tablet (768-1023px) | Mobile (<768px)
+     ========================================================================== */
+
+  /* Title: 64px -> 48px -> 36px */
   --font-size-title: 4rem;
   --line-height-title: 1.1;
 
-  /* H1: 48px Bold Italic Poppins */
+  /* H1: 48px -> 36px -> 28px */
   --font-size-h1: 3rem;
   --line-height-h1: 1.2;
 
-  /* H2: 32px Bold Italic Poppins */
+  /* H2: 32px -> 28px -> 22px */
   --font-size-h2: 2rem;
   --line-height-h2: 1.25;
 
-  /* H3: 24px Bold Italic Poppins */
+  /* H3: 24px -> 20px -> 18px */
   --font-size-h3: 1.5rem;
   --line-height-h3: 1.3;
 
-  /* Body: 16px Normal Roboto */
+  /* Body: 16px -> 15px -> 14px */
   --font-size-body: 1rem;
   --line-height-body: 1.5;
 
-  /* Secondary: 16px Light Italic Roboto */
+  /* Secondary: 16px -> 14px -> 13px */
   --font-size-secondary: 1rem;
   --line-height-secondary: 1.5;
 }
@@ -120,60 +136,145 @@
 }
 
 /* ==========================================================================
-   Typography Utility Classes - v5
+   Typography Utility Classes - v5.1 Responsive
+   Breakpoints: Mobile (<768px) | Tablet (768-1023px) | Desktop (>=1024px)
    ========================================================================== */
 
-/* Title: 64px Bold Italic Poppins */
+/* Title: 36px -> 48px -> 64px (Mobile -> Tablet -> Desktop) */
 .text-title {
   font-family: var(--font-poppins), sans-serif;
-  font-size: var(--font-size-title);
-  line-height: var(--line-height-title);
+  font-size: 2.25rem; /* 36px Mobile */
+  line-height: 1.15;
   font-weight: 700;
   font-style: italic;
 }
 
-/* H1: 48px Bold Italic Poppins */
+@media (min-width: 768px) {
+  .text-title {
+    font-size: 3rem; /* 48px Tablet */
+    line-height: 1.12;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-title {
+    font-size: 4rem; /* 64px Desktop */
+    line-height: var(--line-height-title);
+  }
+}
+
+/* H1: 28px -> 36px -> 48px */
 .text-h1 {
   font-family: var(--font-poppins), sans-serif;
-  font-size: var(--font-size-h1);
-  line-height: var(--line-height-h1);
+  font-size: 1.75rem; /* 28px Mobile */
+  line-height: 1.25;
   font-weight: 700;
   font-style: italic;
 }
 
-/* H2: 32px Bold Italic Poppins */
+@media (min-width: 768px) {
+  .text-h1 {
+    font-size: 2.25rem; /* 36px Tablet */
+    line-height: 1.22;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-h1 {
+    font-size: 3rem; /* 48px Desktop */
+    line-height: var(--line-height-h1);
+  }
+}
+
+/* H2: 22px -> 28px -> 32px */
 .text-h2 {
   font-family: var(--font-poppins), sans-serif;
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
+  font-size: 1.375rem; /* 22px Mobile */
+  line-height: 1.3;
   font-weight: 700;
   font-style: italic;
 }
 
-/* H3: 24px Bold Italic Poppins */
+@media (min-width: 768px) {
+  .text-h2 {
+    font-size: 1.75rem; /* 28px Tablet */
+    line-height: 1.28;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-h2 {
+    font-size: 2rem; /* 32px Desktop */
+    line-height: var(--line-height-h2);
+  }
+}
+
+/* H3: 18px -> 20px -> 24px */
 .text-h3 {
   font-family: var(--font-poppins), sans-serif;
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-h3);
+  font-size: 1.125rem; /* 18px Mobile */
+  line-height: 1.35;
   font-weight: 700;
   font-style: italic;
 }
 
-/* Body: 16px Normal Roboto */
+@media (min-width: 768px) {
+  .text-h3 {
+    font-size: 1.25rem; /* 20px Tablet */
+    line-height: 1.32;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-h3 {
+    font-size: 1.5rem; /* 24px Desktop */
+    line-height: var(--line-height-h3);
+  }
+}
+
+/* Body: 14px -> 15px -> 16px */
 .text-body {
   font-family: var(--font-roboto), sans-serif;
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  font-size: 0.875rem; /* 14px Mobile */
+  line-height: 1.55;
   font-weight: 400;
 }
 
-/* Secondary: 16px Light Italic Roboto */
+@media (min-width: 768px) {
+  .text-body {
+    font-size: 0.9375rem; /* 15px Tablet */
+    line-height: 1.52;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-body {
+    font-size: 1rem; /* 16px Desktop */
+    line-height: var(--line-height-body);
+  }
+}
+
+/* Secondary: 13px -> 14px -> 16px */
 .text-secondary {
   font-family: var(--font-roboto), sans-serif;
-  font-size: var(--font-size-secondary);
-  line-height: var(--line-height-secondary);
+  font-size: 0.8125rem; /* 13px Mobile */
+  line-height: 1.55;
   font-weight: 300;
   font-style: italic;
+}
+
+@media (min-width: 768px) {
+  .text-secondary {
+    font-size: 0.875rem; /* 14px Tablet */
+    line-height: 1.52;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-secondary {
+    font-size: 1rem; /* 16px Desktop */
+    line-height: var(--line-height-secondary);
+  }
 }
 
 /* Font Family Utilities */
@@ -194,6 +295,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
@@ -276,6 +379,119 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ==========================================================================
+   Loading Bar Animation
+   ========================================================================== */
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-loading-bar {
+  width: 25%;
+  animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+/* Respect reduced motion preference for loading bar */
+@media (prefers-reduced-motion: reduce) {
+  .animate-loading-bar {
+    animation: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Staggered Animation Classes (Section Animations - Issue #454)
+   ========================================================================== */
+
+/* Fade in from bottom animation */
+@keyframes staggerFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base state for staggered items - hidden */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Visible state - animated */
+.stagger-item-visible {
+  animation: staggerFadeInUp 0.5s ease-out forwards;
+}
+
+/* Section fade-in animation (for Hero, Footer, etc.) */
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section-fade-in {
+  animation: sectionFadeIn 0.6s ease-out forwards;
+}
+
+/* Delayed section animations */
+.animate-section-delay-1 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-section-delay-2 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animate-section-delay-3 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Respect reduced motion preference for staggered animations */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-item-visible {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-section-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-section-delay-1,
+  .animate-section-delay-2,
+  .animate-section-delay-3 {
+    animation-delay: 0s;
+    opacity: 1;
+  }
 }
 
 @layer utilities {
