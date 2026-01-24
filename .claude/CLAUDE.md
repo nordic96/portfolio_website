@@ -814,15 +814,19 @@ and provide feedback
 
 ### Global Skills Repository
 
-Universal patterns shared across all projects are stored in `~/.claude/skills/`:
+Universal patterns shared across all projects are stored in `nordic_claude_agent_skills`:
 
-- **`~/.claude/skills/frontend-dev/SKILL.md`** - Universal CSS gotchas, accessibility patterns, performance techniques
-- **`~/.claude/skills/ui-ux-designer/SKILL.md`** - Universal design principles, WCAG guidelines, review criteria
+- **`frontend-dev/SKILL.md`** - Universal CSS gotchas, accessibility patterns, performance techniques
+- **`ui-ux-designer/SKILL.md`** - Universal design principles, WCAG guidelines, review criteria
 
-**Repository:** `nordic_claude_agent_skills` (symlinked to `~/.claude/`)
+**Repository:** https://github.com/nordic96/nordic_claude_agent_skills
+
+**Loading Methods:**
+- **Local Development:** Symlinked from `~/.claude/skills/` to local clone
+- **GitHub Actions:** Fetched to `.claude/global-skills/` via pre-clone step in workflow
 
 **Layered Context Loading:**
-1. Global Skills (`~/.claude/skills/`) - Universal patterns
+1. Global Skills (`.claude/global-skills/` or `~/.claude/skills/`) - Universal patterns
 2. Project Skills (`.claude/agents/`) - Project-specific patterns
 3. Project CLAUDE.md - Architecture and design system
 
