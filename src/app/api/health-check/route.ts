@@ -33,16 +33,23 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const urlObj = new URL(url);
-  if (!ALLOWED_DOMAINS.includes(urlObj.hostname)) {
-    return NextResponse.json({ error: 'Domain not allowed' }, { status: 403 });
-  }
-
   // Validate URL format
+  let urlObj: URL;
   try {
-    new URL(url);
+    urlObj = new URL(url);
   } catch {
     return NextResponse.json({ error: 'Invalid URL format' }, { status: 400 });
+  }
+
+  if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https') {
+    return NextResponse.json(
+      { error: 'Unsupported URL protocol' },
+      { status: 400 },
+    );
+  }
+
+  if (!ALLOWED_DOMAINS.includes(urlObj.hostname)) {
+    return NextResponse.json({ error: 'Domain not allowed' }, { status: 403 });
   }
 
   const startTime = Date.now();
@@ -51,7 +58,7 @@ export async function GET(request: NextRequest) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), TIMEOUT);
 
-    const response = await fetch(url, {
+    const response = await fetch(urlObj.toString(), {
       method: 'HEAD', // Use HEAD for faster response
       signal: controller.signal,
       headers: {
