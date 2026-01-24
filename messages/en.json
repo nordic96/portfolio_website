@@ -63,5 +63,15 @@
         "language": "Change Language",
         "footline": "Developed by Gi Hun Ko Stephen",
         "app_version": "App Version"
+    },
+    "ProjectCard": {
+        "website": "Website",
+        "github": "Github"
+    },
+    "WebHealthIndicator": {
+        "status_live": "Website is live and responsive",
+        "status_slow": "Website is slow or partially available",
+        "status_down": "Website is down or unreachable",
+        "status_unknown": "Website status is unknown"
     }
 }

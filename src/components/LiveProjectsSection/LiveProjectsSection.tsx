@@ -24,15 +24,19 @@ const liveProjects: LiveProject[] = [
   {
     id: 'white_rabbit',
     title: 'White Rabbit',
-    url: 'https://white-rabbit-web.vercel.app',
+    websiteUrl: 'https://white-rabbit-web.vercel.app',
+    githubUrl: 'https://github.com/nordic96/white_rabbit',
     fallbackUrl:
       'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets@master/resources/images/white_rabbit_mobileview.png',
     techStack: [siNextdotjs, siReact, siFastapi, siNeo4j, siHuggingface],
+    healthCheckEnabled: true,
   },
   {
     id: 'foodies_trail',
     title: "Foodie's Trail SG",
-    url: 'https://sg-eatwhere.vercel.app',
+    websiteUrl: 'https://sg-eatwhere.vercel.app',
+    githubUrl: 'https://github.com/nordic96/sg_eatwhere',
+    healthCheckEnabled: true,
     fallbackUrl:
       'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets@master/resources/images/foodies_trail_mobileview.png',
     techStack: [siThreedotjs, siWebgl, siHuggingface, siTailwindcss, siClaude],
@@ -52,6 +56,10 @@ interface LiveProjectsSectionProps {
  * - 2 cards side by side on desktop
  * - Stacked vertically on mobile
  * - Uses GridCard wrapper for consistent styling with dashboard
+ *
+ * Features:
+ * - Health status indicators for each project
+ * - Dual CTA buttons (Visit Website, View on GitHub)
  * - Staggered entrance animation for cards
  */
 export default function LiveProjectsSection({

@@ -30,6 +30,21 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Fetch global skills from nordic_claude_agent_skills
+        run: |
+          echo "Fetching global skills..."
+          git clone --depth 1 https://github.com/nordic96/nordic_claude_agent_skills.git /tmp/global-skills
+
+          # Copy skills to project's .claude directory
+          mkdir -p .claude/global-skills/frontend-dev
+          mkdir -p .claude/global-skills/ui-ux-designer
+
+          cp /tmp/global-skills/skills/frontend-dev/SKILL.md .claude/global-skills/frontend-dev/
+          cp /tmp/global-skills/skills/ui-ux-designer/SKILL.md .claude/global-skills/ui-ux-designer/
+
+          echo "Global skills loaded:"
+          ls -la .claude/global-skills/
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1

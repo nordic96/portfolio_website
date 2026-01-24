@@ -1,9 +1,13 @@
 'use client';
 
-import { SimpleIcon } from 'simple-icons';
+import { SimpleIcon, siGithub } from 'simple-icons';
 
 import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
+import { useHealthCheck } from '@/src/hooks';
+import WebHealthIndicator from '@/src/components/WebHealthIndicator';
+import PrimaryButton from '@/src/components/shared/PrimaryButton';
+import { Language } from '@mui/icons-material';
 import { useSimpleIcons } from '@/src/hooks';
 import IPhoneProFrame from '@/src/components/IPhoneProFrame';
 import LiveProjectIframe from '@/src/components/LiveProjectIframe';
@@ -12,9 +16,14 @@ import { useTranslations } from 'next-intl';
 export interface LiveProject {
   id: string;
   title: string;
-  url: string;
   fallbackUrl?: string;
   techStack: SimpleIcon[];
+  /** URL for the website (used for "Visit Website" button and iframe preview) */
+  websiteUrl: string;
+  /** Optional GitHub repository URL */
+  githubUrl?: string;
+  /** Whether to show health check status indicator (default: true) */
+  healthCheckEnabled?: boolean;
 }
 
 interface LiveProjectCardProps {
@@ -30,12 +39,26 @@ interface LiveProjectCardProps {
  * - Live iframe content (Layer 2)
  * - Subtle gradient overlay (Layer 3)
  * - External info section below phone (Title, Tech logos, Description)
+ * - Health status indicator in metadata container
+ * - Dual CTA buttons (Visit Website, View on GitHub)
  */
 export default function LiveProjectCard({
   project,
   className,
 }: LiveProjectCardProps) {
-  const { id, title, url, fallbackUrl, techStack } = project;
+  const {
+    id,
+    title,
+    techStack,
+    websiteUrl,
+    githubUrl,
+    fallbackUrl,
+    healthCheckEnabled = true,
+  } = project;
+
+  // Use the health check hook
+  const { status, isLoading } = useHealthCheck(websiteUrl, healthCheckEnabled);
+  const cardT = useTranslations('ProjectCard');
   const t = useTranslations('Projects');
   const { IconContainer } = useSimpleIcons({
     icons: techStack,
@@ -49,7 +72,7 @@ export default function LiveProjectCard({
         <IPhoneProFrame>
           {/* Live iframe (Layer 2) - uses static fallback image on mobile */}
           <LiveProjectIframe
-            url={url}
+            url={websiteUrl}
             title={title}
             fallbackUrl={fallbackUrl}
           />
@@ -66,7 +89,7 @@ export default function LiveProjectCard({
       </div>
 
       {/* External Info Section - Overlapping bottom of phone frame */}
-      <a href={url} target={'_blank'} className="relative z-20 w-full">
+      <div className="relative z-20">
         <div
           className={cn(
             'text-center w-full md:max-w-55 lg:max-w-60 mx-auto',
@@ -89,13 +112,48 @@ export default function LiveProjectCard({
           >
             {/* Tech Stack Icons Row */}
             <IconContainer className="flex justify-center items-center gap-1 mt-1 md:mt-2" />
+
             {/* Description */}
-            <p className="text-secondary text-text-white mt-1.5 md:mt-2">
+            <p className="text-secondary text-text-white mt-2">
               {t(`${id}.desc`)}
             </p>
+
+            {/* Health Status Indicator */}
+            {healthCheckEnabled && (
+              <div className="flex justify-center mt-3">
+                <WebHealthIndicator status={status} isLoading={isLoading} />
+              </div>
+            )}
+
+            {/* Dual CTA Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center gap-2 mt-4">
+              <PrimaryButton
+                as="link"
+                href={websiteUrl}
+                variant="secondary"
+                size="small"
+                aria-label={`Visit ${title} website`}
+              >
+                <Language fontSize={'small'} />
+                {cardT('website')}
+              </PrimaryButton>
+
+              {githubUrl && (
+                <PrimaryButton
+                  as="link"
+                  href={githubUrl}
+                  variant="primary"
+                  size="small"
+                  icon={siGithub}
+                  aria-label={`View ${title} on GitHub`}
+                >
+                  {cardT('github')}
+                </PrimaryButton>
+              )}
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 }
