@@ -2,10 +2,13 @@
 
 import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
+import { useHealthCheck } from '@/src/hooks';
 import IPhoneProFrame from '@/src/components/IPhoneProFrame';
 import LiveProjectIframe from '@/src/components/LiveProjectIframe';
+import WebHealthIndicator from '@/src/components/WebHealthIndicator';
+import PrimaryButton from '@/src/components/shared/PrimaryButton';
 import { Tooltip } from '@mui/material';
-import { SimpleIcon } from 'simple-icons';
+import { SimpleIcon, siGithub } from 'simple-icons';
 
 export interface LiveProject {
   id: string;
@@ -13,6 +16,12 @@ export interface LiveProject {
   url: string;
   description: string;
   techStack: SimpleIcon[];
+  /** URL for the website (used for "Visit Website" button) */
+  websiteUrl: string;
+  /** Optional GitHub repository URL */
+  githubUrl?: string;
+  /** Whether to show health check status indicator (default: true) */
+  healthCheckEnabled?: boolean;
 }
 
 interface LiveProjectCardProps {
@@ -28,12 +37,25 @@ interface LiveProjectCardProps {
  * - Live iframe content (Layer 2)
  * - Subtle gradient overlay (Layer 3)
  * - External info section below phone (Title, Tech logos, Description)
+ * - Health status indicator in metadata container
+ * - Dual CTA buttons (Visit Website, View on GitHub)
  */
 export default function LiveProjectCard({
   project,
   className,
 }: LiveProjectCardProps) {
-  const { title, url, description, techStack } = project;
+  const {
+    title,
+    url,
+    description,
+    techStack,
+    websiteUrl,
+    githubUrl,
+    healthCheckEnabled = true,
+  } = project;
+
+  // Use the health check hook
+  const { status, isLoading } = useHealthCheck(websiteUrl, healthCheckEnabled);
 
   return (
     <div className={cn('flex flex-col items-center', className)}>
@@ -55,13 +77,13 @@ export default function LiveProjectCard({
       </div>
 
       {/* External Info Section - Overlapping bottom of phone frame */}
-      <a href={url} target={'_blank'} className="relative z-20">
+      <div className="relative z-20">
         <div
           className={cn(
             'text-center w-full max-w-60',
             // Pull up to overlap with phone frame bottom
             '-mt-20',
-            hoverLiftStyle,
+            hoverLiftStyle
           )}
         >
           {/* Project Title */}
@@ -71,7 +93,7 @@ export default function LiveProjectCard({
               glassCardBaseStyle,
               'flex flex-col',
               // Enhanced blur for overlap effect
-              'backdrop-blur-lg',
+              'backdrop-blur-lg'
             )}
           >
             {/* Tech Stack Icons Row */}
@@ -91,11 +113,45 @@ export default function LiveProjectCard({
                 );
               })}
             </div>
+
             {/* Description */}
             <p className="text-secondary text-text-white mt-2">{description}</p>
+
+            {/* Health Status Indicator */}
+            {healthCheckEnabled && (
+              <div className="flex justify-center mt-3">
+                <WebHealthIndicator status={status} isLoading={isLoading} />
+              </div>
+            )}
+
+            {/* Dual CTA Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center gap-2 mt-4">
+              <PrimaryButton
+                as="link"
+                href={websiteUrl}
+                variant="primary"
+                size="small"
+                aria-label={`Visit ${title} website`}
+              >
+                Visit Website
+              </PrimaryButton>
+
+              {githubUrl && (
+                <PrimaryButton
+                  as="link"
+                  href={githubUrl}
+                  variant="secondary"
+                  size="small"
+                  icon={siGithub}
+                  aria-label={`View ${title} on GitHub`}
+                >
+                  GitHub
+                </PrimaryButton>
+              )}
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 }
