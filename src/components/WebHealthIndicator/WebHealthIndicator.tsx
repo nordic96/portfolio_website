@@ -2,6 +2,7 @@
 
 import { cn } from '@/src/utils';
 import type { HealthStatus } from '@/src/app/api/health-check/route';
+import { useTranslations } from 'next-intl';
 
 interface WebHealthIndicatorProps {
   status: HealthStatus;
@@ -57,12 +58,12 @@ export default function WebHealthIndicator({
   className,
 }: WebHealthIndicatorProps) {
   const config = statusConfig[status];
-
+  const t = useTranslations('WebHealthIndicator');
   return (
     <div
       className={cn('flex items-center gap-2 text-sm', className)}
       role="status"
-      aria-label={isLoading ? 'Checking website status' : config.ariaLabel}
+      aria-label={isLoading ? 'Checking website status' : t(`status_${status}`)}
     >
       <span className="text-text-secondary">Status:</span>
       <span
