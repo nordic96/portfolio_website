@@ -812,6 +812,20 @@ and provide feedback
 
 ## Important Context Documents
 
+### Global Skills Repository
+
+Universal patterns shared across all projects are stored in `~/.claude/skills/`:
+
+- **`~/.claude/skills/frontend-dev/SKILL.md`** - Universal CSS gotchas, accessibility patterns, performance techniques
+- **`~/.claude/skills/ui-ux-designer/SKILL.md`** - Universal design principles, WCAG guidelines, review criteria
+
+**Repository:** `nordic_claude_agent_skills` (symlinked to `~/.claude/`)
+
+**Layered Context Loading:**
+1. Global Skills (`~/.claude/skills/`) - Universal patterns
+2. Project Skills (`.claude/agents/`) - Project-specific patterns
+3. Project CLAUDE.md - Architecture and design system
+
 ### Essential Reading (v5.0)
 - **CLAUDE.md** (this file) - Single source of truth for project-wide patterns, design system, and architecture
 - **agents/ui-ux-designer/SKILL.md** - Design review criteria, Figma analysis patterns, v5.0 session learnings

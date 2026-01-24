@@ -1,10 +1,34 @@
-# Frontend Development Skills & Lessons Learned
+# Frontend Development Skills & Lessons Learned (Portfolio v5.0)
 
-**Purpose:** Capture recurring patterns, gotchas, and best practices discovered during development to avoid repeating mistakes.
+**Purpose:** Portfolio-specific patterns, component implementations, and session learnings.
 
-**Scope:** Agent-specific implementation details, debugging techniques, and session learnings. For project-wide architecture and design system, see `.claude/CLAUDE.md`.
+**Scope:** Project-specific implementation details unique to the portfolio v5.0 Night Sky theme. For universal frontend patterns (CSS gotchas, accessibility guidelines, performance techniques), see **`~/.claude/skills/frontend-dev/SKILL.md`**.
 
-**Last Updated:** January 21, 2026
+**Last Updated:** January 24, 2026
+
+---
+
+## Global Skills Reference
+
+Universal patterns have been extracted to the global skills repository. See:
+- **`~/.claude/skills/frontend-dev/SKILL.md`** for:
+  - CSS Transforms Are Atomic
+  - Transform Order Matters
+  - Aspect Ratio Correction for Circles
+  - Staggered Animation with Cleanup
+  - Reduced Motion Accessibility
+  - Mathematical Circle Placement
+  - Props with Sensible Defaults
+  - useMemo for Expensive Calculations
+  - Simple Icons integration
+  - next-intl Setup Pattern
+  - Mobile-First Breakpoints
+  - Dynamic Viewport Units
+  - GPU-Accelerated Animations
+  - SVG Over PNG for Icons
+  - Accessibility Checklist
+  - Common Gotchas (Intervals, Hydration, Z-Index, SVG viewBox)
+  - Intersection Observer Pattern
 
 ---
 

@@ -1,10 +1,32 @@
-# UI/UX Design Skills & Lessons Learned
+# UI/UX Design Skills & Lessons Learned (Portfolio v5.0)
 
-**Purpose:** Capture design patterns, review insights, and best practices discovered during design work.
+**Purpose:** Portfolio-specific design decisions, v5.0 Night Sky theme patterns, and session learnings.
 
-**Scope:** Agent-specific design review criteria, visual analysis patterns, and session learnings. For complete design system specifications, see `.claude/CLAUDE.md`.
+**Scope:** Project-specific design decisions unique to the portfolio v5.0 Night Sky theme. For universal design principles (WCAG guidelines, typography theory, review criteria), see **`~/.claude/skills/ui-ux-designer/SKILL.md`**.
 
-**Last Updated:** January 21, 2026
+**Last Updated:** January 24, 2026
+
+---
+
+## Global Skills Reference
+
+Universal design patterns have been extracted to the global skills repository. See:
+- **`~/.claude/skills/ui-ux-designer/SKILL.md`** for:
+  - Visual Hierarchy Checklist
+  - Responsive Design Guidelines
+  - WCAG Compliance Quick Reference
+  - Typography Best Practices (line length, hierarchy theory)
+  - Touch Target Minimums
+  - Focus States
+  - Animation Accessibility
+  - Review Grading Criteria
+  - Assessment Categories
+  - Common Design Issues
+  - Opacity Hierarchy for Overlays
+  - State Visualization for Async Operations
+  - Design Handoff Format
+  - Design Review Methodology
+  - i18n Design Implications
 
 ---
 

@@ -20,19 +20,25 @@ Expert frontend developer specializing in Next.js, React, TypeScript, and Tailwi
 
 ## Required Context Files
 
-### MUST READ Before Starting Any Task
+### Reading Order (Most Important First)
 
-**Skills & Lessons Learned** (`.claude/agents/frontend-dev/SKILL.md`)
-- CSS gotchas (transforms, animations, accessibility)
-- Component patterns and best practices
-- Common pitfalls and their solutions
-- Quick reference for recurring patterns
-- **Read this FIRST to avoid repeating past mistakes**
+1. **Global Skills** (`~/.claude/skills/frontend-dev/SKILL.md`)
+   - Universal CSS gotchas and patterns
+   - Framework-agnostic best practices
+   - Accessibility guidelines (WCAG)
+   - Performance optimization techniques
+   - **Read FIRST to apply accumulated wisdom across all projects**
 
-**Design System** (`.claude/CLAUDE.md` - Design System section)
-- Complete v5.0 design specifications
-- Reusable styles system (baseStyles.ts)
-- Component patterns and reference
+2. **Project Skills** (`.claude/agents/frontend-dev/SKILL.md`)
+   - v5.0 component patterns (StarField, IPhoneProFrame, etc.)
+   - Session learnings and debugging wins for this project
+   - Project-specific hooks (useStaggeredAnimation, useSimpleIcons)
+   - **Read SECOND for portfolio-specific context**
+
+3. **Design System** (`.claude/CLAUDE.md` - Design System section)
+   - Complete v5.0 design specifications
+   - Reusable styles system (baseStyles.ts)
+   - Component patterns and reference
 
 ## Workflow
 
