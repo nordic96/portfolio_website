@@ -329,6 +329,47 @@ export function TechCard({ iconSlugs, size = 'md' }: CardProps) {
 - Material UI Icons (`@mui/icons-material`) for UI icons
 - SVG components for custom icons
 
+### Image Ping Hook (Client-Side Health Check)
+
+**useImagePing Hook**
+
+For checking if a project URL's favicon loads successfully (client-side, no server API):
+
+```typescript
+import { useImagePing } from '@/hooks/useImagePing';
+
+interface ProjectProps {
+  url: string;
+}
+
+export function ProjectCard({ url }: ProjectProps) {
+  const { status } = useImagePing(url);
+
+  return (
+    <div>
+      <div className={status === 'live' ? 'bg-green-500' : 'bg-gray-500'}>
+        Status: {status}
+      </div>
+      <a href={url}>View Project</a>
+    </div>
+  );
+}
+```
+
+**Hook Details:**
+- **Location:** `/src/hooks/useImagePing.ts`
+- **Returns:** `{ status: 'live' | 'unknown' }` - 'live' if favicon loads, 'unknown' otherwise
+- **Implementation:** Image() element with timeout (2000ms default)
+- **Security:** Client-side only - prevents SSRF vulnerabilities
+- **Used by:** LiveProjectCard for displaying project health status
+- **Features:** Respects CORS policies, no external API calls required
+
+**Why Client-Side?**
+- Prevents server-side request forgery (SSRF) vulnerabilities
+- Avoids need for domain allowlists
+- Uses browser's native CORS handling
+- Lower latency (no round-trip to server)
+
 ### Animation Hooks (v5.1)
 
 **useStaggeredAnimation Hook**
@@ -670,6 +711,7 @@ portfolio_website/
 │   └── AboutSection/      # About with timeline
 ├── hooks/
 │   ├── useSimpleIcons.tsx # Hook for consistent SimpleIcon rendering with responsive sizing
+│   ├── useImagePing.ts # Client-side favicon health check (no server API)
 │   ├── useStaggeredAnimation.ts # Scroll-triggered staggered animations (v5.1)
 │   ├── useSectionAnimation.ts # Simple fade-in on viewport entry (v5.1)
 │   ├── useBreakpoint.ts # Responsive breakpoint detection
@@ -884,6 +926,7 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 
 **Custom Hooks (v5.1):**
 - `useSimpleIcons` - Consistent SimpleIcon rendering with responsive sizing, tooltip support, and accessibility
+- `useImagePing` - Client-side favicon health check using Image() element (no server API)
 - `useStaggeredAnimation` - Scroll-triggered staggered animations with configurable delays (500ms default)
 - `useSectionAnimation` - Simple fade-in on viewport entry with intersection observer
 - `useBreakpoint` - Responsive breakpoint detection for mobile/tablet/desktop
@@ -916,11 +959,19 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 
 ---
 
-**Last Updated:** January 23, 2026
+**Last Updated:** January 25, 2026
 **Document Version:** 5.1 (Night Sky Theme - In Progress)
 **Progress:** 3 of 15 core phases complete + v5.1 polish (issues #454, #462 in PR)
 
-**Recent Updates (Jan 23 - v5.1 Polish Continued):**
+**Recent Updates (Jan 25 - Security & Health Check Refactor):**
+- Removed health-check API route (SSRF vulnerability eliminated)
+- Documented new `useImagePing` hook for client-side favicon pinging
+- Updated hooks reference to use useImagePing instead of useHealthCheck
+- Simplified health status type to 'live' | 'unknown' (from 4 states)
+- Added security rationale for client-side implementation in hook documentation
+- Updated Key Directories to reference useImagePing in hooks section
+
+**Previous Updates (Jan 23 - v5.1 Polish Continued):**
 - Added v5.1 Animation Hooks documentation (`useStaggeredAnimation`, `useSectionAnimation`)
 - Documented 3-tier responsive typography system (mobile/tablet/desktop)
 - Updated `glassCardBaseStyle` with responsive padding (PR #468)
