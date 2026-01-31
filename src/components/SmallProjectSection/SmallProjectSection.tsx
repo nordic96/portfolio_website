@@ -27,24 +27,32 @@ const projectData: SmallProject[] = [
     title: 'Wink',
     url: 'https://github.com/nordic96/wink',
     techStack: [siIos, siAndroid, siFlutter, siBluetooth],
+    tags: [{ label: '#mobile' }, { label: '#iot' }],
+    previewImage: '/assets/projects/wink-preview.png',
   },
   {
     id: 'temppi',
     title: 'TempPi',
     url: 'https://github.com/nordic96/TempPiApp',
     techStack: [siRaspberrypi, siSpring],
+    tags: [{ label: '#iot' }, { label: '#backend' }],
+    previewImage: '/assets/projects/temppi-preview.png',
   },
   {
     id: 'onion',
     title: 'OnionOrNot',
     url: 'https://github.com/nordic96/OnionOrNot',
     techStack: [siPython, siGooglecolab],
+    tags: [{ label: '#ai/ml' }, { label: '#data' }],
+    previewImage: '/assets/projects/onion-preview.png',
   },
   {
     id: 'covid',
     title: 'Covid19 Chest X-Ray',
     url: 'https://www.youtube.com/watch?v=yVC9sNB-Ucg&list=PLs-H3fc40DvA-mpvdsMi8Yhs3eR6y1kpN&index=7',
     techStack: [siGooglecolab, siPython, siNumpy, siTensorflow],
+    tags: [{ label: '#ai/ml' }, { label: '#data' }],
+    previewImage: '/assets/projects/covid-preview.png',
   },
 ];
 
