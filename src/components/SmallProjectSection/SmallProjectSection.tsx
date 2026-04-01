@@ -28,7 +28,8 @@ const projectData: SmallProject[] = [
     url: 'https://github.com/nordic96/wink',
     techStack: [siIos, siAndroid, siFlutter, siBluetooth],
     tags: [{ label: '#mobile' }, { label: '#iot' }],
-    previewImage: '/assets/projects/wink-preview.png',
+    previewImage:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets/resources/images/wink.png',
   },
   {
     id: 'temppi',
@@ -36,7 +37,8 @@ const projectData: SmallProject[] = [
     url: 'https://github.com/nordic96/TempPiApp',
     techStack: [siRaspberrypi, siSpring],
     tags: [{ label: '#iot' }, { label: '#backend' }],
-    previewImage: '/assets/projects/temppi-preview.png',
+    previewImage:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets/resources/images/temppi.gif',
   },
   {
     id: 'onion',
@@ -44,7 +46,8 @@ const projectData: SmallProject[] = [
     url: 'https://github.com/nordic96/OnionOrNot',
     techStack: [siPython, siGooglecolab],
     tags: [{ label: '#ai/ml' }, { label: '#data' }],
-    previewImage: '/assets/projects/onion-preview.png',
+    previewImage:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets/resources/images/onion.png',
   },
   {
     id: 'covid',
@@ -52,7 +55,8 @@ const projectData: SmallProject[] = [
     url: 'https://www.youtube.com/watch?v=yVC9sNB-Ucg&list=PLs-H3fc40DvA-mpvdsMi8Yhs3eR6y1kpN&index=7',
     techStack: [siGooglecolab, siPython, siNumpy, siTensorflow],
     tags: [{ label: '#ai/ml' }, { label: '#data' }],
-    previewImage: '/assets/projects/covid-preview.png',
+    previewImage:
+      'https://cdn.jsdelivr.net/gh/nordic96/portfolio_assets/resources/images/covid.png',
   },
 ];
 
