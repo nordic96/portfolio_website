@@ -1,62 +1,36 @@
-import {
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET,
-  SPOTIFY_COOKIE,
-} from '@/src/config';
+import { SPOTIFY_COOKIE } from '@/src/config';
+import { generateAccessToken, getTopArtists } from '@/src/lib/spotify';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-
-type SpotifyTokenResponse = {
-  access_token: string;
-  token_type: 'bearer';
-  expires_in: number;
-};
-
-async function generateAccessToken(): Promise<SpotifyTokenResponse> {
-  try {
-    if (SPOTIFY_CLIENT_ID === '' || SPOTIFY_CLIENT_SECRET === '') {
-      throw new Error('Error retrieving configs');
-    }
-    const data = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${Buffer.from(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64')}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        grant_type: 'client_credentials',
-      }),
-    }).then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      throw new Error(`${res.status}`);
-    });
-    return data;
-  } catch (e) {
-    throw e;
-  }
-}
+import { testData } from './testData';
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get(SPOTIFY_COOKIE);
-  let token = '';
-  if (!cookie || !cookie.value || cookie.value === '') {
-    //fire auth api to retrieve fresh new token
-    try {
-      const refreshToken = await generateAccessToken();
-      cookieStore.set(SPOTIFY_COOKIE, refreshToken.access_token, {
-        expires: new Date(Date.now() + refreshToken.expires_in),
-      });
-      token = refreshToken.access_token;
-    } catch (e) {
-      console.error(e);
-      return NextResponse.error();
-    }
-  } else {
-    token = cookie.value;
+  if (process.env.NODE_ENV === 'development') {
+    return NextResponse.json(testData);
   }
   // TODO: Use Token to fire Top Artist API & return response
-  return NextResponse.json({ token: token });
+  try {
+    const cookieStore = await cookies();
+    const cookie = cookieStore.get(SPOTIFY_COOKIE);
+    let token = '';
+    if (cookie && cookie.value && cookie.value !== '') {
+      console.log('cookie exists, reusing access token...');
+      token = cookie.value;
+    } else {
+      const tokenResponse = await generateAccessToken();
+      const { access_token, expires_in } = tokenResponse;
+      cookieStore.set(SPOTIFY_COOKIE, access_token, {
+        expires: new Date(Date.now() + expires_in * 1000),
+      });
+      token = access_token;
+    }
+
+    const topArtistResponse = await getTopArtists(token);
+    return NextResponse.json(topArtistResponse);
+  } catch (e) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : 'Unknown error' },
+      { status: 500 },
+    );
+  }
 }
