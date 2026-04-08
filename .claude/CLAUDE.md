@@ -436,6 +436,63 @@ export function HeroSection() {
 - **Returns:** `{ ref }` for section container
 - **Used by:** Hero and Footer sections
 
+### Status & Activity Hooks (v5.1)
+
+**useCurrentStatus Hook**
+
+For displaying real-time activity status based on Singapore Time (SGT):
+
+```typescript
+import { useCurrentStatus } from '@/hooks/useCurrentStatus';
+
+export function NameCard() {
+  const { status, label, emoji } = useCurrentStatus();
+
+  return (
+    <div>
+      <span>{emoji}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
+```
+
+**Hook Details:**
+- **Location:** `/src/hooks/useCurrentStatus.ts`
+- **Status Types:** `'sleeping'` (00:00-06:59) | `'coding'` (09:00-17:59 except lunch) | `'eating'` (12:00-13:00, 19:00-20:00) | `'break'` (other hours)
+- **Returns:** `{ status, label, emoji, currentHour }` - All based on Singapore Time (UTC+8)
+- **Features:** Real-time updates every minute, respects client timezone conversion, SSR-safe default to 'break'
+- **Used by:** NameCard, StatusIndicator components
+- **Configuration:** Optional `updateInterval` parameter (default: 60000ms)
+
+**StatusIndicator Component**
+
+Displays an animated status icon with intelligent fallback chain:
+
+```typescript
+import StatusIndicator from '@/components/StatusIndicator';
+
+export function NameCard() {
+  return (
+    <div className="flex items-center gap-2">
+      <h2>Stephen</h2>
+      <StatusIndicator size={28} />
+    </div>
+  );
+}
+```
+
+**Component Details:**
+- **Location:** `/src/components/StatusIndicator/`
+- **Size:** Configurable in pixels (default: 28)
+- **Fallback Chain:**
+  1. Animated GIF (if motion enabled via `prefers-reduced-motion`)
+  2. Static PNG (if reduced motion or GIF fails)
+  3. Emoji (if all images fail)
+- **Asset Paths:** GIFs and PNGs in `/public/assets/status/` directory with filenames: `sleeping.gif`, `coding.gif`, etc.
+- **Features:** Real-time updates, respects `prefers-reduced-motion` preference, accessible ARIA labels
+- **Accessibility:** `role="img"` and `aria-label` for screen readers
+
 ### Responsive Typography System (v5.1)
 
 Typography scales across 3 breakpoints defined in `globals.css`:
@@ -701,9 +758,10 @@ portfolio_website/
 │   ├── LiveProjectIframe/ # Lazy-loading iframe with mobile fallback
 │   ├── LiveProjectCard/   # 4-layer design card component
 │   ├── LiveProjectsSection/ # Featured projects section
-│   ├── SmallProjectCard/  # Compact card for GitHub projects
+│   ├── SmallProjectCard/  # Compact card for GitHub projects (updated Issue #472)
 │   ├── CertificationCard/ # Certification display with badge
 │   ├── CalligraphySignature/ # Animated signature with clip-path reveal
+│   ├── StatusIndicator/   # Animated status icon (SGT-based activity) (NEW Issue #471)
 │   ├── PrimaryButton/     # Shared button with SimpleIcon support
 │   ├── Dashboard/         # v4.0 components (legacy)
 │   ├── HeroSection/       # Hero with tech logos
@@ -711,10 +769,11 @@ portfolio_website/
 │   └── AboutSection/      # About with timeline
 ├── hooks/
 │   ├── useSimpleIcons.tsx # Hook for consistent SimpleIcon rendering with responsive sizing
-│   ├── useImagePing.ts # Client-side favicon health check (no server API)
+│   ├── useImagePing.ts    # Client-side favicon health check (no server API)
 │   ├── useStaggeredAnimation.ts # Scroll-triggered staggered animations (v5.1)
 │   ├── useSectionAnimation.ts # Simple fade-in on viewport entry (v5.1)
-│   ├── useBreakpoint.ts # Responsive breakpoint detection
+│   ├── useCurrentStatus.ts # SGT-based activity status for real-time display (NEW Issue #471)
+│   ├── useBreakpoint.ts   # Responsive breakpoint detection
 │   └── useClickOutside.ts # Click-outside detection
 ├── public/
 │   └── assets/            # Static assets (images, SVGs, backgrounds)
@@ -774,6 +833,23 @@ portfolio_website/
   - Applied to Hero and Footer sections
 - Both hooks use Intersection Observer API for performance
 
+**Issue #472 - SmallProjectCard Enhancements** (COMPLETE)
+- Added hashtags and hover preview to SmallProjectCard component
+- Enhanced project metadata display with better visual hierarchy
+- Exported TAG_COLORS and ProjectTag interface for reuse
+
+**Issue #471 - StatusIndicator** (COMPLETE)
+- Created `useCurrentStatus` hook at `src/hooks/useCurrentStatus.ts`
+  - SGT-based (UTC+8) activity status calculation
+  - Status types: sleeping (00:00-06:59), coding (09:00-17:59), eating (12:00-13:00, 19:00-20:00), break (other hours)
+  - Real-time updates every 60 seconds with configurable interval
+  - Respects client timezone conversion, SSR-safe default
+- Created `StatusIndicator` component at `src/components/StatusIndicator/`
+  - Displays animated GIF with PNG and emoji fallbacks
+  - Respects `prefers-reduced-motion` preference
+  - Asset paths in `/public/assets/status/` directory
+  - Integrated into NameCard component in hero section
+
 **Previous v5.1 Issues (Complete)**
 - **#460 - iFrame Mobile Crashes:** Mobile detection via `useBreakpoint` hook, renders fallback image on mobile
 - **#461 - SmallProjectCard Icons:** `useSimpleIcons` hook with responsive sizing, tooltip support
@@ -817,6 +893,8 @@ Previous implementations:
 - Status: IN PROGRESS
 
 ### Resolved Issues (v5.1)
+**#472 - SmallProjectCard Enhancements:** Added hashtags and hover preview (COMPLETE)
+**#471 - StatusIndicator:** Created useCurrentStatus hook and StatusIndicator component for SGT-based activity display (COMPLETE)
 **#460 - iFrame Mobile Crashes:** Fixed with mobile fallback image (PR #463)
 **#461 - SmallProjectCard Icons:** Resolved with `useSimpleIcons` hook (PR #464)
 **#459 - Global Loading Page:** Implemented loading.tsx with Suspense (PR #466)
@@ -895,8 +973,8 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 - **Version:** 5.1 (Night Sky Theme - In Progress)
 - **Active Branch:** develop (v5.1 work)
 - **GitHub Epic #431:** Master v5.0 redesign plan (3 of 15 phases complete)
-- **GitHub Milestone #12:** v5.1 polish (issues #454-#462)
-- **Latest PRs:** #468 (Mobile Breakpoints), #469 (Animations), #463-#466 (v5.1 foundation)
+- **GitHub Milestone #12:** v5.1 polish (issues #454-#462, #471, #472)
+- **Latest Work:** #472 (SmallProjectCard Enhancements), #471 (StatusIndicator), #468 (Mobile Breakpoints), #469 (Animations)
 
 ### Design Philosophy (v5.0)
 - **Immersive:** Night sky gradient with animated stars
@@ -915,10 +993,11 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 - `LiveProjectsSection` - Container for featured projects
 
 **v5.1 Polish Components:**
-- `SmallProjectCard` - Compact card for GitHub projects with glass effect, uses `useSimpleIcons`
+- `SmallProjectCard` - Compact card for GitHub projects with glass effect, uses `useSimpleIcons` (updated with hashtags and hover preview - Issue #472)
 - `CertificationCard` - Certification display with badge, uses `glassCardBaseStyle`
 - `CalligraphySignature` - Animated signature with clip-path reveal effect
 - `PrimaryButton` - Shared button component with SimpleIcon support
+- `StatusIndicator` - Animated status icon showing current activity (sleeping/coding/eating/break) based on Singapore Time with GIF/PNG/emoji fallback (NEW - Issue #471)
 
 **Global Features (v5.1):**
 - `loading.tsx` - Global loading page with CalligraphySignature and animated loading bar
@@ -931,6 +1010,7 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 - `useSectionAnimation` - Simple fade-in on viewport entry with intersection observer
 - `useBreakpoint` - Responsive breakpoint detection for mobile/tablet/desktop
 - `useClickOutside` - Click-outside detection for modals and menus
+- `useCurrentStatus` - Real-time activity status based on Singapore Time (SGT) with emoji and label (NEW - Issue #471)
 
 **All components follow:**
 - Reusable styles from `/app/styles/baseStyles.ts`
@@ -959,11 +1039,21 @@ Universal patterns shared across all projects are stored in `nordic_claude_agent
 
 ---
 
-**Last Updated:** January 25, 2026
+**Last Updated:** February 1, 2026
 **Document Version:** 5.1 (Night Sky Theme - In Progress)
-**Progress:** 3 of 15 core phases complete + v5.1 polish (issues #454, #462 in PR)
+**Progress:** 3 of 15 core phases complete + v5.1 polish (8 issues completed: #454, #457, #459-#462, #471-#472)
 
-**Recent Updates (Jan 25 - Security & Health Check Refactor):**
+**Recent Updates (Feb 1 - StatusIndicator & SmallProjectCard Enhancements):**
+- Added `useCurrentStatus` hook documentation (SGT-based activity status)
+- Added `StatusIndicator` component documentation with fallback chain (GIF/PNG/emoji)
+- Documented asset paths for status animations in `/public/assets/status/`
+- Updated SmallProjectCard documentation with hashtags and hover preview features
+- Added new interfaces: `ProjectTag` and `TAG_COLORS` exports
+- Updated Custom Hooks and Components sections with Issue #471 and #472 details
+- Updated v5.1 Progress section with completed issues
+- Updated Quick Reference with latest work summary
+
+**Previous Updates (Jan 25 - Security & Health Check Refactor):**
 - Removed health-check API route (SSRF vulnerability eliminated)
 - Documented new `useImagePing` hook for client-side favicon pinging
 - Updated hooks reference to use useImagePing instead of useHealthCheck

@@ -5,6 +5,7 @@ import { cn } from '@/src/utils';
 import { GitHub, LinkedIn, Mail } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import CalligraphySignature from '@/src/components/CalligraphySignature';
+import { StatusIndicator } from '@/src/components/StatusIndicator';
 import { GITHUB_URL, LINKEDIN_URL } from '@/src/config';
 import { useSectionAnimation } from '@/src/hooks';
 
@@ -68,8 +69,22 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
         )}
         {/** Metadata Container */}
         <div className={'flex flex-col'}>
-          {variant === 'large' && <h2 className={'text-h2'}>{t('name')}</h2>}
-          {variant === 'small' && <h3 className={'text-h3'}>{t('name')}</h3>}
+          {/** Name with Status Indicator */}
+          {variant === 'large' && (
+            <div className="flex items-center gap-2">
+              <h2 className={'text-h2'}>{t('name')}</h2>
+              <StatusIndicator
+                size={28}
+                className="ml-1 max-md:hidden md:block lg:ml-2"
+              />
+            </div>
+          )}
+          {variant === 'small' && (
+            <div className="flex items-center gap-1.5">
+              <h3 className={'text-h3'}>{t('name')}</h3>
+              <StatusIndicator size={20} className="ml-0.5" />
+            </div>
+          )}
           {variant === 'large' && (
             <span className={'text-secondary'}>
               {t('job_title')}&nbsp;
