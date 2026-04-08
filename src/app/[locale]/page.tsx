@@ -10,6 +10,7 @@ import GridCard from '@/src/components/shared/GridCard';
 import SmallProjectSection from '@/src/components/SmallProjectSection/SmallProjectSection';
 import { useTranslations } from 'next-intl';
 import { useStaggeredAnimation } from '@/src/hooks';
+import MetadataSection from '@/src/components/MetadataSection';
 
 /**
  * Dashboard Home Page - v4.0 Layout Foundation
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <DashboardLayout
       heroSection={<NameCard />}
+      metadataSection={<MetadataSection />}
       projectsCard={<LiveProjectsSection />}
       smallProjectsCard={<SmallProjectSection />}
       certificationsCard={<CertificationsSection />}

@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.credly.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co',
+      },
     ],
   },
 };

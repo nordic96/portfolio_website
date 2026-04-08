@@ -1,0 +1,1 @@
+export const SPOTIFY_COOKIE = 'REFRESH_TOKEN';

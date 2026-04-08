@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { SimpleIcon } from 'simple-icons';
 import { Tooltip } from '@mui/material';
 import { cn } from '@/src/utils';
+import { ClassValue } from 'clsx';
 
 /**
  * Size presets for SimpleIcon rendering
@@ -15,7 +16,7 @@ interface UseSimpleIconsOptions {
   /** Array of SimpleIcon objects to render */
   icons: SimpleIcon[];
   /** Additional className for the icon container */
-  className?: string;
+  className?: string | ClassValue;
   /** Show tooltip on hover (default: true) */
   showTooltip?: boolean;
   /** Icon color class (default: 'fill-white') */
