@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 interface DashboardLayoutProps {
   heroSection: ReactNode;
+  metadataSection: ReactNode;
   projectsCard: ReactNode;
   smallProjectsCard: ReactNode;
   certificationsCard: ReactNode;
@@ -31,6 +32,7 @@ interface DashboardLayoutProps {
  */
 export default function DashboardLayout({
   heroSection,
+  metadataSection,
   projectsCard,
   smallProjectsCard,
   certificationsCard,
@@ -51,10 +53,13 @@ export default function DashboardLayout({
           {/* Row 1: Hero Section - spans both columns on desktop */}
           <div className="md:col-span-2">{heroSection}</div>
 
-          {/* Row 2: Projects (left) */}
+          {/* Row 2: Metadata Section */}
+          <div className="md:col-span-2">{metadataSection}</div>
+
+          {/* Row 3: Projects (left) */}
           <div className="md:col-span-1">{projectsCard}</div>
 
-          {/* Row 3: Github Projects & Certifications (right) */}
+          {/* Row 4: Github Projects & Certifications (right) */}
           <div className="md:col-span-1">
             <div className={'flex gap-3 max-sm:flex-col'}>
               {smallProjectsCard}

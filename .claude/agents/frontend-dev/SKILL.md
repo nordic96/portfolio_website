@@ -4,473 +4,50 @@
 
 **Scope:** Project-specific implementation details unique to the portfolio v5.0 Night Sky theme. For universal frontend patterns (CSS gotchas, accessibility guidelines, performance techniques), see **`~/.claude/skills/frontend-dev/SKILL.md`**.
 
-**Last Updated:** January 24, 2026
+**Last Updated:** January 25, 2026
 
 ---
 
 ## Global Skills Reference
 
-Universal patterns have been extracted to the global skills repository. See:
-- **`~/.claude/skills/frontend-dev/SKILL.md`** for:
-  - CSS Transforms Are Atomic
-  - Transform Order Matters
-  - Aspect Ratio Correction for Circles
-  - Staggered Animation with Cleanup
-  - Reduced Motion Accessibility
-  - Mathematical Circle Placement
-  - Props with Sensible Defaults
-  - useMemo for Expensive Calculations
-  - Simple Icons integration
-  - next-intl Setup Pattern
-  - Mobile-First Breakpoints
-  - Dynamic Viewport Units
-  - GPU-Accelerated Animations
-  - SVG Over PNG for Icons
-  - Accessibility Checklist
-  - Common Gotchas (Intervals, Hydration, Z-Index, SVG viewBox)
-  - Intersection Observer Pattern
-
----
-
-## CSS & Styling
-
-### CSS Transforms Are Atomic (Not Additive)
-
-**Problem:** CSS transforms override each other instead of combining.
-
-**Wrong:**
-```css
-.element {
-  transform: translate(-50%, -50%);
-}
-.element:hover {
-  transform: scale(1.15); /* This removes translate! */
-}
-```
-
-**Correct:**
-```css
-.element {
-  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
-}
-.element:hover {
-  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1.15);
-}
-```
-
-**Key Insight:** Always include ALL transforms in every transform declaration. Use CSS custom properties for dynamic values.
-
----
-
-### Transform Order Matters
-
-The order of transform operations affects the final result:
-
-```css
-/* Order: translate → rotate → scale */
-transform: translate(-50%, -50%) rotate(15deg) scale(1.15);
-```
-
-- **translate** - Move the element first
-- **rotate** - Rotate around the (new) center
-- **scale** - Scale last to avoid position drift
-
----
-
-### Aspect Ratio Correction for Circles
-
-When positioning elements in a circle on non-square containers, X-axis needs compensation:
-
-```typescript
-// Without correction: ellipse
-const x = centerX + (radius * Math.cos(angle));
-
-// With correction: perfect circle
-const radiusX = radius * 0.7; // Aspect ratio correction
-const x = centerX + (radiusX * Math.cos(angle));
-```
-
-**When to use:** Any circular positioning on rectangular containers (hero sections, cards, etc.)
-
----
-
-## Animation Patterns
-
-### Staggered Animation with Cleanup
-
-```typescript
-useEffect(() => {
-  if (!animation) {
-    setVisibleLogos(new Set(logos.map((_, i) => i)));
-    return;
-  }
-
-  const interval = setInterval(() => {
-    setVisibleLogos((prev) => {
-      const next = new Set(prev);
-      if (next.size < logos.length) {
-        next.add(next.size);
-      }
-      return next;
-    });
-  }, DELAY_INTERVAL);
-
-  return () => clearInterval(interval); // Critical: cleanup!
-}, [animation, logos.length]);
-```
-
-**Key Points:**
-- Always return cleanup function from useEffect
-- Use Set for O(1) visibility checks
-- Handle non-animated case (instant display)
-
----
-
-### Reduced Motion Accessibility
-
-**Always respect user preferences:**
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  .animated-element {
-    animation: fadeInStatic 0.01ms forwards !important;
-  }
-}
-
-@keyframes fadeInStatic {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-```
-
-**Why:** Users with vestibular disorders need instant display instead of animations.
-
----
-
-## Circular/Orbital Positioning
-
-### Mathematical Circle Placement
-
-```typescript
-const calculatePositions = (totalItems: number, radiusPercent: number) => {
-  const angleStep = (2 * Math.PI) / totalItems;
-  const startAngle = -Math.PI / 2; // Start at 12 o'clock
-
-  return Array.from({ length: totalItems }, (_, index) => {
-    const angle = startAngle + index * angleStep;
-    return {
-      x: 50 + (radiusPercent * 0.7 * Math.cos(angle)), // 0.7 = aspect correction
-      y: 50 + (radiusPercent * Math.sin(angle)),
-      rotation: (angle * 180 / Math.PI) + 90, // Convert to degrees
-    };
-  });
-};
-```
-
-**Parameters:**
-- `startAngle = -Math.PI / 2` → Starts at top (12 o'clock)
-- `angleStep = 2π / n` → Even distribution
-- Multiply X by 0.7 for aspect ratio correction
-
----
-
-## Component Architecture
-
-### Props with Sensible Defaults
-
-```typescript
-interface TechStackLogosProps {
-  animation?: boolean;    // default: true
-  radius?: number;        // default: 35 (%)
-  centerX?: number;       // default: 50 (%)
-  centerY?: number;       // default: 50 (%)
-}
-```
-
-Make components configurable but usable out-of-the-box.
-
----
-
-### useMemo for Expensive Calculations
-
-```typescript
-const logoPositions = useMemo(() => {
-  return calculateCircularPositions(techLogos.length, radius, centerX, centerY);
-}, [radius, centerX, centerY]); // Only recalculate when these change
-```
-
-**When to use:** Trigonometric calculations, array transformations, complex mappings.
-
----
-
-## Third-Party Libraries
-
-### Simple Icons for Tech Logos
-
-**Best source for official brand logos:**
-
-```bash
-npm install simple-icons
-```
-
-```typescript
-import { siReact, siTypescript } from 'simple-icons';
-
-// Usage with SVG string
-<div dangerouslySetInnerHTML={{ __html: siReact.svg }} />
-```
-
-**Benefits:**
-- MIT Licensed (copyright safe)
-- 2800+ brand logos
-- Consistent style
-- Small file sizes
-
----
-
-### Flag Icons for Locale Switcher
-
-```bash
-npm install flag-icons
-```
-
-```css
-@import 'flag-icons/css/flag-icons.min.css';
-```
-
-```tsx
-<span className={`fi fi-${countryCode}`} />
-```
-
-**Note:** Country codes are ISO 3166-1-alpha-2 (e.g., `us`, `kr`, `jp`).
-
----
-
-## Internationalization (i18n)
-
-### next-intl Setup Pattern
-
-```typescript
-// i18n/routing.ts
-export const routing = defineRouting({
-  locales: ['en', 'ko'],
-  defaultLocale: 'en',
-});
-
-// i18n/request.ts
-export default getRequestConfig(async ({ requestLocale }) => {
-  let locale = await requestLocale;
-  if (!locale || !routing.locales.includes(locale as Locale)) {
-    locale = routing.defaultLocale;
-  }
-  return {
-    locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
-  };
-});
-```
-
----
-
-### Locale Switcher Accessibility
-
-**Always include:**
-- `lang` attribute on locale buttons
-- `aria-label` describing the action
-- Visual indicator of current locale (not just color)
-
-```tsx
-<button
-  lang={locale}
-  aria-label={`Switch to ${langName}`}
-  aria-pressed={isActive}
->
-  <span className={`fi fi-${countryCode}`} aria-hidden="true" />
-  <span className="sr-only">{langName}</span>
-</button>
-```
-
----
-
-## Responsive Design
-
-### Mobile-First Breakpoints
-
-```css
-/* Base: Mobile (< 768px) */
-.element { width: 100%; }
-
-/* Tablet (≥ 768px) */
-@media (min-width: 768px) {
-  .element { width: 50%; }
-}
-
-/* Desktop (≥ 1024px) */
-@media (min-width: 1024px) {
-  .element { width: 33%; }
-}
-```
-
-**Tailwind:**
-```tsx
-<div className="w-full md:w-1/2 lg:w-1/3" />
-```
-
----
-
-### Dynamic Viewport Units
-
-**Problem:** `100vh` doesn't account for mobile browser chrome.
-
-**Solution:** Use dynamic viewport units:
-
-```css
-.hero {
-  height: 100dvh; /* Dynamic viewport height */
-}
-```
-
-**Tailwind:**
-```tsx
-<section className="h-dvh" />
-```
-
----
-
-## Performance
-
-### GPU-Accelerated Animations
-
-```css
-.animated {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-```
-
-**Remove after animation:**
-```css
-.animation-complete {
-  will-change: auto;
-}
-```
-
----
-
-### SVG Over PNG for Icons
-
-**Prefer SVGs because:**
-- Infinitely scalable
-- Smaller file size
-- CSS-styleable
-- No retina considerations
-
----
-
-## Accessibility Checklist
-
-### Decorative Elements
-
-```tsx
-<div aria-hidden="true">
-  {/* Decorative content hidden from screen readers */}
-</div>
-```
-
-### Focus Management
-
-```css
-/* Visible focus indicator */
-:focus-visible {
-  outline: 2px solid var(--pastel-green);
-  outline-offset: 2px;
-}
-
-/* Remove outline for mouse users */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-```
-
-### Color Contrast Minimums
-
-| Context | WCAG AA | WCAG AAA |
-|---------|---------|----------|
-| Normal text | 4.5:1 | 7:1 |
-| Large text (18px+) | 3:1 | 4.5:1 |
-| UI components | 3:1 | N/A |
-
----
-
-## Common Gotchas
-
-### 1. Interval Memory Leaks
-
-**Always clean up intervals:**
-```typescript
-useEffect(() => {
-  const id = setInterval(() => {}, 1000);
-  return () => clearInterval(id); // Required!
-}, []);
-```
-
-### 2. Hydration Mismatches
-
-**Avoid:**
-- `Math.random()` in render
-- `new Date()` without useEffect
-- Browser-only APIs during SSR
-
-**Solution:** Use `useEffect` for client-only code.
-
-### 3. Z-Index Wars
-
-**Use consistent z-index scale:**
-```css
-:root {
-  --z-base: 0;
-  --z-dropdown: 100;
-  --z-modal: 200;
-  --z-tooltip: 300;
-  --z-toast: 400;
-}
-```
-
-### 4. SVG viewBox Case Sensitivity
-
-```tsx
-// Wrong (JSX)
-<svg viewbox="0 0 24 24">  // lowercase 'b' won't work
-
-// Correct
-<svg viewBox="0 0 24 24">  // capital 'B' required
-```
-
----
-
-## Quick Reference Commands
-
-**See `.claude/CLAUDE.md` (Development Commands section) for all project commands.**
-
-Common git and testing commands:
-```bash
-git status
-git diff
-git log --oneline -10
-npx playwright screenshot http://localhost:3000
-```
+Universal patterns have been extracted to the global skills repository. See **`~/.claude/skills/frontend-dev/SKILL.md`** for:
+- CSS Transforms Are Atomic
+- Transform Order Matters
+- Aspect Ratio Correction for Circles
+- Staggered Animation with Cleanup
+- Reduced Motion Accessibility
+- Mathematical Circle Placement
+- Props with Sensible Defaults
+- useMemo for Expensive Calculations
+- Simple Icons integration
+- next-intl Setup Pattern
+- Mobile-First Breakpoints
+- Dynamic Viewport Units
+- GPU-Accelerated Animations
+- SVG Over PNG for Icons
+- Accessibility Checklist
+- Common Gotchas (Intervals, Hydration, Z-Index, SVG viewBox)
+- Intersection Observer Pattern
+- Client-Side Image Ping for Health Checks
+- React 19 Patterns
+- Hook Patterns
+- Testing Patterns
+- Tailwind Patterns
+
+For project-specific component patterns, see **`.claude/CLAUDE.md`** sections:
+- Component Patterns (lines 261-567)
+- Reusable Styles System (lines 206-258)
+- Animation Hooks (lines 373-437)
 
 ---
 
 ## Document Maintenance
 
 **When to update this document:**
-- After solving a tricky bug
-- When discovering a better pattern
-- After learning a new library quirk
-- When onboarding notes could help future sessions
+- After solving a project-specific bug
+- When discovering a portfolio v5.0 pattern
+- Session learnings unique to this project
+- **DO NOT duplicate** universal patterns (add to global SKILL.md instead)
 
 **Format:**
 1. Problem description
@@ -945,122 +522,85 @@ Session-specific optimizations (v5.1 completion):
 
 ---
 
-## Session Learnings - January 22, 2026
 
-### GitHub CLI Workflow Automation
-
-**Session-specific patterns for v5.1 milestone and issue management:**
-
-- **Batch Milestone & Issue Creation:** Create milestone with `gh milestone create`, then batch issues with `--milestone` flag
-- **Structured Issue Templates:** Include Type, Affected Breakpoints, Current/Expected Behavior, Screenshots
-- **PR Review Iteration:** Use `gh api repos/:owner/:repo/pulls/:pr/comments` to fetch feedback, amend commits with `--force-with-lease`
-
-**Key Commands:**
-```bash
-gh milestone create "v5.1" -d "Description"
-gh issue create --title "..." --milestone "v5.1" --label "bug,mobile"
-gh api repos/owner/repo/pulls/463/comments
-git commit --amend --no-edit && git push origin branch --force-with-lease
-```
-
-### Mobile Responsive Design Debugging
-
-- **Issue: iframe Content Overflow on Mobile (375px-393px)**
-  - **Root Cause:** 400% scale technique doesn't account for mobile viewport constraints; content width exceeds container
-  - **Investigation:** Playwright screenshots at exact mobile breakpoints revealed horizontal scroll
-  - **Fix Strategy:**
-    - Implement CSS `overflow: hidden` with clipping on mobile
-    - Consider reducing scale percentage on mobile (e.g., 200% instead of 400%)
-    - Alternative: Use viewport-aware scale calculation
-  - **Prevention:** Test iframes at 375px during development, not just desktop
-  - **Related Issue:** #461 (GitHub mobile crashes)
-
-- **Issue: SmallProjectCard Tech Icons Overlap on Mobile**
-  - **Root Cause:** Fixed icon size (24px) + fixed gap (8px) don't reflow in narrow columns
-  - **Investigation:** Tested at 375px showed icons compressing and overlapping text
-  - **Fix Strategy:**
-    - Add `flex-wrap` for icon container to allow wrapping
-    - Reduce icon size on mobile: `w-4 h-4 md:w-6 md:h-6`
-    - Or reduce gap on mobile: `gap-1 md:gap-2`
-  - **Prevention:** Test all card components at 375px and 393px explicitly
-  - **Related Issue:** #462 (SmallProjectCard icons mobile)
-
-### Responsive Testing Best Practices
-
-- **Breakpoint Testing Checklist**
-  - Test at exact breakpoints: 375px, 393px, 768px, 1024px, 1440px
-  - Use Playwright for consistent viewport capture: `await page.setViewportSize({ width: 375, height: 667 })`
-  - Compare against previous screenshots to catch regressions
-  - Document findings by component (LiveProjectCard, SmallProjectCard, IPhoneProFrame, etc.)
-
-- **Mobile-Specific Component Testing**
-  - Verify touch targets remain 44x44px at smaller viewports
-  - Check text wrapping and line breaks at narrow widths
-  - Test scrolling performance on actual mobile devices (canvas animations, iframe scrolling)
-  - Verify images load correctly and don't cause layout shift
-
-- **Responsive CSS Gotchas**
-  - Using `w-full` on container doesn't guarantee content fits (check children widths)
-  - `grid` layouts can overflow on mobile; use `flex` or stack on mobile instead
-  - `fixed` positioning may behave differently on mobile (test with actual device)
-  - Negative margins (`-mt-12`) can cause overflow on narrow screens
-
-### Issue Tracking & Prioritization
-
-- **Categorization System**
-  - **Bugs:** Crashes, rendering errors, broken functionality → Fix immediately
-  - **Polish:** Spacing, alignment, sizing refinements → Plan for release milestone
-  - **Enhancements:** New features, additional states → Consider for future phases
-  - **Blockers:** Breaks deployment or user experience → Highest priority
-
-- **Milestone Planning**
-  - Group related issues by feature/section (Section Animations, GitHub Activity, etc.)
-  - Mark blocking dependencies with labels or issue references
-  - Plan phases to enable parallel work (e.g., mobile fixes don't block desktop enhancements)
-
-### Pattern: Responsive Component Development Workflow
-
-1. **Design specification** → Review at all 5 breakpoints
-2. **Initial implementation** → Test at desktop (1440px)
-3. **Breakpoint testing** → Capture screenshots at 375px, 768px, 1024px
-4. **Mobile debugging** → Fix issues found at 375px-393px
-5. **Tablet validation** → Ensure transitions are smooth at 768px
-6. **Documentation** → Add breakpoint notes to component patterns
+## Session Learnings - January 25, 2026
 
 ### Mistakes & Fixes
 
-- **Issue:** Developed components without testing on mobile; discovered iframe/icon issues only during design review
-  - **Root Cause:** Focused on desktop-first development without validating mobile early
-  - **Fix:** Created comprehensive breakpoint testing workflow before marking features complete
-  - **Prevention:** Add "Test at 375px and 1440px" to component implementation checklist
+- **Issue:** Server-side health check API had SSRF vulnerability requiring domain allowlisting
+  - **Root Cause:** Implemented `app/api/health-check/route.ts` that fetched arbitrary URLs without proper validation, creating SSRF attack surface
+  - **Fix:** Removed server-side API entirely; replaced with client-side `useImagePing` hook that loads favicon via browser Image() element
+  - **Prevention:** Always prefer client-side solutions for simple health checks; avoid server-side fetching of user-provided URLs without critical business need
+  - **Security Lesson:** Browser's built-in CORS protection provides automatic security; don't bypass it with server-side fetches
 
-- **Issue:** Issue documentation lacked breakpoint specificity; made triage harder
-  - **Root Cause:** Didn't use structured template for capturing findings
-  - **Fix:** Created GitHub issue template with "Affected Breakpoints" field
-  - **Prevention:** Use template for all design review findings
+- **Issue:** Created domain allowlist config that added complexity without addressing root security issue
+  - **Root Cause:** Attempted to fix SSRF by restricting allowed domains instead of removing vulnerable code
+  - **Fix:** Removed `src/config/domains.ts` entirely as part of complete API removal
+  - **Prevention:** When multiple security patterns can solve an issue, choose the simplest/most restrictive first (no API > validated API)
 
-### Performance Notes
+### Patterns Discovered
 
-- Mobile debugging with Playwright: Exact viewport sizes (375, 393) are critical; approximate sizes miss edge cases
-- Batch GitHub operations: Using CLI is 5x faster than web UI for 9+ issues
-- Screenshot comparison: Save with breakpoint labels for quick reference during implementation
+- **Pattern: Client-Side Image Ping for Health Checks**
+  - **Context:** Display website status indicator without SSRF vulnerability
+  - **Implementation:** See `~/.claude/skills/frontend-dev/SKILL.md` for complete pattern documentation
+  - **Location:** `/src/hooks/useImagePing.ts`
+  - **Returns:** `{ status: 'live' | 'unknown'; isLoading: boolean }`
+  - **Key Features:**
+    - Uses browser `Image()` element to load favicon
+    - 5-second timeout for hung requests
+    - CORS blocks cross-origin loads automatically (graceful fallback)
+    - Returns 'unknown' for timeout/CORS/any failure
+    - No server-side code = zero SSRF risk
+  - **Session Application:** Integrated into LiveProjectCard to replace useHealthCheck hook
+  - **Type Definition:** `PingStatus = 'live' | 'unknown'`
+
+- **Pattern: Graceful CORS Fallback in Health Checks**
+  - **Context:** Cross-origin favicon loads are blocked by browser CORS policy
+  - **Implementation:** Image element's `onerror` callback triggers on CORS blocks same as actual network failures
+  - **Advantage:** No need to distinguish between "blocked" and "unreachable" - both return 'unknown'
+  - **Key Insight:** This is a security feature, not a bug; simplifies UI logic significantly
+
+- **Pattern: Security Simplification by Removing Vulnerable APIs**
+  - **Context:** SSRF-vulnerable health check API replaced by client-only solution
+  - **Changes Made:**
+    - Deleted `src/app/api/health-check/route.ts` (vulnerable endpoint)
+    - Deleted `src/hooks/useHealthCheck.ts` (server-dependent hook)
+    - Deleted `src/config/domains.ts` (domain allowlist no longer needed)
+    - Deleted empty `src/app/api/` directory
+  - **Benefits:** Reduced attack surface, eliminated validation complexity, simpler codebase
+  - **Principle:** If you can eliminate a feature without losing functionality, do it
 
 ### Debugging Wins
 
-- **Problem:** Understanding why SmallProjectCard icons overlap on mobile
-  - **Approach:** Captured Playwright screenshots at 375px, compared to 1440px version, identified fixed sizing conflict
-  - **Tool/Technique:** Playwright viewport sizing + screenshot comparison
+- **Problem:** Understanding why SSRF is dangerous and how to prevent it in health checks
+  - **Approach:** Analyzed attack surface of server-side fetch; recognized that domain allowlisting doesn't eliminate all risks (regex bypass, subdomain enumeration, etc.)
+  - **Tool/Technique:** Security threat modeling; deciding client-side Image() is inherently safer
 
-- **Problem:** Identifying all mobile-specific issues in one systematic review
-  - **Approach:** Tested all major components at each breakpoint (375, 393, 768, 1024, 1440px) using Playwright
-  - **Tool/Technique:** Documented findings by component in structured issue format
+- **Problem:** Verifying client-side image ping works correctly across different scenarios
+  - **Approach:** Tested with working URL (returns 'live'), invalid URL (returns 'unknown'), and timeout scenarios
+  - **Tool/Technique:** Console logging in useImagePing to verify state transitions
 
-### Automation Opportunities (Updated)
+### Performance Notes
 
-- **Playwright Breakpoint Testing Script:** Create reusable script that tests all components at standard breakpoints
-- **GitHub CLI Batch Issues:** Template for creating milestone with related issues from findings
-- **Screenshot Comparison Tool:** Automated visual diff between breakpoints to catch regressions
-- **Mobile Audit Checklist:** Linter rule to flag fixed-size components that should be responsive
-- **Issue Template Generator:** CLI tool to create properly formatted issues with breakpoint metadata
+Session-specific optimizations:
+- **API Removal:** Eliminates roundtrip latency of server-side health check API call
+- **Image Ping Lightweight:** Simple Image() load uses browser's native image handling (optimized in all browsers)
+- **No Domain Allowlist:** Removes config file parsing and URL validation overhead from server
+- **Early Returns:** 5-second timeout prevents hung requests from blocking UI indefinitely
+
+### Accessibility Wins
+
+- **WebHealthIndicator Component:** Maintains ARIA labels and proper semantic HTML despite simplified health check approach
+- **Status Types:** Reduced from 4 types (live, slow, timeout, error) to 2 types (live, unknown) improves clarity for screen reader users
+- **Loading State:** `isLoading` prop allows WebHealthIndicator to show appropriate aria-label during check
+
+### Security Wins
+
+- **Eliminated SSRF:** No longer fetching arbitrary URLs on server
+- **Eliminated Domain Allowlist:** No need to maintain/validate restricted domain list
+- **Browser-Enforced Security:** Relies on CORS (browser security standard) instead of custom validation
+- **Graceful Failure:** Blocked requests fail safely to 'unknown' instead of exposing error details
+
+**See also:** `~/.claude/skills/frontend-dev/SKILL.md` for complete useImagePing pattern documentation (universal pattern now applicable to all projects)
 
 ---
