@@ -14,7 +14,6 @@ export async function GET() {
     const cookie = cookieStore.get(SPOTIFY_COOKIE);
     let token = '';
     if (cookie && cookie.value && cookie.value !== '') {
-      console.log('cookie exists, reusing access token...');
       token = cookie.value;
     } else {
       const tokenResponse = await generateAccessToken();
