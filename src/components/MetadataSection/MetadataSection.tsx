@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { siSpotify } from 'simple-icons';
+import { BookSection } from '../BookSection';
 
 interface ArtistBubbleProps {
   artist: Artist;
@@ -78,23 +79,25 @@ export default function MetadataSection() {
     return null;
   }
   return (
-    <div>
-      <div className={'flex gap-1 items-center'}></div>
-      <div className={'flex gap-2 items-center'}>
-        <SpotifyIcon />
-        <p>{t('spotify_top_artists')}</p>
-      </div>
-      <div
-        ref={containerRef}
-        className={'flex flex-wrap gap-4 max-sm:gap-2 mt-4'}
-      >
-        {artists.map((a, index) => {
-          return (
-            <div className={getItemClassName(index)} key={a.id}>
-              <ArtistBubble artist={a} />
-            </div>
-          );
-        })}
+    <div className={'flex max-sm:flex-col gap-4 lg:h-60'}>
+      <BookSection />
+      <div>
+        <div className={'flex gap-2 items-center'}>
+          <SpotifyIcon />
+          <p>{t('spotify_top_artists')}</p>
+        </div>
+        <div
+          ref={containerRef}
+          className={'flex flex-wrap gap-4 max-sm:gap-2 mt-4'}
+        >
+          {artists.map((a, index) => {
+            return (
+              <div className={getItemClassName(index)} key={a.id}>
+                <ArtistBubble artist={a} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
