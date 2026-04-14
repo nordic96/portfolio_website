@@ -8,9 +8,10 @@ import { useEffect, useState } from 'react';
 import { siGitbook } from 'simple-icons';
 
 function Book({ book }: { book: BookData }) {
-  const { key, cover, title, authors } = book;
+  const { key, cover, title, authors, publish_date } = book;
   const [hovered, setHovered] = useState(false);
 
+  if (!cover || !cover.medium) return null;
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -23,7 +24,7 @@ function Book({ book }: { book: BookData }) {
         draggable={false}
         key={key}
         alt={`book-${key}`}
-        src={cover?.medium}
+        src={cover.medium}
         className={'lg:h-45 max-sm:h-28'}
       />
       {hovered && (
@@ -37,6 +38,7 @@ function Book({ book }: { book: BookData }) {
           <h4 className={'text-h4 font-bold md:text-lg text-text-white'}>
             {title}
           </h4>
+          <p>{publish_date}</p>
           {authors && <span className={'italic'}>{authors[0].name}</span>}
         </div>
       )}
