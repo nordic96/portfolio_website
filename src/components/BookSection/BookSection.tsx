@@ -24,7 +24,7 @@ function Book({ book }: { book: BookData }) {
         key={key}
         alt={`book-${key}`}
         src={cover?.medium}
-        className={'h-45'}
+        className={'lg:h-45 max-sm:h-28'}
       />
       {hovered && (
         <div
@@ -87,7 +87,7 @@ export default function BookSection() {
   }
 
   return (
-    <div className={'flex grow justify-between'}>
+    <div className={'flex grow justify-between max-sm:flex-col'}>
       <div className={'flex flex-col'}>
         <div className={'flex gap-2 items-center'}>
           <GitBookIcon />
