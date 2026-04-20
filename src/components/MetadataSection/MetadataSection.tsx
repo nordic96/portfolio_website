@@ -5,6 +5,23 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { siSpotify } from 'simple-icons';
 import { BookSection } from '../BookSection';
+import { Skeleton } from '@mui/material';
+
+function ArtistLoadingIndicator({ count = 5 }: { count?: number }) {
+  return (
+    <>
+      {new Array(count).fill(1).map((x, i) => (
+        <div
+          key={`artist-loading-${i}`}
+          className={'flex flex-col items-center'}
+        >
+          <Skeleton width={56} height={56} variant={'circular'} />
+          <Skeleton width={64} variant={'text'} />
+        </div>
+      ))}
+    </>
+  );
+}
 
 interface ArtistBubbleProps {
   artist: Artist;
@@ -23,6 +40,7 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
           <Image
             src={img.url}
             alt={`spotify-artist-a${name}-profile-image`}
+            className={'h-18 w-18 object-cover'}
             height={56}
             width={56}
           />
@@ -35,6 +53,7 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
 
 export default function MetadataSection() {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [artists, setArtists] = useState<Artist[]>([]);
   const t = useTranslations('MetadataSection');
   // Staggered animation for project cards
@@ -54,6 +73,7 @@ export default function MetadataSection() {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/top_artists');
         if (res.status !== 200) {
           throw new Error(`${res.status}`);
@@ -66,11 +86,14 @@ export default function MetadataSection() {
         if (e instanceof Error) {
           setError(true);
         }
+      } finally {
+        setLoading(false);
       }
     };
     fetchArtists();
 
     return () => {
+      setLoading(false);
       setError(false);
     };
   }, []);
@@ -90,13 +113,15 @@ export default function MetadataSection() {
           ref={containerRef}
           className={'flex flex-wrap gap-4 max-sm:gap-2 mt-4'}
         >
-          {artists.map((a, index) => {
-            return (
-              <div className={getItemClassName(index)} key={a.id}>
-                <ArtistBubble artist={a} />
-              </div>
-            );
-          })}
+          {loading && <ArtistLoadingIndicator />}
+          {!loading &&
+            artists.map((a, index) => {
+              return (
+                <div className={getItemClassName(index)} key={a.id}>
+                  <ArtistBubble artist={a} />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

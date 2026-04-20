@@ -20,6 +20,7 @@ import PrimaryButton from '../shared/PrimaryButton';
 import { GITHUB_URL } from '@/src/config';
 import { useTranslations } from 'next-intl';
 import { useStaggeredAnimation } from '@/src/hooks';
+import { cn } from '@/src/utils';
 
 const projectData: SmallProject[] = [
   {
@@ -75,7 +76,10 @@ export default function SmallProjectSection() {
       <div ref={containerRef} className={'flex flex-col gap-3 items-center'}>
         {projectData.map((p, index) => {
           return (
-            <div key={p.id} className={getItemClassName(index)}>
+            <div
+              key={p.id}
+              className={cn(getItemClassName(index), 'max-sm:w-full')}
+            >
               <SmallProjectCard project={p} />
             </div>
           );

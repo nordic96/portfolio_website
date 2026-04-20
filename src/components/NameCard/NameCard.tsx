@@ -35,10 +35,7 @@ export default function NameCard({ variant = 'large' }: NameCardProps) {
   return (
     <section
       ref={variant === 'large' ? sectionRef : undefined}
-      className={cn(
-        'flex flex-col max-md:items-center',
-        variant === 'large' && animationClassName,
-      )}
+      className={cn('flex flex-col', variant === 'large' && animationClassName)}
       aria-label={t('section_label')}
     >
       {/** Signature Container - Animated calligraphy signature */}
