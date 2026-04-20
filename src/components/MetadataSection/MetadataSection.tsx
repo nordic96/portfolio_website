@@ -40,6 +40,7 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
           <Image
             src={img.url}
             alt={`spotify-artist-a${name}-profile-image`}
+            className={'h-18 w-18 object-cover'}
             height={56}
             width={56}
           />
