@@ -2,6 +2,7 @@ import {
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CLIENT_SECRET,
   SPOTIFY_REFRESH_TOKEN,
+  SPOTIFY_TIME_RANGE,
 } from '../config';
 import { SpotifyTokenResponse, TopArtistResponse } from '../types';
 
@@ -36,6 +37,7 @@ export async function generateAccessToken(): Promise<SpotifyTokenResponse> {
 export async function getTopArtists(token: string): Promise<TopArtistResponse> {
   const url = new URL('https://api.spotify.com/v1/me/top/artists');
   url.searchParams.append('limit', '5');
+  url.searchParams.append('time_range', SPOTIFY_TIME_RANGE);
   const res = await fetch(url, {
     headers: {
       Authorization: 'Bearer ' + token,
