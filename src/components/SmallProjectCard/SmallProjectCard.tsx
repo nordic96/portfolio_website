@@ -185,9 +185,13 @@ export default function SmallProjectCard({
           )}
         >
           {/* Metadata Container (Language & ) */}
-          {new URL(url).hostname.includes('github.com') && (
-            <RepoMetadataContainer url={url} />
-          )}
+          {(() => {
+            try {
+              return new URL(url).hostname.toLowerCase() === 'github.com';
+            } catch {
+              return false;
+            }
+          })() && <RepoMetadataContainer url={url} />}
 
           {/* Tech Stack Icons */}
           <IconContainer className="shrink-0" />
