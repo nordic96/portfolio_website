@@ -12,6 +12,7 @@ import { useSimpleIcons } from '@/src/hooks';
 import IPhoneProFrame from '@/src/components/IPhoneProFrame';
 import LiveProjectIframe from '@/src/components/LiveProjectIframe';
 import { useTranslations } from 'next-intl';
+import RepoMetadataContainer from '../RepoMetadataContainer';
 
 export interface LiveProject {
   id: string;
@@ -110,6 +111,9 @@ export default function LiveProjectCard({
               'p-2 md:p-2.5 lg:p-3',
             )}
           >
+            {/* Metadata Container (Language & ) */}
+            {githubUrl && <RepoMetadataContainer url={githubUrl} />}
+
             {/* Tech Stack Icons Row */}
             <IconContainer className="flex justify-center items-center gap-1 mt-1 md:mt-2" />
 

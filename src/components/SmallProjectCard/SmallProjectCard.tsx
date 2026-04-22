@@ -8,6 +8,7 @@ import { glassCardBaseStyle, hoverLiftStyle } from '@/src/styles';
 import { cn } from '@/src/utils';
 import { useSimpleIcons } from '@/src/hooks';
 import { useTranslations } from 'next-intl';
+import RepoMetadataContainer from '../RepoMetadataContainer';
 
 /**
  * Tag with optional custom color
@@ -183,6 +184,15 @@ export default function SmallProjectCard({
             showPreview && previewImage ? 'opacity-40' : 'opacity-100',
           )}
         >
+          {/* Metadata Container (Language & ) */}
+          {(() => {
+            try {
+              return new URL(url).hostname.toLowerCase() === 'github.com';
+            } catch {
+              return false;
+            }
+          })() && <RepoMetadataContainer url={url} />}
+
           {/* Tech Stack Icons */}
           <IconContainer className="shrink-0" />
 
