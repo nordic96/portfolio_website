@@ -1,4 +1,4 @@
-import { LanguageData } from '../types';
+import { LanguageData, RepoMetadataResponse } from '../types';
 
 const PAT_TOKEN = process.env.GITHUB_PAT || '';
 const GH_HEADERS: HeadersInit = {
@@ -39,12 +39,6 @@ async function fetchRepoMetadata(repo_name: string): Promise<number> {
   }
 }
 
-interface RepoMetadataResponse {
-  data: {
-    language: LanguageData;
-    stargazer_count: number;
-  };
-}
 export async function prepareRepoMetadata(
   repo_name: string,
 ): Promise<RepoMetadataResponse> {
