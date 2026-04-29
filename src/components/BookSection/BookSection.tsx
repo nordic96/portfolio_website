@@ -1,12 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-import { useSimpleIcons } from '@/src/hooks';
-import { glassCardBaseStyle } from '@/src/styles';
-import { BookApiResponse, BookData } from '@/src/types/book';
-import { cn } from '@/src/utils';
+import { useEffect, useState } from 'react';
+import Book from '../Book/Book';
 import { Skeleton } from '@mui/material';
+import { useSimpleIcons } from '@/src/hooks';
+import { BookApiResponse, BookData } from '@/src/types/book';
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { siGitbook } from 'simple-icons';
 
 function BookLoadingIndicator({ count = 1 }: { count?: number }) {
@@ -21,45 +19,6 @@ function BookLoadingIndicator({ count = 1 }: { count?: number }) {
         />
       ))}
     </>
-  );
-}
-
-function Book({ book }: { book: BookData }) {
-  const { key, cover, title, authors, publish_date } = book;
-  const [hovered, setHovered] = useState(false);
-
-  if (!cover || !cover.medium) return null;
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={
-        'flex transition-transform ease-in-out hover:-translate-x-5 cursor-pointer'
-      }
-    >
-      <img
-        draggable={false}
-        key={key}
-        alt={`book-${key}`}
-        src={cover.medium}
-        className={'lg:h-45 max-sm:h-28'}
-      />
-      {hovered && (
-        <div
-          className={cn(
-            'absolute bottom-0 left-20 w-40 z-999',
-            'flex flex-col gap-4',
-            glassCardBaseStyle,
-          )}
-        >
-          <h4 className={'text-h4 font-bold md:text-lg text-text-white'}>
-            {title}
-          </h4>
-          <p>{publish_date}</p>
-          {authors && <span className={'italic'}>{authors[0].name}</span>}
-        </div>
-      )}
-    </div>
   );
 }
 
