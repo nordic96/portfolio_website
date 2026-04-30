@@ -23,8 +23,8 @@ export async function GET() {
       });
       token = access_token;
     }
-
-    const topArtistResponse = await getTopArtists(token);
+    const locale = cookieStore.get('NEXT_LOCALE')?.value;
+    const topArtistResponse = await getTopArtists(token, locale);
     return NextResponse.json(topArtistResponse);
   } catch (e) {
     return NextResponse.json(
