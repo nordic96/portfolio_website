@@ -76,7 +76,7 @@ export default function MetadataSection() {
     fetchArtists();
   }, [fetchArtists]);
 
-  if (error) {
+  if (error && error.name !== 'AbortError') {
     return null;
   }
   return (

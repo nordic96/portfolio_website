@@ -38,7 +38,7 @@ export default function BookSection() {
     fetchBooks();
   }, [fetchBooks]);
 
-  if (error) {
+  if (error && error.name !== 'AbortError') {
     return null;
   }
 
