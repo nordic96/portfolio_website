@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+'use client';
+
 import Book from '../Book/Book';
 import { Skeleton } from '@mui/material';
 import { useSimpleIcons } from '@/src/hooks';
-import { BookApiResponse, BookData } from '@/src/types/book';
 
 import { useTranslations } from 'next-intl';
 import { siGitbook } from 'simple-icons';
+import { useBookStore } from '@/src/store';
+import { useEffect } from 'react';
 
 function BookLoadingIndicator({ count = 1 }: { count?: number }) {
   return (
@@ -24,10 +26,7 @@ function BookLoadingIndicator({ count = 1 }: { count?: number }) {
 
 export default function BookSection() {
   const t = useTranslations('MetadataSection');
-  const [error, setError] = useState(false);
-  const [books, setBooks] = useState<BookData[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [readingBooks, setReadingBooks] = useState<BookData[]>([]);
+  const { loading, error, readingBooks, books, fetchBooks } = useBookStore();
   const { IconContainer: GitBookIcon } = useSimpleIcons({
     icons: [siGitbook],
     className: {
@@ -36,34 +35,8 @@ export default function BookSection() {
   });
 
   useEffect(() => {
-    const fetchBookData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('/api/books');
-        if (res.ok) {
-          const data = (await res.json()).data as BookApiResponse;
-          if (Array.isArray(data.completed_books)) {
-            setBooks(data.completed_books || []);
-          }
-          if (Array.isArray(data.reading_books)) {
-            setReadingBooks(data.reading_books || []);
-          }
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBookData();
-    return () => {
-      setError(false);
-      setLoading(false);
-    };
-  }, []);
+    fetchBooks();
+  }, [fetchBooks]);
 
   if (error) {
     return null;
