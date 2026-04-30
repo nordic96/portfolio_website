@@ -1,3 +1,5 @@
+'use client';
+
 import { useSimpleIcons, useStaggeredAnimation } from '@/src/hooks';
 import { Artist } from '@/src/types';
 import { useTranslations } from 'next-intl';

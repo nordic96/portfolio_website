@@ -527,19 +527,14 @@ body {
 .circle-container {
   display: inline-grid;
   & div {
-    border-radius: 50%;
     aspect-ratio: 1;
   }
 }
 
 .book-circle > div {
-  width: 150px;
-  background-color: blue;
-  offset: circle(40vw) calc(100% * sibling-index()/sibling-count()) 0deg;
+  offset: circle(300px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
 
 .artist-circle > div {
-  width: 120px;
-  background-color: red;
-  offset: circle(35vw) calc(100% * sibling-index()/sibling-count()) 0deg;
+  offset: circle(600px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
