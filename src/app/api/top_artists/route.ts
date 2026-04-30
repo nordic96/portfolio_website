@@ -6,7 +6,7 @@ import { testData } from './testData';
 import { ARTISTS_TO_FETCH } from '@/src/store';
 
 export async function GET() {
-  if (process.env.SPOTIFY_TEST_DATA) {
+  if (process.env.SPOTIFY_TEST_DATA === 'true') {
     return NextResponse.json(testData);
   }
   // TODO: Use Token to fire Top Artist API & return response
