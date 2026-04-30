@@ -1,11 +1,12 @@
 import { useSimpleIcons, useStaggeredAnimation } from '@/src/hooks';
-import { Artist, TopArtistResponse } from '@/src/types';
+import { Artist } from '@/src/types';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { siSpotify } from 'simple-icons';
 import { BookSection } from '../BookSection';
 import { Skeleton } from '@mui/material';
+import { useSpotifyStore } from '@/src/store';
+import { useEffect } from 'react';
 
 function ArtistLoadingIndicator({ count = 5 }: { count?: number }) {
   return (
@@ -51,15 +52,14 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
   );
 }
 
+const TOP_ARTISTS_NO = 5;
 export default function MetadataSection() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [artists, setArtists] = useState<Artist[]>([]);
+  const { artists, loading, error, fetchArtists } = useSpotifyStore();
   const t = useTranslations('MetadataSection');
   // Staggered animation for project cards
   const { containerRef, getItemClassName } =
     useStaggeredAnimation<HTMLDivElement>({
-      itemCount: 5,
+      itemCount: TOP_ARTISTS_NO,
       staggerDelay: 500,
     });
 
@@ -71,32 +71,8 @@ export default function MetadataSection() {
   });
 
   useEffect(() => {
-    const fetchArtists = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('/api/top_artists');
-        if (res.status !== 200) {
-          throw new Error(`${res.status}`);
-        }
-        const data = (await res.json()) as TopArtistResponse;
-        if (data.items.length > 0) {
-          setArtists(data.items);
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchArtists();
-
-    return () => {
-      setLoading(false);
-      setError(false);
-    };
-  }, []);
+  }, [fetchArtists]);
 
   if (error) {
     return null;
@@ -115,7 +91,7 @@ export default function MetadataSection() {
         >
           {loading && <ArtistLoadingIndicator />}
           {!loading &&
-            artists.map((a, index) => {
+            artists.slice(0, TOP_ARTISTS_NO).map((a, index) => {
               return (
                 <div className={getItemClassName(index)} key={a.id}>
                   <ArtistBubble artist={a} />
