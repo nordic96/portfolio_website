@@ -3,9 +3,10 @@ import { generateAccessToken, getTopArtists } from '@/src/lib/spotify';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { testData } from './testData';
+import { ARTISTS_TO_FETCH } from '@/src/store';
 
 export async function GET() {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.SPOTIFY_TEST_DATA === 'true') {
     return NextResponse.json(testData);
   }
   // TODO: Use Token to fire Top Artist API & return response
@@ -23,8 +24,13 @@ export async function GET() {
       });
       token = access_token;
     }
+
     const locale = cookieStore.get('NEXT_LOCALE')?.value;
-    const topArtistResponse = await getTopArtists(token, locale);
+    const topArtistResponse = await getTopArtists(
+      token,
+      ARTISTS_TO_FETCH,
+      locale,
+    );
     return NextResponse.json(topArtistResponse);
   } catch (e) {
     return NextResponse.json(

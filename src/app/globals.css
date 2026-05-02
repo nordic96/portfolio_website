@@ -450,6 +450,16 @@ body {
   }
 }
 
+/** Counter Spinning for Spin Animation */
+@keyframes counter-spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
+
 .animate-section-fade-in {
   animation: sectionFadeIn 0.6s ease-out forwards;
 }
@@ -511,4 +521,21 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #4a4a4a;
   }
+}
+
+/** Books Page Related */
+.circle-container {
+  display: inline-grid;
+  & div {
+    aspect-ratio: 1;
+  }
+}
+
+.book-circle > div {
+  offset: circle(200px) calc(100% * sibling-index()/sibling-count()) 0deg;
+}
+
+
+.artist-circle > div {
+  offset: circle(550px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
