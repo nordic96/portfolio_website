@@ -25,7 +25,12 @@ export async function GET() {
       token = access_token;
     }
 
-    const topArtistResponse = await getTopArtists(token, ARTISTS_TO_FETCH);
+    const locale = cookieStore.get('NEXT_LOCALE')?.value;
+    const topArtistResponse = await getTopArtists(
+      token,
+      ARTISTS_TO_FETCH,
+      locale,
+    );
     return NextResponse.json(topArtistResponse);
   } catch (e) {
     return NextResponse.json(

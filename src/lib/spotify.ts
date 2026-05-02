@@ -37,10 +37,14 @@ export async function generateAccessToken(): Promise<SpotifyTokenResponse> {
 export async function getTopArtists(
   token: string,
   limit = 5,
+  locale?: string,
 ): Promise<TopArtistResponse> {
   const url = new URL('https://api.spotify.com/v1/me/top/artists');
   url.searchParams.append('limit', limit.toString());
   url.searchParams.append('time_range', SPOTIFY_TIME_RANGE);
+  if (locale) {
+    url.searchParams.append('locale', locale);
+  }
   const res = await fetch(url, {
     headers: {
       Authorization: 'Bearer ' + token,
