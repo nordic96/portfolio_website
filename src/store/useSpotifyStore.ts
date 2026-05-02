@@ -15,7 +15,7 @@ type Actions = {
 
 let controller: AbortController | null = null;
 type SpotifyState = State & Actions;
-export const useSpotifyStore = create<SpotifyState>()((set) => ({
+export const useSpotifyStore = create<SpotifyState>()((set, get) => ({
   loading: false,
   artists: [],
   error: null,
@@ -24,7 +24,9 @@ export const useSpotifyStore = create<SpotifyState>()((set) => ({
       if (controller !== null) {
         controller.abort();
       }
-
+      if (get().artists.length > 0) {
+        return;
+      }
       set(() => ({ loading: true, error: null }));
       controller = new AbortController();
       const res = await fetch('/api/top_artists', {

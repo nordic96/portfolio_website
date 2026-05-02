@@ -14,7 +14,7 @@ type BookAction = {
 
 type BookStore = BookState & BookAction;
 let controller: AbortController | null = null;
-export const useBookStore = create<BookStore>()((set) => ({
+export const useBookStore = create<BookStore>()((set, get) => ({
   loading: false,
   error: null,
   books: [],
@@ -23,6 +23,9 @@ export const useBookStore = create<BookStore>()((set) => ({
     try {
       if (controller !== null) {
         controller.abort();
+      }
+      if (get().books.length > 0) {
+        return;
       }
       set(() => ({ loading: true }));
       controller = new AbortController();
