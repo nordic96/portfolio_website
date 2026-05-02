@@ -532,9 +532,10 @@ body {
 }
 
 .book-circle > div {
-  offset: circle(300px) calc(100% * sibling-index()/sibling-count()) 0deg;
+  offset: circle(200px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
 
+
 .artist-circle > div {
-  offset: circle(600px) calc(100% * sibling-index()/sibling-count()) 0deg;
+  offset: circle(550px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
