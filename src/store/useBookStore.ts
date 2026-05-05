@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { BookApiResponse, BookData } from '../types/book';
+import { persist } from 'zustand/middleware';
 
 type BookState = {
   loading: boolean;
@@ -14,38 +15,45 @@ type BookAction = {
 
 type BookStore = BookState & BookAction;
 let controller: AbortController | null = null;
-export const useBookStore = create<BookStore>()((set, get) => ({
-  loading: false,
-  error: null,
-  books: [],
-  readingBooks: [],
-  fetchBooks: async () => {
-    try {
-      if (controller !== null) {
-        controller.abort();
-      }
-      if (get().books.length > 0) {
-        return;
-      }
-      set(() => ({ loading: true }));
-      controller = new AbortController();
-      const res = await fetch('/api/books', { signal: controller.signal });
-      if (res.ok) {
-        const data = (await res.json()).data as BookApiResponse;
-        if (Array.isArray(data.completed_books)) {
-          set(() => ({ books: data.completed_books }));
+export const useBookStore = create<BookStore>()(
+  persist(
+    (set, get) => ({
+      loading: false,
+      error: null,
+      books: [],
+      readingBooks: [],
+      fetchBooks: async () => {
+        try {
+          if (controller !== null) {
+            controller.abort();
+          }
+          if (get().books.length > 0) {
+            return;
+          }
+          set(() => ({ loading: true }));
+          controller = new AbortController();
+          const res = await fetch('/api/books', { signal: controller.signal });
+          if (res.ok) {
+            const data = (await res.json()).data as BookApiResponse;
+            if (Array.isArray(data.completed_books)) {
+              set(() => ({ books: data.completed_books }));
+            }
+            if (Array.isArray(data.reading_books)) {
+              set(() => ({ readingBooks: data.reading_books }));
+            }
+          }
+        } catch (e) {
+          if (e instanceof Error) {
+            set(() => ({ error: e }));
+          }
+        } finally {
+          controller = null;
+          set(() => ({ loading: false }));
         }
-        if (Array.isArray(data.reading_books)) {
-          set(() => ({ readingBooks: data.reading_books }));
-        }
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        set(() => ({ error: e }));
-      }
-    } finally {
-      controller = null;
-      set(() => ({ loading: false }));
-    }
-  },
-}));
+      },
+    }),
+    {
+      name: 'book-storage',
+    },
+  ),
+);
