@@ -2,7 +2,7 @@
 
 import { useSimpleIcons, useStaggeredAnimation } from '@/src/hooks';
 import { Artist } from '@/src/types';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { siSpotify } from 'simple-icons';
 import { BookSection } from '../BookSection';
@@ -57,6 +57,7 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
 const TOP_ARTISTS_NO = 5;
 export default function MetadataSection() {
   const { artists, loading, error, fetchArtists } = useSpotifyStore();
+  const locale = useLocale();
   const t = useTranslations('MetadataSection');
   // Staggered animation for project cards
   const { containerRef, getItemClassName } =
@@ -74,7 +75,7 @@ export default function MetadataSection() {
 
   useEffect(() => {
     fetchArtists();
-  }, [fetchArtists]);
+  }, [locale, fetchArtists]);
 
   if (error && error.name !== 'AbortError') {
     return null;
