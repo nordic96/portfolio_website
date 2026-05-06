@@ -78,5 +78,9 @@
         "status_slow": "Website is slow or partially available",
         "status_down": "Website is down or unreachable",
         "status_unknown": "Website status is unknown"
+    },
+    "SandBoxPage": {
+        "header": "Welcome to my secret sandbox page! nothing serious here, just displaying some new cool techniques or frontend concepts that I wanted to do hands-on freely!",
+        "btn_back_to_homepage": "Back To HomePage"
     }
 }

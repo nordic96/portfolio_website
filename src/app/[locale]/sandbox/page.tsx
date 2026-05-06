@@ -6,8 +6,15 @@ import { cn } from '@/src/utils';
 import { Skeleton } from '@mui/material';
 import { useEffect, useState } from 'react';
 import CircleItem from './CircleItem';
+import TopTracksSection from '@/src/components/TopTracksSection/TopTracksSection';
+import PrimaryButton from '@/src/components/shared/PrimaryButton';
+import { ArrowBack } from '@mui/icons-material';
+import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function Page() {
+  const locale = useLocale();
+  const t = useTranslations('SandBoxPage');
   const [artistText, setArtistText] = useState('');
   const [bookText, setBookText] = useState('');
   const { artists, loading, fetchArtists } = useSpotifyStore();
@@ -19,12 +26,12 @@ export default function Page() {
   } = useBookStore();
 
   useEffect(() => {
-    fetchArtists();
-  }, [fetchArtists]);
-
-  useEffect(() => {
     fetchBooks();
   }, [fetchBooks]);
+
+  useEffect(() => {
+    fetchArtists();
+  }, [locale, fetchArtists]);
 
   useEffect(() => {
     const constructedText = artists
@@ -44,11 +51,11 @@ export default function Page() {
   return (
     <div
       className={
-        'h-[70dvh] relative flex grow w-full max-w-360 m-auto overflow-hidden'
+        'h-screen relative flex grow w-full max-w-360 m-auto overflow-hidden justify-center'
       }
     >
       {/** Left Outer Circle Container */}
-      <div className={'absolute left-[20%] bottom-[20%]'}>
+      <div className={'z-0 absolute left-[5%] top-125'}>
         {/** Books Outer Circle Container */}
         <div
           className={cn(
@@ -88,8 +95,8 @@ export default function Page() {
           />
         </div>
       </div>
-      {/** Artist Outer Circle */}
-      <div className={'absolute right-0'}>
+      {/** Right Artist Outer Circle */}
+      <div className={'absolute right-[-10%] top-[40%] translate-y-[-40%]'}>
         {/** Text Inner Circle */}
         <div className={cn(positionCentreStyle)}>
           <CircularText
@@ -124,6 +131,24 @@ export default function Page() {
               />
             );
           })}
+        </div>
+      </div>
+      {/** Back To Home Page Btn Container */}
+      <div className={'absolute top-0 left-0 w-full z-20'}>
+        <div className={'max-w-200'}>
+          <h2 className={'text-3xl font-semibold'}>SANDBOX PAGE</h2>
+          <p>{t('header')}</p>
+        </div>
+        <div className={'mt-4'}>
+          <PrimaryButton>
+            <Link href={'/'}>
+              <ArrowBack />
+              {t('btn_back_to_homepage')}
+            </Link>
+          </PrimaryButton>
+        </div>
+        <div className={'flex justify-center items-center'}>
+          <TopTracksSection />
         </div>
       </div>
     </div>
