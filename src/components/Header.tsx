@@ -3,9 +3,16 @@ import { cn } from '@/src/utils';
 import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n';
+import { ClassValue } from 'clsx';
 
 export default function Header() {
   const t = useTranslations('Header');
+
+  const navLabelStyle: ClassValue = cn(
+    'font-black italic',
+    'text-sm md:text-[0.9375rem] lg:text-base',
+    'hover:text-pastel-green-hover transition-colors',
+  );
 
   return (
     <header
@@ -22,7 +29,7 @@ export default function Header() {
       role="banner"
     >
       <div className={cn(baseWidth, 'flex justify-between items-center')}>
-        <div className={'flex gap-1 items-center'}>
+        <div className={'flex gap-12 items-center'}>
           <Link
             href="/"
             className={cn(
@@ -34,6 +41,13 @@ export default function Header() {
             aria-label={t('home_link_label')}
           >
             {t('site_title')}
+          </Link>
+          <Link
+            href={'/sandbox'}
+            className={navLabelStyle}
+            aria-label={'home link sandbox page'}
+          >
+            {'SANDBOX'}
           </Link>
         </div>
         <nav aria-label={t('navigation_label')}>

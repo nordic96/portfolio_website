@@ -34,7 +34,7 @@ export const useSpotifyStore = create<SpotifyState>()(
           }
           set(() => ({ loading: true, error: null }));
           controller = new AbortController();
-          const res = await fetch('/api/top_artists', {
+          const res = await fetch('/api/v1/spotify/top-artists', {
             signal: controller.signal,
           });
 
