@@ -11,8 +11,17 @@ import PrimaryButton from '@/src/components/shared/PrimaryButton';
 import { ArrowBack } from '@mui/icons-material';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { useBreakpoint } from '@/src/hooks';
+import {
+  BOOK_CIRCLE_MOBILE_STYLE,
+  BOOK_CIRCLE_STYLE,
+  CircularTextOptions,
+  DESKTOP_CIRCLE_STYLE,
+  MOBILE_CIRCLE_STYLE,
+} from '@/src/components/CircularText/CircularText';
 
 export default function Page() {
+  const isMobile = useBreakpoint() === 'mobile';
   const locale = useLocale();
   const t = useTranslations('SandBoxPage');
   const [artistText, setArtistText] = useState('');
@@ -45,6 +54,16 @@ export default function Page() {
     setBookText(constructedText);
   }, [books]);
 
+  const getArtistCircleStyleByBreakpoint = (): CircularTextOptions => {
+    if (isMobile) return MOBILE_CIRCLE_STYLE;
+    return DESKTOP_CIRCLE_STYLE;
+  };
+
+  const getBookCircleStyleByBreakpoint = (): CircularTextOptions => {
+    if (isMobile) return BOOK_CIRCLE_MOBILE_STYLE;
+    return BOOK_CIRCLE_STYLE;
+  };
+
   const positionCentreStyle =
     'absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]';
 
@@ -61,7 +80,8 @@ export default function Page() {
           className={cn(
             positionCentreStyle,
             'animate-spin [animation-duration:50s]',
-            'circle-container book-circle',
+            isMobile ? 'book-circle-mobile' : 'book-circle',
+            'circle-container',
           )}
         >
           {loadingBooks &&
@@ -91,7 +111,7 @@ export default function Page() {
         <div className={cn(positionCentreStyle)}>
           <CircularText
             text={bookText}
-            options={{ width: 650, height: 650, fontSize: 48 }}
+            options={getBookCircleStyleByBreakpoint()}
           />
         </div>
       </div>
@@ -101,18 +121,15 @@ export default function Page() {
         <div className={cn(positionCentreStyle)}>
           <CircularText
             text={artistText}
-            options={{
-              width: 900,
-              height: 900,
-              fontSize: 40,
-            }}
+            options={getArtistCircleStyleByBreakpoint()}
           />
         </div>
         {/** Spotify Top Artists Inner Circle */}
         <div
           className={cn(
             'animate-spin [animation-duration:50s]',
-            'circle-container artist-circle',
+            'circle-container',
+            isMobile ? 'artist-circle-mobile' : 'artist-circle',
             positionCentreStyle,
           )}
         >
@@ -134,18 +151,23 @@ export default function Page() {
         </div>
       </div>
       {/** Back To Home Page Btn Container */}
-      <div className={'absolute top-0 left-0 w-full z-20'}>
+      <div
+        className={cn(
+          'absolute top-0 left-0 w-full z-20',
+          'px-4 md:px-6 lg:px-8',
+        )}
+      >
         <div className={'max-w-200'}>
           <h2 className={'text-3xl font-semibold'}>SANDBOX PAGE</h2>
           <p>{t('header')}</p>
         </div>
         <div className={'mt-4'}>
-          <PrimaryButton>
-            <Link href={'/'}>
+          <Link href={'/'}>
+            <PrimaryButton>
               <ArrowBack />
               {t('btn_back_to_homepage')}
-            </Link>
-          </PrimaryButton>
+            </PrimaryButton>
+          </Link>
         </div>
         <div className={'flex justify-center items-center'}>
           <TopTracksSection />

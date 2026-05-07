@@ -25,7 +25,7 @@ export default function CircleItem({
           src={src || ''}
           loading={'eager'}
           className={
-            'w-40 h-40 max-sm:w-30 max-sm:h-30 rounded-full object-cover'
+            'w-40 h-40 max-sm:w-20 max-sm:h-20 rounded-full object-cover'
           }
           width={100}
           height={100}
@@ -34,7 +34,7 @@ export default function CircleItem({
       <span
         className={cn(
           glassCardBaseStyle,
-          'whitespace-pre-line text-center max-w-45',
+          'whitespace-pre-line text-center max-w-45 max-sm:text-xs max-sm:p-1',
           'absolute bottom-[-20]',
         )}
       >
