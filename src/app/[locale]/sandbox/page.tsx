@@ -89,7 +89,7 @@ export default function Page() {
               return (
                 <div
                   key={`book-loading-${i}`}
-                  className={'flex flex-col items-center'}
+                  className={'flex flex-col items-center min-w-75'}
                 >
                   <Skeleton variant={'circular'} width={160} height={160} />
                   <Skeleton variant={'text'} width={120} />
@@ -151,12 +151,7 @@ export default function Page() {
         </div>
       </div>
       {/** Back To Home Page Btn Container */}
-      <div
-        className={cn(
-          'absolute top-0 left-0 w-full z-20',
-          'px-4 md:px-6 lg:px-8',
-        )}
-      >
+      <div className={cn('absolute top-0 left-0 w-full z-20', 'max-sm:px-4')}>
         <div className={'max-w-200'}>
           <h2 className={'text-3xl font-semibold'}>SANDBOX PAGE</h2>
           <p>{t('header')}</p>
@@ -169,7 +164,7 @@ export default function Page() {
             </PrimaryButton>
           </Link>
         </div>
-        <div className={'flex justify-center items-center'}>
+        <div className={'flex justify-center items-center mt-8'}>
           <TopTracksSection />
         </div>
       </div>
