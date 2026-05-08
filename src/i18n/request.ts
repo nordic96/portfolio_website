@@ -2,6 +2,7 @@ import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 import { CDN_BASE } from '../config';
+import backupMessageData from '../../messages/en.json';
 
 /**
  * Will fetch locale json file from CDN, if error or not found, will return backup defualt en locale file (/messages/en.json)
@@ -9,6 +10,13 @@ import { CDN_BASE } from '../config';
  * @returns Locale File JSON
  */
 export async function geti18nConfig(locale: string) {
+  /** Return Offline Locale for Development Use Case */
+  if (process.env.USE_BACKUP_LOCALE === 'true') {
+    return {
+      locale,
+      messages: backupMessageData,
+    };
+  }
   const cdnUrl = new URL(`${CDN_BASE}/resources/messages/${locale}.json`);
   let messages;
   try {

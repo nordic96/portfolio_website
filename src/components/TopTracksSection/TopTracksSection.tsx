@@ -1,6 +1,6 @@
 'use client';
 
-import { useStaggeredAnimation } from '@/src/hooks';
+import { useSimpleIcons, useStaggeredAnimation } from '@/src/hooks';
 import { ARTISTS_TO_FETCH, useSpotifyStore } from '@/src/store';
 import { useEffect } from 'react';
 import Image from 'next/image';
@@ -9,11 +9,15 @@ import { cn } from '@/src/utils';
 import { Track } from '@/src/types';
 import { Refresh } from '@mui/icons-material';
 import { Skeleton } from '@mui/material';
+import { siSpotify } from 'simple-icons';
+import { useTranslations } from 'next-intl';
 
 function TrackCard({ track, rank }: { track: Track; rank: number }) {
-  const { name, album } = track;
+  const { name, album, external_urls } = track;
   return (
-    <div
+    <a
+      target={'_blank'}
+      href={external_urls.spotify}
       className={cn(
         glassCardBaseStyle,
         'flex gap-2 items-center max-sm:p-2!',
@@ -33,11 +37,16 @@ function TrackCard({ track, rank }: { track: Track; rank: number }) {
         >{`#${rank}. ${name}`}</span>
         <span>{album.artists[0].name}</span>
       </div>
-    </div>
+    </a>
   );
 }
 
 export default function TopTracksSection() {
+  const t = useTranslations('TopTracksSection');
+  const { IconContainer } = useSimpleIcons({
+    icons: [siSpotify],
+    fillOriginalColour: true,
+  });
   const { tracks, fetchTracks, loadingTracks } = useSpotifyStore();
   const { containerRef, getItemClassName } =
     useStaggeredAnimation<HTMLDivElement>({
@@ -51,8 +60,14 @@ export default function TopTracksSection() {
 
   return (
     <div>
-      <div className={'flex gap-4 items-center'}>
-        <h3 className={'text-2xl font-semibold'}>My Top #8 Tracks</h3>
+      <div className={'flex gap-4 items-center justify-between'}>
+        <div className={'flex flex-col gap-2'}>
+          <h3 className={'text-2xl font-semibold'}>{t('header')}</h3>
+          <div className={'flex items-center gap-2'}>
+            <IconContainer />
+            <span>{t('disclaimer')}</span>
+          </div>
+        </div>
         <button
           onClick={fetchTracks}
           disabled={loadingTracks}

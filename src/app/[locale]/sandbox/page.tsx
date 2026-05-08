@@ -74,7 +74,12 @@ export default function Page() {
       }
     >
       {/** Left Outer Circle Container */}
-      <div className={'z-0 absolute left-[5%] top-125'}>
+      <div
+        className={cn(
+          'z-0 absolute left-[5%]',
+          isMobile ? 'bottom-50' : 'top-125',
+        )}
+      >
         {/** Books Outer Circle Container */}
         <div
           className={cn(
@@ -156,7 +161,7 @@ export default function Page() {
           <h2 className={'text-3xl font-semibold'}>SANDBOX PAGE</h2>
           <p>{t('header')}</p>
         </div>
-        <div className={'mt-4'}>
+        <div className={'mt-4 w-fit'}>
           <Link href={'/'}>
             <PrimaryButton>
               <ArrowBack />
