@@ -535,7 +535,14 @@ body {
   offset: circle(200px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }
 
+.book-circle-mobile > div {
+  offset: circle(100px) calc(100% * sibling-index()/sibling-count()) 0deg;
+}
 
 .artist-circle > div {
   offset: circle(550px) calc(100% * sibling-index()/sibling-count()) 0deg;
+}
+
+.artist-circle-mobile > div {
+  offset: circle(270px) calc(100% * sibling-index()/sibling-count()) 0deg;
 }

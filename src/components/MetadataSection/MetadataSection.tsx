@@ -30,12 +30,14 @@ interface ArtistBubbleProps {
   artist: Artist;
 }
 function ArtistBubble({ artist }: ArtistBubbleProps) {
-  const { name, images } = artist;
+  const { name, images, external_urls } = artist;
   const img = images[0];
   return (
     <div className={'flex flex-col items-center gap-1'}>
       {img && (
-        <div
+        <a
+          target={'_blank'}
+          href={external_urls.spotify}
           className={
             'overflow-hidden rounded-full transition-transform duration-300 hover:scale-120'
           }
@@ -47,7 +49,7 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
             height={56}
             width={56}
           />
-        </div>
+        </a>
       )}
       <p className={'max-w-16 text-center'}>{name}</p>
     </div>
@@ -68,6 +70,7 @@ export default function MetadataSection() {
 
   const { IconContainer: SpotifyIcon } = useSimpleIcons({
     icons: [siSpotify],
+    fillOriginalColour: true,
     className: {
       'lg:w-7 lg:h-7': true,
     },
@@ -86,7 +89,7 @@ export default function MetadataSection() {
       <div>
         <div className={'flex gap-2 items-center'}>
           <SpotifyIcon />
-          <p>{t('spotify_top_artists')}</p>
+          <span>{t('spotify_top_artists')}</span>
         </div>
         <div
           ref={containerRef}

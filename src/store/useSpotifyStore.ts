@@ -7,9 +7,11 @@ export const TRACKS_TO_FETCH = 8;
 
 type State = {
   loading: boolean;
+  loadingTracks: boolean;
   artists: Artist[];
   tracks: Track[];
   error: Error | null;
+  errorTracks: Error | null;
 };
 
 type Actions = {
@@ -24,9 +26,11 @@ export const useSpotifyStore = create<SpotifyState>()(
   persist(
     (set) => ({
       loading: false,
+      loadingTracks: false,
       artists: [],
       tracks: [],
       error: null,
+      errorTracks: null,
       fetchArtists: async () => {
         try {
           if (controller !== null) {
@@ -60,6 +64,7 @@ export const useSpotifyStore = create<SpotifyState>()(
             trackRequestController.abort();
           }
           trackRequestController = new AbortController();
+          set(() => ({ loadingTracks: true, errorTracks: null }));
           const res = await fetch('/api/v1/spotify/top-tracks', {
             signal: trackRequestController.signal,
           });
@@ -72,11 +77,11 @@ export const useSpotifyStore = create<SpotifyState>()(
           }
         } catch (e) {
           if (e instanceof Error) {
-            set(() => ({ error: e }));
+            set(() => ({ errorTracks: e }));
           }
         } finally {
           controller = null;
-          set(() => ({ loading: false }));
+          set(() => ({ loadingTracks: false }));
         }
       },
     }),

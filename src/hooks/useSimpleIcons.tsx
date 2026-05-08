@@ -21,6 +21,8 @@ interface UseSimpleIconsOptions {
   showTooltip?: boolean;
   /** Icon color class (default: 'fill-white') */
   colorClass?: string;
+  /** Fill SVG with original colour hexcode (default: false) */
+  fillOriginalColour?: boolean;
 }
 
 interface RenderedIcon {
@@ -59,6 +61,7 @@ export function useSimpleIcons({
   icons,
   className,
   showTooltip = true,
+  fillOriginalColour = false,
   colorClass = 'fill-white',
 }: UseSimpleIconsOptions): UseSimpleIconsReturn {
   const renderedIcons: RenderedIcon[] = useMemo(
@@ -67,20 +70,21 @@ export function useSimpleIcons({
         const iconElement = (
           <div
             className={cn(
+              colorClass,
+              className,
               'flex items-center justify-center shrink-0',
               {
                 'max-sm:w-4 max-sm:h-4': true,
                 'md:w-5 md:h-5': true,
                 'lg:w-6 lg:h-6': true,
               },
-              colorClass,
-              className,
             )}
             /**
              * SAFETY: SVG content from 'simple-icons' package (trusted source).
              * No user input involved. Static SVG strings only.
              */
             dangerouslySetInnerHTML={{ __html: icon.svg }}
+            style={fillOriginalColour ? { fill: `#${icon.hex}` } : undefined}
             aria-label={icon.title}
             role="img"
           />
@@ -100,7 +104,7 @@ export function useSimpleIcons({
           element,
         };
       }),
-    [icons, className, showTooltip, colorClass],
+    [icons, className, showTooltip, colorClass, fillOriginalColour],
   );
 
   /**

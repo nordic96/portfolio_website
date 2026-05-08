@@ -1,7 +1,7 @@
 import { cn } from '@/src/utils';
 import { useId } from 'react';
 
-type CircularTextOptions = {
+export type CircularTextOptions = {
   width?: number;
   height?: number;
   fontSize?: number;
@@ -11,6 +11,30 @@ type CircularTextOptions = {
 type CircularTextProps = {
   text: string;
   options: CircularTextOptions;
+};
+
+export const BOOK_CIRCLE_STYLE: CircularTextOptions = {
+  width: 650,
+  height: 650,
+  fontSize: 48,
+};
+
+export const BOOK_CIRCLE_MOBILE_STYLE: CircularTextOptions = {
+  width: 325,
+  height: 325,
+  fontSize: 16,
+};
+
+export const MOBILE_CIRCLE_STYLE: CircularTextOptions = {
+  width: 450,
+  height: 450,
+  fontSize: 16,
+};
+
+export const DESKTOP_CIRCLE_STYLE: CircularTextOptions = {
+  width: 900,
+  height: 900,
+  fontSize: 40,
 };
 
 export default function CircularText({ text, options }: CircularTextProps) {
