@@ -1,13 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
-import { useSimpleIcons } from '@/src/hooks';
-import { glassCardBaseStyle } from '@/src/styles';
-import { BookApiResponse, BookData } from '@/src/types/book';
-import { cn } from '@/src/utils';
+'use client';
+
+import Book from '../Book/Book';
 import { Skeleton } from '@mui/material';
+import { useSimpleIcons } from '@/src/hooks';
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { siGitbook } from 'simple-icons';
+import { useBookStore } from '@/src/store';
+import { useEffect } from 'react';
 
 function BookLoadingIndicator({ count = 1 }: { count?: number }) {
   return (
@@ -24,51 +24,9 @@ function BookLoadingIndicator({ count = 1 }: { count?: number }) {
   );
 }
 
-function Book({ book }: { book: BookData }) {
-  const { key, cover, title, authors, publish_date } = book;
-  const [hovered, setHovered] = useState(false);
-
-  if (!cover || !cover.medium) return null;
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={
-        'flex transition-transform ease-in-out hover:-translate-x-5 cursor-pointer'
-      }
-    >
-      <img
-        draggable={false}
-        key={key}
-        alt={`book-${key}`}
-        src={cover.medium}
-        className={'lg:h-45 max-sm:h-28'}
-      />
-      {hovered && (
-        <div
-          className={cn(
-            'absolute bottom-0 left-20 w-40 z-999',
-            'flex flex-col gap-4',
-            glassCardBaseStyle,
-          )}
-        >
-          <h4 className={'text-h4 font-bold md:text-lg text-text-white'}>
-            {title}
-          </h4>
-          <p>{publish_date}</p>
-          {authors && <span className={'italic'}>{authors[0].name}</span>}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function BookSection() {
   const t = useTranslations('MetadataSection');
-  const [error, setError] = useState(false);
-  const [books, setBooks] = useState<BookData[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [readingBooks, setReadingBooks] = useState<BookData[]>([]);
+  const { loading, error, readingBooks, books, fetchBooks } = useBookStore();
   const { IconContainer: GitBookIcon } = useSimpleIcons({
     icons: [siGitbook],
     className: {
@@ -77,36 +35,10 @@ export default function BookSection() {
   });
 
   useEffect(() => {
-    const fetchBookData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('/api/books');
-        if (res.ok) {
-          const data = (await res.json()).data as BookApiResponse;
-          if (Array.isArray(data.completed_books)) {
-            setBooks(data.completed_books || []);
-          }
-          if (Array.isArray(data.reading_books)) {
-            setReadingBooks(data.reading_books || []);
-          }
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+    fetchBooks();
+  }, [fetchBooks]);
 
-    fetchBookData();
-    return () => {
-      setError(false);
-      setLoading(false);
-    };
-  }, []);
-
-  if (error) {
+  if (error && error.name !== 'AbortError') {
     return null;
   }
 

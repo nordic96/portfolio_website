@@ -1,11 +1,14 @@
+'use client';
+
 import { useSimpleIcons, useStaggeredAnimation } from '@/src/hooks';
-import { Artist, TopArtistResponse } from '@/src/types';
-import { useTranslations } from 'next-intl';
+import { Artist } from '@/src/types';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { siSpotify } from 'simple-icons';
 import { BookSection } from '../BookSection';
 import { Skeleton } from '@mui/material';
+import { useSpotifyStore } from '@/src/store';
+import { useEffect } from 'react';
 
 function ArtistLoadingIndicator({ count = 5 }: { count?: number }) {
   return (
@@ -27,12 +30,14 @@ interface ArtistBubbleProps {
   artist: Artist;
 }
 function ArtistBubble({ artist }: ArtistBubbleProps) {
-  const { name, images } = artist;
+  const { name, images, external_urls } = artist;
   const img = images[0];
   return (
     <div className={'flex flex-col items-center gap-1'}>
       {img && (
-        <div
+        <a
+          target={'_blank'}
+          href={external_urls.spotify}
           className={
             'overflow-hidden rounded-full transition-transform duration-300 hover:scale-120'
           }
@@ -44,61 +49,38 @@ function ArtistBubble({ artist }: ArtistBubbleProps) {
             height={56}
             width={56}
           />
-        </div>
+        </a>
       )}
       <p className={'max-w-16 text-center'}>{name}</p>
     </div>
   );
 }
 
+const TOP_ARTISTS_NO = 5;
 export default function MetadataSection() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [artists, setArtists] = useState<Artist[]>([]);
+  const { artists, loading, error, fetchArtists } = useSpotifyStore();
+  const locale = useLocale();
   const t = useTranslations('MetadataSection');
   // Staggered animation for project cards
   const { containerRef, getItemClassName } =
     useStaggeredAnimation<HTMLDivElement>({
-      itemCount: 5,
+      itemCount: TOP_ARTISTS_NO,
       staggerDelay: 500,
     });
 
   const { IconContainer: SpotifyIcon } = useSimpleIcons({
     icons: [siSpotify],
+    fillOriginalColour: true,
     className: {
       'lg:w-7 lg:h-7': true,
     },
   });
 
   useEffect(() => {
-    const fetchArtists = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('/api/top_artists');
-        if (res.status !== 200) {
-          throw new Error(`${res.status}`);
-        }
-        const data = (await res.json()) as TopArtistResponse;
-        if (data.items.length > 0) {
-          setArtists(data.items);
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchArtists();
+  }, [locale, fetchArtists]);
 
-    return () => {
-      setLoading(false);
-      setError(false);
-    };
-  }, []);
-
-  if (error) {
+  if (error && error.name !== 'AbortError') {
     return null;
   }
   return (
@@ -107,7 +89,7 @@ export default function MetadataSection() {
       <div>
         <div className={'flex gap-2 items-center'}>
           <SpotifyIcon />
-          <p>{t('spotify_top_artists')}</p>
+          <span>{t('spotify_top_artists')}</span>
         </div>
         <div
           ref={containerRef}
@@ -115,7 +97,7 @@ export default function MetadataSection() {
         >
           {loading && <ArtistLoadingIndicator />}
           {!loading &&
-            artists.map((a, index) => {
+            artists.slice(0, TOP_ARTISTS_NO).map((a, index) => {
               return (
                 <div className={getItemClassName(index)} key={a.id}>
                   <ArtistBubble artist={a} />

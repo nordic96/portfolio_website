@@ -10,6 +10,7 @@ import { ClassValue } from 'clsx';
 import { getAppVersion } from '@/src/config';
 import NameCard from './NameCard';
 import { useSectionAnimation } from '@/src/hooks';
+import Link from 'next/link';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -39,7 +40,7 @@ export default function Footer() {
           className={cn(
             baseWidth,
             // Responsive grid columns: smaller on mobile, medium tablet, larger desktop
-            'grid grid-cols-[140px_auto] md:grid-cols-[180px_auto] lg:grid-cols-[240px_auto]',
+            'grid grid-cols-[140px_auto_auto] md:grid-cols-[180px_auto_auto] lg:grid-cols-[240px_auto_auto]',
           )}
         >
           <div className={'flex gap-3 md:gap-4 items-start justify-start'}>
@@ -51,6 +52,11 @@ export default function Footer() {
             </FooterSection>
             <FooterSection headerKey={'app_version'}>
               {`v${getAppVersion()}`}
+            </FooterSection>
+          </div>
+          <div className={'flex flex-col gap-2 md:gap-2.5 lg:gap-3'}>
+            <FooterSection>
+              <Link href={'/sandbox'}>SandBox</Link>
             </FooterSection>
           </div>
         </div>
@@ -77,14 +83,14 @@ const FooterSection = ({
   containerClass,
   childContainerClass,
 }: PropsWithChildren<{
-  headerKey: string;
+  headerKey?: string;
   containerClass?: ClassValue | string;
   childContainerClass?: ClassValue | string;
 }>) => {
   const t = useTranslations('Footer');
   return (
     <div className={cn(containerClass)}>
-      <h3>{t(headerKey)}</h3>
+      {headerKey && <h3>{t(headerKey)}</h3>}
       <div className={cn(childContainerClass)}>{children}</div>
     </div>
   );
